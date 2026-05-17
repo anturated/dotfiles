@@ -47,8 +47,5 @@ hl.config({
 
   animations = {
     enabled = true, -- o7 farewell "yes, please :)", you will be missed
-
-    -- curves looked default enough, might do custom later
-    -- https://wiki.hypr.land/Configuring/Advanced-and-Cool/Animations/
   },
 })
