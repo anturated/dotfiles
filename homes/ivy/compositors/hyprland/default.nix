@@ -8,7 +8,7 @@
 
 {
   config = lib.mkIf config.ceirios.profiles.graphical {
-    ceirios.packages = { inherit (pkgs) hyprshot hyprsunset; };
+    ceirios.packages = { inherit (pkgs) grim slurp hyprsunset; };
 
     # whoever tf thought it's a good idea to make me rewrite
     # my hyprland config for the second time this year

@@ -12,6 +12,7 @@ hl.bind(mod .. " + D", hl.dsp.exec_cmd(menu))
 -- TODO: rofi run
 -- hl.bind(mod .. " + SHIFT + E", hl.dsp.exec_cmd("cosmic-files"))
 hl.bind(mod .. " + SHIFT + I", hl.dsp.exec_cmd("chwal"))
+hl.bind(mod .. " + SHIFT + S", hl.dsp.exec_cmd('grim -g "$(slurp)" - | wl-copy'))
 
 -- why does it spell bdsm :cry:
 hl.bind(mod .. " + ALT + B", hl.dsp.exec_cmd(browser))
@@ -21,8 +22,6 @@ hl.bind(mod .. " + ALT + M", hl.dsp.exec_cmd("spotify"))
 
 hl.bind(mod .. " + ALT + A", hl.dsp.exec_cmd("anytype"))
 hl.bind(mod .. " + ALT + T", hl.dsp.exec_cmd("Telegram"))
-
--- TODO: screenshot
 
 -------------
 -- windows --
