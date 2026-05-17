@@ -4,14 +4,23 @@ local mod = "SUPER"
 -- launch apps --
 -----------------
 
+-- terminal
 hl.bind(mod .. " + R", hl.dsp.exec_cmd(terminal))
 hl.bind(mod .. " + SHIFT + R", hl.dsp.exec_cmd(terminal .. " --class=floating-" .. terminal))
+
+-- files
 hl.bind(mod .. " + E", hl.dsp.exec_cmd(terminal .. " yazi"))
 hl.bind(mod .. " + SHIFT + E", hl.dsp.exec_cmd("cosmic-files"))
+
+-- dmenu
 hl.bind(mod .. " + D", hl.dsp.exec_cmd(menu))
 -- TODO: rofi run
 -- hl.bind(mod .. " + SHIFT + E", hl.dsp.exec_cmd("cosmic-files"))
+
+-- wallpaper picker
 hl.bind(mod .. " + SHIFT + I", hl.dsp.exec_cmd("chwal"))
+
+-- screenshot
 hl.bind(mod .. " + SHIFT + S", hl.dsp.exec_cmd('grim -g "$(slurp)" - | wl-copy'))
 
 -- why does it spell bdsm :cry:
