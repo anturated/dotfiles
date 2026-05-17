@@ -55,3 +55,15 @@ hl.config({
     disable_hyprland_logo = true,
   },
 })
+
+-- workspace and window cosmetic tweaks --
+
+-- remove gaps where only one window is visible
+hl.workspace_rule({ workspace = "w[tv1]", gaps_out = 0, gaps_in = 0 }) -- one window
+hl.workspace_rule({ workspace = "f[1]", gaps_out = 0, gaps_in = 0 }) -- fullscreen
+
+-- remove borders and rounding where only one window is visible
+hl.window_rule({ match = { float = false, workspace = "w[tv1]" }, border_size = 0 })
+hl.window_rule({ match = { float = false, workspace = "w[tv1]" }, rounding = 0 })
+hl.window_rule({ match = { float = false, workspace = "f[1]" }, border_size = 0 })
+hl.window_rule({ match = { float = false, workspace = "f[1]" }, rounding = 0 })
