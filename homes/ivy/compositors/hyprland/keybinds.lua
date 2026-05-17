@@ -6,7 +6,7 @@ local mod = "SUPER"
 
 hl.bind(mod .. " + R", hl.dsp.exec_cmd(terminal))
 hl.bind(mod .. " + SHIFT + R", hl.dsp.exec_cmd(terminal .. " --class=floating-" .. terminal))
-hl.bind(mod .. " + E", hl.dsp.exec_cmd("yazi"))
+hl.bind(mod .. " + E", hl.dsp.exec_cmd(terminal .. " yazi"))
 hl.bind(mod .. " + SHIFT + E", hl.dsp.exec_cmd("cosmic-files"))
 hl.bind(mod .. " + D", hl.dsp.exec_cmd(menu))
 -- TODO: rofi run
@@ -29,10 +29,9 @@ hl.bind(mod .. " + ALT + T", hl.dsp.exec_cmd("Telegram"))
 -------------
 
 hl.bind(mod .. " + Q", hl.dsp.window.close())
-hl.bind(mod .. " + F", hl.dsp.window.fullscreen())
--- TODO: maximize
+hl.bind(mod .. " + F", hl.dsp.window.fullscreen({ mode = "maximized" }))
+hl.bind(mod .. " + SHIFT + F", hl.dsp.window.fullscreen())
 hl.bind(mod .. " + SHIFT + Space", hl.dsp.window.float({ action = "toggle" }))
-hl.bind(mod .. " + P", hl.dsp.window.pseudo()) -- WARN: WHAT IS THIS
 
 -- focus
 hl.bind(mod .. " + H", hl.dsp.focus({ direction = "l" }))

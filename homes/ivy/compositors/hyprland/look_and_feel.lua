@@ -48,4 +48,10 @@ hl.config({
   animations = {
     enabled = true, -- o7 farewell "yes, please :)", you will be missed
   },
+
+  -- we have wallpapers at home
+  misc = {
+    force_default_wallpaper = 1,
+    disable_hyprland_logo = true,
+  },
 })
