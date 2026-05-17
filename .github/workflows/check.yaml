@@ -1,0 +1,31 @@
+name: Run nix flake check
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "**.nix"
+      - "**.lock"
+      - ".github/workflows/check.yaml"
+
+permissions: {}
+
+jobs:
+  flake-check:
+    name: Check flake
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+
+      - name: Use cache
+        uses: DeterminateSystems/magic-nix-cache-action@main
+
+      - name: Check buildability
+        run: nix flake check --show-trace
