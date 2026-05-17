@@ -33,8 +33,8 @@ input_path = '~/.config/matugen/templates/gtk.css'
 output_path = '~/.config/gtk-4.0/colors.css'
 
 [templates.hyprland]
-input_path = '~/.config/matugen/templates/hyprland-colors.conf'
-output_path = '~/.config/hypr/components/colors.conf'
+input_path = '~/.config/matugen/templates/hyprland-colors.lua'
+output_path = '~/.config/hypr/colors.lua'
 
 [templates.ivy]
 input_path = '~/.config/matugen/templates/ivy-colors.json'
