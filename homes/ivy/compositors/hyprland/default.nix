@@ -71,6 +71,7 @@
         ${builtins.readFile ./keybinds.lua}
         ${builtins.readFile ./look_and_feel.lua}
         ${builtins.readFile ./windows.lua}
+        ${builtins.readFile ./animations.lua}
       '';
     };
 
