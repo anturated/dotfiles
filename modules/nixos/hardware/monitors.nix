@@ -62,21 +62,37 @@ in
               x = lib.mkOption {
                 type = int;
                 default = 0;
-                description = "Horizontal offset in pixels";
+                description = ''
+                  Scaled horizontal offset in pixels.
+
+                  Meaning if you want your 4K monitor with scale 2
+                  to the left of your 1080p one, you’d use x = 1920
+                  for the second screen (3840 / 2).
+                  If the monitor is also rotated 90 degrees (vertical),
+                  you’d use x = 1080 (2160 / 2)
+                '';
                 example = -1920;
               };
 
               y = lib.mkOption {
                 type = int;
                 default = 0;
-                description = "Vertical offset in pixels";
+                description = ''
+                  Scaled horizontal offset in pixels.
+
+                  Meaning if you want your 4K monitor with scale 2
+                  to the top of your 1080p one, you’d use y = -1080
+                  for the second screen (2160 / 2).
+                  If the monitor is also rotated 90 degrees (vertical),
+                  you’d use y = -1920 (3840 / 2)
+                '';
                 example = 700;
               };
 
               scale = mkOption {
                 type = float;
                 default = 1.0;
-                description = "Refresh rate of the monitor in hz";
+                description = "Scale of your monitor";
                 example = 1.5;
               };
             };
