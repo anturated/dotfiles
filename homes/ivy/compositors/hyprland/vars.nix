@@ -14,4 +14,7 @@ in
   local terminal = "${defaults.terminal}"
   local menu = "rofi -show drun"
   local browser = "vivaldi"
+
+  -- misc
+  local screenshotDir = "${config.xdg.userDirs.pictures}/screenshots"
 ''
