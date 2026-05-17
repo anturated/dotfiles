@@ -1,0 +1,15 @@
+name: Update fywion
+
+on:
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  update:
+    uses: ./.github/workflows/_update.yaml
+    with:
+      inputs: fywion
+      commit_msg: "flake: bump fywion (auto)"
+    secrets:
+      GH_TOKEN_UPDATES: ${{ secrets.GH_TOKEN_UPDATES }}

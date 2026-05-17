@@ -1,0 +1,16 @@
+name: Update all inputs # every day until gta6 comes out
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "7 0 * * *"
+
+permissions: {}
+
+jobs:
+  update:
+    uses: ./.github/workflows/_update.yaml
+    with:
+      commit_msg: "flake: bump (auto)"
+    secrets:
+      GH_TOKEN_UPDATES: ${{ secrets.GH_TOKEN_UPDATES }}

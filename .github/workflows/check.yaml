@@ -24,8 +24,5 @@ jobs:
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@main
 
-      - name: Use cache
-        uses: DeterminateSystems/magic-nix-cache-action@main
-
       - name: Check buildability
         run: nix flake check --show-trace
