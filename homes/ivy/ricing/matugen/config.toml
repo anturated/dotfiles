@@ -23,6 +23,11 @@ input_path = '~/.config/matugen/templates/fish-theme.fish'
 output_path = '~/.config/fish/theme.fish'
 post_hook = "fish -c 'emit reload-theme' &"
 
+[templates.ghostty]
+input_path = '~/.config/matugen/templates/ghostty-theme.conf'
+output_path = '~/.config/ghostty/themes/matugen'
+post_hook = 'pkill -SIGUSR2 ghostty'
+
 [templates.gtk3]
 input_path = '~/.config/matugen/templates/gtk.css'
 output_path = '~/.config/gtk-3.0/colors.css'

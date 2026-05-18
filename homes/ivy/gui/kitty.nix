@@ -2,7 +2,7 @@
 
 {
   programs.kitty = {
-    enable = config.ceirios.profiles.graphical;
+    enable = config.ceirios.profiles.graphical && (config.ceirios.software.defaults.terminal == "kitty");
     settings = {
       include = "current-theme.conf";
 
