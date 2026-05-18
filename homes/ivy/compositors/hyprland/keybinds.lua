@@ -14,8 +14,7 @@ hl.bind(mod .. " + SHIFT + E", hl.dsp.exec_cmd("cosmic-files"))
 
 -- dmenu
 hl.bind(mod .. " + D", hl.dsp.exec_cmd(menu))
--- TODO: rofi run
--- hl.bind(mod .. " + SHIFT + E", hl.dsp.exec_cmd("cosmic-files"))
+hl.bind(mod .. " + SHIFT + D", hl.dsp.exec_cmd("rofi -show run"))
 
 -- wallpaper picker
 hl.bind(mod .. " + SHIFT + I", hl.dsp.exec_cmd("chwal"))
