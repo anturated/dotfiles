@@ -24,9 +24,12 @@
       };
 
       monitors = {
-        # why 2 :cry: it was 1 before
         eDP-2.refresh-rate = 120;
-        DP-1 = { };
+
+        DP-1 = {
+          x = 1920;
+          y = 700;
+        };
       };
     };
 
