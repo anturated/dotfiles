@@ -92,7 +92,7 @@ in
         ];
 
         sansSerif = [
-          cfg.name
+          # cfg.name
 
           # primary latin fallbacks
           "Inter"
@@ -116,7 +116,7 @@ in
         ];
 
         serif = [
-          cfg.name
+          # cfg.name
 
           # latin serif
           "Source Serif 4"
