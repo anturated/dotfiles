@@ -114,11 +114,17 @@ hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO
 hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"), { repeating = true })
 
 -- brightness
-hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl set 5%+ -q"), { repeating = true })
-hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl set 5%- -q"), { repeating = true })
+-- i need to mass nuke my backlights because optimus.
+-- it doesn't work any other documented way that i could find.
+local br_cmd = "brightnessctl -lm | awk -F, '$2==\"backlight\"{print $1}' | xargs -I{} brightnessctl -e4 -n2 -d {} set"
+local br_up = br_cmd .. " 5%+"
+local br_dn = br_cmd .. " 5%-"
 
-hl.bind(mod .. " + bracketright", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%+"), { repeating = true })
-hl.bind(mod .. " + bracketleft", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%-"), { repeating = true })
+hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd(br_up), { repeating = true })
+hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd(br_dn), { repeating = true })
+
+hl.bind(mod .. " + bracketright", hl.dsp.exec_cmd(br_up), { repeating = true })
+hl.bind(mod .. " + bracketleft", hl.dsp.exec_cmd(br_dn), { repeating = true })
 
 -- mute
 hl.bind("XF86AudioMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"))
