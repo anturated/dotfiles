@@ -9,12 +9,21 @@ let
     int
     float
     ;
+
+  getClosestTo00 =
+    let
+      # use values because names MAY be overridden
+      mons = builtins.attrValues config.ceirios.hardware.monitors;
+      sorted = builtins.sort (a: b: (a.x + a.y) < (b.x + b.y)) mons;
+      closestTo00 = builtins.head sorted;
+    in
+    closestTo00;
 in
 {
   options.ceirios.hardware = {
     mainMonitor = mkOption {
       type = str;
-      default = builtins.elemAt (builtins.attrNames config.ceirios.hardware.monitors) 0;
+      default = getClosestTo00.name;
       description = "Main monitor's name.";
     };
 
