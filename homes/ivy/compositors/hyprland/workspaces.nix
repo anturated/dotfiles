@@ -12,8 +12,14 @@ let
     length
     elemAt
     ;
-  # we only need names here, use the one in value because it may be overridden
-  monitors = builtins.attrValues osConfig.ceirios.hardware.monitors;
+  inherit (osConfig.ceirios) hardware;
+  # use the name from values because it may be overridden
+  monitors =
+    let
+      mons = builtins.attrValues hardware.monitors;
+    in
+    builtins.sort (a: b: a.name == hardware.mainMonitor) mons;
+
   hasMonitor = monitors != [ ];
 
   # https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
