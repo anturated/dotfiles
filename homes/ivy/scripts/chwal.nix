@@ -53,7 +53,7 @@
         --outputs "$monitor"\
         --transition-type any\
         --transition-fps 120\
-        --transition-duration 1 &
+        --transition-duration 0.6 &
 
       # If monitor is at (0,0), run matugen
       if [ "$x" -eq 0 ] && [ "$y" -eq 0 ]; then
