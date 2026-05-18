@@ -5,8 +5,17 @@
   ...
 }:
 
+let
+  schema = pkgs.gsettings-desktop-schemas;
+in
 {
   config = lib.mkIf config.ceirios.profiles.graphical {
+    # gsettings for hot reload, requires dbus and dconf.
+    ceirios.packages = { inherit (pkgs) glib; };
+
+    # and apparently this, because it doesn't know what schemas is
+    xdg.systemDirs.data = [ "${schema}/share/gsettings-schemas/${schema.name}" ];
+
     dconf.settings = {
       "org/gnome/desktop/interface" = {
         color-scheme = "prefer-dark";
@@ -30,8 +39,9 @@
       };
 
       theme = {
-        name = "Adwaita-dark";
-        package = pkgs.gnome-themes-extra;
+        # this is the one that matugen works with
+        name = "adw-gtk3-dark";
+        package = pkgs.adw-gtk3;
       };
 
       iconTheme = {
@@ -42,13 +52,27 @@
         };
       };
 
-      gtk4.theme = config.gtk.theme;
+      gtk4 = {
+        theme = config.gtk.theme;
 
-      gtk3.extraConfig = {
-        gtk-application-prefer-dark-theme = 1;
+        extraConfig = {
+          gtk-application-prefer-dark-theme = 1;
+        };
+
+        # this should get it to load matugen colors
+        extraCss = ''
+          @import 'colors.css';
+        '';
       };
-      gtk4.extraConfig = {
-        gtk-application-prefer-dark-theme = 1;
+
+      gtk3 = {
+        extraConfig = {
+          gtk-application-prefer-dark-theme = 1;
+        };
+
+        extraCss = ''
+          @import 'colors.css';
+        '';
       };
     };
 

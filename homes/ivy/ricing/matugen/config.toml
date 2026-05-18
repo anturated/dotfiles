@@ -31,11 +31,13 @@ post_hook = 'pkill -SIGUSR2 ghostty'
 [templates.gtk3]
 input_path = '~/.config/matugen/templates/gtk.css'
 output_path = '~/.config/gtk-3.0/colors.css'
-post_hook = "(sh -c 'gsettings set org.gnome.desktop.interface gtk-theme \"\"; gsettings set org.gnome.desktop.interface gtk-theme adw-gtk3-dark') &"
+post_hook = 'gsettings set org.gnome.desktop.interface gtk-theme ""; gsettings set org.gnome.desktop.interface gtk-theme adw-gtk3-dark'
 
 [templates.gtk4]
 input_path = '~/.config/matugen/templates/gtk.css'
 output_path = '~/.config/gtk-4.0/colors.css'
+post_hook = 'gsettings set org.gnome.desktop.interface color-scheme prefer-light; gsettings set org.gnome.desktop.interface color-scheme prefer-dark'
+# https://github.com/InioX/matugen-themes/blob/main/post-hook-scripts/gtk-themes-reload.sh
 
 [templates.hyprland]
 input_path = '~/.config/matugen/templates/hyprland-colors.lua'
