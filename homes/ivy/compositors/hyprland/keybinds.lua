@@ -68,10 +68,10 @@ hl.bind(mod .. " + left", hl.dsp.window.resize({ x = -100, y = 0, relative = tru
 hl.bind(mod .. " + right", hl.dsp.window.resize({ x = 100, y = 0, relative = true }), { repeating = true })
 hl.bind(mod .. " + up", hl.dsp.window.resize({ x = 0, y = -100, relative = true }), { repeating = true })
 hl.bind(mod .. " + down", hl.dsp.window.resize({ x = 0, y = 100, relative = true }), { repeating = true })
-hl.bind(mod .. " + ALT_L + H", hl.dsp.window.resize({ x = -100, y = 0, relative = true }), { repeating = true })
-hl.bind(mod .. " + ALT_L + J", hl.dsp.window.resize({ x = 0, y = 100, relative = true }), { repeating = true })
-hl.bind(mod .. " + ALT_L + K", hl.dsp.window.resize({ x = 0, y = -100, relative = true }), { repeating = true })
-hl.bind(mod .. " + ALT_L + L", hl.dsp.window.resize({ x = 100, y = 0, relative = true }), { repeating = true })
+hl.bind(mod .. " + ALT + H", hl.dsp.window.resize({ x = -100, y = 0, relative = true }), { repeating = true })
+hl.bind(mod .. " + ALT + J", hl.dsp.window.resize({ x = 0, y = 100, relative = true }), { repeating = true })
+hl.bind(mod .. " + ALT + K", hl.dsp.window.resize({ x = 0, y = -100, relative = true }), { repeating = true })
+hl.bind(mod .. " + ALT + L", hl.dsp.window.resize({ x = 100, y = 0, relative = true }), { repeating = true })
 
 -- mouse resize
 hl.bind(mod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
