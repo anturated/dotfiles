@@ -14,7 +14,7 @@
         piper
 
         # media viewing
-        cosmic-files
+        nemo
         okteta
 
         # tools

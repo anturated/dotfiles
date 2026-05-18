@@ -10,7 +10,7 @@ hl.bind(mod .. " + SHIFT + R", hl.dsp.exec_cmd(terminal .. " --class=floating-" 
 
 -- files
 hl.bind(mod .. " + E", hl.dsp.exec_cmd(terminal .. " yazi"))
-hl.bind(mod .. " + SHIFT + E", hl.dsp.exec_cmd("cosmic-files"))
+hl.bind(mod .. " + SHIFT + E", hl.dsp.exec_cmd("nemo"))
 
 -- dmenu
 hl.bind(mod .. " + D", hl.dsp.exec_cmd(menu))

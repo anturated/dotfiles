@@ -68,7 +68,7 @@ let
     };
 
     fileManager = {
-      app = "com.system76.CosmicFiles";
+      app = "nemo";
       mimeTypes = [ "inode/directory" ];
     };
   };
