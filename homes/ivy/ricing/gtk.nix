@@ -34,8 +34,7 @@ in
       enable = true;
 
       font = {
-        name = "Cantarell 11";
-        package = pkgs.cantarell-fonts;
+        inherit (config.ceirios.style.fonts) name;
       };
 
       theme = {
