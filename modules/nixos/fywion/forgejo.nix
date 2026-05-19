@@ -172,7 +172,14 @@ in
 
           migrations.ALLOWED_DOMAINS = "github.com, *.github.com, gitlab.com, *.gitlab.com";
           packages.ENABLED = false;
-          repository.PREFERRED_LICENSES = "MIT,GPL-3.0,GPL-2.0,LGPL-3.0,LGPL-2.1";
+
+          repository = {
+            PREFERRED_LICENSES = "MIT,GPL-3.0,GPL-2.0,LGPL-3.0,LGPL-2.1";
+
+            # allow creating repos on push
+            ENABLE_PUSH_CREATE_ORG = true;
+            ENABLE_PUSH_CREATE_USER = true;
+          };
 
           "repository.upload" = {
             FILE_MAX_SIZE = 100;
@@ -247,13 +254,12 @@ in
         group = "forgejo";
       };
 
-      "${config.services.forgejo.stateDir}/custom/public/assets/css/theme-evergarden-fall-green.css".C =
-        {
-          mode = "0644";
-          user = "forgejo";
-          group = "forgejo";
-          argument = "${evergarden-theme}";
-        };
+      "${config.services.forgejo.stateDir}/custom/public/assets/css/theme-evergarden-fall-green.css".C = {
+        mode = "0644";
+        user = "forgejo";
+        group = "forgejo";
+        argument = "${evergarden-theme}";
+      };
     };
   };
 }
