@@ -19,6 +19,9 @@ hl.bind(mod .. " + SHIFT + D", hl.dsp.exec_cmd("rofi -show run"))
 -- wallpaper picker
 hl.bind(mod .. " + SHIFT + I", hl.dsp.exec_cmd("chwal"))
 
+-- rofi videos
+hl.bind(mod .. " + ALT + W", hl.dsp.exec_cmd("animelist"))
+
 -- screenshot
 hl.bind(mod .. " + SHIFT + S", hl.dsp.exec_cmd(
   "mkdir -p " .. screenshotDir                                       -- generate screenshots dir
