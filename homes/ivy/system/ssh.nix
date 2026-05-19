@@ -8,6 +8,10 @@
     includes = [ ];
 
     settings = {
+      ####################
+      ## VPS / MACHINES ##
+      ####################
+
       "pinwydd" = {
         user = "anturated";
         hostname = "82.38.2.58";
@@ -27,6 +31,24 @@
         user = "wizards";
         hostname = "185.233.36.209";
       };
+
+      ############
+      ## FORGES ##
+      ############
+
+      "github" = {
+        user = "git";
+        hostname = "github.com";
+      };
+
+      "forge" = {
+        user = "forgejo";
+        hostname = "anturated.dev";
+      };
+
+      #########
+      ## ??? ##
+      #########
 
       "*" = {
         forwardAgent = false;
