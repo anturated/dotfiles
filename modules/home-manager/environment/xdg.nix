@@ -107,11 +107,6 @@ in
       publicShare = "${config.home.homeDirectory}/public/share";
       templates = "${config.home.homeDirectory}/public/templates";
       projects = "${config.home.homeDirectory}/dev";
-
-      extraConfig = {
-        SCREENSHOTS = "${config.xdg.userDirs.pictures}/screenshots";
-        DEV = "${config.home.homeDirectory}/dev";
-      };
     };
 
     mimeApps = {
