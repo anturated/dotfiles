@@ -36,8 +36,13 @@ post_hook = 'gsettings set org.gnome.desktop.interface gtk-theme ""; gsettings s
 [templates.gtk4]
 input_path = '~/.config/matugen/templates/gtk.css'
 output_path = '~/.config/gtk-4.0/colors.css'
-post_hook = 'gsettings set org.gnome.desktop.interface color-scheme prefer-light; gsettings set org.gnome.desktop.interface color-scheme prefer-dark'
+# post_hook = 'gsettings set org.gnome.desktop.interface color-scheme prefer-light; gsettings set org.gnome.desktop.interface color-scheme prefer-dark'
 # https://github.com/InioX/matugen-themes/blob/main/post-hook-scripts/gtk-themes-reload.sh
+
+# NOTE: i'm now officially one of them GNOME haters.
+# also if we figure out how to make
+# org.gnome.desktop.interface color-scheme default
+# actually be dark, we can achieve flashbangless hot reloads on gtk4
 
 [templates.hyprland]
 input_path = '~/.config/matugen/templates/hyprland-colors.lua'
