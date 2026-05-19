@@ -7,7 +7,7 @@
 
     includes = [ ];
 
-    matchBlocks = {
+    settings = {
       "pinwydd" = {
         user = "anturated";
         hostname = "82.38.2.58";
