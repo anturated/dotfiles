@@ -20,14 +20,6 @@ in
   };
 
   config = mkIf cfg.enable {
-
-    sops.secrets.pdsEnv = mkSecret {
-      key = "env";
-      file = "pds";
-      owner = "pds";
-      group = "pds";
-    };
-
     services = {
       bluesky-pds = {
         enable = true;
@@ -48,5 +40,18 @@ in
         };
       };
     };
+
+    sops.secrets.pdsEnv = mkSecret {
+      key = "env";
+      file = "pds";
+      owner = "pds";
+      group = "pds";
+    };
+
+    # pdsadmin wants secrets here:
+    systemd.tmpfiles.rules = [
+      "d /pds 0750 pds pds -"
+      "L /pds/pds.env - - - - ${secrets.pdsEnv.path}"
+    ];
   };
 }
