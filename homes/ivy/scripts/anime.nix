@@ -15,7 +15,7 @@
       ANIME_DIR="${config.xdg.userDirs.videos}/anime/"
 
       anime="$ANIME_DIR$( \
-        find "$ANIME_DIR" -type d -mindepth 1 |
+        find "$ANIME_DIR" -type d -mindepth 1 | sort |
         while read -r dir; do
           echo $(basename "$dir")
         done |
