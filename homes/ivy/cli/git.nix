@@ -54,7 +54,7 @@
       settings = {
         user = {
           name = "Desant";
-          email = "anturated" + "@" + "gmail" + "." + "com"; # obsfuscate email to prevent webscrapper spam
+          email = "desant" + "@" + "anturated" + "." + "dev"; # obsfuscate email to prevent webscrapper spam
         };
 
         alias = {
