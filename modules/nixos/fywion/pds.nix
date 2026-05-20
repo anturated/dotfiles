@@ -24,6 +24,9 @@ in
       bluesky-pds = {
         enable = true;
 
+        # cli admin tool
+        pdsadmin.enable = true;
+
         environmentFiles = [ secrets.pdsEnv.path ];
 
         settings = {
@@ -47,11 +50,5 @@ in
       owner = "pds";
       group = "pds";
     };
-
-    # pdsadmin wants secrets here:
-    systemd.tmpfiles.rules = [
-      "d /pds 0750 pds pds -"
-      "L /pds/pds.env - - - - ${secrets.pdsEnv.path}"
-    ];
   };
 }
