@@ -10,6 +10,7 @@
     ./mailserver.nix
     ./nginx.nix
     ./obsidian-livesync.nix
+    ./pds.nix
     ./postgres.nix
     ./redis.nix
     ./website.nix

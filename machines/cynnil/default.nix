@@ -25,6 +25,7 @@
       nginx.enable = true;
       anturated-website.enable = true;
       mailserver.enable = true;
+      pds.enable = true;
 
       forgejo.enable = true;
       anubis.enable = true;
