@@ -56,7 +56,7 @@ class KaleDaemon(dbus.service.Object):
     # hyprctl just won't work from root for some reason
     # so we just... pretend to be the user playing the game
     # this feels awful, might rework
-    def run_hypr_command(self, command: str, sig: str, xdg: str):
+    def run_hypr_command(self, command: list[str], sig: str, xdg: str):
         # get username
         uid = int(xdg.split('/')[-1])
         user = pwd.getpwuid(uid).pw_name
@@ -64,7 +64,7 @@ class KaleDaemon(dbus.service.Object):
         # pretend to be username
         full_cmd = ["sudo", "-u", user, "env",
                     f"HYPRLAND_INSTANCE_SIGNATURE={sig}",
-                    f"XDG_RUNTIME_DIR={xdg}"] + command.split(" ")
+                    f"XDG_RUNTIME_DIR={xdg}"] + command
 
         # capture error output just in case
         result = subprocess.run(full_cmd, capture_output=True, text=True)
@@ -75,26 +75,27 @@ class KaleDaemon(dbus.service.Object):
     # disables a bunch of cosmetic stuff that might give us performance
     # AND enables the big direct_scanout
     def hypr_optimize(self, sig: str, xdg: str):
-        # disable animations
-        self.run_hypr_command("hyprctl keyword animations:enabled 0", sig, xdg)
-
-        # disable deco
-        self.run_hypr_command("hyprctl keyword decoration:blur:enabled 0", sig, xdg)
-        self.run_hypr_command("hyprctl keyword decoration:shadow:enabled 0", sig, xdg)
-        self.run_hypr_command("hyprctl keyword decoration:rounding 0", sig, xdg)
-
-        # disable gaps
-        self.run_hypr_command("hyprctl keyword general:gaps_in 0", sig, xdg)
-        self.run_hypr_command("hyprctl keyword general:gaps_out 0", sig, xdg)
-
-        # allow fullscreen apps to render directly
-        # bypassing the compositor entirely
-        self.run_hypr_command("hyprctl keyword render:direct_scanout 1", sig, xdg)
+        self.run_hypr_command([
+            "hyprctl", "eval", (
+            "hl.config({"
+            "    general = {"
+            "        gaps_in = 0,"
+            "        gaps_out = 0,"
+            "    },"
+            "    decoration = {"
+            "        rounding = 0,"
+            "        shadow = { enabled = false },"
+            "        blur = { enabled = false },"
+            "    },"
+            "    animations = { enabled = false },"
+            "    render = { direct_scanout = 1 },"
+            "})"
+        )], sig, xdg)
 
 
     # resets the config because idk what was enabled
     def hypr_reset(self, sig: str, xdg: str):
-        self.run_hypr_command("hyprctl reload", sig, xdg)
+        self.run_hypr_command(["hyprctl", "reload"], sig, xdg)
 
 
     ### UPDATER ###
