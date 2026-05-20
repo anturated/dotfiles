@@ -190,7 +190,6 @@ in
             ENABLED = true;
             PROTOCOL = "smtps";
             # SMTP_ADDR = config.ceirios.fywion.mailserver.domain;
-            # USER = "git@${rdomain}";
             SMTP_ADDR = "smtp.gmail.com"; # FIXME: update to own
             USER = "anturated@gmail.com";
             SMTP_PORT = 465;
