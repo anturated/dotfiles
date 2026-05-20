@@ -22,12 +22,14 @@
     system.users.anturated = { };
 
     fywion = {
-      nginx.enable = true;
+      # self-hosted #
       anturated-website.enable = true;
       mailserver.enable = true;
       pds.enable = true;
-
       forgejo.enable = true;
+
+      # web services #
+      nginx.enable = true;
       anubis.enable = true;
       redis.enable = true;
     };
