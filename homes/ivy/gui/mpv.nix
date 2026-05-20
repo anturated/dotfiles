@@ -98,9 +98,6 @@ in
         screenshot-tag-colorspace = "yes";
         screenshot-high-bit-depth = "yes"; # Same output bitdepth as the video
 
-        # use English audio and subtitles if available
-        alang = "en,jpn,jp";
-
         # misc
         stop-screensaver = "yes";
         cursor-autohide = 100; # auto hide cursor after 100ms
