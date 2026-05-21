@@ -7,6 +7,7 @@
     ./anubis.nix
     ./forgejo.nix
     ./hello-http.nix
+    ./local.nix
     ./mailserver.nix
     ./nginx.nix
     ./obsidian-livesync.nix
