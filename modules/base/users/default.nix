@@ -21,6 +21,7 @@ in
     ./anturated.nix
     ./desant.nix
     ./mkusers.nix
+    ./wizard.nix
   ];
 
   # this exists for per user overrides per machine
