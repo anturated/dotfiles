@@ -24,7 +24,6 @@ in
       # (0 still lets you press ESC)
       timeout = cfg.timeout;
 
-      systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
 
