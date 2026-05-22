@@ -28,7 +28,7 @@
       };
 
       "brethyn" = {
-        user = "wizards";
+        user = "wizard";
         hostname = "185.233.36.209";
       };
 
