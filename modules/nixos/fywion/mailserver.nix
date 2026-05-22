@@ -97,6 +97,10 @@ in
           aliases = [
             "anturated@${rdomain}"
             "me@${rdomain}"
+            "wlodek@${rdomain}"
+            "volodymyr@${rdomain}"
+            "volodymyrdesiatniuk@${rdomain}"
+            "desiatniuk@${rdomain}"
             "admin@${rdomain}"
             "root@${rdomain}"
             "postmaster@${rdomain}"
