@@ -58,5 +58,12 @@ in
         AllowHybridSleep = false;
       };
     };
+
+    boot = {
+      loader.grub = {
+        useOSProber = mkForce false;
+        efiSupport = mkForce false;
+      };
+    };
   };
 }
