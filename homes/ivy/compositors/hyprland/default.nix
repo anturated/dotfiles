@@ -47,6 +47,10 @@
 
         ${import ./workspaces.nix { inherit lib osConfig; }}
 
+        -- aquamarine --
+
+        ${import ./aquamarine.nix { inherit osConfig; }}
+
         -------------------------------------
         -- too small to have it's own file --
         -------------------------------------
