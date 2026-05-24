@@ -84,7 +84,7 @@ hl.window_rule {
 
 hl.window_rule {
   name = "music-apps",
-  match = { class = "^(spotify)$" },
+  match = { class = "^(spotify)$|^(Spotify)$" },
 
   workspace = "4 silent",
 }
