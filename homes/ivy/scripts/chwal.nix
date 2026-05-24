@@ -16,13 +16,13 @@
       thumb_dir="$HOME/.cache/wallthumbs"
       mkdir -p "$thumb_dir"
 
-      img="$WALLPAPER_DIR$(${pkgs.findutils}/bin/find "$WALLPAPER_DIR" -type f \( -iname "*.jpg" -o -iname "*.png" -o -iname "*.webp" \) \
+      img="$WALLPAPER_DIR$(${pkgs.findutils}/bin/find "$WALLPAPER_DIR" -type f \( -iname "*.jpg" -o -iname "*.png" -o -iname "*.webp" -o -iname "*.jpeg" -o -iname "*.gif" \) \
       | while read -r file; do
         base=$(${pkgs.coreutils}/bin/basename "$file")
         thumb="$thumb_dir/$base"
         if [ ! -f "$thumb" ]; then
           printf "%s\0icon\x1fthumbnail://%s\n" "$base" "$file"
-          ${pkgs.imagemagick}/bin/magick "$file" -thumbnail 200x200 "$thumb" &
+          ${pkgs.imagemagick}/bin/magick "$file"[0] -thumbnail 200x200 "$thumb" &
         else
           printf "%s\0icon\x1f%s\n" "$base" "$thumb"
         fi
