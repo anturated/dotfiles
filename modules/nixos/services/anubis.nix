@@ -7,12 +7,12 @@
 
 let
   inherit (lib.modules) mkIf;
-  inherit (self.lib) mkFywionOption;
+  inherit (self.lib) mkServiceOption;
 
-  cfg = config.ceirios.fywion.anubis;
+  cfg = config.ceirios.services.anubis;
 in
 {
-  options.ceirios.fywion.anubis = mkFywionOption "anubis" { };
+  options.ceirios.services.anubis = mkServiceOption "anubis" { };
 
   config = mkIf cfg.enable {
     # allow using ports

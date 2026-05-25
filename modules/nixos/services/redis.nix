@@ -8,12 +8,12 @@
 
 let
   inherit (lib.modules) mkIf mkMerge;
-  inherit (self.lib) mkFywionOption;
+  inherit (self.lib) mkServiceOption;
 
-  cfg = config.ceirios.fywion;
+  cfg = config.ceirios.services;
 in
 {
-  options.ceirios.fywion.redis = mkFywionOption "redis" { };
+  options.ceirios.services.redis = mkServiceOption "redis" { };
 
   config = mkIf cfg.redis.enable {
     services.redis = {

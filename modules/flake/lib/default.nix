@@ -4,14 +4,14 @@
 { lib, inputs }:
 
 lib.fixedPoints.makeExtensible (final: {
-  fywion = import ./fywion.nix { inherit lib; };
+  services = import ./services.nix { inherit lib; };
   helpers = import ./helpers.nix { inherit lib; };
   mkHost = import ./mkHost.nix { inherit inputs lib; };
   secrets = import ./secrets.nix { inherit inputs; };
   template = import ./template; # templates, selections of code that are repeated
   validators = import ./validators.nix { inherit lib; };
 
-  inherit (final.fywion) mkGraphicalService mkFywionOption;
+  inherit (final.services) mkGraphicalService mkServiceOption;
   inherit (final.helpers)
     mkPubs
     giturl

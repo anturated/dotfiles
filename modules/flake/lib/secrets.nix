@@ -48,7 +48,7 @@ let
       ];
     in
     {
-      sopsFile = "${self}/secrets/fywion/${file}.yaml";
+      sopsFile = "${self}/secrets/services/${file}.yaml";
       inherit owner group mode;
     }
     // args';

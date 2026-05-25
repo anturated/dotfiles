@@ -6,15 +6,15 @@
 }:
 
 let
-  inherit (self.lib) mkFywionOption mkSecret;
+  inherit (self.lib) mkServiceOption mkSecret;
   inherit (lib) mkIf mkForce;
 
   inherit (config.sops) secrets;
 
-  cfg = config.ceirios.fywion.pds;
+  cfg = config.ceirios.services.pds;
 in
 {
-  options.ceirios.fywion.pds = mkFywionOption "bluesky pds" {
+  options.ceirios.services.pds = mkServiceOption "bluesky pds" {
     inherit (config.networking) domain;
     port = 9876;
   };

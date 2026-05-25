@@ -7,12 +7,12 @@
 
 let
   inherit (lib) mkIf;
-  inherit (self.lib) mkSecret mkFywionOption;
+  inherit (self.lib) mkSecret mkServiceOption;
 
-  cfg = config.ceirios.fywion.obsidian-livesync;
+  cfg = config.ceirios.services.obsidian-livesync;
 in
 {
-  options.ceirios.fywion.obsidian-livesync = mkFywionOption "CouchDB + nginx" {
+  options.ceirios.services.obsidian-livesync = mkServiceOption "CouchDB + nginx" {
     inherit (config.networking) domain;
     port = 5984;
   };

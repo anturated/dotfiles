@@ -23,7 +23,7 @@ let
     mkServiceOption :: String -> (Int -> String -> String -> AttrSet) -> AttrSet
     ```
   */
-  mkFywionOption =
+  mkServiceOption =
     name:
     {
       port ? 0,
@@ -54,5 +54,5 @@ let
     };
 in
 {
-  inherit mkGraphicalService mkFywionOption;
+  inherit mkGraphicalService mkServiceOption;
 }

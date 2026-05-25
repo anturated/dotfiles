@@ -8,15 +8,15 @@
 
 let
   inherit (lib.modules) mkIf;
-  inherit (self.lib) mkFywionOption mkSecret;
+  inherit (self.lib) mkServiceOption mkSecret;
 
   rdomain = config.networking.domain;
-  cfg = config.ceirios.fywion.mailserver;
+  cfg = config.ceirios.services.mailserver;
 in
 {
   imports = [ inputs.simple-nixos-mailserver.nixosModules.default ];
 
-  options.ceirios.fywion.mailserver = mkFywionOption "mailserver" { domain = "mail.${rdomain}"; };
+  options.ceirios.services.mailserver = mkServiceOption "mailserver" { domain = "mail.${rdomain}"; };
 
   config = mkIf cfg.enable {
 

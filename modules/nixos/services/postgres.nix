@@ -8,12 +8,12 @@
 
 let
   inherit (lib.modules) mkIf;
-  inherit (self.lib) mkFywionOption;
+  inherit (self.lib) mkServiceOption;
 
-  cfg = config.ceirios.fywion;
+  cfg = config.ceirios.services;
 in
 {
-  options.ceirios.fywion.postgresql = mkFywionOption "postgresql" { };
+  options.ceirios.services.postgresql = mkServiceOption "postgresql" { };
 
   config = mkIf cfg.postgresql.enable {
     systemd.tmpfiles.settings."postgresql" = {

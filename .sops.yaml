@@ -24,7 +24,7 @@ creation_rules:
           - *desant
 
   # fywion service secrets
-  - path_regex: secrets/fywion/[^/]+\.(yaml|json|env|ini)$
+  - path_regex: secrets/services/[^/]+\.(yaml|json|env|ini)$
     key_groups:
       - age:
           - *desant

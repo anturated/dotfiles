@@ -7,7 +7,7 @@
 }:
 
 let
-  cfg = config.ceirios.fywion.forgejo;
+  cfg = config.ceirios.services.forgejo;
   rdomain = config.networking.domain;
 
   evergarden-theme = pkgs.fetchurl {
@@ -16,10 +16,10 @@ let
   };
 
   inherit (lib.modules) mkIf mkForce;
-  inherit (self.lib) mkFywionOption mkSecret;
+  inherit (self.lib) mkServiceOption mkSecret;
 in
 {
-  options.ceirios.fywion.forgejo = mkFywionOption "forgejo" {
+  options.ceirios.services.forgejo = mkServiceOption "forgejo" {
     port = 3011;
     domain = "git.${rdomain}";
   };
@@ -41,7 +41,7 @@ in
       };
     };
 
-    ceirios.fywion = {
+    ceirios.services = {
       # turns out redis is very good for md and pfps
       # so we keep it
       redis.enable = true;
@@ -129,7 +129,7 @@ in
           };
 
           cache = {
-            ENABLED = config.ceirios.fywion.redis.enable;
+            ENABLED = config.ceirios.services.redis.enable;
             ADAPTER = "redis";
             HOST = "redis://:forgejo@localhost:6371";
           };
@@ -189,7 +189,7 @@ in
           mailer = {
             ENABLED = true;
             PROTOCOL = "smtps";
-            # SMTP_ADDR = config.ceirios.fywion.mailserver.domain;
+            # SMTP_ADDR = config.ceirios.services.mailserver.domain;
             SMTP_ADDR = "smtp.gmail.com"; # FIXME: update to own
             USER = "anturated@gmail.com";
             SMTP_PORT = 465;
@@ -210,7 +210,7 @@ in
         };
       };
 
-      anubis = mkIf config.ceirios.fywion.anubis.enable {
+      anubis = mkIf config.ceirios.services.anubis.enable {
         instances.forgejo.settings = {
           BIND = "/run/anubis/anubis-forgejo/anubis.sock";
           METRICS_BIND = "/run/anubis/anubis-forgejo/anubis-metrics.sock";
@@ -225,7 +225,7 @@ in
           proxyPass =
             "http://unix:"
             + (
-              if config.ceirios.fywion.anubis.enable then
+              if config.ceirios.services.anubis.enable then
                 config.services.anubis.instances.forgejo.settings.BIND
               else
                 config.services.forgejo.settings.server.HTTP_ADDR

@@ -21,7 +21,7 @@
 
     system.users.anturated = { };
 
-    fywion = {
+    services = {
       # self-hosted #
       anturated-website.enable = true;
       mailserver.enable = true;

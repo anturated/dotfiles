@@ -7,12 +7,12 @@
 
 let
   inherit (lib) mkIf;
-  inherit (self.lib) mkFywionOption;
+  inherit (self.lib) mkServiceOption;
 
-  cfg = config.ceirios.fywion.anturated-website;
+  cfg = config.ceirios.services.anturated-website;
 in
 {
-  options.ceirios.fywion.anturated-website = mkFywionOption "anturated-website" {
+  options.ceirios.services.anturated-website = mkServiceOption "anturated-website" {
     inherit (config.networking) domain;
     port = 3000;
   };
@@ -21,7 +21,7 @@ in
     fywion.anturated-website.enable = true;
 
     # gotta configure nginx
-    # because fywion has no idea what the setup is
+    # because services has no idea what the setup is
     services.nginx.virtualHosts.${cfg.domain} = {
       serverAliases = [ "www.${cfg.domain}" ];
       enableACME = true;

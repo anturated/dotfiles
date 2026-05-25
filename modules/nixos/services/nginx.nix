@@ -1,14 +1,24 @@
-{ lib, config, ... }:
+{
+  lib,
+  config,
+  self,
+  ...
+}:
 
 let
+  inherit (self.lib) mkServiceOption;
   inherit (lib.modules) mkIf mkDefault mkMerge;
   inherit (lib.options) mkOption;
   inherit (lib) types;
 
-  cfg = config.ceirios.fywion.nginx;
+  cfg = config.ceirios.services.nginx;
 in
 {
   options = {
+    ceirios.services.nginx = mkServiceOption "nginx" {
+      domain = "anturated.dev";
+    };
+
     # getchoo is cool for this
     # https://github.com/getchoo/borealis/blob/6e5ad4fb14a0de172c64e0d6a9d6f63ed7df88e6/modules/nixos/mixins/nginx.nix#L5
     services.nginx.virtualHosts = mkOption {

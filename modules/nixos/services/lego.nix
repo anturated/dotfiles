@@ -77,7 +77,7 @@ in
     );
   };
 
-  config = mkIf config.ceirios.fywion.nginx.enable {
+  config = mkIf config.ceirios.services.nginx.enable {
     security.acme = {
       acceptTerms = true;
       defaults.email = "desant" + "@" + "anturated" + "." + "dev";
