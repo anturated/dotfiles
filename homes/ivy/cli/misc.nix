@@ -23,11 +23,16 @@ in
         fzf
         zoxide
         jq
+        just
 
         # better alternatives
         ripgrep
         eza
         bat
+
+        # secrets
+        sops
+        yaml-language-server # FIXME: shouldn't be here
         ;
     }
 
