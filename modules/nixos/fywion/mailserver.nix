@@ -60,7 +60,7 @@ in
         path = "/srv/storage/mail/vmail";
       };
 
-      sieveDirectory = "/srv/storage/mail/sieve";
+      # sieveDirectory = "/srv/storage/mail/sieve";
 
       # Enable STARTTLS
       enableImap = true;
@@ -74,7 +74,7 @@ in
       enableSubmissionSsl = true;
 
       # Enable ManageSieve so that we don't need to change the config to update sieves
-      enableManageSieve = true;
+      enableManageSieve = false;
 
       # DKIM Settings
       dkim = {
