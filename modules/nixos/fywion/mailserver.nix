@@ -51,7 +51,7 @@ in
       enable = true;
       openFirewall = true;
 
-      stateVersion = 4;
+      stateVersion = 5;
 
       storage = {
         directoryLayout = "fs";
@@ -59,8 +59,6 @@ in
         group = "vmail";
         path = "/srv/storage/mail/vmail";
       };
-
-      # sieveDirectory = "/srv/storage/mail/sieve";
 
       # Enable STARTTLS
       enableImap = true;
@@ -74,7 +72,7 @@ in
       enableSubmissionSsl = true;
 
       # Enable ManageSieve so that we don't need to change the config to update sieves
-      enableManageSieve = false;
+      enableManageSieve = true;
 
       # DKIM Settings
       dkim = {
