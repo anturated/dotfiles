@@ -51,7 +51,7 @@ in
       enable = true;
       openFirewall = true;
 
-      stateVersion = 4;
+      stateVersion = 5;
 
       storage = {
         directoryLayout = "fs";
@@ -59,8 +59,6 @@ in
         group = "vmail";
         path = "/srv/storage/mail/vmail";
       };
-
-      sieveDirectory = "/srv/storage/mail/sieve";
 
       # Enable STARTTLS
       enableImap = true;
