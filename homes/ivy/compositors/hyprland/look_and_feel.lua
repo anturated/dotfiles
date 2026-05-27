@@ -16,7 +16,7 @@ hl.config({
     -- we game. this should only affect windows that request tearing.
     -- if this is false, tearing won't happen at all.
     -- https://wiki.hypr.land/Configuring/Advanced-and-Cool/Tearing/
-    allow_tearing = true,
+    allow_tearing = false,
 
     -- binary tree layout
     layout = "dwindle",
