@@ -20,6 +20,27 @@
         "type": "github"
       }
     },
+    "gift-wrap": {
+      "inputs": {
+        "nixpkgs": [
+          "newydd",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1773403464,
+        "narHash": "sha256-fckT48WShz/HqRgHgBKbVZCreC+Apfu3UqPZxFuL7Us=",
+        "owner": "tgirlcloud",
+        "repo": "gift-wrap",
+        "rev": "9499bc6e450d9959e2019f7122efd3b9077f333a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "tgirlcloud",
+        "repo": "gift-wrap",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -37,6 +58,27 @@
       "original": {
         "owner": "nix-community",
         "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "newydd": {
+      "inputs": {
+        "gift-wrap": "gift-wrap",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1780009482,
+        "narHash": "sha256-zPEmLYraWZvrtordD9U8nyK+j7w9ReN7ln87EtNU+yw=",
+        "owner": "anturated",
+        "repo": "nvim",
+        "rev": "58ec0052cfd32b89069f13c1611762d9b00098f8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "anturated",
+        "repo": "nvim",
         "type": "github"
       }
     },
@@ -96,6 +138,7 @@
       "inputs": {
         "fywion": "fywion",
         "home-manager": "home-manager",
+        "newydd": "newydd",
         "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs",
         "nixpkgs-stable": "nixpkgs-stable",

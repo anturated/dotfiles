@@ -4,7 +4,7 @@
   imports = [
     ./cava.nix
     ./lazygit.nix
-    ./nvim
+    ./nvim.nix
     ./misc.nix
   ];
 }

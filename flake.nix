@@ -65,6 +65,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # my nvim config
+    newydd = {
+      type = "github";
+      owner = "anturated";
+      repo = "nvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # mail server
     simple-nixos-mailserver = {
       type = "gitlab";
