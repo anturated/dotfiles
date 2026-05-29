@@ -1,9 +1,11 @@
 # NixOS dotfiles RAAAAAH
+
 TODO: add showcase :\\
+
 TODO: installation instructions
 
 ## Rice that's yet to arrive
-- [ ] neovim (it exists trust me)
+- [x] neovim (it exists trust me)
 - [ ] [quickshell](https://github.com/anturated/ivy-shell)
 
 ## Thank/Credits

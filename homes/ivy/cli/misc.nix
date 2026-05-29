@@ -32,7 +32,6 @@ in
 
         # secrets
         sops
-        yaml-language-server # FIXME: shouldn't be here
         ;
     }
 
