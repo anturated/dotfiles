@@ -19,6 +19,7 @@ in
     name:
     let
       inherit (config.home-manager.users.${name}.ceirios.software.defaults) shell;
+      inherit (config.ceirios.users.${name}) ssh hashedPassword;
     in
     mergeAttrsList [
       {
@@ -31,6 +32,9 @@ in
 
       (optionalAttrs (_class == "nixos") {
         home = "/home/${name}";
+
+        inherit hashedPassword;
+        openssh.authorizedKeys.keys = ssh.authorizedKeys;
 
         uid = mkDefault 1000;
         isNormalUser = true;

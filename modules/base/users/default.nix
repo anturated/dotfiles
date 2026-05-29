@@ -1,8 +1,4 @@
-# some stuff can be shared between darwin/iso/nixos/... and it should be here.
-# like ssh keys and such.
-# nixos-specific stuff like passwords is in modules/nixos/users/
-
-{ lib, config, ... }:
+{ config, lib, ... }:
 
 let
   inherit (lib)
@@ -18,10 +14,8 @@ let
 in
 {
   imports = [
-    ./anturated.nix
-    ./desant.nix
+    ../../../users
     ./mkusers.nix
-    ./wizard.nix
   ];
 
   # this exists for per user overrides per machine

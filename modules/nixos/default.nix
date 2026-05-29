@@ -16,7 +16,7 @@
     ./secrets.nix
     ./software
     ./system
-    ./users
+    ./users.nix
 
     ./extras.nix
   ];

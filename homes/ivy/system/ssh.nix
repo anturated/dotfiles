@@ -1,5 +1,13 @@
-{ config, ... }:
+{
+  config,
+  osConfig,
+  user,
+  ...
+}:
 
+let
+  userSettings = osConfig.ceirios.users.${user}.ssh.settings;
+in
 {
   programs.ssh = {
     enable = config.ceirios.profiles.workstation;
@@ -7,31 +15,7 @@
 
     includes = [ ];
 
-    settings = {
-      ####################
-      ## VPS / MACHINES ##
-      ####################
-
-      "pinwydd" = {
-        user = "anturated";
-        hostname = "82.38.2.58";
-      };
-
-      "cynnil" = {
-        user = "anturated";
-        hostname = "178.105.140.238";
-      };
-
-      "fawrion" = {
-        user = "desant";
-        hostname = "185.233.46.184";
-      };
-
-      "brethyn" = {
-        user = "wizard";
-        hostname = "185.233.36.209";
-      };
-
+    settings = userSettings // {
       ############
       ## FORGES ##
       ############
@@ -39,11 +23,6 @@
       "github" = {
         user = "git";
         hostname = "github.com";
-      };
-
-      "forge" = {
-        user = "forgejo";
-        hostname = "anturated.dev";
       };
 
       #########
