@@ -9,5 +9,6 @@
     ./git.nix
     ./starship.nix
     ./misc.nix
+    ./wakatime.nix
   ];
 }

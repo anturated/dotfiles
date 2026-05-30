@@ -29,7 +29,10 @@
           user = "forgejo";
           hostname = "anturated.dev";
         };
+      };
 
+      secrets = {
+        wakatime = true;
       };
     };
 
