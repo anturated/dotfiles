@@ -8,7 +8,6 @@
         headless
         workstation
         laptop
-        server
         gaming
         ;
     };
