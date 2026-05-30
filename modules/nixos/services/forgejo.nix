@@ -11,8 +11,8 @@ let
   rdomain = config.networking.domain;
 
   evergarden-theme = pkgs.fetchurl {
-    url = "https://evergarden.moe/gitea/theme-evergarden-fall-green.css";
-    hash = "sha256-Jqm3Qyz/E4VecbIO2DRai8Q/tRFFW9+doKcw0Zhvf+g=";
+    url = "https://evergarden.moe/gitea/theme-evergarden-fall-lime.css";
+    hash = "sha256-xdcNuG/3DTlquUfQ8Otx4x3XWNGkDWK9zheG89B3dgg=";
   };
 
   inherit (lib.modules) mkIf mkForce;
@@ -95,13 +95,10 @@ in
           attachment.ALLOWED_TYPES = "*/*";
 
           ui = {
-            DEFAULT_THEME = "evergarden-winter-green";
+            DEFAULT_THEME = "evergarden-fall-lime";
             THEMES = lib.concatStringsSep "," [
               # i don't care enough to add the rest
-              "evergarden-fall-green"
-              # "evergarden-fall-green"
-              # "evergarden-spring-green"
-              # "evergarden-summer-green"
+              "evergarden-fall-lime"
 
               "forgejo-auto"
               "forgejo-light"
@@ -253,7 +250,7 @@ in
         group = "forgejo";
       };
 
-      "${config.services.forgejo.stateDir}/custom/public/assets/css/theme-evergarden-fall-green.css".C = {
+      "${config.services.forgejo.stateDir}/custom/public/assets/css/theme-evergarden-fall-lime.css".C = {
         mode = "0644";
         user = "forgejo";
         group = "forgejo";
