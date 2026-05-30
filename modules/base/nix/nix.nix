@@ -33,6 +33,10 @@ in
         "flakes"
       ];
 
+      # let me mess with the store
+      allowed-users = [ "@wheel" ];
+      trusted-users = [ "@wheel" ];
+
       # disable dirty tree warning
       warn-dirty = false;
 
