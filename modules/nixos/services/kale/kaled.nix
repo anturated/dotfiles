@@ -1,4 +1,9 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 
 let
   pythonEnv = pkgs.python3.withPackages (
@@ -16,39 +21,40 @@ let
   };
 in
 {
-  # 1. The D-Bus Policy (Allows users to talk to the daemon)
-  services.dbus.packages = [
-    (pkgs.writeTextFile {
-      name = "kaled-dbus-conf";
-      destination = "/share/dbus-1/system.d/com.anturated.kaled.conf";
-      text = ''
-        <!DOCTYPE busconfig PUBLIC "-//freedesktop//DTD D-BUS Bus Configuration 1.0//EN"
-         "http://www.freedesktop.org/standards/dbus/1.0/busconfig.dtd">
-        <busconfig>
+  config = lib.mkIf config.ceirios.profiles.gaming {
+    services.dbus.packages = [
+      (pkgs.writeTextFile {
+        name = "kaled-dbus-conf";
+        destination = "/share/dbus-1/system.d/com.anturated.kaled.conf";
+        text = ''
+          <!DOCTYPE busconfig PUBLIC "-//freedesktop//DTD D-BUS Bus Configuration 1.0//EN"
+          "http://www.freedesktop.org/standards/dbus/1.0/busconfig.dtd">
+          <busconfig>
           <policy user="root">
-            <allow own="com.anturated.kaled"/>
+          <allow own="com.anturated.kaled"/>
           </policy>
           <policy context="default">
-            <allow send_destination="com.anturated.kaled"/>
+          <allow send_destination="com.anturated.kaled"/>
           </policy>
-        </busconfig>
-      '';
-    })
-  ];
-
-  # 2. The Background Service
-  systemd.services.kaled = {
-    description = "Kale Daemon";
-    after = [ "dbus.service" ];
-    wantedBy = [ "multi-user.target" ];
-    path = [
-      pkgs.hyprland
-      pkgs.tuned
-      pkgs.sudo
+          </busconfig>
+        '';
+      })
     ];
-    serviceConfig = {
-      ExecStart = "${kaleDaemon}/bin/kaled.py";
-      Restart = "always";
+
+    # 2. The Background Service
+    systemd.services.kaled = {
+      description = "Kale Daemon";
+      after = [ "dbus.service" ];
+      wantedBy = [ "multi-user.target" ];
+      path = [
+        pkgs.hyprland
+        pkgs.tuned
+        pkgs.sudo
+      ];
+      serviceConfig = {
+        ExecStart = "${kaleDaemon}/bin/kaled.py";
+        Restart = "always";
+      };
     };
   };
 }
