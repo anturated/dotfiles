@@ -33,13 +33,19 @@ deployer host action *args:
 #   REBUILDS   #
 ################
 
+alias rb := rebuild
+
 [group('rebuild')]
 [no-exit-message]
 rebuild *args: (builder "switch" args)
 
 [group('rebuild')]
 [no-exit-message]
-rebuild-boot *args: (builder "boot" args)
+boot *args: (builder "boot" args)
+
+[group('rebuild')]
+[no-exit-message]
+test *args: (builder "test" args)
 
 ###############
 #   DEPLOYS   #
@@ -96,3 +102,13 @@ rotate-secrets:
 [no-exit-message]
 update-secrets:
     find secrets/ -name "*.yaml" | xargs -I {} sops updatekeys -y {}
+
+#############
+#   UTILS   #
+#############
+
+[group('utils')]
+[no-exit-message]
+gc:
+    nix-collect-garbage --delete-older-than 3d
+    nix store optimise
