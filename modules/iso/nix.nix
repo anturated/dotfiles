@@ -12,6 +12,10 @@
         "nix-command"
       ];
 
+      # let me mess with the store
+      allowed-users = [ "@wheel" ];
+      trusted-users = [ "@wheel" ];
+
       # more logging is nice when doing installs, we want to know if something goes wrong
       log-lines = 50;
 
