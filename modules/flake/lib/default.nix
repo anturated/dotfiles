@@ -25,7 +25,6 @@ lib.fixedPoints.makeExtensible (final: {
     ;
   inherit (final.secrets)
     mkSecret
-    mkScriptSecret
     ;
   inherit (final.validators)
     ifTheyExist

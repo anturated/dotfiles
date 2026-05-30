@@ -1,0 +1,43 @@
+name: Release Iso and Dotfiles
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-isos:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Maximize Space
+        uses: easimon/maximize-build-space
+        with:
+          overprovision-lvm: true
+          remove-android: true
+          remove-dotnet: true
+          remove-codeql: true
+          remove-haskell: true
+          remove-docker-images: true
+
+      - name: Checkout
+        uses: actions/checkout
+        with:
+          persist-credentials: false
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action
+
+      - name: Build Iso
+        continue-on-error: false
+        run: |
+          nix build -L .#nixosConfigurations.saeth.config.system.build.isoImage
+          cp result/iso/*.iso ./
+
+      - name: Build dotfiles
+        run: |
+          nix build -L .#nixosConfigurations.legion.config.home-manager.users.desant.home-files
+          tar -czvhf dotfiles.tar.gz result/
+
+      - name: Upload Release Artifacts
+        run: gh release create "$(date +"%Y-%m-%d")" ./saeth.iso ./dotfiles.tar.gz
+        env:
+          GH_TOKEN: ${{ github.token }}

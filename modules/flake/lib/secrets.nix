@@ -52,17 +52,7 @@ let
       inherit owner group mode;
     }
     // args';
-
-  # this one reads from secrets/scripts.yaml
-  # home manager doesn't need all that owner/group bs
-  mkScriptSecret =
-    args:
-    {
-      sopsFile = "${self}/secrets/scripts.yaml";
-    }
-    // args;
 in
 {
   inherit mkSecret;
-  inherit mkScriptSecret;
 }

@@ -17,13 +17,7 @@ creation_rules:
       - age:
           - *desant
 
-  # required for some scripts to work
-  - path_regex: secrets/scripts\.yaml
-    key_groups:
-      - age:
-          - *desant
-
-  # fywion service secrets
+  # service secrets
   - path_regex: secrets/services/[^/]+\.(yaml|json|env|ini)$
     key_groups:
       - age:
