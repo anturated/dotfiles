@@ -4,6 +4,9 @@ let
   inherit (inputs) nixpkgs self;
   inherit (nixpkgs) lib;
 
+  forAllSystems =
+    f: lib.genAttrs lib.systems.flakeExposed (system: f (import nixpkgs { inherit system; }));
+
   mkHosts = lib.mapAttrs self.lib.mkHost;
 
   # auto-discover from machines/
@@ -26,4 +29,8 @@ in
       };
     }
   );
+
+  devShells = forAllSystems (pkgs: {
+    default = pkgs.callPackage ./shell.nix { };
+  });
 }
