@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ./mounts.nix
+    ./hardware.nix
   ];
 
   ceirios = {
