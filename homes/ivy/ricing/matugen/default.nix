@@ -6,7 +6,7 @@
 }:
 
 let
-  wallpaper = ./wallpaper.png;
+  wallpaper = ./wallpaper.webp;
 in
 {
   config = {
