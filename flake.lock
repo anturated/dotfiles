@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1780161835,
-        "narHash": "sha256-RNubNAddupFt/xmHtmag67cBSxqww+dZysOM+Rsclr0=",
+        "lastModified": 1780180311,
+        "narHash": "sha256-q9p4VQbLftVmmKefZxkphJXcQyc9hrFWYdmO1VUHV0E=",
         "owner": "anturated",
         "repo": "ivy-shell",
-        "rev": "4f6f9a8cfd2e1c1cea35a1dd313f761fad6b1497",
+        "rev": "becac20622f38ccfd862cefe118ec90c1791f392",
         "type": "github"
       },
       "original": {
@@ -89,11 +89,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1780155371,
-        "narHash": "sha256-rBF0ESE6Q+01lZj8zeGRFsJTskvjc88bvb771b2pYCo=",
+        "lastModified": 1780176611,
+        "narHash": "sha256-gstlayNqzjvnUrLDvOzSVFDg/UrHchdFpKd10x8EVrE=",
         "owner": "anturated",
         "repo": "nvim",
-        "rev": "4491f02163a773cd084047b122b22b84d05a9071",
+        "rev": "4df4834f1462e6464cf45472e0d0f4705fdb565b",
         "type": "github"
       },
       "original": {
