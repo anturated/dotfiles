@@ -41,6 +41,16 @@ in
 
       # whether to accept nix configuration from a flake without prompting
       accept-flake-config = false;
+
+      substituters = [
+        "https://nix-community.cachix.org"
+        "https://anturated.cachix.org"
+      ];
+
+      trusted-public-keys = [
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+        "anturated.cachix.org-1:UbrvoKEvUKs/wEYeefuE1hP1oOXUXpvNa6pQMzMAUZQ="
+      ];
     };
 
     # garbage collection
