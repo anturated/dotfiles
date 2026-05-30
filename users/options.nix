@@ -4,6 +4,7 @@ let
   inherit (lib)
     types
     mkOption
+    mkEnableOption
     ;
 
   inherit (types)
@@ -63,6 +64,10 @@ in
                   You can use this to define ssh hostnames and whatnot.
                 '';
               };
+            };
+
+            secrets = {
+              wakatime = mkEnableOption "Has wakatime config in secrets";
             };
           };
         }
