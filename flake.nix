@@ -73,6 +73,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # my quickshell config
+    eiddew = {
+      type = "github";
+      owner = "anturated";
+      repo = "ivy-shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # mail server
     simple-nixos-mailserver = {
       type = "gitlab";

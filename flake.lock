@@ -1,5 +1,25 @@
 {
   "nodes": {
+    "eiddew": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1780147576,
+        "narHash": "sha256-6Ofz6VnVQg9LZJccUSLkHTclXjO6qDMn0GJcZBzdpbI=",
+        "owner": "anturated",
+        "repo": "ivy-shell",
+        "rev": "9e9b9f8f76c687a62175abf6014f63bb48123f10",
+        "type": "github"
+      },
+      "original": {
+        "owner": "anturated",
+        "repo": "ivy-shell",
+        "type": "github"
+      }
+    },
     "fywion": {
       "inputs": {
         "nixpkgs": [
@@ -136,6 +156,7 @@
     },
     "root": {
       "inputs": {
+        "eiddew": "eiddew",
         "fywion": "fywion",
         "home-manager": "home-manager",
         "newydd": "newydd",

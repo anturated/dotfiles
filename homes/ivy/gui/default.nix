@@ -11,7 +11,7 @@
     ./mpv.nix
     ./obsidian
     ./spotify.nix
-    ./quickshell
+    ./quickshell.nix
     ./vesktop.nix
   ];
 }
