@@ -10,7 +10,7 @@
       type = "github";
       owner = "NixOS";
       repo = "nixpkgs";
-      ref = "nixos-unstable";
+      ref = "nixpkgs-unstable";
     };
 
     # stable branch is here because nvim likes breaking changes.
