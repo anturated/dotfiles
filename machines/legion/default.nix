@@ -34,6 +34,7 @@
     };
 
     system = {
+      lix.enable = true;
       stateVersion = "25.05";
       flakeDir = "$HOME/dev/dotfiles";
     };
