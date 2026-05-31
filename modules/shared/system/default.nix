@@ -3,6 +3,6 @@
 {
   imports = [
     ./fonts.nix
-    ./vars.nix
+    ./environment.nix
   ];
 }

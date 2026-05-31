@@ -5,6 +5,7 @@
   config,
   ...
 }:
+
 let
   inherit (lib)
     mergeAttrsList
@@ -22,24 +23,27 @@ in
       inherit (config.ceirios.users.${name}) ssh hashedPassword;
     in
     mergeAttrsList [
-      {
-        shell = "/run/current-system/sw/bin/${shell}";
-      }
+      # set shell
+      { shell = "/run/current-system/sw/bin/${shell}"; }
 
-      (optionalAttrs (_class == "darwin") {
-        home = "/Users/${name}";
-      })
+      # darwin manages users differently so we just point at home
+      (optionalAttrs (_class == "darwin") { home = "/Users/${name}"; })
 
+      # nixos allows granual control so we do that
       (optionalAttrs (_class == "nixos") {
         home = "/home/${name}";
 
+        # set password
         inherit hashedPassword;
+
+        # set authorized keys
         openssh.authorizedKeys.keys = ssh.authorizedKeys;
 
+        # set some properties
         uid = mkDefault 1000;
         isNormalUser = true;
 
-        # only add groups that exist
+        # add groups that exist
         extraGroups = [
           "wheel"
           "nix"

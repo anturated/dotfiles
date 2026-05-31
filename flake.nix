@@ -13,8 +13,7 @@
       ref = "nixpkgs-unstable";
     };
 
-    # stable branch is here because nvim likes breaking changes.
-    # should be used as pkgsStable
+    # stable branch for anything broken upstream
     nixpkgs-stable = {
       type = "github";
       owner = "NixOS";

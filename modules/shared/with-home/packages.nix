@@ -6,9 +6,16 @@
 }:
 
 let
-  inherit (lib) mergeAttrsList optionalAttrs;
+  inherit (lib) mergeAttrsList optionalAttrs mkOption;
+  inherit (lib.types) lazyAttrsOf package;
 in
 {
+  options.ceirios.packages = mkOption {
+    type = lazyAttrsOf package;
+    default = { };
+    description = "A set of packages to install";
+  };
+
   config = mergeAttrsList [
     (optionalAttrs (_class == "nixos" || _class == "darwin") {
       environment.systemPackages = builtins.attrValues config.ceirios.packages;

@@ -2,12 +2,11 @@
 
 {
   imports = [
-    ../generic
     ../../homes
     ./nix
-    ./nixpkgs.nix
+    ./with-home
     ./users
     ./system
-    ./programs.nix
+    ./shell.nix
   ];
 }

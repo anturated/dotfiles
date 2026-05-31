@@ -4,12 +4,11 @@
   _class = "homeManager";
 
   imports = [
-    ../generic
+    ../shared/with-home
     ./fonts.nix
     ./environment
     ./extras.nix
     ./revision.nix
-    ./profiles.nix
     ./software
     ./secrets.nix
   ];

@@ -5,8 +5,7 @@
 }:
 
 let
-  inherit (lib.attrsets) mapAttrs;
-  inherit (lib.options) mkOption;
+  inherit (lib) mapAttrs mkOption;
   inherit (lib.types) enum str;
 
   mkDefault = name: args: mkOption ({ description = "default ${name} for the system"; } // args);
@@ -16,11 +15,9 @@ in
     shell = {
       type = enum [
         "bash"
-        "zsh"
         "fish"
-        "nushell"
       ];
-      default = if (osClass == "nixos") then "fish" else "zsh";
+      default = if (osClass == "nixos") then "fish" else "bash";
     };
 
     terminal = {

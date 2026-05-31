@@ -4,7 +4,7 @@
   _class = "nixos";
 
   imports = [
-    ../base
+    ../shared
     ./boot
     ./environment
     ./hardware
