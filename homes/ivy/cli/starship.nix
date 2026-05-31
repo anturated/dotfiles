@@ -1,13 +1,11 @@
-{ ... }:
-
 {
   programs.starship = {
     enable = true;
     settings = {
       add_newline = true;
-      format = ("$username" + "$directory" + "$git_branch" + "$git_status" + "$character");
+      format = "$username" + "$directory" + "$git_branch" + "$git_status" + "$character";
 
-      right_format = (
+      right_format =
         "$rust"
         + "$golang"
         + "$docker_context"
@@ -16,8 +14,7 @@
         + "$nodejs"
         + "$lua"
         + "$package"
-        + "$nix_shell"
-      );
+        + "$nix_shell";
 
       username = {
         format = "[$user]($style)[](blue)";

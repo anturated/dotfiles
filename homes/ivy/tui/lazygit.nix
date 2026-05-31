@@ -1,5 +1,3 @@
-{ ... }:
-
 {
   programs.lazygit = {
     # enable it globally for now just in case

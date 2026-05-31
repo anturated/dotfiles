@@ -1,5 +1,3 @@
-{ ... }:
-
 {
   nix = {
     # we can disable channels since we can just use the flake

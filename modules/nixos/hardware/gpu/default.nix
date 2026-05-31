@@ -29,7 +29,7 @@ in
 
     busIds = {
       primary = mkOption {
-        type = nullOr (str);
+        type = nullOr str;
         default = null;
         description = ''
           Primary/iGPU bus id.
@@ -38,7 +38,7 @@ in
         '';
       };
       discrete = mkOption {
-        type = nullOr (str);
+        type = nullOr str;
         default = null;
         description = ''
           Nvidia/dGPU bus id.

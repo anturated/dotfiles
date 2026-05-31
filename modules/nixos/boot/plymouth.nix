@@ -22,7 +22,7 @@ in
 
     themes = mkOption {
       type = listOf str;
-      default = ["circle_hud"];
+      default = [ "circle_hud" ];
       description = "Extra themes to get.";
     };
   };
@@ -31,7 +31,7 @@ in
     # optional plymouth
     plymouth = lib.mkIf cfg.enable {
       enable = true;
-      theme = cfg.theme;
+      inherit (cfg) theme;
       themePackages = with pkgs; [
         # By default we would install all themes
         (adi1090x-plymouth-themes.override {

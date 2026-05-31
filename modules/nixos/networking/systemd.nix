@@ -1,5 +1,3 @@
-{ ... }:
-
 {
   # systemd DNS resolver daemon
   services.resolved.enable = true;

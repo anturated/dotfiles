@@ -21,7 +21,7 @@ let
     + ".${builtins.elemAt parts 2}";
 in
 {
-  config = mkIf (useIntel) {
+  config = mkIf useIntel {
     # we enable modesetting since this is recomeneded for intel gpus
     services.xserver.videoDrivers = [ "modesetting" ];
 

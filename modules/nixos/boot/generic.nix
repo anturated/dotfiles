@@ -22,7 +22,7 @@ in
     loader = {
       # time to choose derivation
       # (0 still lets you press ESC)
-      timeout = cfg.timeout;
+      inherit (cfg) timeout;
 
       efi.canTouchEfiVariables = true;
     };

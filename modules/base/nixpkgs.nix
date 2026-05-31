@@ -1,5 +1,3 @@
-{ ... }:
-
 {
   nixpkgs.config = {
     # enable spyware

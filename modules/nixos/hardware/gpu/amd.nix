@@ -20,7 +20,7 @@ let
     + ".${builtins.elemAt parts 2}";
 in
 {
-  config = mkIf (useAmd) {
+  config = mkIf useAmd {
     # enable amdgpu xorg drivers
     services.xserver.videoDrivers = [ "amdgpu" ];
 

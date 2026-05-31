@@ -64,7 +64,7 @@ let
 
     images = {
       app = "mpv";
-      mimeTypes = (import ./mime/image.nix);
+      mimeTypes = import ./mime/image.nix;
     };
 
     fileManager = {
