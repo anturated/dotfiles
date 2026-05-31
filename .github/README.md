@@ -84,36 +84,41 @@ And you're done.
 > No password prompts on sudo commands.
 > Don't do anything stupid.
 
-### Binds
-- `super d` - drun
-- `super shift d` - run
-- `super r` - terminal
-- `super shift r` - terminal (float)
-- `super e` - yazi (terminal file explorer)
-- `super shift e` - nemo (file explorer)
+<details>
+<summary><h3>Binds</h3></summary>
 
-- `super alt b` - browser
-- `super alt d` - discord
-- `super alt s` - steam
-- `super alt m` - spotify
+Key             | Action
+----------------|-------
+super d         | drun
+super shift d   | run
+super r         | terminal
+super shift r   | terminal (float)
+super e         | yazi (terminal file explorer)
+super shift e   | nemo (file explorer)
+super alt b     | browser
+super alt d     | discord
+super alt s     | steam
+super alt m     | spotify
+super q         | close window
+super f         | maximize
+super shift f   | fullscreen
+super shift spc | float
+super 0-9       | workspaces
+super -=        | play next/prev
+super space     | play/pause
+super []        | brightness
 
-- `super q` - close window
-- `super f` - maximize
-- `super shift f` - fullscreen
-- `super shift space` - float
-
-- `super 0-9` - workspaces
-- `super -=` - play next/prev
-- `super space` - play/pause
-- `super []` - brightness
 The rest of them is [here](https://github.com/anturated/dotfiles/blob/master/homes/ivy/compositors/hyprland/keybinds.lua)
 
+</details>
+
 ### Commands
-- `chwal` (`super shift i`) - Wallpaper picker.
+`chwal` (`super shift i`) - Wallpaper picker.
 Auto-themes and reloads colors on most apps.
 Wallpapers are at `~/media/pictures/wallpapers/`.
 GIFs take a while to load the first time.
-- `animelist` (`super alt w`) - opens everything in `~/media/videos/anime/<name>/` in mpv.
+
+`animelist` (`super alt w`) - opens everything in `~/media/videos/anime/<name>/` in mpv.
 
 ### Zoxide
 Present. `z /some/very/deeply/nested/directory` once and `z dir[ectory]` to jump there afterwards. The better `cd`.
@@ -137,20 +142,22 @@ use wayland (if on proton-ge),
 use FSR 4.
 
 Args it can take:
-`-m` - minimal
-`-s` - SteamDeck=1
-`-l` - PROTON_LOG=1
-`-x` - PROTON_ENABLE_WAYLAND=0
-`-g` - enable gamemode system-wide, don't `gamemoderun`
-`-G` - enable gamemode system-wide, `gamemoderun`
-`-b` - bypass game launcher (EAC, UPlay, etc.), `gamemoderun` the game itself
-`-n` - no gamemode
-`-S` - gamescope (poorly tested)
-`-c` - clean/customize, to be used with these (which are on by default):
-`-H` - optimize hyprland
-`-O` - offload
-`-M` - mangohud
-`-P` - switch power profile
+```bash
+  -m  # minimal
+  -s  # SteamDeck=1
+  -l  # PROTON_LOG=1
+  -x  # PROTON_ENABLE_WAYLAND=0
+  -g  # enable gamemode system-wide, don't `gamemoderun`
+  -G  # enable gamemode system-wide, `gamemoderun`
+  -b  # bypass game launcher (EAC, UPlay, etc.), `gamemoderun` the game itself
+  -n  # no gamemode
+  -S  # gamescope (poorly tested)
+  -c  # clean/customize, to be used with these (which are on by default):
+  -H  # optimize hyprland
+  -O  # offload
+  -M  # mangohud
+  -P  # switch power profile
+```
 
 ### Other small things
 A justfile is included with the repo, if you have something to run it with:
