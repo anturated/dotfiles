@@ -142,3 +142,8 @@ bettergif input:
     ffmpeg -i "{{input}}" -i "$palette" \
       -lavfi "fps=60,scale=1920:1080:flags=lanczos:force_original_aspect_ratio=increase,crop=1920:1080,unsharp=5:5:0.8:3:3:0.4 [x]; [x][1:v] paletteuse=dither=bayer:bayer_scale=5:diff_mode=rectangle" \
       "$output"
+
+[group('utils')]
+[no-exit-message]
+hash url:
+    nix-prefetch-url --type sha256 '{{url}}' 2>/dev/null | xargs -I{} nix hash convert --hash-algo sha256 {}
