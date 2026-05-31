@@ -26,15 +26,18 @@ let
   systemUsers = attrNames cfg.users;
 in
 {
+  config.assertions = [
+    {
+      assertion = length systemUsers > 1 -> cfg.mainUser != null;
+      message = "You have multiple users configured. Please set ceirios.system.mainUser=\"yourname\"";
+    }
+  ];
+
   options.ceirios = {
     system = {
       mainUser = mkOption {
-        type = enum systemUsers;
-        default =
-          if (length systemUsers <= 1) then
-            elemAt systemUsers 0
-          else
-            throw "You have multiple users configured. Please set ceirios.system.mainUser=\"yourname\"";
+        type = nullOr (enum systemUsers);
+        default = if (length systemUsers == 1) then elemAt systemUsers 0 else null;
         description = "Main user's username. Used for root password";
       };
 
