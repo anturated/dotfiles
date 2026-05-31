@@ -136,7 +136,7 @@
 
       package = {
         symbol = " ";
-        format = " [\(\$version\)](\$style)";
+        format = " [(\$version)](\$style)";
       };
 
       perl = {

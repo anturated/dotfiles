@@ -55,7 +55,7 @@ in
           useACMEHost = "pds.${cfg.domain}";
           enableACME = mkForce false;
 
-          serverName = "~^(?<user>.+)\.pds\.${cfg.domain}$";
+          serverName = "~^(?<user>.+).pds.${cfg.domain}$";
 
           # feed it atproto dids at this specific location
           locations."/.well-known/atproto-did" = {
