@@ -10,12 +10,30 @@ let
   cfg = config.ceirios.services.forgejo;
   rdomain = config.networking.domain;
 
-  evergarden-theme = pkgs.fetchurl {
-    url = "https://evergarden.moe/gitea/theme-evergarden-fall-lime.css";
-    hash = "sha256-xdcNuG/3DTlquUfQ8Otx4x3XWNGkDWK9zheG89B3dgg=";
+  themes = {
+    evergarden-fall-lime = pkgs.fetchurl {
+      url = "https://evergarden.moe/gitea/theme-evergarden-fall-lime.css";
+      hash = "sha256-xdcNuG/3DTlquUfQ8Otx4x3XWNGkDWK9zheG89B3dgg=";
+    };
+
+    evergarden-fall-cherry = pkgs.fetchurl {
+      url = "https://evergarden.moe/gitea/theme-evergarden-fall-cherry.css";
+      hash = "sha256-9uSOQKkpgVDcb4zMdYCL+WU2Lvg7NVQ7fCW718WUiD4=";
+    };
+
+    evergarden-fall-skye = pkgs.fetchurl {
+      url = "https://evergarden.moe/gitea/theme-evergarden-fall-skye.css";
+      hash = "sha256-58GPpaIT/En3FziL/un5foZPMT1BUt1oFM2PHSfOcMQ=";
+    };
   };
 
-  inherit (lib.modules) mkIf mkForce;
+  inherit (lib)
+    mkIf
+    mkForce
+    attrNames
+    attrValues
+    mapAttrs
+    ;
   inherit (self.lib) mkServiceOption mkSecret;
 in
 {
@@ -96,14 +114,16 @@ in
 
           ui = {
             DEFAULT_THEME = "evergarden-fall-lime";
-            THEMES = lib.concatStringsSep "," [
-              # i don't care enough to add the rest
-              "evergarden-fall-lime"
-
-              "forgejo-auto"
-              "forgejo-light"
-              "forgejo-dark"
-            ];
+            THEMES = lib.concatStringsSep "," (
+              lib.flatten [
+                (attrNames themes)
+                [
+                  "forgejo-auto"
+                  "forgejo-light"
+                  "forgejo-dark"
+                ]
+              ]
+            );
           };
 
           "ui.meta" = {
@@ -232,30 +252,23 @@ in
     };
 
     # this SHOULD download the theme where it needs to be
-    systemd.tmpfiles.settings."forgejo-theme" = {
-      # need each dir for some reason too
-      "${config.services.forgejo.stateDir}/custom/public".d = {
-        mode = "0755";
-        user = "forgejo";
-        group = "forgejo";
+    systemd.services.forgejo-themes = {
+      description = "Install Forgejo custom themes";
+      wantedBy = [ "forgejo.service" ];
+      before = [ "forgejo.service" ];
+      serviceConfig = {
+        Type = "oneshot";
+        User = "forgejo";
+        Group = "forgejo";
       };
-      "${config.services.forgejo.stateDir}/custom/public/assets".d = {
-        mode = "0755";
-        user = "forgejo";
-        group = "forgejo";
-      };
-      "${config.services.forgejo.stateDir}/custom/public/assets/css".d = {
-        mode = "0755";
-        user = "forgejo";
-        group = "forgejo";
-      };
-
-      "${config.services.forgejo.stateDir}/custom/public/assets/css/theme-evergarden-fall-lime.css".C = {
-        mode = "0644";
-        user = "forgejo";
-        group = "forgejo";
-        argument = "${evergarden-theme}";
-      };
+      script = lib.concatStringsSep "" (
+        attrValues (
+          mapAttrs (name: file: ''
+            install -Dm644 ${file} \
+            ${config.services.forgejo.stateDir}/custom/public/assets/css/theme-${name}.css
+          '') themes
+        )
+      );
     };
   };
 }
