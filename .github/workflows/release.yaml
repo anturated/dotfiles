@@ -38,6 +38,6 @@ jobs:
           tar -czvhf dotfiles.tar.gz result/
 
       - name: Upload Release Artifacts
-        run: gh release create "$(date +"%Y-%m-%d")" ./saeth.iso ./dotfiles.tar.gz
+        run: gh release create "$(date +"%Y-%m-%d")" ./*.iso ./dotfiles.tar.gz
         env:
           GH_TOKEN: ${{ github.token }}
