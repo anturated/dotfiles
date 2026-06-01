@@ -2,27 +2,7 @@
 let
   inherit (lib.types) str;
   inherit (lib.options) mkOption mkEnableOption;
-  inherit (lib.attrsets) recursiveUpdate;
 
-  mkGraphicalService = recursiveUpdate {
-    Unit.PartOf = [ "graphical-session.target" ];
-    Unit.After = [ "graphical-session.target" ];
-    Install.WantedBy = [ "graphical-session.target" ];
-  };
-
-  /**
-    A quick way to use my services abstraction
-
-    # Arguments
-
-    - [name]: The name of the service
-
-    # Type
-
-    ```
-    mkServiceOption :: String -> (Int -> String -> String -> AttrSet) -> AttrSet
-    ```
-  */
   mkServiceOption =
     name:
     {
@@ -54,5 +34,5 @@ let
     };
 in
 {
-  inherit mkGraphicalService mkServiceOption;
+  inherit mkServiceOption;
 }

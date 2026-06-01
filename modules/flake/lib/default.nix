@@ -9,25 +9,8 @@ lib.fixedPoints.makeExtensible (final: {
   mkHost = import ./mkHost.nix { inherit inputs lib; };
   secrets = import ./secrets.nix { inherit inputs; };
   template = import ./template; # templates, selections of code that are repeated
-  validators = import ./validators.nix { inherit lib; };
 
   inherit (final.services) mkGraphicalService mkServiceOption;
-  inherit (final.helpers)
-    mkPubs
-    giturl
-    filterNixFiles
-    importNixFiles
-    importNixFilesAndDirs
-    boolToNum
-    containsStrings
-    indexOf
-    intListToStringList
-    ;
-  inherit (final.secrets)
-    mkSecret
-    ;
-  inherit (final.validators)
-    ifTheyExist
-    anyHome
-    ;
+  inherit (final.helpers) mkPubs anyHome;
+  inherit (final.secrets) mkSecret;
 })

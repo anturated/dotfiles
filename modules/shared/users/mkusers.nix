@@ -1,6 +1,5 @@
 {
   lib,
-  self,
   _class,
   config,
   ...
@@ -13,7 +12,6 @@ let
     genAttrs
     mkDefault
     ;
-  inherit (self.lib) ifTheyExist;
 in
 {
   users.users = genAttrs (builtins.attrNames config.ceirios.system.users) (
@@ -43,17 +41,15 @@ in
         uid = mkDefault 1000;
         isNormalUser = true;
 
-        # add groups that exist
+        # add groups
         extraGroups = [
           "wheel"
           "nix"
-        ]
-        ++ ifTheyExist config [
           "network"
           "networkmanager"
           "systemd-journal"
           "audio"
-          "pipewire" # this give us access to the rt limits
+          "pipewire" # this gives us access to the rt limits
           "video"
           "input"
           "plugdev"
