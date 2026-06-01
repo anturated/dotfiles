@@ -10,7 +10,7 @@ lib.fixedPoints.makeExtensible (final: {
   secrets = import ./secrets.nix { inherit inputs; };
   template = import ./template; # templates, selections of code that are repeated
 
-  inherit (final.services) mkGraphicalService mkServiceOption;
+  inherit (final.services) mkServiceOption;
   inherit (final.helpers) mkPubs anyHome;
   inherit (final.secrets) mkSecret;
 })
