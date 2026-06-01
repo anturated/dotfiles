@@ -78,14 +78,14 @@
       '';
     };
 
-    # FIXME: do we need this???
     # xdg-desktop-portal-hyprland config
     # https://wiki.hypr.land/Hypr-Ecosystem/xdg-desktop-portal-hyprland/
-    # xdg.configFile."hypr/xdph.conf".text = ''
-    #   screencopy {
-    #     max_fps = 60
-    #     allow_token_by_default = true
-    #   }
-    # '';
+    # FIXME: there's probably a better way
+    xdg.configFile."hypr/xdph.conf".text = ''
+      screencopy {
+        max_fps = 60
+        allow_token_by_default = true
+      }
+    '';
   };
 }
