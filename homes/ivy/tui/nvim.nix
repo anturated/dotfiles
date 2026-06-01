@@ -1,10 +1,4 @@
-{
-  pkgs,
-  config,
-  lib,
-  inputs',
-  ...
-}:
+{ inputs', ... }:
 
 {
   imports = [ inputs'.newydd.homeModules.default ];
