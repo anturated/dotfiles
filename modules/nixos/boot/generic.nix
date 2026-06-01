@@ -30,8 +30,5 @@ in
     # something related to boot logs (probably)
     consoleLogLevel = 3;
     initrd.verbose = false;
-
-    # i have ONE ntfs partition and it needs to go
-    supportedFilesystems = [ "ntfs" ];
   };
 }
