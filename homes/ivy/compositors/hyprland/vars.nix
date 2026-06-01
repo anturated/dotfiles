@@ -5,7 +5,6 @@ let
 in
 ''
   -- bg stuff
-  local bar = "eiddew"
   local wallpaper = "awww-daemon"
   local filter = "hyprsunset"
   local polkit = "soteria"

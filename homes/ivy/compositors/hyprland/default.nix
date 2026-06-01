@@ -61,7 +61,6 @@
 
         -- autostart
         hl.on("hyprland.start", function ()
-          hl.exec_cmd(bar)
           hl.exec_cmd(wallpaper)
           hl.exec_cmd(polkit)
           hl.exec_cmd(filter)
