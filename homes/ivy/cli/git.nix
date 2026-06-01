@@ -52,6 +52,7 @@
       ];
 
       settings = {
+        # TODO: remove to all-users
         user = {
           name = "Desant";
           email = "desant" + "@" + "anturated" + "." + "dev"; # obsfuscate email to prevent webscrapper spam

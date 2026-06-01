@@ -41,12 +41,5 @@
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMOJoauZQLAdUyxVmB+oxNQK+LSQ1Y3/L///GjC+oQlG"
       ];
     };
-
-    wizard = {
-      hashedPassword = "$y$j9T$UjK.OcOZ2SDWoh4FGlGcD1$uBz3gUlhFKn1Ie9A6jC0kSE7rhfpXRYcXhsvgoS1PU7";
-      ssh.authorizedKeys = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMOJoauZQLAdUyxVmB+oxNQK+LSQ1Y3/L///GjC+oQlG"
-      ];
-    };
   };
 }
