@@ -59,12 +59,8 @@ let
       mimeTypes = concatLists [
         (import ./mime/video.nix)
         (import ./mime/audio.nix)
+        (import ./mime/image.nix)
       ];
-    };
-
-    images = {
-      app = "mpv";
-      mimeTypes = import ./mime/image.nix;
     };
 
     fileManager = {
