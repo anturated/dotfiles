@@ -12,7 +12,7 @@ hl.config({
     touchpad = {
       natural_scroll = true,
     },
-  }
+  },
 })
 
 -- workspace gesture

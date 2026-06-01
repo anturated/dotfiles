@@ -24,23 +24,23 @@ hl.config({
 
   decoration = {
     -- i bet you i came up with these numbers at 5am
-    rounding         = 13,
-    rounding_power   = 2,
+    rounding = 13,
+    rounding_power = 2,
 
-    active_opacity   = 1.0,
+    active_opacity = 1.0,
     inactive_opacity = 0.92,
 
-    shadow           = {
-      enabled      = true,
-      range        = 4,
+    shadow = {
+      enabled = true,
+      range = 4,
       render_power = 3,
-      color        = 0xee1a1a1a, -- default
+      color = 0xee1a1a1a, -- default
     },
 
-    blur             = {
-      enabled  = true,
-      size     = 1,
-      passes   = 2,
+    blur = {
+      enabled = true,
+      size = 1,
+      passes = 2,
       vibrancy = 0.1696,
     },
   },

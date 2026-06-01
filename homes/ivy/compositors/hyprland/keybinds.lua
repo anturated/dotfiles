@@ -23,12 +23,18 @@ hl.bind(mod .. " + SHIFT + I", hl.dsp.exec_cmd("chwal"))
 hl.bind(mod .. " + ALT + W", hl.dsp.exec_cmd("animelist"))
 
 -- screenshot
-hl.bind(mod .. " + SHIFT + S", hl.dsp.exec_cmd(
-  "mkdir -p " .. screenshotDir                                       -- generate screenshots dir
-  .. ' && grim -g "$(slurp)" -'                                      -- take screenshot
-  .. " | tee " .. screenshotDir .. "/$(date +%Y-%m-%d_%H-%M-%S).png" -- save
-  .. " | wl-copy"                                                    -- copy
-))
+hl.bind(
+  mod .. " + SHIFT + S",
+  hl.dsp.exec_cmd(
+    "mkdir -p "
+      .. screenshotDir -- generate screenshots dir
+      .. ' && grim -g "$(slurp)" -' -- take screenshot
+      .. " | tee "
+      .. screenshotDir
+      .. "/$(date +%Y-%m-%d_%H-%M-%S).png" -- save
+      .. " | wl-copy" -- copy
+  )
+)
 
 -- why does it spell bdsm :cry:
 hl.bind(mod .. " + ALT + B", hl.dsp.exec_cmd(browser))
