@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1780242089,
-        "narHash": "sha256-e2dEL/g8NrLcK16Fm/TRlP/XrKe3RxftJ6UypFzEYGo=",
+        "lastModified": 1780323996,
+        "narHash": "sha256-nMdWJY3XRfF58guft5s/FDjRIZ5X0kV3z6GI1n/55LM=",
         "owner": "anturated",
         "repo": "ivy-shell",
-        "rev": "750b02a008a19431023d9307e070e6756efb1d7c",
+        "rev": "7cac598c7b1866206c42774cfbe9312c8d213a3c",
         "type": "github"
       },
       "original": {
