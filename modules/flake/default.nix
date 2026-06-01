@@ -1,34 +1,39 @@
 { inputs }:
 
 let
+  # put overrides here, the rest is automated below
+  overrides = {
+    saeth = {
+      class = "iso";
+    };
+  };
+
   inherit (inputs) nixpkgs self;
   inherit (nixpkgs) lib;
+  inherit (lib)
+    genAttrs
+    systems
+    filterAttrs
+    readDir
+    attrNames
+    mapAttrs
+    ;
 
-  forAllSystems =
-    f: lib.genAttrs lib.systems.flakeExposed (system: f (import nixpkgs { inherit system; }));
+  forAllSystems = f: genAttrs systems.flakeExposed (system: f (import nixpkgs { inherit system; }));
 
-  mkHosts = lib.mapAttrs self.lib.mkHost;
+  mkHosts = mapAttrs self.lib.mkHost;
 
   # auto-discover from machines/
-  machineNames = builtins.attrNames (
-    lib.filterAttrs (_: type: type == "directory") (builtins.readDir (self + "/machines"))
+  machineNames = attrNames (
+    filterAttrs (_: type: type == "directory") (readDir (self + "/machines"))
   );
 
-  discovered = lib.genAttrs machineNames (_: { });
+  discovered = genAttrs machineNames (_: { });
 in
 {
   lib = import ./lib { inherit lib inputs; };
 
-  nixosConfigurations = mkHosts (
-    discovered
-
-    # manual overrides go here
-    // {
-      saeth = {
-        class = "iso";
-      };
-    }
-  );
+  nixosConfigurations = mkHosts (discovered // overrides);
 
   devShells = forAllSystems (pkgs: {
     default = pkgs.callPackage ./shell.nix { };
