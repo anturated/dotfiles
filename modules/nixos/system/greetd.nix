@@ -7,17 +7,11 @@
 
 let
   inherit (lib) concatStringsSep;
-  inherit (config.ceirios.system.login) autoLogin;
-  inherit (config.ceirios.system) mainUser;
 
   enable = config.ceirios.profiles.graphical;
   sessionData = config.services.displayManager.sessionData.desktops;
 in
 {
-  options.ceirios.system.login = {
-    autoLogin = lib.mkEnableOption "Enable auto login";
-  };
-
   config.services.greetd = {
     inherit enable;
     restart = true;
@@ -40,12 +34,6 @@ in
           }'"
         ];
       };
-
-      initial_session = lib.mkIf autoLogin {
-        command = "start-hyprland";
-        user = "${mainUser}";
-      };
-
     };
   };
 }
