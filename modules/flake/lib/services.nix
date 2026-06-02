@@ -9,7 +9,15 @@ let
       port ? 0,
       host ? "127.0.0.1",
       domain ? "",
-    }:
+      ...
+    }@args:
+    let
+      args' = removeAttrs args [
+        "port"
+        "host"
+        "domain"
+      ];
+    in
     {
       enable = mkEnableOption "Enable the ${name} service";
 
@@ -31,7 +39,8 @@ let
         defaultText = "networking.domain";
         description = "Domain name for the ${name} service";
       };
-    };
+    }
+    // args';
 in
 {
   inherit mkServiceOption;
