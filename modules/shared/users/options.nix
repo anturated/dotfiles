@@ -54,6 +54,11 @@ in
               description = "Which home config to use from homes/";
               example = "ivy";
             };
+
+            # here because ssh keys don't appear out of thin air
+            secrets = {
+              wakatime = mkEnableOption "Has wakatime config in secrets";
+            };
           };
         }));
       };
@@ -106,10 +111,6 @@ in
                     You can use this to define ssh hostnames and whatnot.
                   '';
                 };
-              };
-
-              secrets = {
-                wakatime = mkEnableOption "Has wakatime config in secrets";
               };
             };
           }

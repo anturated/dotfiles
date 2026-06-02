@@ -3,10 +3,6 @@
     desant = {
       hashedPassword = "$y$j9T$gVFMTg9bPiCeQV1QmYCW80$Sow4EyH1UCKBRYra94EY1d2DFWKxE/0ZzADroGJzg/9";
 
-      secrets = {
-        wakatime = true;
-      };
-
       ssh.settings = {
         "pinwydd" = {
           user = "anturated";

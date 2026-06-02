@@ -11,7 +11,7 @@ let
   inherit (config.ceirios.profiles) workstation;
   inherit (config.xdg) configHome;
 
-  hasSecret = osConfig.ceirios.users.${user}.secrets.wakatime;
+  hasSecret = osConfig.ceirios.system.users.${user}.secrets.wakatime;
 in
 {
   config = lib.mkIf (workstation && hasSecret) {
