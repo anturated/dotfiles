@@ -66,7 +66,8 @@ in
         # fix sleep
         powerManagement.enable = true;
 
-        # disable open drivers cuz i'm not sure
+        # open drivers tend to get fixes quicker
+        # disable on older hardware (< Turing aka 1660)
         open = true;
 
         # we are likely on wayland so this is useless
