@@ -1,8 +1,12 @@
 { config, ... }:
 
+let
+  inherit (config.ceirios.software.defaults) terminal;
+  inherit (config.ceirios.profiles) graphical;
+in
 {
   programs.kitty = {
-    enable = config.ceirios.profiles.graphical && (config.ceirios.software.defaults.terminal == "kitty");
+    enable = graphical && (terminal == "kitty");
     settings = {
       include = "current-theme.conf";
 
