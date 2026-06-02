@@ -1,0 +1,38 @@
+name: Release Iso
+
+on:
+  workflow_dispatch:
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Maximize Space
+        uses: easimon/maximize-build-space@master
+        with:
+          overprovision-lvm: true
+          remove-android: true
+          remove-dotnet: true
+          remove-codeql: true
+          remove-haskell: true
+          remove-docker-images: true
+
+      - name: Checkout
+        uses: actions/checkout@main
+        with:
+          persist-credentials: false
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+
+      - name: Build Iso
+        continue-on-error: false
+        run: |
+          nix build -L .#nixosConfigurations.saeth.config.system.build.isoImage
+          cp result/iso/*.iso ./
+
+      - name: Upload
+        run: gh release create "Ceirios-$(date +"%Y-%m-%d")" ./*.iso
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN_UPDATES }}
