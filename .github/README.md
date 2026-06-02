@@ -196,7 +196,7 @@ llin
 - [ ] brightness/volume sliders
 - [ ] notifs
 - [ ] better defaults customization
-- [ ] kale seems to not exit properly
+- [x] kale seems to not exit properly
 
 ## Thank/Credits
 - [isabelroses/dotfiles](https://github.com/isabelroses/dotfiles) - HEAVILY based upon, will happily steal more
