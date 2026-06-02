@@ -30,6 +30,10 @@ in
       # misc
       background_opacity = 0.9;
       allow_remote_control = "yes";
+
+      # this spawns literally 500k watchers for some reason
+      # and fills inotify limits
+      auto_reload_config = -1;
     };
 
     font = {
