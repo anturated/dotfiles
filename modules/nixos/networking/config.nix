@@ -129,23 +129,11 @@ in
               prefixLength = cfg.prefix;
             }
           ];
-          routes = optionals (cfg.gateway != null) [
-            {
-              address = cfg.gateway;
-              prefixLength = cfg.prefix;
-            }
-          ];
         };
         ipv6 = mkIf (cfg.prefix6 != null) {
           addresses = optionals (cfg.ip6 != null) [
             {
               address = cfg.ip6;
-              prefixLength = cfg.prefix6;
-            }
-          ];
-          routes = optionals (cfg.gateway6 != null) [
-            {
-              address = cfg.gateway6;
               prefixLength = cfg.prefix6;
             }
           ];
