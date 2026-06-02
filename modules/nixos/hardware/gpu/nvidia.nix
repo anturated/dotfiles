@@ -60,8 +60,8 @@ in
 
     hardware = {
       nvidia = {
-        # use the latest and greatest nvidia drivers
-        package = config.boot.kernelPackages.nvidiaPackages.beta;
+        # autopick beta or latest whichever is newer
+        branch = "bleeding_edge";
 
         # fix sleep
         powerManagement.enable = true;
