@@ -19,34 +19,6 @@ in
   options.ceirios.services.mailserver = mkServiceOption "mailserver" { domain = "mail.${rdomain}"; };
 
   config = mkIf cfg.enable {
-
-    sops.secrets = {
-      mailserver-desant = mkSecret {
-        key = "desant";
-        file = "mailserver";
-      };
-      mailserver-noreply = mkSecret {
-        key = "noreply";
-        file = "mailserver";
-      };
-      mailserver-spam = mkSecret {
-        key = "spam";
-        file = "mailserver";
-      };
-      mailserver-deploy = mkSecret {
-        key = "deploy";
-        file = "mailserver";
-      };
-      mailserver-jobs = mkSecret {
-        key = "jobs";
-        file = "mailserver";
-      };
-      mailserver-caterpillar = mkSecret {
-        key = "bot";
-        file = "mailserver";
-      };
-    };
-
     mailserver = {
       enable = true;
       openFirewall = true;
@@ -204,6 +176,33 @@ in
         "postfix.service"
         "dovecot.service"
       ];
+    };
+
+    sops.secrets = {
+      mailserver-desant = mkSecret {
+        key = "desant";
+        file = "mailserver";
+      };
+      mailserver-noreply = mkSecret {
+        key = "noreply";
+        file = "mailserver";
+      };
+      mailserver-spam = mkSecret {
+        key = "spam";
+        file = "mailserver";
+      };
+      mailserver-deploy = mkSecret {
+        key = "deploy";
+        file = "mailserver";
+      };
+      mailserver-jobs = mkSecret {
+        key = "jobs";
+        file = "mailserver";
+      };
+      mailserver-caterpillar = mkSecret {
+        key = "bot";
+        file = "mailserver";
+      };
     };
   };
 }
