@@ -6,7 +6,7 @@
     ./lego.nix
     ./nginx.nix
     ./anubis.nix
-    ./forgejo.nix
+    ./forgejo
     ./mailserver.nix
     ./obsidian-livesync.nix
     ./pds.nix

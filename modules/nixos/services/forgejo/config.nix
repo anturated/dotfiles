@@ -10,30 +10,7 @@ let
   cfg = config.ceirios.services.forgejo;
   rdomain = config.networking.domain;
 
-  themes = {
-    evergarden-fall-lime = pkgs.fetchurl {
-      url = "https://evergarden.moe/gitea/theme-evergarden-fall-lime.css";
-      hash = "sha256-xdcNuG/3DTlquUfQ8Otx4x3XWNGkDWK9zheG89B3dgg=";
-    };
-
-    evergarden-fall-cherry = pkgs.fetchurl {
-      url = "https://evergarden.moe/gitea/theme-evergarden-fall-cherry.css";
-      hash = "sha256-9uSOQKkpgVDcb4zMdYCL+WU2Lvg7NVQ7fCW718WUiD4=";
-    };
-
-    evergarden-fall-skye = pkgs.fetchurl {
-      url = "https://evergarden.moe/gitea/theme-evergarden-fall-skye.css";
-      hash = "sha256-58GPpaIT/En3FziL/un5foZPMT1BUt1oFM2PHSfOcMQ=";
-    };
-  };
-
-  inherit (lib)
-    mkIf
-    mkForce
-    attrNames
-    attrValues
-    mapAttrs
-    ;
+  inherit (lib) mkIf mkForce;
   inherit (self.lib) mkServiceOption mkSecret;
 in
 {
@@ -104,32 +81,17 @@ in
 
           api.ENABLE_SWAGGER = false;
 
-          # we probably won't even see this
           DEFAULT = {
-            APP_NAME = "The forge.";
+            APP_NAME = "Gefail"; # welsh for "forge"
             # APP_SLOGAN = "It is possible that we bent some metal here.";
           };
 
           attachment.ALLOWED_TYPES = "*/*";
 
-          ui = {
-            DEFAULT_THEME = "evergarden-fall-lime";
-            THEMES = lib.concatStringsSep "," (
-              lib.flatten [
-                (attrNames themes)
-                [
-                  "forgejo-auto"
-                  "forgejo-light"
-                  "forgejo-dark"
-                ]
-              ]
-            );
-          };
-
           "ui.meta" = {
-            AUTHOR = "Desant's forge";
-            DESCRIPTION = "This is where I forge the jo";
-            KEYWORDS = "git,self-hosted,gitea,forgejo,anturated,desant,open-source,nix,nixos";
+            AUTHOR = "Desant";
+            DESCRIPTION = "The place where things get forged";
+            KEYWORDS = "git,self-hosted,gitea,forge,forgejo,gefail,anturated,desant,open-source,nix,nixos";
           };
 
           actions = {
@@ -247,26 +209,6 @@ in
             );
         };
       };
-    };
-
-    # this SHOULD download the theme where it needs to be
-    systemd.services.forgejo-themes = {
-      description = "Install Forgejo custom themes";
-      wantedBy = [ "forgejo.service" ];
-      before = [ "forgejo.service" ];
-      serviceConfig = {
-        Type = "oneshot";
-        User = "forgejo";
-        Group = "forgejo";
-      };
-      script = lib.concatStringsSep "" (
-        attrValues (
-          mapAttrs (name: file: ''
-            install -Dm644 ${file} \
-            ${config.services.forgejo.stateDir}/custom/public/assets/css/theme-${name}.css
-          '') themes
-        )
-      );
     };
   };
 }
