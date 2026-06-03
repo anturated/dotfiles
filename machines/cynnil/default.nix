@@ -19,7 +19,7 @@
       netmask = "255.255.255.255";
     };
 
-    system.users.anturated = { };
+    users.anturated = { };
 
     services = {
       # self-hosted #

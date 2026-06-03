@@ -11,7 +11,7 @@
 
 let
   inherit (lib) genAttrs;
-  inherit (config.ceirios.system) users;
+  inherit (config.ceirios) users;
   usernames = builtins.attrNames users;
 in
 {

@@ -6,7 +6,7 @@
 }:
 
 let
-  userSettings = osConfig.ceirios.users.${user}.ssh.settings;
+  userSettings = osConfig.ceirios.allUsers.${user}.ssh.settings;
 in
 {
   programs.ssh = {

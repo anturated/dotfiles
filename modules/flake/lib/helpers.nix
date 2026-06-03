@@ -13,7 +13,7 @@ let
           "users"
           user
         ] conf
-      ) (builtins.attrNames conf.ceirios.system.users);
+      ) (builtins.attrNames conf.ceirios.users);
     in
     any cond list;
 

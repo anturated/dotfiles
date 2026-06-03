@@ -1,5 +1,5 @@
 {
-  ceirios.users = {
+  ceirios.allUsers = {
     desant = {
       hashedPassword = "$y$j9T$gVFMTg9bPiCeQV1QmYCW80$Sow4EyH1UCKBRYra94EY1d2DFWKxE/0ZzADroGJzg/9";
 

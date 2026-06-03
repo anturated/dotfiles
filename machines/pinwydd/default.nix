@@ -17,6 +17,6 @@
       netmask = "255.255.255.0";
     };
 
-    system.users.anturated = { };
+    users.anturated = { };
   };
 }

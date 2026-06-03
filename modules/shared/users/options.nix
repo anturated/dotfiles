@@ -22,13 +22,13 @@ let
     anything
     ;
 
-  cfg = config.ceirios.system;
-  systemUsers = attrNames cfg.users;
+  inherit (config.ceirios) system users;
+  usernames = attrNames users;
 in
 {
   config.assertions = [
     {
-      assertion = length systemUsers > 1 -> cfg.mainUser != null;
+      assertion = length usernames > 1 -> system.mainUser != null;
       message = "You have multiple users configured. Please set ceirios.system.mainUser=\"yourname\"";
     }
   ];
@@ -36,35 +36,35 @@ in
   options.ceirios = {
     system = {
       mainUser = mkOption {
-        type = nullOr (enum systemUsers);
-        default = if (length systemUsers == 1) then elemAt systemUsers 0 else null;
+        type = nullOr (enum usernames);
+        default = if (length usernames == 1) then elemAt usernames 0 else null;
         description = "Main user's username. Used for root password";
-      };
-
-      users = mkOption {
-        description = "Set of users present on a given system, with per-system options";
-
-        default = { };
-
-        type = attrsOf (submodule ({
-          options = {
-            home = mkOption {
-              type = str;
-              default = "ivy";
-              description = "Which home config to use from homes/";
-              example = "ivy";
-            };
-
-            # here because ssh keys don't appear out of thin air
-            secrets = {
-              wakatime = mkEnableOption "Has wakatime config in secrets";
-            };
-          };
-        }));
       };
     };
 
     users = mkOption {
+      description = "Set of users present on a given system, with per-system options";
+
+      default = { };
+
+      type = attrsOf (submodule ({
+        options = {
+          home = mkOption {
+            type = str;
+            default = "ivy";
+            description = "Which home config to use from homes/";
+            example = "ivy";
+          };
+
+          # here because ssh keys don't appear out of thin air
+          secrets = {
+            wakatime = mkEnableOption "Has wakatime config in secrets";
+          };
+        };
+      }));
+    };
+
+    allUsers = mkOption {
       description = "List of all users across this flake";
       default = { };
 
