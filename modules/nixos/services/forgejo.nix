@@ -206,10 +206,8 @@ in
           mailer = {
             ENABLED = true;
             PROTOCOL = "smtps";
-            # SMTP_ADDR = config.ceirios.services.mailserver.domain;
-            SMTP_ADDR = "smtp.gmail.com"; # FIXME: update to own
-            USER = "anturated@gmail.com";
-            SMTP_PORT = 465;
+            SMTP_ADDR = config.ceirios.services.mailserver.domain;
+            USER = "git@${rdomain}";
           };
         };
 

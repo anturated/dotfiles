@@ -9,6 +9,7 @@
 let
   inherit (lib.modules) mkIf;
   inherit (self.lib) mkServiceOption mkSecret;
+  inherit (config.sops) secrets;
 
   rdomain = config.networking.domain;
   cfg = config.ceirios.services.mailserver;
@@ -71,6 +72,7 @@ in
             "volodymyr@${rdomain}"
             "volodymyrdesiatniuk@${rdomain}"
             "desiatniuk@${rdomain}"
+            "contact@${rdomain}"
             "admin@${rdomain}"
             "root@${rdomain}"
             "postmaster@${rdomain}"
@@ -79,7 +81,12 @@ in
 
         "noreply@${rdomain}" = {
           aliases = [ "noreply" ];
-          hashedPasswordFile = config.sops.secrets.mailserver-noreply.path;
+          hashedPasswordFile = secrets.mailserver-noreply.path;
+        };
+
+        # make it its own separate thing because theres a non-hashed version of password
+        "git@${rdomain}" = {
+          hashedPasswordFile = secrets.mailserver-git.path;
         };
 
         "spam@${rdomain}" = {
@@ -87,7 +94,7 @@ in
             "no@${rdomain}"
             "stfu@${rdomain}"
           ];
-          hashedPasswordFile = config.sops.secrets.mailserver-spam.path;
+          hashedPasswordFile = secrets.mailserver-spam.path;
         };
 
         "deploy@${rdomain}" = {
@@ -95,16 +102,7 @@ in
             "hosting@${rdomain}"
             "vps@${rdomain}"
           ];
-          hashedPasswordFile = config.sops.secrets.mailserver-deploy.path;
-        };
-
-        "jobs@${rdomain}" = {
-          aliases = [
-            "hire@${rdomain}"
-            "hireme@${rdomain}"
-            "contact@${rdomain}"
-          ];
-          hashedPasswordFile = config.sops.secrets.mailserver-jobs.path;
+          hashedPasswordFile = secrets.mailserver-deploy.path;
         };
 
         "caterpillar@${rdomain}" = {
@@ -112,7 +110,7 @@ in
             "pill@${rdomain}"
             "bot@${rdomain}"
           ];
-          hashedPasswordFile = config.sops.secrets.mailserver-caterpillar.path;
+          hashedPasswordFile = secrets.mailserver-caterpillar.path;
         };
       };
 
@@ -167,6 +165,15 @@ in
         settings.main.smtp_helo_name = config.mailserver.fqdn;
       };
 
+      # NOTE: when dns propagates check if it works without and remove
+      # i deployed the commented version
+      # force signing dkim, should keep us out of spam
+      # this merges on top of existing config
+      # rspamd.locals."dkim_signing.conf".text = ''
+      #   sign_authenticated = true;
+      #   sign_local = true;
+      # '';
+
       # ssl and acme are true by default
       nginx.virtualHosts."${cfg.domain}" = { };
     };
@@ -185,6 +192,10 @@ in
       };
       mailserver-noreply = mkSecret {
         key = "noreply";
+        file = "mailserver";
+      };
+      mailserver-git = mkSecret {
+        key = "git";
         file = "mailserver";
       };
       mailserver-spam = mkSecret {

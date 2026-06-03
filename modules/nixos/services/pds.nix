@@ -32,7 +32,7 @@ in
         settings = {
           PDS_PORT = cfg.port;
           PDS_HOSTNAME = "pds.${cfg.domain}";
-          PDS_ADMIN_EMAIL = "anturated" + "@" + "gmail" + "." + "com";
+          PDS_ADMIN_EMAIL = "desant" + "@" + "anturated" + "." + "dev";
         };
       };
 
