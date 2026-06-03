@@ -112,6 +112,20 @@ in
                   '';
                 };
               };
+
+              git = {
+                name = mkOption {
+                  type = nullOr str;
+                  default = null;
+                  description = "Git username";
+                };
+
+                email = mkOption {
+                  type = nullOr str;
+                  default = null;
+                  description = "Git email";
+                };
+              };
             };
           }
         )

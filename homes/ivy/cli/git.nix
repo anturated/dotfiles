@@ -1,9 +1,15 @@
 {
   pkgs,
+  user,
   config,
+  lib,
+  osConfig,
   ...
 }:
 
+let
+  cfg = osConfig.ceirios.allUsers.${user}.git;
+in
 {
   programs = {
     git = {
@@ -52,10 +58,9 @@
       ];
 
       settings = {
-        # TODO: remove to all-users
         user = {
-          name = "Desant";
-          email = "desant" + "@" + "anturated" + "." + "dev"; # obsfuscate email to prevent webscrapper spam
+          name = lib.mkIf (cfg.name != null) cfg.name;
+          email = lib.mkIf (cfg.email != null) cfg.email;
         };
 
         init.defaultBranch = "master";
