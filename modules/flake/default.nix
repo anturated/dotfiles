@@ -12,12 +12,17 @@ let
   inherit (nixpkgs) lib;
   inherit (lib)
     genAttrs
-    systems
     filterAttrs
     readDir
     attrNames
     mapAttrs
     ;
+
+  systems = [
+    "x86_64-linux"
+    "aarch64-linux"
+    "aarch64-darwin"
+  ];
 
   forAllSystems = f: genAttrs systems (system: f nixpkgs.legacyPackages.${system});
 
