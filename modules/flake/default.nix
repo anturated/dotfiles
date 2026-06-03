@@ -19,7 +19,7 @@ let
     mapAttrs
     ;
 
-  forAllSystems = f: genAttrs systems.flakeExposed (system: f (import nixpkgs { inherit system; }));
+  forAllSystems = f: genAttrs systems (system: f nixpkgs.legacyPackages.${system});
 
   mkHosts = mapAttrs self.lib.mkHost;
 
