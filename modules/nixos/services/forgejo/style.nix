@@ -15,7 +15,6 @@ let
   logo = ./custom/icon.svg;
   favicon = ./custom/favicon_sm.svg;
   home = ./custom/home.tmpl;
-  navbar = ./custom/navbar.tmpl;
 
   themes = {
     evergarden-fall-lime = pkgs.fetchurl {
@@ -70,18 +69,16 @@ in
           '') themes
         )
       )
-      # ew but whatever
-      # home template: removed the advertisement
-      # navbar: use favicon for logo
+      # navbar reads icon.svg and we feed homepage the "hero.svg" that is the full icon
       + ''
-        install -Dm644 ${logo} \
+        install -Dm644 ${favicon} \
           ${config.services.forgejo.stateDir}/custom/public/assets/img/logo.svg
         install -Dm644 ${favicon} \
           ${config.services.forgejo.stateDir}/custom/public/assets/img/favicon.svg
+        install -Dm644 ${logo} \
+          ${config.services.forgejo.stateDir}/custom/public/assets/img/hero.svg
         install -Dm644 ${home} \
           ${config.services.forgejo.stateDir}/custom/templates/home.tmpl
-        install -Dm644 ${navbar} \
-          ${config.services.forgejo.stateDir}/custom/templates/base/head_navbar.tmpl
       '';
   };
 }
