@@ -6,4 +6,4 @@ steps:
     image: nixos/nix
     commands:
       - export NIX_CONFIG="extra-experimental-features = nix-command flakes"
-      - nix flake check
+      - nix flake check --show-trace
