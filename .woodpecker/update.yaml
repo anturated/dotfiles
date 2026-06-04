@@ -1,6 +1,6 @@
 when:
   - event: [cron, manual]
-    cron: "flake update"
+    cron: update
 
 clone:
   - name: clone
