@@ -27,6 +27,7 @@
       mailserver.enable = true;
       pds.enable = true;
       forgejo.enable = true;
+      woodpecker.enable = true;
 
       # web services #
       nginx.enable = true;

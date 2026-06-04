@@ -13,5 +13,6 @@
     ./postgres.nix
     ./redis.nix
     ./website.nix
+    ./woodpecker.nix
   ];
 }
