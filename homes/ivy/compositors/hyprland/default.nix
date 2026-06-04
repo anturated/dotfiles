@@ -26,8 +26,6 @@
       package = null;
       portalPackage = null;
 
-      # TODO: the autostart section sucks
-
       # we ball. merge raw lua into one file since that's gonna happen anyways
       extraConfig = ''
         -- import colors from matugen
@@ -60,11 +58,6 @@
         -- cursor env
         hl.env("XCURSOR_SIZE", "24")
         hl.env("XCURSOR_THEME", "Volantes Cursors")
-
-        -- autostart
-        hl.on("hyprland.start", function ()
-          hl.exec_cmd(wallpaper)
-        end)
 
         --------------
         -- the rest --
