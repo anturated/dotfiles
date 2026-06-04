@@ -7,8 +7,10 @@
 }:
 
 {
+  imports = [ ./hyprsunset.nix ];
+
   config = lib.mkIf config.ceirios.profiles.graphical {
-    ceirios.packages = { inherit (pkgs) grim slurp hyprsunset; };
+    ceirios.packages = { inherit (pkgs) grim slurp; };
 
     # whoever tf thought it's a good idea to make me rewrite
     # my hyprland config for the second time this year
@@ -62,7 +64,6 @@
         -- autostart
         hl.on("hyprland.start", function ()
           hl.exec_cmd(wallpaper)
-          hl.exec_cmd(filter)
         end)
 
         --------------
