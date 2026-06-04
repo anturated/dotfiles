@@ -2,8 +2,8 @@ name: Update all inputs # every day until gta6 comes out
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "7 0 * * *"
+  # schedule:
+  #   - cron: "7 0 * * *"
 
 permissions: {}
 
