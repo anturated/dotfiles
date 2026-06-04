@@ -1,0 +1,56 @@
+when:
+  - event: [cron, manual]
+    cron: "flake update"
+
+clone:
+  - name: clone
+    image: woodpeckerci/plugin-git
+    settings:
+      username: caterpillar-bot
+      password:
+        from_secret: PILL_TOKEN
+
+steps:
+  - name: update
+    image: nixos/nix
+    environment:
+      FORGEJO_TOKEN:
+        from_secret: PILL_TOKEN
+    commands:
+      # configure git
+      - git config --global user.name "Caterpillar"
+      - git config --global user.email "pill@anturated.dev"
+      - git remote set-url origin "https://caterpillar:$${FORGEJO_TOKEN}@git.anturated.dev/${CI_REPO}.git"
+      # checkout
+      - git checkout -b flake-update
+      # update
+      # unfortunately can't do pretty commit summary
+      - export NIX_CONFIG="extra-experimental-features = nix-command flakes"
+      - nix flake update
+      - git add flake.lock
+      # check diff push
+      - git diff --cached --quiet && exit 0
+      - |
+        git commit -m "inputs"
+      - git push -u origin pill-flake-update --force
+
+  - name: pr
+    image: woodpeckercommunity/gitea-pull-request-create-plugin
+    depends_on: [update]
+    settings:
+      gitea_address: https://git.anturated.dev
+      gitea_token:
+        from_secret: PILL_TOKEN
+      owner: ${CI_REPO_OWNER}
+      repo: ${CI_REPO_NAME}
+      base_branch: master
+      branch: pill-flake-update
+      pr_title: "flake: bump (auto)"
+      pr_body: "[pipeline](${CI_PIPELINE_URL}) Going along with woodpecker surprisingly well."
+      skip_on_empty_branch: true
+      skip_on_missing_branch: true
+      delete_branch_after_merge: true
+      merge_when_checks_succeed: true
+      # some bug workaround
+      close_pr_if_empty: true
+      delete_branch_if_pr_empty: true

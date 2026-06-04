@@ -1,0 +1,9 @@
+when:
+  event: push
+
+steps:
+  - name: flake check
+    image: nixos/nix
+    commands:
+      - export NIX_CONFIG="extra-experimental-features = nix-command flakes"
+      - nix flake check
