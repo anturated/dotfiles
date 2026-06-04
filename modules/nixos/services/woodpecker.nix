@@ -12,7 +12,7 @@ let
   # it has DynamicUser so just put this wherever
   dbUser = "woodpecker-server";
 
-  inherit (lib) mkIf mkOption;
+  inherit (lib) mkIf mkOption mapAttrs';
   inherit (self.lib) mkServiceOption mkSecret;
   inherit (config.sops) secrets;
   inherit (config.ceirios.services) forgejo;
@@ -87,9 +87,13 @@ in
         file = "woodpecker";
       };
     };
-    # needs to connect to docker.
-    systemd.services."woodpecker-agent-morthwyl" = {
-      serviceConfig.SupplementaryGroups = [ "docker" ];
-    };
+
+    # let all agents connect to docker
+    systemd.services = mapAttrs' (agent: _: {
+      name = "woodpecker-agent-${agent}";
+      value = {
+        serviceConfig.SupplementaryGroups = [ "docker" ];
+      };
+    }) config.services.woodpecker-agents.agents;
   };
 }
