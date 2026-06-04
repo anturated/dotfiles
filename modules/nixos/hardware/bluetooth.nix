@@ -22,10 +22,14 @@ in
           Experimental = true;
           # Faster connect, more power drain
           FastConnectable = true;
-          DisableAbsoluteVolume = true;
           # repair stuff
           JustWorksRepairing = "always";
           MultiProfile = "multiple";
+        };
+
+        AVRCP = {
+          # should disable absolute volume
+          VolumeWithoutTarget = false;
         };
 
         # Enable all controllers when they are found.
