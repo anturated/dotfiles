@@ -83,7 +83,8 @@ in
 
           DEFAULT = {
             APP_NAME = "Gefail"; # welsh for "forge"
-            # APP_SLOGAN = "It is possible that we bent some metal here.";
+            APP_SLOGAN = "The place where things get forged";
+            APP_DISPLAY_NAME_FORMAT = "{APP_NAME}";
           };
 
           attachment.ALLOWED_TYPES = "*/*";
