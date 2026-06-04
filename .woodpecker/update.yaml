@@ -22,7 +22,7 @@ steps:
       - git config --global user.email "pill@anturated.dev"
       - git remote set-url origin "https://caterpillar:$${FORGEJO_TOKEN}@git.anturated.dev/${CI_REPO}.git"
       # checkout
-      - git checkout -b flake-update
+      - git checkout -b pill-flake-update
       # update
       # unfortunately can't do pretty commit summary
       - export NIX_CONFIG="extra-experimental-features = nix-command flakes"
