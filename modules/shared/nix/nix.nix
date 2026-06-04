@@ -33,6 +33,9 @@ in
       min-free = 1024 * 1024 * 1024 * 5;
       max-free = 1024 * 1024 * 1024 * 20;
 
+      # use more internet to rebuild faster
+      http-connections = 50;
+
       # very dangerous bleeding edge stuff here
       experimental-features = [
         "nix-command"
