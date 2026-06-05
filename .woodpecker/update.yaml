@@ -21,17 +21,17 @@ steps:
       - git config --global user.name "Caterpillar"
       - git config --global user.email "pill@anturated.dev"
       - git remote set-url origin "https://caterpillar:$${FORGEJO_TOKEN}@git.anturated.dev/${CI_REPO}.git"
+      - BEFORE=$(git rev-parse HEAD)
       # checkout
       - git checkout -b pill-flake-update
       # update
-      # unfortunately can't do pretty commit summary
       - export NIX_CONFIG="extra-experimental-features = nix-command flakes"
-      - nix flake update
-      - git add flake.lock
-      # check diff push
-      - git diff --cached --quiet && exit 0
       - |
-        git commit -m "flake: bump (auto)"
+        nix flake update \
+        --commit-lock-file \
+        --commit-lockfile-summary "flake: bump (auto)"
+      # check diff push
+      - git diff --quiet $BEFORE HEAD && exit 0
       # - git push -u origin pill-flake-update --force
       # until that workflow has a decent pr message input we just ball it
       - git checkout ${CI_REPO_DEFAULT_BRANCH}
