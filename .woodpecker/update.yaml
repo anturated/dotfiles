@@ -31,26 +31,30 @@ steps:
       # check diff push
       - git diff --cached --quiet && exit 0
       - |
-        git commit -m "inputs"
-      - git push -u origin pill-flake-update --force
+        git commit -m "flake: bump (auto)"
+      # - git push -u origin pill-flake-update --force
+      # until that workflow has a decent pr message input we just ball it
+      - git checkout ${CI_REPO_DEFAULT_BRANCH}
+      - git merge --ff pill-flake-update
+      - git push -u origin ${CI_REPO_DEFAULT_BRANCH}
 
-  - name: pr
-    image: woodpeckercommunity/gitea-pull-request-create-plugin
-    depends_on: [update]
-    settings:
-      gitea_address: https://git.anturated.dev
-      gitea_token:
-        from_secret: PILL_TOKEN
-      owner: ${CI_REPO_OWNER}
-      repo: ${CI_REPO_NAME}
-      base_branch: master
-      branch: pill-flake-update
-      pr_title: "flake: bump (auto)"
-      pr_body: "[pipeline](${CI_PIPELINE_URL}) Going along with woodpecker surprisingly well."
-      skip_on_empty_branch: true
-      skip_on_missing_branch: true
-      delete_branch_after_merge: true
-      merge_when_checks_succeed: true
-      # some bug workaround
-      close_pr_if_empty: true
-      delete_branch_if_pr_empty: true
+  # - name: pr
+  #   image: woodpeckercommunity/gitea-pull-request-create-plugin
+  #   depends_on: [update]
+  #   settings:
+  #     gitea_address: https://git.anturated.dev
+  #     gitea_token:
+  #       from_secret: PILL_TOKEN
+  #     owner: ${CI_REPO_OWNER}
+  #     repo: ${CI_REPO_NAME}
+  #     base_branch: master
+  #     branch: pill-flake-update
+  #     pr_title: "flake: bump (auto)"
+  #     pr_body: "[[pipeline](${CI_PIPELINE_URL})] Going along with woodpecker surprisingly well."
+  #     skip_on_empty_branch: true
+  #     skip_on_missing_branch: true
+  #     delete_branch_after_merge: true
+  #     merge_when_checks_succeed: true
+  #     # some bug workaround
+  #     close_pr_if_empty: true
+  #     delete_branch_if_pr_empty: true
