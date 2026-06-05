@@ -34,22 +34,21 @@ let
   };
 in
 {
-  services.forgejo.settings = {
-    ui = {
-      DEFAULT_THEME = "evergarden-fall-lime";
+  services.forgejo.settings.ui = {
+    DEFAULT_THEME = "evergarden-fall-lime";
 
-      THEMES = lib.concatStringsSep "," (
-        lib.flatten [
-          (attrNames themes)
-          [
-            "forgejo-auto"
-            "forgejo-light"
-            "forgejo-dark"
-          ]
+    THEMES = lib.concatStringsSep "," (
+      lib.flatten [
+        (attrNames themes)
+        [
+          "forgejo-auto"
+          "forgejo-light"
+          "forgejo-dark"
         ]
-      );
-    };
+      ]
+    );
   };
+
   systemd.services.forgejo-themes = {
     description = "Install Forgejo custom themes";
     wantedBy = [ "forgejo.service" ];
