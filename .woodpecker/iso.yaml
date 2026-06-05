@@ -1,0 +1,46 @@
+when:
+  - event: cron
+    cron: iso
+
+clone:
+  - name: clone
+    image: woodpeckerci/plugin-git
+    settings:
+      username: caterpillar-bot
+      password:
+        from_secret: PILL_TOKEN
+
+steps:
+  - name: build
+    image: nixos/nix
+    environment:
+      CDN_PASS:
+        from_secret: CDN_PASS
+    commands:
+      # setup
+      - export NIX_CONFIG="extra-experimental-features = nix-command flakes"
+      - nix profile install nixpkgs#jq
+      # build
+      - nix build -L .#nixosConfigurations.saeth.config.system.build.isoImage
+      # get iso data
+      - ISO_PATH=$(find ./result/iso -type f -name "*.iso" | head -1)
+      - UPLOAD_PATH="/ceirios-builds/$(basename $${ISO_PATH})"
+      # get cdn token
+      - |
+        CDN_TOKEN=$(curl -X PUT -s "https://burger.anturated.dev/~/api/auth" \
+        -F "login=builder" \
+        -F "password=$${CDN_PASS}" | jq -r '.data.token')
+      # upload
+      - |
+        curl -X PUT "https://burger.anturated.dev/~/api/file" \
+        --header "Authorization: Bearer $${CDN_TOKEN}" \
+        --data-binary "@$${ISO_PATH}" \
+        --url-query "path=$${UPLOAD_PATH}"
+      # get permalink
+      - |
+        LINK_RESPONSE=$(curl -X GET -s "https://burger.anturated.dev/~/api/link" \
+        --header "Authorization: Bearer $${CDN_TOKEN}" \
+        --url-query "path=$${UPLOAD_PATH}")
+      - URL=$(echo "$${LINK_RESPONSE}" | jq -r '.data.url')
+      # print link # TODO: send somewhere maybe?
+      - echo $${URL}
