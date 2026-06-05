@@ -165,15 +165,6 @@ in
         settings.main.smtp_helo_name = config.mailserver.fqdn;
       };
 
-      # NOTE: when dns propagates check if it works without and remove
-      # i deployed the commented version
-      # force signing dkim, should keep us out of spam
-      # this merges on top of existing config
-      # rspamd.locals."dkim_signing.conf".text = ''
-      #   sign_authenticated = true;
-      #   sign_local = true;
-      # '';
-
       # ssl and acme are true by default
       nginx.virtualHosts."${cfg.domain}" = { };
     };
