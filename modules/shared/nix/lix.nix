@@ -1,5 +1,13 @@
-{ lib, config, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 
+let
+  cfg = config.ceirios.system.lix;
+in
 {
   # import per os type,
   # enable per system
@@ -7,7 +15,7 @@
     enable = lib.mkEnableOption "Enable Lix";
   };
 
-  config = {
-    lix.enable = config.ceirios.system.lix.enable;
+  config = lib.mkIf cfg.enable {
+    nix.package = pkgs.lix;
   };
 }
