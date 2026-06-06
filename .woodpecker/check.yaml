@@ -5,5 +5,10 @@ steps:
   - name: flake check
     image: nixos/nix
     commands:
-      - export NIX_CONFIG="extra-experimental-features = nix-command flakes"
+      - |
+        export NIX_CONFIG="
+          extra-experimental-features = nix-command flakes
+          http-connections = 128
+          max-substitution-jobs = 128
+        "
       - nix flake check --show-trace

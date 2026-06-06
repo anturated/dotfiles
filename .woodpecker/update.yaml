@@ -25,7 +25,12 @@ steps:
       # checkout
       - git checkout -b pill-flake-update
       # update
-      - export NIX_CONFIG="extra-experimental-features = nix-command flakes"
+      - |
+        export NIX_CONFIG="
+          extra-experimental-features = nix-command flakes
+          http-connections = 128
+          max-substitution-jobs = 128
+        "
       - |
         nix flake update \
         --commit-lock-file \

@@ -16,7 +16,12 @@ steps:
   - name: build
     image: nixos/nix
     commands:
-      - export NIX_CONFIG="extra-experimental-features = nix-command flakes"
+      - |
+        export NIX_CONFIG="
+          extra-experimental-features = nix-command flakes
+          http-connections = 128
+          max-substitution-jobs = 128
+        "
       - nix build -L .#nixosConfigurations.saeth.config.system.build.isoImage
       # nix store gets nuked
       - cp ./result/iso/*.iso ./
