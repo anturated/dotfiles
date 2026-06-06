@@ -2,6 +2,8 @@ when:
   - event: cron
     cron: iso
 
+# TODO: try parallel html connections here and in check... and update
+
 clone:
   - name: clone
     image: woodpeckerci/plugin-git
@@ -19,8 +21,32 @@ steps:
       # nix store gets nuked
       - cp ./result/iso/*.iso ./
 
-  - name: upload
+  - name: cleanup
     depends_on: [build]
+    image: alpine
+    environment:
+      CDN_PASS:
+        from_secret: CDN_PASS
+    commands:
+      - apk add curl jq
+      - |
+        CDN_TOKEN=$(curl -X PUT -s "https://burger.anturated.dev/~/api/auth" \
+          -F "login=builder" \
+          -F "password=$${CDN_PASS}" | jq -r '.data.token')
+      # this is horrid but i'm sleep deprived enough at this point
+      # delete all but 2 last ISOs
+      - |
+        curl -s -X GET "https://burger.anturated.dev/~/api/directory?path=/ceirios-builds" \
+          --header "Authorization: Bearer $${CDN_TOKEN}" \
+          | jq -r '[.data[] | select(.isDirectory == false)] | sort_by(.birthtime) | reverse | .[2:] | .[].path' \
+          | while read path; do
+              echo "deleting $path"
+              curl -s -X DELETE "https://burger.anturated.dev/~/api/file?path=$(echo $path | sed 's|/|%2F|g')" \
+                --header "Authorization: Bearer $${CDN_TOKEN}"
+            done
+
+  - name: upload
+    depends_on: [cleanup]
     image: alpine
     environment:
       CDN_PASS:
@@ -72,7 +98,7 @@ steps:
           -H "Content-Type: application/json" \
           -d "{
             \"tag_name\": \"ceirios-$${SHORT_SHA}\",
-            \"body\": \"> Forged this one myself\n\n\- Caterpillar, probably\",
+            \"body\": \"Only 3 isos stay alive at the same time, the rest gets nuked.\",
             \"target_commitish\": \"${CI_COMMIT_SHA}\"
           }")
       # grab id
