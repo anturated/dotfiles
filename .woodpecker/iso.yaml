@@ -13,20 +13,26 @@ clone:
 steps:
   - name: build
     image: nixos/nix
+    commands:
+      - export NIX_CONFIG="extra-experimental-features = nix-command flakes"
+      - nix build -L .#nixosConfigurations.saeth.config.system.build.isoImage
+      # nix store gets nuked
+      - cp ./result/iso/*.iso ./
+
+  - name: upload
+    depends_on: [build]
+    image: alpine
     environment:
       CDN_PASS:
         from_secret: CDN_PASS
       FORGEJO_TOKEN:
         from_secret: PILL_TOKEN
     commands:
-      # setup
-      - export NIX_CONFIG="extra-experimental-features = nix-command flakes"
-      - nix profile install nixpkgs#jq
-      # build
-      - nix build -L .#nixosConfigurations.saeth.config.system.build.isoImage
+      # set up
+      - apk add curl jq
       # get iso data
-      - ISO_PATH=$(find ./result/iso -type f -name "*.iso" | head -1)
-      - UPLOAD_PATH="/ceirios-builds/$(basename $${ISO_PATH})"
+      - ISO=$(ls *.iso | head -1)
+      - UPLOAD_PATH="/ceirios-builds/$${ISO}"
       # get cdn token
       - |
         CDN_TOKEN=$(curl -X PUT -s "https://burger.anturated.dev/~/api/auth" \
@@ -36,7 +42,7 @@ steps:
       - |
         curl -X PUT "https://burger.anturated.dev/~/api/file" \
         --header "Authorization: Bearer $${CDN_TOKEN}" \
-        --data-binary "@$${ISO_PATH}" \
+        --data-binary "@$${ISO}" \
         --url-query "path=$${UPLOAD_PATH}"
       # get permalink
       - |
@@ -44,27 +50,42 @@ steps:
         --header "Authorization: Bearer $${CDN_TOKEN}" \
         --url-query "path=$${UPLOAD_PATH}")
       - URL=$(echo "$${LINK_RESPONSE}" | jq -r '.data.url')
+      # persist
+      - echo $URL > ./url
+
+  - name: release
+    depends_on: [upload]
+    image: alpine
+    environment:
+      FORGEJO_TOKEN:
+        from_secret: PILL_TOKEN
+    commands:
+      # setup
+      - apk add curl jq
+      - URL=$(cat ./url)
+      - ISO=$(ls *.iso | head -1)
+      - SHORT_SHA=$(echo ${CI_COMMIT_SHA} | cut -c1-7)
       # release
       - |
         RELEASE=$(curl -s -X POST https://git.anturated.dev/api/v1/repos/${CI_REPO}/releases \
           -H "Authorization: token $${FORGEJO_TOKEN}" \
           -H "Content-Type: application/json" \
           -d "{
-            \"tag_name\": \"ceirios-${CI_COMMIT_SHA:0:7}\",
-            \"body\": \"> Forged this one myself\n\n- Caterpillar, probably\",
+            \"tag_name\": \"ceirios-$${SHORT_SHA}\",
+            \"body\": \"> Forged this one myself\n\n\- Caterpillar, probably\",
             \"target_commitish\": \"${CI_COMMIT_SHA}\"
           }")
       # grab id
       - RELEASE_ID=$(echo $RELEASE | jq -r '.id')
       # add iso
       - |
-        curl -s -X POST "https://git.anturated.dev/api/v1/repos/${CI_REPO}/releases/$${RELEASE_ID}/assets?name=iso" \
+        curl -s -X POST "https://git.anturated.dev/api/v1/repos/${CI_REPO}/releases/$${RELEASE_ID}/assets?name=$${ISO}" \
           -H "Authorization: token $${FORGEJO_TOKEN}" \
-          -H 'Content-Type: multipart/form-data' \
-          -F 'external_url=$${URL}'
+          -H "Content-Type: multipart/form-data" \
+          -F "external_url=$${URL}"
       # add pipeline
       - |
         curl -s -X POST "https://git.anturated.dev/api/v1/repos/${CI_REPO}/releases/$${RELEASE_ID}/assets?name=pipeline" \
           -H "Authorization: token $${FORGEJO_TOKEN}" \
-          -H 'Content-Type: multipart/form-data' \
-          -F 'external_url=${CI_PIPELINE_URL}'
+          -H "Content-Type: multipart/form-data" \
+          -F "external_url=${CI_PIPELINE_URL}"
