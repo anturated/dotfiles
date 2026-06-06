@@ -13,14 +13,6 @@
       ref = "nixpkgs-unstable";
     };
 
-    # stable branch for anything broken upstream
-    nixpkgs-stable = {
-      type = "github";
-      owner = "NixOS";
-      repo = "nixpkgs";
-      ref = "nixos-26.05";
-    };
-
     # if you're not faster you get removed
     lix = {
       url = "https://git.lix.systems/lix-project/lix/archive/main.tar.gz";
