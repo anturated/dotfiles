@@ -7,17 +7,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1780766609,
-        "narHash": "sha256-TTMWOrU89cLSH0f15IPKJhQw1poo3bKMo9wE+r9/eBE=",
-        "owner": "anturated",
-        "repo": "ivy-shell",
-        "rev": "80103dbc8387f8eacd19608a43a0a97daea17892",
-        "type": "github"
+        "lastModified": 1780784930,
+        "narHash": "sha256-pTW7IolexF0Ab7/Zll44MFBgNFaR1mU1rwNwerEAx04=",
+        "ref": "refs/heads/master",
+        "rev": "7934bac1ba0c46bd1d3147c00a91bd12013df289",
+        "revCount": 76,
+        "type": "git",
+        "url": "https://git.anturated.dev/anturated/eiddew"
       },
       "original": {
-        "owner": "anturated",
-        "repo": "ivy-shell",
-        "type": "github"
+        "type": "git",
+        "url": "https://git.anturated.dev/anturated/eiddew"
       }
     },
     "fywion": {

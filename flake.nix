@@ -66,9 +66,8 @@
 
     # my quickshell config
     eiddew = {
-      type = "github";
-      owner = "anturated";
-      repo = "ivy-shell";
+      type = "git";
+      url = "https://git.anturated.dev/anturated/eiddew";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
