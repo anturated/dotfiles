@@ -16,6 +16,8 @@ steps:
     environment:
       CDN_PASS:
         from_secret: CDN_PASS
+      FORGEJO_TOKEN:
+        from_secret: PILL_TOKEN
     commands:
       # setup
       - export NIX_CONFIG="extra-experimental-features = nix-command flakes"
@@ -42,5 +44,27 @@ steps:
         --header "Authorization: Bearer $${CDN_TOKEN}" \
         --url-query "path=$${UPLOAD_PATH}")
       - URL=$(echo "$${LINK_RESPONSE}" | jq -r '.data.url')
-      # print link # TODO: send somewhere maybe?
-      - echo $${URL}
+      # release
+      - |
+        RELEASE=$(curl -s -X POST https://git.anturated.dev/api/v1/repos/${CI_REPO}/releases \
+          -H "Authorization: token $${FORGEJO_TOKEN}" \
+          -H "Content-Type: application/json" \
+          -d "{
+            \"tag_name\": \"ceirios-${CI_COMMIT_SHA:0:7}\",
+            \"body\": \"> Forged this one myself\n\n- Caterpillar, probably\",
+            \"target_commitish\": \"${CI_COMMIT_SHA}\"
+          }")
+      # grab id
+      - RELEASE_ID=$(echo $RELEASE | jq -r '.id')
+      # add iso
+      - |
+        curl -s -X POST "https://git.anturated.dev/api/v1/repos/${CI_REPO}/releases/$${RELEASE_ID}/assets?name=iso" \
+          -H "Authorization: token $${FORGEJO_TOKEN}" \
+          -H 'Content-Type: multipart/form-data' \
+          -F 'external_url=$${URL}'
+      # add pipeline
+      - |
+        curl -s -X POST "https://git.anturated.dev/api/v1/repos/${CI_REPO}/releases/$${RELEASE_ID}/assets?name=pipeline" \
+          -H "Authorization: token $${FORGEJO_TOKEN}" \
+          -H 'Content-Type: multipart/form-data' \
+          -F 'external_url=${CI_PIPELINE_URL}'
