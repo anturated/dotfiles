@@ -48,11 +48,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # quickly deploy my stuff
-    fywion = {
-      type = "github";
-      owner = "anturated";
-      repo = "fywion";
+    # my website
+    anturated-website = {
+      type = "git";
+      url = "https://git.anturated.dev/anturated/website";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

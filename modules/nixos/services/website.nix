@@ -2,6 +2,7 @@
   lib,
   config,
   self,
+  inputs,
   ...
 }:
 
@@ -12,16 +13,15 @@ let
   cfg = config.ceirios.services.anturated-website;
 in
 {
+  imports = [ inputs.anturated-website.nixosModules.default ];
   options.ceirios.services.anturated-website = mkServiceOption "anturated-website" {
     inherit (config.networking) domain;
     port = 3000;
   };
 
   config = mkIf cfg.enable {
-    fywion.anturated-website.enable = true;
+    services.anturated-website.enable = true;
 
-    # gotta configure nginx
-    # because services has no idea what the setup is
     services.nginx.virtualHosts.${cfg.domain} = {
       serverAliases = [ "www.${cfg.domain}" ];
       enableACME = true;

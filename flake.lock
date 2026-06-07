@@ -1,5 +1,25 @@
 {
   "nodes": {
+    "anturated-website": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1780862429,
+        "narHash": "sha256-5Cn6PaDSOxv3n9NxuErQuTsfnw/Qm6+rI6FmuXhcSFQ=",
+        "ref": "refs/heads/master",
+        "rev": "26cb3ddf3927c4d83332d1385067e95f4bbeae55",
+        "revCount": 29,
+        "type": "git",
+        "url": "https://git.anturated.dev/anturated/website"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://git.anturated.dev/anturated/website"
+      }
+    },
     "eiddew": {
       "inputs": {
         "nixpkgs": [
@@ -18,26 +38,6 @@
       "original": {
         "type": "git",
         "url": "https://git.anturated.dev/anturated/eiddew"
-      }
-    },
-    "fywion": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1780115458,
-        "narHash": "sha256-0ZQyPAVRJeSzsA6oyZjNQBzSyZhGLpgDgO2+Kvv0shA=",
-        "owner": "anturated",
-        "repo": "fywion",
-        "rev": "853979aa623e9621daecb053fbbe3592491055a2",
-        "type": "github"
-      },
-      "original": {
-        "owner": "anturated",
-        "repo": "fywion",
-        "type": "github"
       }
     },
     "gift-wrap": {
@@ -140,8 +140,8 @@
     },
     "root": {
       "inputs": {
+        "anturated-website": "anturated-website",
         "eiddew": "eiddew",
-        "fywion": "fywion",
         "home-manager": "home-manager",
         "newydd": "newydd",
         "nix-index-database": "nix-index-database",
