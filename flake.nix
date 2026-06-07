@@ -58,9 +58,8 @@
 
     # my nvim config
     newydd = {
-      type = "github";
-      owner = "anturated";
-      repo = "nvim";
+      type = "git";
+      url = "https://git.anturated.dev/anturated/newydd";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

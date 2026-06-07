@@ -89,17 +89,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1780676370,
-        "narHash": "sha256-GhihWMYiFezF398p7aU8MdhasDkRHqK75h309rfg0Pc=",
-        "owner": "anturated",
-        "repo": "nvim",
-        "rev": "d357a33e2ad4a67ae8600b687313995c590e5b0e",
-        "type": "github"
+        "lastModified": 1780852473,
+        "narHash": "sha256-w47m+sX/M0F1nWjSOU+g1fD+stQXShWOkzqW0eEaLzU=",
+        "ref": "refs/heads/master",
+        "rev": "1f28eda1f4bacff46bf10da43e03999d57200609",
+        "revCount": 74,
+        "type": "git",
+        "url": "https://git.anturated.dev/anturated/newydd"
       },
       "original": {
-        "owner": "anturated",
-        "repo": "nvim",
-        "type": "github"
+        "type": "git",
+        "url": "https://git.anturated.dev/anturated/newydd"
       }
     },
     "nix-index-database": {
