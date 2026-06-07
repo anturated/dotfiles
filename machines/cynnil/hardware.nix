@@ -22,8 +22,4 @@
       "dmask=0022"
     ];
   };
-
-  swapDevices = [
-    { device = "/dev/disk/by-uuid/e3363a8f-481a-4255-9407-78e497d0332f"; }
-  ];
 }
