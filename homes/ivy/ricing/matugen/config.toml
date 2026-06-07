@@ -50,7 +50,7 @@ output_path = '~/.config/hypr/colors.lua'
 
 [templates.ivy]
 input_path = '~/.config/matugen/templates/ivy-colors.json'
-output_path = '~/.config/ivy-shell/colors.json'
+output_path = '~/.config/eiddew/colors.json'
 
 [templates.kitty]
 input_path = '~/.config/matugen/templates/kitty-theme.conf'
