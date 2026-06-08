@@ -1,0 +1,877 @@
+:root {
+  color-scheme: dark;
+  --is-dark-theme: true;
+  accent-color: #acd28c;
+  --color-primary: #acd28c;
+  --color-primary-contrast: #101410;
+  --color-primary-hover: rgb(158.771875, 202.828125, 121.671875);
+  --color-primary-dark-1: rgb(164.063125, 205.696875, 129.003125);
+  --color-primary-dark-2: rgb(156.12625, 201.39375, 118.00625);
+  --color-primary-dark-3: rgb(148.189375, 197.090625, 107.009375);
+  --color-primary-dark-4: rgb(140.2525, 192.7875, 96.0125);
+  --color-primary-dark-5: rgb(132.315625, 188.484375, 85.015625);
+  --color-primary-dark-6: rgb(124.37875, 184.18125, 74.01875);
+  --color-primary-dark-7: rgb(116.895625, 174.584375, 68.315625);
+  --color-primary-light-1: rgb(179.936875, 214.303125, 150.996875);
+  --color-primary-light-2: rgb(187.87375, 218.60625, 161.99375);
+  --color-primary-light-3: rgb(195.810625, 222.909375, 172.990625);
+  --color-primary-light-4: rgb(203.7475, 227.2125, 183.9875);
+  --color-primary-light-5: rgb(211.684375, 231.515625, 194.984375);
+  --color-primary-light-6: rgb(219.62125, 235.81875, 205.98125);
+  --color-primary-light-7: rgb(227.558125, 240.121875, 216.978125);
+  --color-primary-alpha-10: rgba(172, 210, 140, 0.1);
+  --color-primary-alpha-20: rgba(172, 210, 140, 0.2);
+  --color-primary-alpha-30: rgba(172, 210, 140, 0.3);
+  --color-primary-alpha-40: rgba(172, 210, 140, 0.4);
+  --color-primary-alpha-50: rgba(172, 210, 140, 0.5);
+  --color-primary-alpha-60: rgba(172, 210, 140, 0.6);
+  --color-primary-alpha-70: rgba(172, 210, 140, 0.7);
+  --color-primary-alpha-80: rgba(172, 210, 140, 0.8);
+  --color-primary-alpha-90: rgba(172, 210, 140, 0.9);
+  --color-secondary: #0b0f0b;
+  --color-secondary-dark-1: rgb(22.8, 28.5, 22.8);
+  --color-secondary-dark-2: rgb(29.6, 37, 29.6);
+  --color-secondary-dark-3: rgb(36.4, 45.5, 36.4);
+  --color-secondary-dark-4: rgb(43.2, 54, 43.2);
+  --color-secondary-dark-5: rgb(50, 62.5, 50);
+  --color-secondary-dark-6: rgb(56.8, 71, 56.8);
+  --color-secondary-dark-7: rgb(63.6, 79.5, 63.6);
+  --color-secondary-dark-8: rgb(70.4, 88, 70.4);
+  --color-secondary-dark-9: rgb(77.2, 96.5, 77.2);
+  --color-secondary-dark-10: #546954;
+  --color-secondary-dark-11: rgb(90.8, 113.5, 90.8);
+  --color-secondary-dark-12: rgb(97.6, 122, 97.6);
+  --color-secondary-dark-13: rgb(104.4, 130.5, 104.4);
+  --color-secondary-light-1: rgb(9.2, 11.5, 9.2);
+  --color-secondary-light-2: rgb(2.4, 3, 2.4);
+  --color-secondary-light-3: hsl(120, 11.1111111111%, -1.9411764706%);
+  --color-secondary-light-4: hsl(120, 11.1111111111%, -4.9411764706%);
+  --color-secondary-alpha-10: rgba(16, 20, 16, 0.1);
+  --color-secondary-alpha-20: rgba(16, 20, 16, 0.2);
+  --color-secondary-alpha-30: rgba(16, 20, 16, 0.3);
+  --color-secondary-alpha-40: rgba(16, 20, 16, 0.4);
+  --color-secondary-alpha-50: rgba(16, 20, 16, 0.5);
+  --color-secondary-alpha-60: rgba(16, 20, 16, 0.6);
+  --color-secondary-alpha-70: rgba(16, 20, 16, 0.7);
+  --color-secondary-alpha-80: rgba(16, 20, 16, 0.8);
+  --color-secondary-alpha-90: rgba(16, 20, 16, 0.9);
+  /* colors */
+  --color-red: #ffb39f;
+  --color-orange: #ffb684;
+  --color-yellow: #e0c46b;
+  --color-olive: #a5d393;
+  --color-green: #a5d393;
+  --color-aqua: #93d5a7;
+  --color-blue: #92ccf7;
+  --color-violet: #7ed4db;
+  --color-purple: #c3beff;
+  --color-pink: #feaed1;
+  --color-brown: #ffaeca;
+  --color-grey: #313630;
+  --color-black: #101410;
+  /* light variants - produced via Sass scale-color(color, $lightness: -10%) */
+  --color-red-light: rgb(255, 138.625, 108);
+  --color-orange-light: rgb(255, 151.7317073171, 81);
+  --color-yellow-light: rgb(215.1675977654, 179.1899441341, 64.8324022346);
+  --color-olive-light: rgb(134.8026315789, 196.2368421053, 110.7631578947);
+  --color-green-light: rgb(134.8026315789, 196.2368421053, 110.7631578947);
+  --color-aqua-light: rgb(110.28, 198.72, 137.08);
+  --color-blue-light: rgb(98.4871794872, 181.7692307692, 243.5128205128);
+  --color-violet-light: rgb(86.1272727273, 198.7090909091, 207.8727272727);
+  --color-purple-light: rgb(147.9230769231, 139, 255);
+  --color-pink-light: rgb(253.3780487805, 123.6219512195, 180.3902439024);
+  --color-brown-light: rgb(255, 123, 168.6296296296);
+  --color-grey-light: rgb(24.5, 27, 24);
+  --color-black-light: hsl(120, 11.1111111111%, -2.9411764706%);
+  /* dark 1 variants - produced via Sass scale-color(color, $lightness: -10%) */
+  --color-red-dark-1: rgb(255, 138.625, 108);
+  --color-orange-dark-1: rgb(255, 151.7317073171, 81);
+  --color-yellow-dark-1: rgb(215.1675977654, 179.1899441341, 64.8324022346);
+  --color-olive-dark-1: rgb(134.8026315789, 196.2368421053, 110.7631578947);
+  --color-green-dark-1: rgb(134.8026315789, 196.2368421053, 110.7631578947);
+  --color-aqua-dark-1: rgb(110.28, 198.72, 137.08);
+  --color-blue-dark-1: rgb(98.4871794872, 181.7692307692, 243.5128205128);
+  --color-violet-dark-1: rgb(86.1272727273, 198.7090909091, 207.8727272727);
+  --color-purple-dark-1: rgb(147.9230769231, 139, 255);
+  --color-pink-dark-1: rgb(253.3780487805, 123.6219512195, 180.3902439024);
+  --color-brown-dark-1: rgb(255, 123, 168.6296296296);
+  --color-black-dark-1: hsl(120, 11.1111111111%, -2.9411764706%);
+  /* dark 2 variants - produced via Sass scale-color(color, $lightness: -20%) */
+  --color-red-dark-2: rgb(255, 98.25, 57);
+  --color-orange-dark-2: rgb(255, 121.4634146341, 30);
+  --color-yellow-dark-2: rgb(189.3407821229, 153.5195530726, 39.6592178771);
+  --color-olive-dark-2: rgb(104.6052631579, 181.4736842105, 74.5263157895);
+  --color-green-dark-2: rgb(104.6052631579, 181.4736842105, 74.5263157895);
+  --color-aqua-dark-2: rgb(73.56, 184.44, 107.16);
+  --color-blue-dark-2: rgb(50.9743589744, 159.5384615385, 240.0256410256);
+  --color-violet-dark-2: rgb(53.0181818182, 179.6727272727, 189.9818181818);
+  --color-purple-dark-2: rgb(100.8461538462, 88, 255);
+  --color-pink-dark-2: rgb(252.756097561, 73.243902439, 151.7804878049);
+  --color-brown-dark-2: rgb(255, 72, 135.2592592593);
+  --color-black-dark-2: hsl(120, 11.1111111111%, -12.9411764706%);
+  /* other colors */
+  --color-gold: #ffaeca;
+  --color-white: #e0e4db;
+  --color-diff-removed-word-bg: rgba(255, 179, 159, 0.15);
+  --color-diff-added-word-bg: rgba(165, 211, 147, 0.15);
+  --color-diff-removed-row-bg: rgba(255, 179, 159, 0.07);
+  --color-diff-moved-row-bg: rgba(224, 196, 107, 0.07);
+  --color-diff-added-row-bg: rgba(165, 211, 147, 0.07);
+  --color-diff-removed-row-border: rgba(255, 179, 159, 0.07);
+  --color-diff-moved-row-border: rgba(224, 196, 107, 0.07);
+  --color-diff-added-row-border: rgba(165, 211, 147, 0.07);
+  --color-diff-inactive: #313630;
+  --color-error-border: #ffb39f;
+  --color-error-bg: #ffb39f;
+  --color-error-bg-active: rgb(255, 158.8125, 133.5);
+  --color-error-bg-hover: rgb(255, 138.625, 108);
+  --color-error-text: #101410;
+  --color-success-border: rgb(134.8026315789, 196.2368421053, 110.7631578947);
+  --color-success-bg: #a5d393;
+  --color-success-text: #101410;
+  --color-warning-border: rgb(215.1675977654, 179.1899441341, 64.8324022346);
+  --color-warning-bg: #e0c46b;
+  --color-warning-text: #101410;
+  --color-info-border: rgb(98.4871794872, 181.7692307692, 243.5128205128);
+  --color-info-bg: #101410;
+  --color-info-text: #e0e4db;
+  --color-red-badge: rgb(255, 138.625, 108);
+  --color-red-badge-bg: #101410;
+  --color-red-badge-hover-bg: rgb(255, 158.8125, 133.5);
+  --color-green-badge: #a5d393;
+  --color-green-badge-bg: #a5d393;
+  --color-green-badge-hover-bg: rgb(149.9013157895, 203.6184210526, 128.8815789474);
+  --color-yellow-badge: #e0c46b;
+  --color-yellow-badge-bg: #101410;
+  --color-yellow-badge-hover-bg: rgb(219.5837988827, 187.594972067, 85.9162011173);
+  --color-orange-badge: #ffb684;
+  --color-orange-badge-bg: #101410;
+  --color-orange-badge-hover-bg: rgb(255, 166.8658536585, 106.5);
+  --color-git: #ffb684;
+  --color-highlight-bg: rgba(224, 196, 107, 0.15);
+  /* target-based colors */
+  --color-body: #101410;
+  --color-box-header: #101410;
+  --color-box-body: #101410;
+  --color-box-body-highlight: #101410;
+  --color-text-dark: #8c9389;
+  --color-text: #e0e4db;
+  --color-text-light: #72796f;
+  --color-text-light-1: #72796f;
+  --color-text-light-2: #72796f;
+  --color-text-light-3: #72796f;
+  --color-footer: #101410;
+  --color-timeline: #101410;
+  --color-input-text: #e0e4db;
+  --color-input-background: #101410;
+  --color-input-toggle-background: #101410;
+  --color-input-border: #0b0f0b;
+  --color-input-border-hover: #181d18;
+  --color-nav-bg: #101410;
+  --color-nav-hover-bg: var(--color-hover);
+  --color-navbar: #101410;
+  --color-navbar-transparent: rgba(16, 20, 16, 0);
+  --color-light: rgba(24, 29, 24, 0.3);
+  --color-light-mimic-enabled: rgba(
+    0,
+    0,
+    0,
+    calc(40 / 255 * 222 / 255 / var(--opacity-disabled))
+  );
+  --color-light-border: #181d18;
+  --color-hover: rgba(28, 33, 27, 0.2);
+  --color-active: rgba(224, 228, 219, 0.1);
+  --color-menu: #101410;
+  --color-card: #101410;
+  --color-markup-table-row: rgba(224, 228, 219, 0.02);
+  --color-markup-code-block: rgba(224, 228, 219, 0.05);
+  --color-markup-code-inline: #101410;
+  --color-button: #101410;
+  --color-code-bg: #101410;
+  --color-code-sidebar-bg: #101410;
+  --color-shadow: rgba(16, 20, 16, 0.1);
+  --color-tooltip-bg: #101410;
+  --color-tooltip-text: var(--color-text);
+  --color-secondary-bg: #101410;
+  --color-text-focus: #e0e4db;
+  --color-expand-button: #181d18;
+  --color-placeholder-text: #8c9389;
+  --color-editor-line-highlight: var(--color-primary-light-5);
+  --color-project-board-bg: var(--color-secondary-light-2);
+  /* gitea source code: */
+  /* should ideally be --color-text-dark, see go-gitea/gitea#15651 */
+  --color-caret: var(--color-text);
+  --color-reaction-bg: rgba(224, 228, 219, 0.07);
+  --color-reaction-active-bg: var(--color-primary-alpha-40);
+  --color-header-wrapper: #101410;
+  --color-header-wrapper-transparent: rgba(16, 20, 16, 0);
+  --color-label-text: #101410;
+  --color-label-bg: #acd28c;
+  --color-label-hover-bg: rgb(156.12625, 201.39375, 118.00625);
+  --color-label-active-bg: rgb(164.063125, 205.696875, 129.003125);
+  --color-accent: var(--color-primary-light-1);
+  --color-small-accent: var(--color-primary-light-5);
+  --color-active-line: #0b0f0b;
+}
+
+/* invert emojis that are hard to read otherwise */
+.emoji[aria-label="check mark"],
+.emoji[aria-label="currency exchange"],
+.emoji[aria-label="TOP arrow"],
+.emoji[aria-label="END arrow"],
+.emoji[aria-label="ON! arrow"],
+.emoji[aria-label="SOON arrow"],
+.emoji[aria-label="heavy dollar sign"],
+.emoji[aria-label=copyright],
+.emoji[aria-label=registered],
+.emoji[aria-label="trade mark"],
+.emoji[aria-label=multiply],
+.emoji[aria-label=plus],
+.emoji[aria-label=minus],
+.emoji[aria-label=divide],
+.emoji[aria-label="curly loop"],
+.emoji[aria-label="double curly loop"],
+.emoji[aria-label="wavy dash"],
+.emoji[aria-label="paw prints"],
+.emoji[aria-label="musical note"],
+.emoji[aria-label="musical notes"] {
+  filter: invert(100%) hue-rotate(180deg);
+}
+
+.ui.ui.ui.button:not(.inverted, .basic).primary, .ui.ui.ui.button:not(.inverted, .basic).green, .ui.ui.ui.button:not(.inverted, .basic).red, .ui.ui.ui.button:not(.inverted, .basic).aqua,
+.ui.ui.ui.label:not(.inverted, .basic).primary,
+.ui.ui.ui.label:not(.inverted, .basic).green,
+.ui.ui.ui.label:not(.inverted, .basic).red,
+.ui.ui.ui.label:not(.inverted, .basic).aqua {
+  color: #101410;
+}
+.ui.ui.ui.button:not(.inverted, .basic).primary:hover, .ui.ui.ui.button:not(.inverted, .basic).green:hover, .ui.ui.ui.button:not(.inverted, .basic).red:hover, .ui.ui.ui.button:not(.inverted, .basic).aqua:hover,
+.ui.ui.ui.label:not(.inverted, .basic).primary:hover,
+.ui.ui.ui.label:not(.inverted, .basic).green:hover,
+.ui.ui.ui.label:not(.inverted, .basic).red:hover,
+.ui.ui.ui.label:not(.inverted, .basic).aqua:hover {
+  color: #101410;
+}
+
+.ui.basic.modal {
+  background-color: #101410;
+}
+
+.ui.commit-header-row .svg.gitea-lock ~ a {
+  color: #101410;
+}
+
+.ui.negative.message .header {
+  color: var(--color-error-text);
+}
+
+.ui.sha.isSigned.isVerified .shortsha {
+  color: #101410;
+}
+.ui.sha.isSigned.isVerified svg.gitea-lock {
+  fill: #101410;
+}
+
+.ui.basic.modal,
+.ui.basic.modal > .header,
+.ui.inverted.button {
+  color: #e0e4db !important;
+}
+
+#repo-topics,
+#topic_edit > .ui.selection.dropdown {
+  color: var(--color-label-text) !important;
+}
+
+#manage_topic {
+  color: var(--color-text-light-2) !important;
+}
+
+blockquote.attention-tip {
+  border-left-color: var(--color-success-bg);
+}
+blockquote.attention-warning {
+  border-left-color: var(--color-warning-bg);
+}
+
+svg.attention-tip,
+strong.attention-tip {
+  color: var(--color-success-bg);
+}
+svg.attention-warning,
+strong.attention-warning {
+  color: var(--color-warning-bg);
+}
+
+.inline-code-block {
+  color: #101410;
+}
+
+::selection {
+  background: rgba(172, 210, 140, 0.3) !important;
+}
+
+/* NameBuiltinPseudo */
+.chroma .bp {
+  color: #ffb684;
+}
+
+/* Comment */
+.chroma .c {
+  color: #1c211b;
+}
+
+/* CommentSingle */
+.chroma .c1 {
+  color: #1c211b;
+}
+
+/* CommentHashbang */
+.chroma .ch {
+  color: #1c211b;
+}
+
+/* CommentMultiline */
+.chroma .cm {
+  color: #1c211b;
+}
+
+/* CommentPreproc */
+.chroma .cp {
+  color: #92ccf7;
+}
+
+/* CommentPreprocFile */
+.chroma .cpf {
+  color: #92ccf7;
+}
+
+/* CommentSpecial */
+.chroma .cs {
+  color: #1c211b;
+}
+
+/* LiteralStringDelimiter */
+.chroma .dl {
+  color: #92ccf7;
+}
+
+/* NameFunctionMagic */
+/* Generic */
+/* GenericDeleted */
+.chroma .gd {
+  color: #e0e4db;
+  background-color: rgba(255, 179, 159, 0.15);
+}
+
+/* GenericEmph */
+.chroma .ge {
+  font-style: italic;
+}
+
+/* GenericHeading */
+.chroma .gh {
+  color: #89d5b4;
+}
+
+/* GenericInserted */
+.chroma .gi {
+  color: #e0e4db;
+  background-color: rgba(165, 211, 147, 0.15);
+}
+
+/* GenericUnderline */
+/* GenericOutput */
+.chroma .go {
+  color: #ffb684;
+}
+
+/* GenericPrompt */
+.chroma .gp {
+  color: #1c211b;
+  font-weight: bold;
+}
+
+/* GenericError */
+.chroma .gr {
+  color: #ffb39f;
+}
+
+/* GenericStrong */
+.chroma .gs {
+  font-weight: bold;
+}
+
+/* GenericTraceback */
+.chroma .gt {
+  color: #ffb39f;
+}
+
+/* GenericSubheading */
+.chroma .gu {
+  color: #89d5b4;
+}
+
+/* LiteralNumberIntegerLong */
+.chroma .il {
+  color: #ffb684;
+}
+
+/* Keyword */
+.chroma .k {
+  color: #c3beff;
+}
+
+/* KeywordConstant */
+.chroma .kc {
+  color: #e0c46b;
+}
+
+/* KeywordDeclaration */
+.chroma .kd {
+  color: #c3beff;
+}
+
+/* KeywordNamespace */
+.chroma .kn {
+  color: #e0c46b;
+}
+
+/* KeywordPseudo */
+.chroma .kp {
+  color: #c3beff;
+  font-weight: bold;
+}
+
+/* KeywordReserved */
+.chroma .kr {
+  color: #c3beff;
+}
+
+/* KeywordType */
+.chroma .kt {
+  color: #e0c46b;
+}
+
+/* Literal */
+/* LiteralDate */
+/* LiteralNumber */
+.chroma .m {
+  color: #ffb684;
+}
+
+/* LiteralNumberBin */
+.chroma .mb {
+  color: #ffb684;
+}
+
+/* LiteralNumberFloat */
+.chroma .mf {
+  color: #ffb684;
+}
+
+/* LiteralNumberHex */
+.chroma .mh {
+  color: #ffb684;
+}
+
+/* LiteralNumberInteger */
+.chroma .mi {
+  color: #ffb684;
+}
+
+/* LiteralNumberOct */
+.chroma .mo {
+  color: #ffb684;
+}
+
+/* Name */
+.chroma .n {
+  color: #7ed4db;
+}
+
+/* NameAttribute */
+.chroma .na {
+  color: #e0c46b;
+}
+
+/* NameBuiltin */
+.chroma .nb {
+  color: #ffb684;
+}
+
+/* NameClass */
+.chroma .nc {
+  color: #e0c46b;
+}
+
+/* NameDecorator */
+.chroma .nd {
+  color: #feaed1;
+}
+
+/* NameException */
+.chroma .ne {
+  color: #ffb39f;
+}
+
+/* NameFunction */
+.chroma .nf {
+  color: #92ccf7;
+}
+
+/* NameEntity */
+.chroma .ni {
+  color: #feaed1;
+}
+
+/* NameLabel */
+.chroma .nl {
+  color: #e0c46b;
+}
+
+/* NameNamespace */
+.chroma .nn {
+  color: #e0c46b;
+}
+
+/* NameConstant */
+.chroma .no {
+  color: #e0c46b;
+}
+
+/* NameTag */
+.chroma .nt {
+  color: #c3beff;
+}
+
+/* NameVariable */
+.chroma .nv {
+  color: #ffb684;
+}
+
+/* NameOther */
+.chroma .nx {
+  color: #ffb684;
+}
+
+/* Operator */
+.chroma .o {
+  color: #89d5b4;
+}
+
+/* OperatorWord */
+.chroma .ow {
+  color: #89d5b4;
+  font-weight: bold;
+}
+
+/* Punctuation */
+.chroma .p {
+  color: #313630;
+}
+
+/* NameProperty */
+/* LiteralString */
+.chroma .s {
+  color: #a5d393;
+}
+
+/* LiteralStringSingle */
+.chroma .s1 {
+  color: #a5d393;
+}
+
+/* LiteralStringDouble */
+.chroma .s2 {
+  color: #a5d393;
+}
+
+/* LiteralStringAffix */
+.chroma .sa {
+  color: #a5d393;
+}
+
+/* LiteralStringBacktick */
+.chroma .sb {
+  color: #a5d393;
+}
+
+/* LiteralStringChar */
+.chroma .sc {
+  color: #a5d393;
+}
+
+/* LiteralStringDoc */
+.chroma .sd {
+  color: #a5d393;
+}
+
+/* LiteralStringEscape */
+.chroma .se {
+  color: #92ccf7;
+}
+
+/* LiteralStringHeredoc */
+.chroma .sh {
+  color: #a5d393;
+}
+
+/* LiteralStringInterpol */
+.chroma .si {
+  color: #a5d393;
+}
+
+/* LiteralStringRegex */
+.chroma .sr {
+  color: #92ccf7;
+}
+
+/* LiteralStringSymbol */
+.chroma .ss {
+  color: #a5d393;
+}
+
+/* LiteralStringOther */
+.chroma .sx {
+  color: #a5d393;
+}
+
+/* NameVariableClass */
+.chroma .vc {
+  color: #e0c46b;
+}
+
+/* NameVariableGlobal */
+.chroma .vg {
+  color: #ffb684;
+}
+
+/* NameVariableInstance */
+.chroma .vi {
+  color: #e0c46b;
+}
+
+/* NameVariableMagic */
+/* TextWhitespace */
+.chroma .w {
+  color: #101410;
+}
+
+.CodeMirror .cm-property,
+.CodeMirror.cm-s-default .cm-property,
+.CodeMirror.cm-s-paper .cm-property {
+  color: #e0e4db;
+}
+.CodeMirror .cm-header,
+.CodeMirror.cm-s-default .cm-header,
+.CodeMirror.cm-s-paper .cm-header {
+  color: #e0e4db;
+}
+.CodeMirror .cm-quote,
+.CodeMirror.cm-s-default .cm-quote,
+.CodeMirror.cm-s-paper .cm-quote {
+  color: #a5d393;
+}
+.CodeMirror .cm-keyword,
+.CodeMirror.cm-s-default .cm-keyword,
+.CodeMirror.cm-s-paper .cm-keyword {
+  color: #c3beff;
+}
+.CodeMirror .cm-atom,
+.CodeMirror.cm-s-default .cm-atom,
+.CodeMirror.cm-s-paper .cm-atom {
+  color: #ffb39f;
+}
+.CodeMirror .cm-number,
+.CodeMirror.cm-s-default .cm-number,
+.CodeMirror.cm-s-paper .cm-number {
+  color: #ffb684;
+}
+.CodeMirror .cm-def,
+.CodeMirror.cm-s-default .cm-def,
+.CodeMirror.cm-s-paper .cm-def {
+  color: #e0e4db;
+}
+.CodeMirror .cm-variable-2,
+.CodeMirror.cm-s-default .cm-variable-2,
+.CodeMirror.cm-s-paper .cm-variable-2 {
+  color: #89d5b4;
+}
+.CodeMirror .cm-variable-3,
+.CodeMirror.cm-s-default .cm-variable-3,
+.CodeMirror.cm-s-paper .cm-variable-3 {
+  color: #93d5a7;
+}
+.CodeMirror .cm-comment,
+.CodeMirror.cm-s-default .cm-comment,
+.CodeMirror.cm-s-paper .cm-comment {
+  color: #181d18;
+}
+.CodeMirror .cm-string,
+.CodeMirror.cm-s-default .cm-string,
+.CodeMirror.cm-s-paper .cm-string {
+  color: #a5d393;
+}
+.CodeMirror .cm-string-2,
+.CodeMirror.cm-s-default .cm-string-2,
+.CodeMirror.cm-s-paper .cm-string-2 {
+  color: #a5d393;
+}
+.CodeMirror .cm-meta,
+.CodeMirror.cm-s-default .cm-meta,
+.CodeMirror.cm-s-paper .cm-meta {
+  color: #ffb684;
+}
+.CodeMirror .cm-qualifier,
+.CodeMirror.cm-s-default .cm-qualifier,
+.CodeMirror.cm-s-paper .cm-qualifier {
+  color: #ffb684;
+}
+.CodeMirror .cm-builtin,
+.CodeMirror.cm-s-default .cm-builtin,
+.CodeMirror.cm-s-paper .cm-builtin {
+  color: #ffb684;
+}
+.CodeMirror .cm-bracket,
+.CodeMirror.cm-s-default .cm-bracket,
+.CodeMirror.cm-s-paper .cm-bracket {
+  color: #e0e4db;
+}
+.CodeMirror .cm-tag,
+.CodeMirror.cm-s-default .cm-tag,
+.CodeMirror.cm-s-paper .cm-tag {
+  color: #e0c46b;
+}
+.CodeMirror .cm-attribute,
+.CodeMirror.cm-s-default .cm-attribute,
+.CodeMirror.cm-s-paper .cm-attribute {
+  color: #e0c46b;
+}
+.CodeMirror .cm-hr,
+.CodeMirror.cm-s-default .cm-hr,
+.CodeMirror.cm-s-paper .cm-hr {
+  color: #313630;
+}
+.CodeMirror .cm-url,
+.CodeMirror.cm-s-default .cm-url,
+.CodeMirror.cm-s-paper .cm-url {
+  color: #92ccf7;
+}
+.CodeMirror .cm-link,
+.CodeMirror.cm-s-default .cm-link,
+.CodeMirror.cm-s-paper .cm-link {
+  color: #92ccf7;
+}
+.CodeMirror .cm-error,
+.CodeMirror.cm-s-default .cm-error,
+.CodeMirror.cm-s-paper .cm-error {
+  color: #ffb39f;
+}
+
+.monaco-editor .selected-text {
+  background-color: #101410 !important;
+}
+.monaco-editor .margin-view-overlays .line-numbers {
+  color: #8c9389 !important;
+}
+.monaco-editor .line-numbers.active-line-number {
+  color: #acd28c !important;
+}
+.monaco-editor .view-overlays .current-line,
+.monaco-editor .margin-view-overlays .current-line-margin {
+  background-color: #101410 !important;
+}
+.monaco-editor .mtk1 {
+  color: #e0e4db !important;
+}
+.monaco-editor .mtk2 {
+  color: #ff69b4 !important;
+}
+.monaco-editor .mtk3 {
+  color: #ffb684 !important;
+}
+.monaco-editor .mtk4 {
+  color: #93d5a7 !important;
+}
+.monaco-editor .mtk5 {
+  color: #e0e4db !important;
+}
+.monaco-editor .mtk6 {
+  color: #c3beff !important;
+}
+.monaco-editor .mtk7 {
+  color: #ffb684 !important;
+}
+.monaco-editor .mtk8 {
+  color: #313630 !important;
+}
+.monaco-editor .mtk9 {
+  color: #c3beff !important;
+}
+.monaco-editor .mtk10 {
+  color: #8c9389 !important;
+}
+.monaco-editor .mtk11 {
+  color: #93d5a7 !important;
+}
+.monaco-editor .mtk12 {
+  color: #93d5a7 !important;
+}
+.monaco-editor .mtk13 {
+  color: #ff69b4 !important;
+}
+.monaco-editor .mtk14 {
+  color: #ff69b4 !important;
+}
+.monaco-editor .mtk15 {
+  color: #c3beff !important;
+}
+.monaco-editor .mtk16 {
+  color: #313630 !important;
+}
+.monaco-editor .mtk17 {
+  color: #ff69b4 !important;
+}
+.monaco-editor .mtk18 {
+  color: #ff69b4 !important;
+}
+.monaco-editor .mtk19 {
+  color: #93d5a7 !important;
+}
+.monaco-editor .mtk20 {
+  color: #ff69b4 !important;
+}
+.monaco-editor .mtk21 {
+  color: #a5d393 !important;
+}
+.monaco-editor .mtk22 {
+  color: #ff69b4 !important;
+}
+.monaco-editor .mtk23 {
+  color: #92ccf7 !important;
+}
+.monaco-editor .mtk24 {
+  color: #ffb684 !important;
+}
+.monaco-editor .mtk25 {
+  color: #feaed1 !important;
+}
+.monaco-editor .bracket-highlighting-0 {
+  color: rgb(242.6, 198.6, 183) !important;
+}
+.monaco-editor .bracket-highlighting-1 {
+  color: rgb(242.6, 200.4, 166.8) !important;
+}
+.monaco-editor .bracket-highlighting-2 {
+  color: rgb(224, 208.8, 151.8) !important;
+}
+.monaco-editor .bracket-highlighting-3 {
+  color: rgb(188.6, 217.8, 175.8) !important;
+}
+.monaco-editor .bracket-highlighting-4 {
+  color: rgb(177.2, 213.6, 235.8) !important;
+}
+.monaco-editor .bracket-highlighting-5 {
+  color: rgb(206.6, 205.2, 240.6) !important;
+}

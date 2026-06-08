@@ -31,11 +31,13 @@ let
       url = "https://evergarden.moe/gitea/theme-evergarden-fall-skye.css";
       hash = "sha256-58GPpaIT/En3FziL/un5foZPMT1BUt1oFM2PHSfOcMQ=";
     };
+
+    gefail = ./custom/theme.css;
   };
 in
 {
   services.forgejo.settings.ui = {
-    DEFAULT_THEME = "evergarden-fall-lime";
+    DEFAULT_THEME = "gefail";
 
     THEMES = lib.concatStringsSep "," (
       lib.flatten [
