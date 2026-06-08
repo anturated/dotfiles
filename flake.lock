@@ -27,11 +27,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1780882470,
-        "narHash": "sha256-lFR9CiBQ/faVQ/gEEQhJNaxp3tJb+UKwu2MHQDN/uj8=",
+        "lastModified": 1780930906,
+        "narHash": "sha256-t6n7vx9sQm/ZQ7zC3Sl6al13Ec4ViEAlKidvK7VctSU=",
         "ref": "refs/heads/master",
-        "rev": "93ca27d54f4144902f6fb779ac36b29d2f3fd70c",
-        "revCount": 83,
+        "rev": "f6ff3232ad19266c4ac4b094e4f6aae59af53f17",
+        "revCount": 84,
         "type": "git",
         "url": "https://git.anturated.dev/anturated/eiddew"
       },
@@ -68,11 +68,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1780679734,
-        "narHash": "sha256-KmRNvpNOb7QEORa06bVgjW9kITcx0VhsI7w0vhmZyD8=",
+        "lastModified": 1780943742,
+        "narHash": "sha256-01bTMR9ZPG+uxPaZBeOwagg5uxIaFYs2/3YIrOX+bCA=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "b2b7db486e06e098711dc291bb25db82850e1d16",
+        "rev": "df39142474950e42d5fc3bf2fef9d6c62abbe8d7",
         "type": "github"
       },
       "original": {
@@ -89,11 +89,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1780852473,
-        "narHash": "sha256-w47m+sX/M0F1nWjSOU+g1fD+stQXShWOkzqW0eEaLzU=",
+        "lastModified": 1780930957,
+        "narHash": "sha256-TzWqieP1rD6P1m+q9HVK/Ng1ns5n/a8t2hZ0LCgpqp4=",
         "ref": "refs/heads/master",
-        "rev": "1f28eda1f4bacff46bf10da43e03999d57200609",
-        "revCount": 74,
+        "rev": "d45f62c540b98e815d12e13b085359321e99be9a",
+        "revCount": 76,
         "type": "git",
         "url": "https://git.anturated.dev/anturated/newydd"
       },
@@ -161,11 +161,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1780702838,
-        "narHash": "sha256-6Yt57vURvmM7JblKGDXdz8wnb7iDzzVu87hhLfDWbMw=",
+        "lastModified": 1780923938,
+        "narHash": "sha256-9JKKc7xP0GNL28KDZxuDoXBoDYaXPUBQh0pqmwwQQyw=",
         "owner": "simple-nixos-mailserver",
         "repo": "nixos-mailserver",
-        "rev": "124cd33453267157bf3cb15b66bd9be99b8d1067",
+        "rev": "65d4ea6456bbf3e0331a27f054039b73bb52d265",
         "type": "gitlab"
       },
       "original": {
