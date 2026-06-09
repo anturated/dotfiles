@@ -113,6 +113,7 @@ if [ "$HAS_INTERNET" -eq 0 ]; then
   # set the device up
   ip addr flush dev "$adapter" # for good measure
   ip addr add "$ip_cidr" dev "$adapter"
+  ip route add "$gateway" dev "$adapter"
   ip route add default via "$gateway"
   ip link set "$adapter" up
 
