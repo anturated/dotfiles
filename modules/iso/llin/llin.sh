@@ -21,7 +21,7 @@ run() {
 mask_to_cidr() {
   local mask=$1
   local cidr=0
-  IFS='.' read -r a b c d <<< "$mask"
+  IFS='.' read -r a b c d <<<"$mask"
   for octet in $a $b $c $d; do
     while [ "$octet" -gt 0 ]; do
       cidr=$((cidr + (octet & 1)))
@@ -41,7 +41,7 @@ echo "• ──────────────────── System �
 ##################
 
 echo "  Checking if we have internet..."
-ping -c1 -W3 8.8.8.8 > /dev/null 2>&1 && HAS_INTERNET=1 || HAS_INTERNET=0
+ping -c1 -W3 8.8.8.8 >/dev/null 2>&1 && HAS_INTERNET=1 || HAS_INTERNET=0
 
 if [ "$HAS_INTERNET" -eq 0 ]; then
   echo "  No internet. Unfortunate. Checking adapters..."
@@ -55,11 +55,11 @@ if [ "$HAS_INTERNET" -eq 0 ]; then
     echo "  One adapter found, good."
   else
     adapter=$(echo "$adapters" |
-    gum choose \
-      --header "  Choose the real adapter:" \
-      --header.foreground 15 \
-      --item.foreground 8 \
-      --cursor.foreground 2)
+      gum choose \
+        --header "  Choose the real adapter:" \
+        --header.foreground 15 \
+        --item.foreground 8 \
+        --cursor.foreground 2)
   fi
 
   if [ -z "$adapter" ]; then
@@ -71,12 +71,12 @@ if [ "$HAS_INTERNET" -eq 0 ]; then
   echo "  Go to your panel and find this info:"
 
   ipv4=$(gum input \
-      --header "  IPv4, optionally add /prefix:" \
-      --header.foreground 15 \
-      --placeholder "123.45.67.89/24" \
-      --placeholder.foreground 8 \
-      --prompt.foreground 8 \
-      --cursor.foreground 15)
+    --header "  IPv4, optionally add /prefix:" \
+    --header.foreground 15 \
+    --placeholder "123.45.67.89/24" \
+    --placeholder.foreground 8 \
+    --prompt.foreground 8 \
+    --cursor.foreground 15)
 
   [ -z "$ipv4" ] && exit 1
 
@@ -84,12 +84,12 @@ if [ "$HAS_INTERNET" -eq 0 ]; then
 
   if ! echo "$ipv4" | grep -q '/'; then
     netmask=$(gum input \
-        --header "  No prefix. Enter your netmask:" \
-        --header.foreground 15 \
-        --placeholder "255.255.255.0" \
-        --placeholder.foreground 8 \
-        --prompt.foreground 8 \
-        --cursor.foreground 15)
+      --header "  No prefix. Enter your netmask:" \
+      --header.foreground 15 \
+      --placeholder "255.255.255.0" \
+      --placeholder.foreground 8 \
+      --prompt.foreground 8 \
+      --cursor.foreground 15)
 
     [ -z "$netmask" ] && exit 1
 
@@ -99,12 +99,12 @@ if [ "$HAS_INTERNET" -eq 0 ]; then
   echo "  ip: $ip_cidr"
 
   gateway=$(gum input \
-      --header "  Enter your gateway:" \
-      --header.foreground 15 \
-      --placeholder "192.168.1.1" \
-      --placeholder.foreground 8 \
-      --prompt.foreground 8 \
-      --cursor.foreground 15)
+    --header "  Enter your gateway:" \
+    --header.foreground 15 \
+    --placeholder "192.168.1.1" \
+    --placeholder.foreground 8 \
+    --prompt.foreground 8 \
+    --cursor.foreground 15)
 
   [ -z "$gateway" ] && exit 1
 
@@ -118,7 +118,7 @@ if [ "$HAS_INTERNET" -eq 0 ]; then
   ip link set "$adapter" up
 
   echo "  See if it works..."
-  ping -c1 -W3 8.8.8.8 > /dev/null 2>&1 && GOT_INTERNET=1 || GOT_INTERNET=0
+  ping -c1 -W3 8.8.8.8 >/dev/null 2>&1 && GOT_INTERNET=1 || GOT_INTERNET=0
 
   if [ "$GOT_INTERNET" -eq 0 ]; then
     echo "  Nope."
@@ -127,22 +127,22 @@ if [ "$HAS_INTERNET" -eq 0 ]; then
 fi
 
 echo "  Yep. See if DNS works..."
-ping -c1 -W3 github.com > /dev/null 2>&1 && HAS_DNS=1 || HAS_DNS=0
+ping -c1 -W3 github.com >/dev/null 2>&1 && HAS_DNS=1 || HAS_DNS=0
 
 if [ "$HAS_DNS" -eq 0 ]; then
   nameserver=$(gum input \
     --header "  Enter your nameserver (one is enough):" \
-      --header.foreground 15 \
-      --placeholder "192.168.1.1" \
-      --placeholder.foreground 8 \
-      --prompt.foreground 8 \
-      --cursor.foreground 15)
+    --header.foreground 15 \
+    --placeholder "192.168.1.1" \
+    --placeholder.foreground 8 \
+    --prompt.foreground 8 \
+    --cursor.foreground 15)
 
   [ -z "$nameserver" ] && exit 1
 
-  echo "nameserver $nameserver" >> /etc/resolv.conf
+  echo "nameserver $nameserver" >>/etc/resolv.conf
   echo "  See if it works now..."
-  ping -c1 -W3 github.com > /dev/null 2>&1 && GOT_DNS=1 || GOT_DNS=0
+  ping -c1 -W3 github.com >/dev/null 2>&1 && GOT_DNS=1 || GOT_DNS=0
 
   if [ "$GOT_DNS" -eq 0 ]; then
     echo "  Nope."
@@ -153,26 +153,26 @@ fi
 echo "  You have internet."
 
 gum confirm "Exit installer so you can SSH?" \
-    --affirmative "yes" \
-    --negative "no" \
-    --prompt.foreground 15 \
-    --selected.foreground 16 \
-    --selected.background 15 \
-    --unselected.foreground 15 \
-    --unselected.background 16 \
-    --padding "1 2" \
-    --no-show-help \
-&& exit 0 \
-|| true
+  --affirmative "yes" \
+  --negative "no" \
+  --prompt.foreground 15 \
+  --selected.foreground 16 \
+  --selected.background 15 \
+  --unselected.foreground 15 \
+  --unselected.background 16 \
+  --padding "1 2" \
+  --no-show-help &&
+  exit 0 ||
+  true
 
 # get some information from the user
 hostname=$(gum input \
-    --header "  Enter your hostname:" \
-    --header.foreground 15 \
-    --placeholder "saeth" \
-    --placeholder.foreground 8 \
-    --prompt.foreground 8 \
-    --cursor.foreground 15)
+  --header "  Enter your hostname:" \
+  --header.foreground 15 \
+  --placeholder "saeth" \
+  --placeholder.foreground 8 \
+  --prompt.foreground 8 \
+  --cursor.foreground 15)
 echo "  Hostname: $hostname"
 
 drive=$(lsblk -nlo PATH,TYPE |
@@ -240,17 +240,17 @@ fi
 
 # last warning
 gum confirm "Wipe $drive and set up flake?" \
-    --affirmative "yes" \
-    --negative "no" \
-    --default=false \
-    --prompt.foreground 1 \
-    --selected.foreground 16 \
-    --selected.background 15 \
-    --unselected.foreground 15 \
-    --unselected.background 16 \
-    --padding "0 2" \
-    && echo "  Wiping $drive..." \
-    || exit 1
+  --affirmative "yes" \
+  --negative "no" \
+  --default=false \
+  --prompt.foreground 1 \
+  --selected.foreground 16 \
+  --selected.background 15 \
+  --unselected.foreground 15 \
+  --unselected.background 16 \
+  --padding "0 2" &&
+  echo "  Wiping $drive..." ||
+  exit 1
 
 ##############
 #   MOUNTS   #
@@ -261,7 +261,7 @@ umount -R /mnt 2>/dev/null || true
 swapoff -a 2>/dev/null || true
 
 # cleanup
-run wipefs -af "$drive" # fs signature
+run wipefs -af "$drive"       # fs signature
 run sgdisk --zap-all "$drive" # headers
 
 # refresh info
@@ -320,28 +320,28 @@ FLAKE_REPO="https://github.com/anturated/dotfiles"
 CUSTOM_FLAKE=0
 
 gum confirm "Do you want to use your own flake?" \
-    --affirmative "yes" \
-    --negative "no" \
-    --default=false \
-    --prompt.foreground 1 \
-    --selected.foreground 16 \
-    --selected.background 15 \
-    --unselected.foreground 15 \
-    --unselected.background 16 \
-    --padding "0 2" \
-    && CUSTOM_FLAKE=1 \
-    || true # "no" exits with 1
+  --affirmative "yes" \
+  --negative "no" \
+  --default=false \
+  --prompt.foreground 1 \
+  --selected.foreground 16 \
+  --selected.background 15 \
+  --unselected.foreground 15 \
+  --unselected.background 16 \
+  --padding "0 2" &&
+  CUSTOM_FLAKE=1 ||
+  true # "no" exits with 1
 
 if [ "$CUSTOM_FLAKE" -eq 1 ]; then
   echo "  Getting custom flake ready..."
 
   FLAKE_REPO=$(gum input \
-      --header "  Enter your flake's git url:" \
-      --header.foreground 15 \
-      --placeholder "https://github.com/you/nix-config" \
-      --placeholder.foreground 8 \
-      --prompt.foreground 8 \
-      --cursor.foreground 15)
+    --header "  Enter your flake's git url:" \
+    --header.foreground 15 \
+    --placeholder "https://github.com/you/nix-config" \
+    --placeholder.foreground 8 \
+    --prompt.foreground 8 \
+    --cursor.foreground 15)
 
   echo "  Checking if we can read..."
   CAN_READ=0
@@ -357,12 +357,12 @@ if [ "$CUSTOM_FLAKE" -eq 1 ]; then
 
     if [ "$IS_SSH" -eq 0 ]; then
       FLAKE_REPO=$(gum input \
-          --header "  Enter ssh format url" \
-          --header.foreground 15 \
-          --placeholder "git@github.com:you/nix-config" \
-          --placeholder.foreground 8 \
-          --prompt.foreground 8 \
-          --cursor.foreground 15)
+        --header "  Enter ssh format url" \
+        --header.foreground 15 \
+        --placeholder "git@github.com:you/nix-config" \
+        --placeholder.foreground 8 \
+        --prompt.foreground 8 \
+        --cursor.foreground 15)
     fi
 
     echo " ──  Add this to your flake repo's deploy keys:  ── "
@@ -406,7 +406,6 @@ if [ "$CUSTOM_FLAKE" -eq 1 ]; then
     --prompt.foreground 8 \
     --cursor.foreground 15)
 fi
-
 
 echo "  Doing git stuff..."
 
@@ -456,27 +455,26 @@ echo "nixos-install --flake /mnt/etc/nixos#$hostname ${installArgs[*]}"
 echo " ──  ──  ──  ──  ──  ──  ──  ──  ──  ──  ──  ──  ── "
 
 gum confirm "Want me to run it?" \
-    --affirmative "yes" \
-    --negative "no" \
-    --prompt.foreground 15 \
-    --selected.foreground 16 \
-    --selected.background 15 \
-    --unselected.foreground 15 \
-    --unselected.background 16 \
-    --padding "1 2" \
-    --no-show-help \
-&& nixos-install --flake "/mnt/etc/nixos#$hostname" "${installArgs[@]}" \
-|| echo "  Ok. Run it manually then."
+  --affirmative "yes" \
+  --negative "no" \
+  --prompt.foreground 15 \
+  --selected.foreground 16 \
+  --selected.background 15 \
+  --unselected.foreground 15 \
+  --unselected.background 16 \
+  --padding "1 2" \
+  --no-show-help &&
+  nixos-install --flake "/mnt/etc/nixos#$hostname" "${installArgs[@]}" ||
+  echo "  Ok. Run it manually then."
 echo
 
 # not really "keys" but you get the idea
 # and it stays symmetrical
 echo " ──  ──  ──  ──  ──   SSH KEYS   ──  ──  ──  ──  ── "
-cat  /mnt/etc/ssh/ssh_host_ed25519_key.pub
+cat /mnt/etc/ssh/ssh_host_ed25519_key.pub
 echo " ──  ──  ──  ──  ──   RSA KEYS   ──  ──  ──  ──  ── "
-cat  /mnt/etc/ssh/ssh_host_rsa_key.pub
+cat /mnt/etc/ssh/ssh_host_rsa_key.pub
 echo " ──  ──  ──  ──  ──  ──  ──  ──  ──  ──  ──  ──  ── "
 echo "  This is as far as the installer goes."
 echo "  You can reboot into hard drive now."
 echo "• ──────────────────────────────────────────────── •"
-
