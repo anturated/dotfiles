@@ -20,7 +20,7 @@
         };
 
         "fawrion" = {
-          user = "desant";
+          user = "wizard";
           hostname = "185.233.46.184";
         };
 
