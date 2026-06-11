@@ -316,7 +316,7 @@ echo "  Setting up flake..."
 run mkdir -p /mnt/etc/nixos/machines/"$hostname" # extend it all the way so we can write hw
 
 # need to check a whole lot of git stuff because i might get funky
-FLAKE_REPO="https://github.com/anturated/dotfiles"
+FLAKE_REPO="https://git.anturated.dev/anturated/dotfiles"
 CUSTOM_FLAKE=0
 
 gum confirm "Do you want to use your own flake?" \
