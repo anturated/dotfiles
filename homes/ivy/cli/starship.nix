@@ -17,59 +17,46 @@
         + "$nix_shell";
 
       username = {
-        format = "[$user]($style)[](blue)";
+        format = "[ $user ]($style)[](blue)";
         style_user = "fg:bold black bg:blue"; # this won't apply to root so don't worry
         show_always = false; # only show on ssh
       };
 
       directory = {
         format = "[ $path]($style)";
-        style = "bold bluer";
+        style = "bold blue";
         truncate_to_repo = true;
         truncation_length = 0;
         truncation_symbol = "";
       };
 
-      palette = "ivy";
-
-      palettes.ivy = {
-        bluer = "#afc9d0";
-        orang = "#BD6F3E";
-        yello = "#dbb26c";
-        pears = "#97ad6e";
-      };
-
-      palettes.cust = {
-        flamingo = "#f2cdcd";
-        maroon = "#eba0ac";
-        peach = "#fab387";
-      };
-
       git_branch = {
-        format = "[\\(](bold blue)[$branch](bold cyan)[\\)](bold blue)";
+        format = "[\\(](bold blue)[$branch](bold red)[\\)](bold blue)";
         symbol = " ";
-        style = "bold red";
       };
 
       git_status = {
-        format = "[ ><](bold blue)[$all_status>](bold blue)[$ahead_behind]($style)";
-        conflicted = "[*](bold red)";
+        format = "[$ahead_behind](white)";
+
+        untracked = "[/](bold dimmed white)";
+        modified = "[/](bold orange)";
+        deleted = "[/](bold red)";
+        renamed = "[/](bold yellow)";
+        typechanged = "[/](bold blue)";
+
+        staged = "[/](bold green)";
+        stashed = "[/](bold cyan)";
+
         ahead = "⇡\${count}";
         behind = "⇣\${count}";
-        diverged = "⇡\${ahead_count}⇣''\${behind_count}";
-        untracked = "[/](bold green)";
-        stashed = "[/](bold blue)";
-        modified = "[/](bold orang)";
-        staged = "[/](bold cyan)";
-        renamed = "[/](bold yello)";
-        typechanged = "[/](bold pears)";
-        deleted = "[/](bold red)";
-        style = "maroon";
+        diverged = "⇡\${ahead_count}⇣\${behind_count}";
+
+        conflicted = "[CONFLICT](bold red)";
       };
 
       character = {
-        error_symbol = " [󱏳 ](bold red)";
-        success_symbol = " [󰈺 ](bold blue)";
+        error_symbol = " [󱋙 ](bold red)";
+        success_symbol = " [󰌪 ](bold green)";
       };
 
       fill = {
