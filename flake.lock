@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1781215275,
-        "narHash": "sha256-BLVMw8Vv/TbGHqPyJ2pcD4HhxoOt35QlblY2xORY7bg=",
+        "lastModified": 1781301661,
+        "narHash": "sha256-pJRSwJ/ekj+sn39onnchuGzoG4FjOGKCulWrxceDamw=",
         "ref": "refs/heads/master",
-        "rev": "5ad9aeb7ae4f8ef934189499573f9e0bd07534ab",
-        "revCount": 33,
+        "rev": "006444861316ac64b8308ee262d941cc1f946e95",
+        "revCount": 34,
         "type": "git",
         "url": "https://git.anturated.dev/anturated/website"
       },
@@ -27,11 +27,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1781296023,
-        "narHash": "sha256-9HU3oO+bzOoKXqdmGh4+9qZUAiXEm7w/bGph2zmi6nc=",
+        "lastModified": 1781301661,
+        "narHash": "sha256-lSFKsWWerZv+vQoUsRHn6MihCEJj15RBrsVZXG+nmjs=",
         "ref": "refs/heads/master",
-        "rev": "58670133c4cc6cd8a746592f1c08b3ce46c559f9",
-        "revCount": 87,
+        "rev": "78068ef64b4317da466557839c5c6518f3dc796c",
+        "revCount": 88,
         "type": "git",
         "url": "https://git.anturated.dev/anturated/eiddew"
       },
@@ -89,11 +89,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1781278951,
-        "narHash": "sha256-MfMh72RYJriiLb0BkYbjsQXx90pxx48x0VKs/HYvhHQ=",
+        "lastModified": 1781301661,
+        "narHash": "sha256-ppNa0iGaX8pSz0MUZCY7jkDhLc9f8Y3UC9aql6FH5KQ=",
         "ref": "refs/heads/master",
-        "rev": "2061c8e87a220b825ca9c8978246a4555cdb46cf",
-        "revCount": 80,
+        "rev": "d4463729dfd888b972d80089ac2368c6c81656c0",
+        "revCount": 81,
         "type": "git",
         "url": "https://git.anturated.dev/anturated/newydd"
       },
@@ -124,11 +124,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1781141223,
-        "narHash": "sha256-Eye4UQJjC4TLobclolFCMl6MrjgiF6Bk1cOI5x8SH00=",
+        "lastModified": 1781229721,
+        "narHash": "sha256-ORvqDbb/LYxiJljGIejapjkc/kJbVote2N1WSb9W45I=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "b503dde361500433ca25a32e8f4d218bf58fb659",
+        "rev": "173d0ad7a974f8543a9ab01d2271b2e290341b33",
         "type": "github"
       },
       "original": {
@@ -161,11 +161,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1781101431,
-        "narHash": "sha256-NVcJWT5IX/NhWo/REax1pWVPy39XYl8xYpIzpbQFq0s=",
+        "lastModified": 1781300555,
+        "narHash": "sha256-anhcFNgXdTEe1KPBAHvxLxDzjEbrt+YZ2O4tfq3WiRA=",
         "owner": "simple-nixos-mailserver",
         "repo": "nixos-mailserver",
-        "rev": "f6cda90e8f4cce83ceae17f1657a9dfbd7b9825b",
+        "rev": "51726d7b7fd94aa69829fd42749a803914cbf3b7",
         "type": "gitlab"
       },
       "original": {
