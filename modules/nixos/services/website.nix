@@ -8,19 +8,24 @@
 
 let
   inherit (lib) mkIf;
-  inherit (self.lib) mkServiceOption;
+  inherit (self.lib) mkServiceOption mkSecret;
+  inherit (config.sops) secrets;
 
   cfg = config.ceirios.services.anturated-website;
 in
 {
   imports = [ inputs.anturated-website.nixosModules.default ];
+
   options.ceirios.services.anturated-website = mkServiceOption "anturated-website" {
     inherit (config.networking) domain;
     port = 3000;
   };
 
   config = mkIf cfg.enable {
-    services.anturated-website.enable = true;
+    services.anturated-website = {
+      enable = true;
+      env = secrets.website-env.path;
+    };
 
     services.nginx.virtualHosts.${cfg.domain} = {
       serverAliases = [ "www.${cfg.domain}" ];
@@ -28,6 +33,11 @@ in
       locations."/" = {
         proxyPass = "http://${cfg.host}:${toString cfg.port}";
       };
+    };
+
+    sops.secrets.website-env = mkSecret {
+      key = "env";
+      file = "website";
     };
   };
 }

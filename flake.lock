@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1781388072,
-        "narHash": "sha256-uOHYl4F9L1h0fk1xcAPWTlSt7PA2M2zs/mtLGnIyAC4=",
+        "lastModified": 1781458861,
+        "narHash": "sha256-0g2Phn05HB1DvC1iWd9+7S+5cIfLbgTXEuUcBjWdYSc=",
         "ref": "refs/heads/master",
-        "rev": "b48df06a494a831c259aa277bfc531ee98d3de60",
-        "revCount": 35,
+        "rev": "2ef3a61931828a8a0fe324761df607894c986092",
+        "revCount": 39,
         "type": "git",
         "url": "https://git.anturated.dev/anturated/website"
       },
