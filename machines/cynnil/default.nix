@@ -25,7 +25,6 @@
       # self-hosted #
       anturated-website.enable = true;
       mailserver.enable = true;
-      pds.enable = true;
       forgejo.enable = true;
       woodpecker.enable = true;
 
