@@ -22,4 +22,20 @@
       "dmask=0022"
     ];
   };
+
+  fileSystems."/swap" = {
+    device = "/dev/disk/by-uuid/8df774d8-25a1-4e09-9bd5-b4280ced50bc";
+    fsType = "btrfs";
+    options = [
+      "subvol=swap"
+      "noatime"
+    ];
+  };
+
+  swapDevices = [
+    {
+      device = "/swap/swapfile";
+      size = 8192;
+    }
+  ];
 }
