@@ -40,8 +40,8 @@ in
           WOODPECKER_HOST = "https://${cfg.domain}";
           WOODPECKER_OPEN = "true"; # you can only register with forgejo and that's closed
           WOODPECKER_ADMIN = "anturated";
-          WOODPECKER_GITEA = "true";
-          WOODPECKER_GITEA_URL = "https://${forgejo.domain}";
+          WOODPECKER_FORGEJO = "true";
+          WOODPECKER_FORGEJO_URL = "https://${forgejo.domain}";
           WOODPECKER_DATABASE_DRIVER = "postgres";
           WOODPECKER_DATABASE_DATASOURCE = "postgres:///${dbUser}?host=/run/postgresql";
         };
