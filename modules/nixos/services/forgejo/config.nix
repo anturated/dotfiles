@@ -136,6 +136,9 @@ in
             ALLOW_ONLY_INTERNAL_REGISTRATION = true;
             # EMAIL_DOMAIN_ALLOWLIST = "anturated.dev";
             ALLOW_ONLY_EXTERNAL_REGISTRATION = false;
+
+            # allow email notifs
+            ENABLE_NOTIFY_MAIL = true;
           };
 
           session = {
