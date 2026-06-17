@@ -144,7 +144,6 @@ in
 
       # Misc
       ff = "fastfetch";
-      sleep-timer = "echo '  Sleep in 1 hour' && brightnessctl -d amdgpu_bl1 -q s 0% && sleep 3600 && systemctl suspend";
     };
   };
 }
