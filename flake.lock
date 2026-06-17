@@ -89,11 +89,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1781647280,
-        "narHash": "sha256-PO0BBcuOiUb07RqXbVA2pC/x39XBh44QBnWgQ4TbsAw=",
+        "lastModified": 1781713379,
+        "narHash": "sha256-f+fR+FeNJfTQN+3pbR8YaDKF1Z536taBUUoEilRqxo8=",
         "ref": "refs/heads/master",
-        "rev": "60c155a8801e75cf255f8da61ab0867f1b794cad",
-        "revCount": 88,
+        "rev": "dcaa7c8d0b93c0f52e8c0cfb0d5c1c2e246fcf4a",
+        "revCount": 89,
         "type": "git",
         "url": "https://git.anturated.dev/anturated/newydd"
       },
