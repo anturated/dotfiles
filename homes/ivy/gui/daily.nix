@@ -13,6 +13,7 @@
       telegram-desktop
       anytype
       libreoffice
+      signal-desktop
       ;
   };
 }
