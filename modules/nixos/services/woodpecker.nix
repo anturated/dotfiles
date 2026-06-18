@@ -13,6 +13,7 @@ let
   dbUser = "woodpecker-server";
   webuiAddr = "${cfg.host}:${toString cfg.port}";
   serverAddr = "${cfg.host}:${toString cfg.portGRPC}";
+  healthAddr = "${cfg.host}:${toString cfg.portHealthcheck}";
 
   inherit (lib) mkIf mkOption mapAttrs';
   inherit (self.lib) mkServiceOption mkSecret;
@@ -33,7 +34,7 @@ in
     portHealthcheck = mkOption {
       type = lib.types.int;
       default = 3001;
-      description = "Healthcheck port to use instead of 3000";
+      description = "Healthcheck port";
     };
   };
 
@@ -65,7 +66,7 @@ in
           WOODPECKER_SERVER = serverAddr;
           WOODPECKER_MAX_WORKFLOWS = "4";
           WOODPECKER_BACKEND = "docker";
-          WOODPECKER_HEALTHCHECK_ADDR = ":${toString cfg.portHealthcheck}";
+          WOODPECKER_HEALTHCHECK_ADDR = healthAddr;
         };
       };
 
