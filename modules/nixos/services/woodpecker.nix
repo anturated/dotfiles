@@ -75,7 +75,7 @@ in
 
     sops.secrets = {
       # site admin -> apps -> create one, get secrets -> profit
-      # WOODPECKER_GITEA_CLIENT WOODPECKER_GITEA_SECRET
+      # WOODPECKER_FORGEJO_CLIENT WOODPECKER_FORGEJO_SECRET
       woodpecker-env = mkSecret {
         key = "env";
         file = "woodpecker";
