@@ -11,6 +11,8 @@ let
 
   # it has DynamicUser so just put this wherever
   dbUser = "woodpecker-server";
+  webuiAddr = "${cfg.host}:${toString cfg.port}";
+  serverAddr = "${cfg.host}:${toString cfg.portGRPC}";
 
   inherit (lib) mkIf mkOption mapAttrs';
   inherit (self.lib) mkServiceOption mkSecret;
@@ -20,7 +22,14 @@ in
 {
   options.ceirios.services.woodpecker = mkServiceOption "Woodpecker CI" {
     domain = "ci.${rdomain}";
-    port = 8000;
+    port = 8000; # webui
+
+    portGRPC = mkOption {
+      type = lib.types.int;
+      default = 9000;
+      description = "Agent comms port";
+    };
+
     portHealthcheck = mkOption {
       type = lib.types.int;
       default = 3001;
@@ -38,6 +47,8 @@ in
         ];
         environment = {
           WOODPECKER_HOST = "https://${cfg.domain}";
+          WOODPECKER_SERVER_ADDR = webuiAddr;
+          WOODPECKER_GRPC_ADDR = serverAddr;
           WOODPECKER_OPEN = "true"; # you can only register with forgejo and that's closed
           WOODPECKER_ADMIN = "anturated";
           WOODPECKER_FORGEJO = "true";
@@ -51,7 +62,7 @@ in
         enable = true;
         environmentFile = [ secrets.woodpecker-secret.path ];
         environment = {
-          WOODPECKER_SERVER = "localhost:9000"; # idk if i can change server port
+          WOODPECKER_SERVER = serverAddr;
           WOODPECKER_MAX_WORKFLOWS = "4";
           WOODPECKER_BACKEND = "docker";
           WOODPECKER_HEALTHCHECK_ADDR = ":${toString cfg.portHealthcheck}";
@@ -68,7 +79,7 @@ in
 
       nginx.virtualHosts.${cfg.domain} = {
         locations."/" = {
-          proxyPass = "http://${cfg.host}:${toString cfg.port}";
+          proxyPass = "http://${webuiAddr}";
         };
       };
     };
