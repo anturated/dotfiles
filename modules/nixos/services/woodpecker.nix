@@ -78,9 +78,26 @@ in
         };
       };
 
+      anubis = mkIf config.ceirios.services.anubis.enable {
+        instances.woodpecker.settings = {
+          BIND = "/run/anubis/anubis-woodpecker/anubis.sock";
+          METRICS_BIND = "/run/anubis/anubis-woodpecker/anubis-metrics.sock";
+          TARGET = "http://${webuiAddr}";
+          ED25519_PRIVATE_KEY_HEX_FILE = config.sops.secrets.anubis-woodpecker.path;
+        };
+      };
+
       nginx.virtualHosts.${cfg.domain} = {
         locations."/" = {
-          proxyPass = "http://${webuiAddr}";
+          recommendedProxySettings = true;
+          proxyPass =
+            "http://"
+            + (
+              if config.ceirios.services.anubis.enable then
+                "unix:" + config.services.anubis.instances.woodpecker.settings.BIND
+              else
+                webuiAddr
+            );
         };
       };
     };
@@ -97,6 +114,13 @@ in
       woodpecker-secret = mkSecret {
         key = "secret";
         file = "woodpecker";
+      };
+
+      anubis-woodpecker = mkSecret {
+        key = "woodpecker";
+        file = "anubis";
+        owner = "anubis";
+        group = "anubis";
       };
     };
 
