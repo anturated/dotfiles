@@ -53,8 +53,6 @@ in
         "b" = "add audio-delay +0.042";
         "n" = "add audio-delay -0.042";
         "a" = "cycle-values video-aspect \"16:9\" \"4:3\" \"2.35:1\" \"-1\"";
-        "<" = "playlist_prev";
-        ">" = "playlist_next";
 
         # video speed controller my beloved
         "g-g" = "set speed 1.5";
