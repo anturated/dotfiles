@@ -4,8 +4,6 @@
   outputs = inputs: import ./modules/flake { inherit inputs; };
 
   inputs = {
-    # might switch to this if i care
-    # nixpkgs.url = "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.xz";
     nixpkgs = {
       type = "github";
       owner = "NixOS";
@@ -48,6 +46,22 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # mail server
+    simple-nixos-mailserver = {
+      type = "gitlab";
+      owner = "simple-nixos-mailserver";
+      repo = "nixos-mailserver";
+
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        git-hooks.follows = "";
+        flake-compat.follows = "";
+        blobs.follows = "";
+      };
+    };
+
+    ### my stuff ###
+
     # my website
     anturated-website = {
       type = "git";
@@ -67,20 +81,6 @@
       type = "git";
       url = "https://git.anturated.dev/anturated/eiddew";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # mail server
-    simple-nixos-mailserver = {
-      type = "gitlab";
-      owner = "simple-nixos-mailserver";
-      repo = "nixos-mailserver";
-
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        git-hooks.follows = "";
-        flake-compat.follows = "";
-        blobs.follows = "";
-      };
     };
   };
 }
