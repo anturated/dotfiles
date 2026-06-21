@@ -97,14 +97,6 @@ in
           hashedPasswordFile = secrets.mailserver-spam.path;
         };
 
-        "deploy@${rdomain}" = {
-          aliases = [
-            "hosting@${rdomain}"
-            "vps@${rdomain}"
-          ];
-          hashedPasswordFile = secrets.mailserver-deploy.path;
-        };
-
         "caterpillar@${rdomain}" = {
           aliases = [
             "pill@${rdomain}"
@@ -191,10 +183,6 @@ in
       };
       mailserver-spam = mkSecret {
         key = "spam";
-        file = "mailserver";
-      };
-      mailserver-deploy = mkSecret {
-        key = "deploy";
         file = "mailserver";
       };
       mailserver-jobs = mkSecret {
