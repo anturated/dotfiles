@@ -27,6 +27,7 @@
       mailserver.enable = true;
       forgejo.enable = true;
       woodpecker.enable = true;
+      jellyfin.enable = true;
 
       # web services #
       nginx.enable = true;

@@ -7,6 +7,7 @@
     ./nginx.nix
     ./anubis.nix
     ./forgejo
+    ./jellyfin.nix
     ./mailserver.nix
     ./obsidian-livesync.nix
     ./pds.nix
