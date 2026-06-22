@@ -80,7 +80,7 @@ in
         # video settings
         # use hardware decoding when available, prefer vulkan
         hwdec = if isLinux then "auto-copy" else "auto";
-        gpu-api = if isLinux then "vulkan" else "auto";
+        # gpu-api = if isLinux then "vulkan" else "auto";
         profile = "gpu-hq";
         vo = "gpu-next"; # GPU-Next: https://github.com/mpv-player/mpv/wiki/GPU-Next-vs-GPV
 
