@@ -67,7 +67,7 @@ in
 
       config = {
         # osc settings
-        osc = "no"; # i am using modernz ^.^
+        osc = "no";
         border = "no";
         msg-color = "yes";
         msg-module = "yes";
