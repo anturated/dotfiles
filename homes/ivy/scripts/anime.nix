@@ -22,12 +22,7 @@
         rofi -dmenu
       )"
 
-      episodes=()
-      while read -r ep; do
-        episodes+=("$ep")
-      done < <(find "$anime" -type f | sort -V)
-
-      mpv "''${episodes[@]}"
+      mpv "''${anime}"
     '')
   ];
 }
