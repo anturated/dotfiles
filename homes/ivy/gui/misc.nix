@@ -10,7 +10,7 @@
     ceirios.packages = {
       inherit (pkgs)
         # settings
-        pavucontrol
+        pwvucontrol
         piper
 
         # media viewing
