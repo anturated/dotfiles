@@ -92,6 +92,16 @@ hl.window_rule({
   workspace = "5 silent",
 })
 
+hl.window_rule({
+  name = "steam-installer",
+  match = {
+    class = "",
+    title = "Steam",
+  },
+
+  workspace = "5 silent",
+})
+
 -- fixes --
 
 hl.window_rule({
