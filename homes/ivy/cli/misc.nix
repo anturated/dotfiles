@@ -14,16 +14,15 @@ in
     # just keep
     {
       inherit (pkgs)
-        # i don't know every command yet
         zip
         unzip
-        killall
 
         # convenience
         fzf
         zoxide
         jq
         just
+        killall
 
         # better alternatives
         ripgrep
@@ -50,9 +49,9 @@ in
 
         # clipboard
         wl-clipboard-rs
-        xclip # NOTE: remove when proton wayland is a thing
+        xclip # TODO: test if proton needs this nowadays
 
-        imagemagick # FIXME: since this is for wallpapers maybe move it to the script
+        imagemagick # nice to have for images
         ;
     })
   ];
