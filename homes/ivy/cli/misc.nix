@@ -23,6 +23,7 @@ in
         jq
         just
         killall
+        rsync
 
         # better alternatives
         ripgrep
