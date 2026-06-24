@@ -64,7 +64,6 @@ fi
 
 # set wallpaper #
 
-# TODO: this is pretty much for setup only, find a better way
 if $ALL_MONITORS; then
   if [ "$CHWAL_GRAPHICAL" -eq 1 ]; then
     awww img "$img" \

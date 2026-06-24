@@ -131,7 +131,6 @@ in
             # --password PASSWORD \
             # --work-path /srv/storage/forgejo/data
             # other users MAY be created on the admin panel
-            # TODO: this isn't the most declarative thing ever
             DISABLE_REGISTRATION = true;
             ALLOW_ONLY_INTERNAL_REGISTRATION = true;
             # EMAIL_DOMAIN_ALLOWLIST = "anturated.dev";
