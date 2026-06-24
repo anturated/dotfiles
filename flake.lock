@@ -40,6 +40,24 @@
         "url": "https://git.anturated.dev/anturated/eiddew"
       }
     },
+    "flake-utils": {
+      "inputs": {
+        "systems": "systems"
+      },
+      "locked": {
+        "lastModified": 1731533236,
+        "narHash": "sha256-l0KFg5HjrsfsO/JpG+r7fRrqm12kzFHyUHqHCVpMMbI=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "11707dc2f618dd54ca8739b309ec4fc024de578b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
     "gift-wrap": {
       "inputs": {
         "nixpkgs": [
@@ -86,14 +104,15 @@
         "gift-wrap": "gift-wrap",
         "nixpkgs": [
           "nixpkgs"
-        ]
+        ],
+        "ts-nix-numtide": "ts-nix-numtide"
       },
       "locked": {
-        "lastModified": 1782338519,
-        "narHash": "sha256-6J5c5cR4WSgGY7If7t5FVRfUSr1FGgmm7rju5+owbo4=",
+        "lastModified": 1782340642,
+        "narHash": "sha256-w3+UCjCeEtv+NY42dtLIUVJqORl6s/ZvTr6tjOsahmM=",
         "ref": "refs/heads/master",
-        "rev": "38b6c24f14760e7f218dba8ec892f93359a801bc",
-        "revCount": 91,
+        "rev": "1fe220c2c527d20d6d14102ad8463cf3d79e57fc",
+        "revCount": 93,
         "type": "git",
         "url": "https://git.anturated.dev/anturated/newydd"
       },
@@ -200,7 +219,7 @@
         "nixpkgs": [
           "nixpkgs"
         ],
-        "systems": "systems"
+        "systems": "systems_2"
       },
       "locked": {
         "lastModified": 1782031037,
@@ -228,6 +247,43 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "systems_2": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
+    "ts-nix-numtide": {
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "nixpkgs": [
+          "newydd",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1779268707,
+        "narHash": "sha256-n3sQz0LhDCdoza4bmXHGvZWROyUpYO7u+00/w7bsO/I=",
+        "owner": "numtide",
+        "repo": "tree-sitter-nix",
+        "rev": "70f34e95e30b7ebcc40815d4385d68576c4a15cd",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "tree-sitter-nix",
         "type": "github"
       }
     }
