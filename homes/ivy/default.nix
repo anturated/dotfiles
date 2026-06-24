@@ -9,6 +9,5 @@
     ./system
     ./scripts
     ./tui
-    ./lsps.nix
   ];
 }
