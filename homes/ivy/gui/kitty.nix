@@ -1,7 +1,7 @@
 { config, ... }:
 
 let
-  inherit (config.ceirios.software.defaults) terminal;
+  inherit (config.ceirios.programs.defaults) terminal;
   inherit (config.ceirios.profiles) graphical;
 in
 {

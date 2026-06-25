@@ -5,7 +5,7 @@
 }:
 
 let
-  inherit (config.ceirios.software) defaults;
+  inherit (config.ceirios.programs) defaults;
 in
 {
   home.sessionVariables = {

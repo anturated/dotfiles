@@ -3,7 +3,7 @@
 {
   programs.ghostty = {
     enable =
-      config.ceirios.profiles.graphical && (config.ceirios.software.defaults.terminal == "ghostty");
+      config.ceirios.profiles.graphical && (config.ceirios.programs.defaults.terminal == "ghostty");
     settings = {
       theme = "matugen";
 

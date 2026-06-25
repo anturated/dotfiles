@@ -11,10 +11,10 @@
     ./headless.nix
     ./kernel
     ./networking
+    ./programs
     ./security
     ./services
     ./secrets.nix
-    ./software
     ./system
     ./users.nix
 

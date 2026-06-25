@@ -7,8 +7,8 @@
     ../shared/with-home
     ./fonts.nix
     ./environment
+    ./programs
     ./revision.nix
-    ./software
     ./secrets.nix
   ];
 }

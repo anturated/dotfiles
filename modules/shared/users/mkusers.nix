@@ -17,7 +17,7 @@ in
   users.users = genAttrs (builtins.attrNames config.ceirios.users) (
     name:
     let
-      inherit (config.home-manager.users.${name}.ceirios.software.defaults) shell;
+      inherit (config.home-manager.users.${name}.ceirios.programs.defaults) shell;
       inherit (config.ceirios.allUsers.${name}) ssh hashedPassword;
     in
     mergeAttrsList [

@@ -11,7 +11,7 @@ let
   mkDefault = name: args: mkOption ({ description = "default ${name} for the system"; } // args);
 in
 {
-  options.ceirios.software.defaults = mapAttrs mkDefault {
+  options.ceirios.programs.defaults = mapAttrs mkDefault {
     shell = {
       type = enum [
         "bash"

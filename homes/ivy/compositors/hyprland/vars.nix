@@ -1,7 +1,7 @@
 { config, lib, ... }:
 
 let
-  inherit (config.ceirios.software) defaults;
+  inherit (config.ceirios.programs) defaults;
 in
 ''
   -- software defaults
