@@ -24,6 +24,8 @@
 
     users.anturated = { };
 
+    system.stateVersion = "25.11";
+
     # note: this VPS has UEFI boot so no grub.
 
     services = {
