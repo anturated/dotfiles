@@ -95,10 +95,8 @@ in
             KEYWORDS = "git,self-hosted,gitea,forge,forgejo,gefail,anturated,desant,open-source,nix,nixos";
           };
 
-          actions = {
-            ENABLED = false;
-            DEFAULT_ACTIONS_URL = "https://code.forgejo.org";
-          };
+          # enabled by default, i use woodpecker.
+          actions.ENABLED = false;
 
           database = {
             DB_TYPE = mkForce "postgres";
