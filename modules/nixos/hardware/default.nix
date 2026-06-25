@@ -8,5 +8,6 @@
     ./bluetooth.nix
     ./firmware.nix
     ./monitors.nix
+    ./qemu-guest.nix
   ];
 }

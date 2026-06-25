@@ -1,11 +1,4 @@
-{ modulesPath, ... }:
-
 {
-  # TODO: research
-  imports = [
-    (modulesPath + "/profiles/qemu-guest.nix")
-  ];
-
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/79def9ae-0c37-4d42-9f53-430fb23c4eae";
     fsType = "btrfs";

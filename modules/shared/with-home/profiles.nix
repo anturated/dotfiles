@@ -38,6 +38,10 @@ in
     virtualization = mkEnableOption ''
       Optimize for VM hosting (iommu, kvm, etc.);
     '';
+
+    qemuGuest = mkEnableOption ''
+      Optimize for being a QEMU guest.
+    '';
   };
 
   config = lib.mkIf (_class == "homeManager") {

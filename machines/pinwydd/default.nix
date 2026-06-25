@@ -6,7 +6,10 @@
   ];
 
   ceirios = {
-    profiles.headless = true;
+    profiles = {
+      headless = true;
+      qemuGuest = true;
+    };
 
     hardware.cpu = "amd";
 
