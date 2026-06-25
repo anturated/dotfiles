@@ -1,5 +1,5 @@
-# the holy handbook to kernel parameters
 # <https://www.kernel.org/doc/html/latest/admin-guide/kernel-parameters.html>
+# taken from https://github.com/isabelroses/dotfiles/blob/main/modules/nixos/kernel/params.nix
 { lib, config, ... }:
 let
   inherit (lib.lists) optionals;

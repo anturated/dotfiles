@@ -24,6 +24,8 @@
 
     users.anturated = { };
 
+    # note: this VPS has UEFI boot so no grub.
+
     services = {
       # self-hosted #
       anturated-website.enable = true;

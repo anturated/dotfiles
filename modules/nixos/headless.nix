@@ -6,19 +6,17 @@ let
 in
 {
   config = mkIf config.ceirios.profiles.headless {
-    # print the URL instead on servers
+    # print the URL instead
     environment.variables.BROWSER = "echo";
 
-    # we don't need fonts on a server
-    # since there are no fonts to be configured outside the console
+    # don't need fonts on a server
     fonts = mapAttrs (_: mkForce) {
       packages = [ ];
       fontDir.enable = false;
       fontconfig.enable = false;
     };
 
-    # a headless system should not mount any removable media without explicit
-    # user action
+    # disable mounting external media
     services.udisks2.enable = mkForce false;
 
     xdg = mapAttrs (_: mkForce) {
@@ -31,23 +29,14 @@ in
 
     # https://github.com/numtide/srvos/blob/main/nixos/server/default.nix
     systemd = {
-      # given that our systems are headless, emergency mode is useless.
-      # we prefer the system to attempt to continue booting so
-      # that we can hopefully still access it remotely.
+      # continue trying to boot in the hopes we might regain access
       enableEmergencyMode = false;
 
-      # For more detail, see:
-      #   https://0pointer.de/blog/projects/watchdog.html
       settings.Manager = {
-        # systemd will send a signal to the hardware watchdog at half
-        # the interval defined here, so every 10s.
-        # If the hardware watchdog does not get a signal for 20s,
-        # it will forcefully reboot the system.
+        # systemd will ping the watchdog at half this interval
+        # if the watchdog does not get pinged for this long it will reboot the system.
         RuntimeWatchdogSec = "20s";
-        # Forcefully reboot if the final stage of the reboot
-        # hangs without progress for more than 30s.
-        # For more info, see:
-        #   https://utcc.utoronto.ca/~cks/space/blog/linux/SystemdShutdownWatchdog
+        # max wait time on reboot before it's forced
         RebootWatchdogSec = "30s";
       };
 
@@ -59,6 +48,7 @@ in
       };
     };
 
+    # TODO: move this out of here, this isn't really "headless" stuff
     boot = {
       loader.grub = {
         useOSProber = mkForce false;

@@ -18,7 +18,8 @@ in
   nixpkgs.config.allowUnfree = true;
 
   nix = {
-    # pin the registry to avoid downloading and evaluating a new nixpkgs version everytime
+    # make nix run, nix shell, etc. use the nixpkgs present on system
+    # instead of downloading whatever's pinned in the flake we're running
     registry = (mapAttrs (_: flake: { inherit flake; }) flakeInputs) // {
       # https://github.com/NixOS/nixpkgs/pull/388090
       nixpkgs = mkForce { flake = inputs.nixpkgs; };

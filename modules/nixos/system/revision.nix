@@ -18,9 +18,8 @@ in
   };
 
   config.system = {
-    # this is the NixOS version that the configuration was generated with
-    # this should be change to the version of the NixOS release that the configuration was generated with
-    # https://nixos.org/manual/nixos/unstable/release-notes.html
+    # used by nixos for keeping breaking nixos changes at bay
+    # should be whatever version was first installed
     stateVersion = if (_class == "nixos") then cfg.stateVersion else 6;
 
     # we can get the git rev that we are working on and set that to the configurationRevision

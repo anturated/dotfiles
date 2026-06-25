@@ -8,7 +8,6 @@
     ceirios.packages = { inherit (pkgs) gnupg; };
 
     # signing daemon
-    # https://search.nixos.org/options?channel=25.11&query=security.pam.services.%3Cname%3E.gnupg#show=option%253Asecurity.pam.services.%253Cname%253E.gnupg.enable
     services.gpg-agent = {
       enable = true;
 
