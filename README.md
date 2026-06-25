@@ -1,6 +1,6 @@
 # NixOS dotfiles
 
-![preview](./preview.webp)
+![preview](./.assets/preview.webp)
 
 ## Installation and Usage
 Check the [wiki](https://git.anturated.dev/anturated/dotfiles/wiki/Home)
