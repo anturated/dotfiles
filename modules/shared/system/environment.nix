@@ -8,6 +8,7 @@ in
     type = lib.types.str;
     default = "";
     description = "Path to your local config";
+    example = "$HOME/dev/dotfiles";
   };
 
   config.environment.variables = {

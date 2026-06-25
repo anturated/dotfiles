@@ -38,12 +38,23 @@ in
       mainUser = mkOption {
         type = nullOr (enum usernames);
         default = if (length usernames == 1) then elemAt usernames 0 else null;
-        description = "Main user's username. Used for root password";
+        description = ''
+          Main user's username. Used for root password.
+          Don't need to set if there's only one user on the system.
+        '';
       };
     };
 
     users = mkOption {
-      description = "Set of users present on a given system, with per-system options";
+      description = "Set of users present on a given machine, with per-machine options";
+
+      example = lib.literalExpression ''
+        # machines/legion/default.nix
+        ceirios = {
+          users.desant = {
+            home = "ivy";
+          };
+        };'';
 
       default = { };
 
@@ -58,15 +69,30 @@ in
 
           # here because ssh keys don't appear out of thin air
           secrets = {
-            wakatime = mkEnableOption "Has wakatime config in secrets";
+            wakatime =
+              mkEnableOption ''
+                wakatime config file.
+                You must have a wakatime config file in your secrets for this to work''
+              // {
+                example = lib.literalExpression ''
+                  # in secrets/<you>.yaml
+                  # wakatime: |
+                  #   [settings]
+                  #   api_key = waka_your-wakatime-api-key-xyz'';
+              };
           };
         };
       }));
     };
 
     allUsers = mkOption {
-      description = "List of all users across this flake";
+      description = "Set of all possible users across this flake.";
       default = { };
+
+      example = lib.literalExpression ''
+        ceirios.allUsers.desant = {
+          hashedPassword = "$y$j9T$gV...";
+        };'';
 
       type = attrsOf (
         submodule (
@@ -79,7 +105,7 @@ in
                 description = ''
                   Username. Only set this if you need 2 users with the same name,
                   but different properties to use on different machines.
-                  Otherwise derived from attrName.
+                  Otherwise defaults to attrName.
                 '';
                 example = "desant";
               };
@@ -96,7 +122,11 @@ in
                 authorizedKeys = mkOption {
                   type = listOf str;
                   default = [ ];
-                  description = "Keys that are allowed to ssh into this user.";
+                  description = "Public keys that are allowed to ssh into this user.";
+                  example = lib.literalExpression ''
+                    ssh.authorizedKeys = [
+                      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMOJoauZQLAdUyxVmB+oxNQK+LSQ1Y3/L///GjC+oQlG"
+                    ];'';
                 };
 
                 settings = mkOption {
@@ -110,6 +140,14 @@ in
                     Shortcut for home-manager ssh.settings (~/.ssh/config).
                     You can use this to define ssh hostnames and whatnot.
                   '';
+                  example = lib.literalExpression ''
+                    # this would let you `ssh my-vps` instead of `ssh john@82.38.x.xx`
+                    ssh.settings = {
+                      "my-vps" = {
+                        user = "john";
+                        hostname = "82.38.x.xx";
+                      };
+                    };'';
                 };
               };
 
@@ -117,13 +155,13 @@ in
                 name = mkOption {
                   type = nullOr str;
                   default = null;
-                  description = "Git username";
+                  description = "Username shown in git commits. Usually your github handle.";
                 };
 
                 email = mkOption {
                   type = nullOr str;
                   default = null;
-                  description = "Git email";
+                  description = "Email shown in git commits. Usually your github login email.";
                 };
               };
             };

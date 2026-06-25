@@ -13,7 +13,9 @@ let
 in
 {
   options.ceirios.boot.plymouth = {
-    enable = mkEnableOption "Enable boot animation";
+    enable = mkEnableOption ''
+      boot animation, instead of boot logs.
+      You can still view logs by pressing ESC'';
     theme = mkOption {
       type = str;
       default = "circle_hud";

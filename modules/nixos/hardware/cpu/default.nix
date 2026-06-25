@@ -22,7 +22,6 @@ in
   };
 
   options.ceirios.capabilities.CPPC = mkEnableOption ''
-    Enable AMD pstate optimizations.
-    Set to true if your CPU has have CPPC.
-  '';
+    AMD pstate optimizations.
+    Set this to true if your CPU has CPPC'';
 }

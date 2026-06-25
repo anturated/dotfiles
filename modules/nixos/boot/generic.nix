@@ -13,7 +13,7 @@ in
       type = int;
       default = 0;
       description = ''
-        Time to choose derivation.
+        Time to choose derivation in seconds.
         If 0 you can still press ESC'';
     };
   };

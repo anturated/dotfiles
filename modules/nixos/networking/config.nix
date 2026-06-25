@@ -9,7 +9,12 @@ let
     mkForce
     optionals
     ;
-  inherit (lib.types) nullOr str int;
+  inherit (lib.types)
+    nullOr
+    str
+    int
+    submodule
+    ;
 
   maskToPrefix =
     netmask:
@@ -31,55 +36,69 @@ let
   cfg = config.ceirios.networking;
 in
 {
-  options.ceirios.networking = {
-    ip = mkOption {
-      type = nullOr str;
-      default = null;
-      description = "Your ipv4 address";
-    };
-    ip6 = mkOption {
-      type = nullOr str;
-      default = null;
-      description = "Your ipv6 address";
-    };
+  options.ceirios.networking = mkOption {
+    description = ''
+      Network settings.
+      This only ever needs to be set on a VPS.
+      Desktop machines should be fine.
+    '';
 
-    gateway = mkOption {
-      type = nullOr str;
-      default = null;
-      description = "Your ipv4 gateway";
-    };
-    gateway6 = mkOption {
-      type = nullOr str;
-      default = null;
-      description = "Your ipv6 gateway";
-    };
+    default = { };
 
-    netmask = mkOption {
-      type = nullOr str;
-      default = null;
-      description = "Your netmask";
-    };
-    prefix = mkOption {
-      type = nullOr int;
-      default = maskToPrefix cfg.netmask;
-      description = "Your prefix. Set netmask to auto-generate.";
-    };
+    type = submodule {
+      options = {
+        ip = mkOption {
+          type = nullOr str;
+          default = null;
+          description = "Your ipv4 address";
+        };
+        ip6 = mkOption {
+          type = nullOr str;
+          default = null;
+          description = "Your ipv6 address";
+        };
 
-    netmask6 = mkOption {
-      type = nullOr str;
-      default = null;
-      description = "Your netmask v6";
-    };
-    prefix6 = mkOption {
-      type = nullOr int;
-      default = null;
-      description = "Your prefix v6";
-    };
+        gateway = mkOption {
+          type = nullOr str;
+          default = null;
+          description = "Your ipv4 gateway";
+        };
+        gateway6 = mkOption {
+          type = nullOr str;
+          default = null;
+          description = "Your ipv6 gateway";
+        };
 
-    interface = mkOption {
-      type = nullOr str;
-      default = null;
-      description = "Your interface name";
+        netmask = mkOption {
+          type = nullOr str;
+          default = null;
+          description = "Your netmask";
+        };
+        prefix = mkOption {
+          type = nullOr int;
+          default = maskToPrefix cfg.netmask;
+          description = "Your prefix. Auto-generated if netmask is set.";
+        };
+
+        netmask6 = mkOption {
+          type = nullOr str;
+          default = null;
+          description = "Your netmask v6";
+        };
+        prefix6 = mkOption {
+          type = nullOr int;
+          default = null;
+          description = "Your prefix v6";
+        };
+
+        interface = mkOption {
+          type = nullOr str;
+          default = null;
+          description = "Your interface name";
+          example = "ens3";
+        };
+
+      };
     };
   };
 

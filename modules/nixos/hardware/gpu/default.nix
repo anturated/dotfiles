@@ -33,9 +33,10 @@ in
         default = null;
         description = ''
           Primary/iGPU bus id.
-          Required for prime.
+          Required for PRIME offload.
           Renders everything but games in offload mode.
         '';
+        example = "6:0:0";
       };
       discrete = mkOption {
         type = nullOr str;
@@ -47,6 +48,7 @@ in
           You want to set this and primary if your second monitor port is wired to NVIDIA GPU.
           If you use a second monitor that is.
         '';
+        example = "1:0:0";
       };
     };
 
@@ -57,7 +59,10 @@ in
         "offload"
       ]);
       default = null;
-      description = "Nvidia PRIME mode: sync, reverse-sync, or offload";
+      description = ''
+        Nvidia PRIME mode.
+        https://wiki.nixos.org/wiki/NVIDIA#Hybrid_graphics_with_PRIME
+      '';
     };
   };
 }

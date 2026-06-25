@@ -19,7 +19,7 @@ let
       ];
     in
     {
-      enable = mkEnableOption "Enable the ${name} service";
+      enable = mkEnableOption "${name} service";
 
       host = mkOption {
         type = str;

@@ -13,7 +13,14 @@ in
   options.ceirios.packages = mkOption {
     type = lazyAttrsOf package;
     default = { };
-    description = "A set of packages to install";
+    description = ''
+      A set of packages to install.
+      Replaces environment.systemPackages and home.packages
+    '';
+    example = lib.literalExpression ''
+      ceirios.packages = {
+        inherit (pkgs) obsidian;
+      }'';
   };
 
   config = mergeAttrsList [

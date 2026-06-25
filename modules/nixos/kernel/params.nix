@@ -11,8 +11,8 @@ in
 {
   options.ceirios.system = {
     boot.silent = mkEnableOption ''
-      almost entirely silent boot process through `quiet` kernel parameter
-    '';
+      silent boot
+      (hides kernel logs, you get a clean screen during boot)'';
 
     kernel.tweaks.enable = mkEnableOption "security and performance related kernel parameters" // {
       default = true;

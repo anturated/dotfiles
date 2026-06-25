@@ -13,7 +13,10 @@ let
 in
 {
   options.ceirios.system.security = {
-    binaries.enable = lib.mkEnableOption "Allow native binaries (not from nix store) to run";
+    binaries.enable = lib.mkEnableOption ''
+      native binary runners (nix-ld and AppImage).
+      Allows to run binaries not from nix store, like on normal linux distros.
+      Usually you don't want this, you can install almost anything from nixpkgs'';
   };
 
   config = mkIf cfg.enable {

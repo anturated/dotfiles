@@ -24,7 +24,10 @@ in
     mainMonitor = mkOption {
       type = str;
       default = getClosestTo00.name;
-      description = "Main monitor's name.";
+      description = ''
+        Main monitor's name.
+        Defaults to whatever monitor is closest to (0, 0).
+      '';
     };
 
     monitors = mkOption {
@@ -64,7 +67,7 @@ in
               orientation = lib.mkOption {
                 type = int;
                 default = 0;
-                description = "How many times the monitor is rotated 90 degrees.";
+                description = "How many times the monitor is rotated 90 degrees clockwise.";
                 example = 3;
               };
 
@@ -110,8 +113,18 @@ in
       );
 
       description = ''
-        Declare monitors in window managers
+        Monitors config. You usually want this set up. Get monitor names with `hyprctl monitors` or similar.
       '';
+
+      example = lib.literalExpression ''
+        monitors = {
+          HDMI-1 = { }; # defaults to 1080p @ 60hz
+          DP-1 = {
+            width = 3440;
+            height = 1440;
+            refresh-rate = 144;
+          };
+        };'';
     };
   };
 }

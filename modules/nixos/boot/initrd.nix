@@ -11,11 +11,11 @@ let
 in
 {
   options.ceirios.boot.initrd = {
-    tweaks = mkEnableOption "Initrd QOL" // {
+    tweaks = mkEnableOption "initrd QOL tweaks" // {
       default = true;
     };
 
-    compress = mkEnableOption "Use zstd" // {
+    compress = mkEnableOption "initrd zstd compression" // {
       default = config.ceirios.profiles.workstation;
     };
   };

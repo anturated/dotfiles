@@ -12,36 +12,28 @@ in
   options.ceirios.profiles = {
     graphical = mkEnableOption ''
       Enable graphical applications
-      hyprland, browser, terminal, etc.
-    '';
+      (hyprland, browser, terminal, etc.)'';
 
     headless = mkEnableOption ''
-      Indicate that this is a server and optimize accordingly.
-    '';
+      stuff for better operation of a headless machine
+      (like a VPS or WSL instance)'';
 
     workstation = mkEnableOption ''
-      Enable coding stuff:
-      ssh, docker, direnv, etc.
-    '';
+      coding stuff
+      (ssh, docker, direnv, etc.)'';
 
     gaming = mkEnableOption ''
-      Enable gaming apps:
-      prism, steam, bottles, etc.
-    '';
+      gaming apps and optimizations
+      (prism, steam, bottles, etc.)'';
 
     laptop = mkEnableOption ''
-      Optimize for laptop:
-      tuned, acpid, etc.
-    '';
+      laptop optimizations and services
+      (tuned, acpid, etc.)'';
 
     # TODO: this does nothing currently (i think)
-    virtualization = mkEnableOption ''
-      Optimize for VM hosting (iommu, kvm, etc.);
-    '';
+    virtualization = mkEnableOption "stuff for VM hosting (iommu, kvm, etc.)";
 
-    qemuGuest = mkEnableOption ''
-      Optimize for being a QEMU guest.
-    '';
+    qemuGuest = mkEnableOption "QEMU guest optimizations";
   };
 
   config = lib.mkIf (_class == "homeManager") {
