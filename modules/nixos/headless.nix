@@ -19,7 +19,7 @@ in
 
     # a headless system should not mount any removable media without explicit
     # user action
-    services.udisks2.enable = lib.modules.mkForce false;
+    services.udisks2.enable = mkForce false;
 
     xdg = mapAttrs (_: mkForce) {
       sounds.enable = false;
