@@ -89,6 +89,9 @@ in
 
           attachment.ALLOWED_TYPES = "*/*";
 
+          # disable the "ambiguous characters detected" warning, it's mostly just annoying
+          ui.AMBIGUOUS_UNICODE_DETECTION = false;
+
           "ui.meta" = {
             AUTHOR = "Desant";
             DESCRIPTION = "The place where things get forged";
