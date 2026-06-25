@@ -2,12 +2,21 @@
   pkgs,
   config,
   osConfig,
+  lib,
   ...
 }:
 
 let
   inherit (config.ceirios.profiles) graphical;
   inherit (osConfig.ceirios) hardware;
+  inherit (lib) attrNames length;
+
+  # fallbacks just in case it's not configured
+  hasMonitors = length (attrNames hardware.monitors) > 0;
+  refresh =
+    if hasMonitors then toString hardware.monitors.${hardware.mainMonitor}.refresh-rate else 60;
+
+  mainMonitor = if hasMonitors then hardware.mainMonitor else "";
 in
 {
   ceirios.packages = {
@@ -25,9 +34,9 @@ in
       ];
 
       text = ''
-        CHWAL_GRAPHICAL=${if graphical then "1" else "0"}
-        CHWAL_REFRESH=${toString hardware.monitors.${hardware.mainMonitor}.refresh-rate}
-        CHWAL_MAIN_MONITOR="${hardware.mainMonitor}"
+        CHWAL_GRAPHICAL=${if graphical && hasMonitors then "1" else "0"}
+        CHWAL_REFRESH=${toString refresh}
+        CHWAL_MAIN_MONITOR="${mainMonitor}"
       ''
       + builtins.readFile ./chwal.sh;
     };
