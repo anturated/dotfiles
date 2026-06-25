@@ -1,0 +1,57 @@
+when:
+  - event: push
+    branch: master
+
+clone:
+  - name: clone
+    image: woodpeckerci/plugin-git
+    settings:
+      username: caterpillar-bot
+      password:
+        from_secret: PILL_TOKEN
+
+steps:
+  - name: build
+    image: nixos/nix
+    commands:
+      - |
+        export NIX_CONFIG="
+          extra-experimental-features = nix-command flakes
+          http-connections = 128
+          max-substitution-jobs = 128
+        "
+      - nix build -L .#optionsDocs --show-trace
+      # nix store gets nuked
+      - cp ./result wiki.md
+      - chmod 0777 wiki.md
+
+  - name: format
+    depends_on: [build]
+    image: alpine
+    commands:
+      - apk add sed
+      # shorten paths
+      - sed -Ei 's|/nix/store/[a-z0-9]+-source/||g' wiki.md
+      # replace file links with forge links
+      - sed -Ei 's|file://|https://git.anturated.dev/anturated/dotfiles/src/branch/master/|g' wiki.md
+
+  - name: update-wiki
+    depends_on: [format]
+    image: alpine
+    environment:
+      FORGEJO_TOKEN:
+        from_secret: PILL_TOKEN
+    commands:
+      # setup
+      - apk add curl base64
+      - PAGE_NAME="Ceirios-options"
+      - TITLE="Ceirios options"
+      - |
+        curl -s -X PATCH https://git.anturated.dev/api/v1/repos/${CI_REPO}/wiki/page/$${PAGE_NAME} \
+          -H "Authorization: token $${FORGEJO_TOKEN}" \
+          -H "Content-Type: application/json" \
+          -d "{
+            \"content_base64\": \"$(base64 -w 0 ./wiki.md)\",
+            \"message\": \"\",
+            \"title\": \"$${TITLE}\"
+          }"
