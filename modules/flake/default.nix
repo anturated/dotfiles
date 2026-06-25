@@ -40,6 +40,25 @@ in
 
   nixosConfigurations = mkHosts (discovered // overrides);
 
+  # docs generator
+  # this'll run on linux so x86_64 should be fine
+  # ceirios.services is omitted
+  packages.x86_64-linux.optionsDocs =
+    let
+      inherit (self.nixosConfigurations.legion) options;
+      ceiriosOptions = lib.filterAttrs (n: _: n == "ceirios") options;
+
+      dropTheseOptions = [ "services" ];
+      filteredOptions = {
+        ceirios = lib.removeAttrs ceiriosOptions.ceirios dropTheseOptions;
+      };
+
+      docs = nixpkgs.legacyPackages.x86_64-linux.nixosOptionsDoc {
+        options = filteredOptions;
+      };
+    in
+    docs.optionsCommonMark;
+
   devShells = forAllSystems (pkgs: {
     default = pkgs.callPackage ./shell.nix { };
   });
