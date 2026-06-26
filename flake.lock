@@ -27,11 +27,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1782338515,
-        "narHash": "sha256-DCKdTEKSMuNmcxZ1K73S9gVIFv0gZweJXjhiCfNgxWs=",
+        "lastModified": 1782486005,
+        "narHash": "sha256-fnK7JPMAORvf37u7lpq97/Zq2/ceh3p20BTJ0lyq/m4=",
         "ref": "refs/heads/master",
-        "rev": "44dc1b30e3bf9a8451f2aec36dc8c7e4681c344c",
-        "revCount": 107,
+        "rev": "65941ebb532872e94b50b11282ebda64ff5ec6f1",
+        "revCount": 108,
         "type": "git",
         "url": "https://git.anturated.dev/anturated/eiddew"
       },
