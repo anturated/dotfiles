@@ -5,9 +5,13 @@
   ...
 }:
 
+let
+  inherit (config.ceirios.profiles) graphical;
+  inherit (lib) mkIf;
+in
 {
-  home.packages = lib.optionals config.ceirios.profiles.graphical [
-    (pkgs.writeShellScriptBin "animelist" ''
+  ceirios.packages = mkIf graphical {
+    animelist = pkgs.writeShellScriptBin "animelist" ''
       #!/usr/bin/env bash
       set -euo pipefail
 
@@ -23,6 +27,6 @@
       )"
 
       mpv "''${anime}"
-    '')
-  ];
+    '';
+  };
 }
