@@ -36,7 +36,7 @@ post_hook = 'gsettings set org.gnome.desktop.interface gtk-theme ""; gsettings s
 [templates.gtk4]
 input_path = '~/.config/matugen/templates/gtk.css'
 output_path = '~/.config/gtk-4.0/colors.css'
-# post_hook = 'gsettings set org.gnome.desktop.interface color-scheme prefer-light; gsettings set org.gnome.desktop.interface color-scheme prefer-dark'
+post_hook = 'gsettings set org.gnome.desktop.interface color-scheme prefer-light; gsettings set org.gnome.desktop.interface color-scheme prefer-dark'
 # https://github.com/InioX/matugen-themes/blob/main/post-hook-scripts/gtk-themes-reload.sh
 
 # i'm now officially one of them GNOME haters.
