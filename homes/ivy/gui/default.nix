@@ -4,6 +4,7 @@
   imports = [
     ./awww.nix
     ./daily.nix
+    ./explorer.nix
     ./ghostty.nix
     ./rofi
     ./kitty.nix

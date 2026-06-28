@@ -14,7 +14,6 @@
         piper
 
         # media viewing
-        nemo
         okteta
 
         # tools

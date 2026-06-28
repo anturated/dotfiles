@@ -37,6 +37,14 @@ in
       default = "nvim";
     };
 
+    explorer = {
+      type = enum [
+        "nautilus"
+        "nemo"
+      ];
+      default = "nautilus";
+    };
+
     pager = {
       type = str;
       default = "less -FR";
