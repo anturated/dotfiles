@@ -49,10 +49,12 @@ in
       };
 
       iconTheme = {
-        name = "Colloid-Grey-Nord-Dark";
-        package = pkgs.colloid-icon-theme.override {
-          colorVariants = [ "grey" ];
-          schemeVariants = [ "nord" ];
+        # this one takes a particularly long time to build
+        # 6 whole minutes to be specific
+        name = "WhiteSur-grey";
+        package = pkgs.whitesur-icon-theme.override {
+          themeVariants = [ "grey" ];
+          alternativeIcons = true;
         };
       };
 
