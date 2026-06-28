@@ -39,7 +39,8 @@ in
       enable = true;
 
       font = {
-        inherit (config.ceirios.style.fonts) name;
+        name = "Geist";
+        package = pkgs.geist-font;
       };
 
       theme = {
