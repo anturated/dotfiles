@@ -8,5 +8,6 @@
     ./users
     ./system
     ./shell.nix
+    ./nixpkgs.nix
   ];
 }
