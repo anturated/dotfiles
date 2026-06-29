@@ -23,7 +23,7 @@ in
           # mpv as our image viewer
           mpv-image-viewer.image-positioning
         ])
-        ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux [
+        ++ lib.optionals isLinux [
           pkgs.mpvScripts.mpris
         ];
 
