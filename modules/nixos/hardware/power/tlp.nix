@@ -1,11 +1,9 @@
-{ config, ... }:
+{ ... }:
 
-let
-  isLaptop = config.ceirios.profiles.laptop;
-in
 {
   services = {
     tlp = {
+      # TODO: make conditional
       enable = false;
 
       # ppd bridge
