@@ -1,9 +1,4 @@
-{
-  lib,
-  osConfig,
-  _class,
-  ...
-}:
+{ lib, _class, ... }:
 
 let
   inherit (lib) mkEnableOption;
@@ -34,17 +29,5 @@ in
     virtualization = mkEnableOption "stuff for VM hosting (iommu, kvm, etc.)";
 
     qemuGuest = mkEnableOption "QEMU guest optimizations";
-  };
-
-  config = lib.mkIf (_class == "homeManager") {
-    ceirios.profiles = {
-      inherit (osConfig.ceirios.profiles)
-        graphical
-        headless
-        workstation
-        laptop
-        gaming
-        ;
-    };
   };
 }

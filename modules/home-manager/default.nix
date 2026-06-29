@@ -10,5 +10,6 @@
     ./programs
     ./revision.nix
     ./secrets.nix
+    ./inherit.nix
   ];
 }
