@@ -6,19 +6,11 @@
 }:
 
 let
-  inherit (lib.modules) mkIf mkMerge;
+  inherit (lib.modules) mkIf;
   inherit (pkgs.stdenv.hostPlatform) isLinux;
 in
 {
   config = mkIf config.ceirios.profiles.graphical {
-    ceirios.packages = mkMerge [
-      (mkIf pkgs.stdenv.hostPlatform.isLinux {
-        inherit (pkgs)
-          ffmpeg
-          ;
-      })
-    ];
-
     programs.mpv = {
       enable = true;
 
