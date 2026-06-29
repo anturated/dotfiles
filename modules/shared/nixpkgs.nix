@@ -2,6 +2,8 @@
 
 {
   nixpkgs.config = {
+    # enable spyware
+    allowUnfree = true;
 
     permittedInsecurePackages = [
       # FIXME: remove once vesktop updates deps

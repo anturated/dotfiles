@@ -14,9 +14,6 @@ in
   # prevent using ~/.config/nixpkgs/config.nix
   environment.variables.NIXPKGS_CONFIG = lib.mkForce "";
 
-  # enable spyware
-  nixpkgs.config.allowUnfree = true;
-
   nix = {
     # make nix run, nix shell, etc. use the nixpkgs present on system
     # instead of downloading whatever's pinned in the flake we're running
