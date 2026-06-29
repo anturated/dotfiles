@@ -1,10 +1,14 @@
 {
   pkgs,
-  config,
   lib,
+  osConfig,
   ...
 }:
 
+let
+  inherit (lib) optionalAttrs;
+  inherit (osConfig.ceirios.hardware) gpu bluetooth;
+in
 {
   ceirios.packages = {
     inherit (pkgs)
@@ -14,8 +18,10 @@
       gdu
       ;
   }
-  // lib.optionalAttrs config.ceirios.profiles.graphical {
+  // optionalAttrs bluetooth.enable {
     inherit (pkgs) bluetui;
+  }
+  // optionalAttrs (gpu != null) {
     nvtop = pkgs.nvtopPackages.full;
   };
 }
