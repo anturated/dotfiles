@@ -32,11 +32,11 @@ deployer host action *args:
 [group('deploy')]
 [no-exit-message]
 [private]
-deployer-all goal:
+deployer-all goal *args:
     #!/usr/bin/env bash
     set -euo pipefail
 
-    just deployer cynnil {{ goal }}
+    just deployer cynnil {{ goal }} {{ args }}
 
 ################
 #   REBUILDS   #
@@ -70,11 +70,11 @@ deploy-boot host *args: (deployer host "boot" args)
 
 [group('rebuild')]
 [no-exit-message]
-deploy-all: (deployer-all "switch")
+deploy-all *args: (deployer-all "switch" args)
 
 [group('rebuild')]
 [no-exit-message]
-deploy-all-boot: (deployer-all "boot")
+deploy-all-boot *args: (deployer-all "boot" args)
 
 ###############
 #   SHARING   #
