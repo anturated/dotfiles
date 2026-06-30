@@ -1,6 +1,7 @@
 { config, lib, ... }:
 
 let
+  inherit (config.ceirios.profiles) workstation;
   inherit (lib)
     mkIf
     mkMerge
@@ -16,7 +17,7 @@ in
     };
 
     compress = mkEnableOption "initrd zstd compression" // {
-      default = config.ceirios.profiles.workstation;
+      default = workstation.enable;
     };
   };
 

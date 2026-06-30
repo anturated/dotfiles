@@ -1,9 +1,9 @@
-{ config, lib, ... }:
+{ config, ... }:
 
 {
-  config = lib.mkIf config.ceirios.profiles.graphical {
+  config = {
     programs.rofi = {
-      enable = true;
+      inherit (config.ceirios.profiles.graphical) enable;
       theme = ./drun.rasi;
     };
 

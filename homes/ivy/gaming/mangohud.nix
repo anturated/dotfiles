@@ -5,9 +5,13 @@
   ...
 }:
 
+let
+  inherit (lib) mkIf;
+  inherit (config.ceirios.profiles) gaming;
+in
 {
-
-  config = lib.mkIf config.ceirios.profiles.gaming {
+  # TODO: there's a mangohud home-manager module
+  config = mkIf gaming.enable {
     ceirios.packages = {
       inherit (pkgs) mangohud;
     };

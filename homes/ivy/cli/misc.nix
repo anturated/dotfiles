@@ -7,7 +7,7 @@
 
 let
   inherit (lib) mergeAttrsList optionalAttrs;
-  inherit (config.ceirios) profiles;
+  inherit (config.ceirios.profiles) gaming graphical;
 in
 {
   ceirios.packages = mergeAttrsList [
@@ -35,14 +35,14 @@ in
         ;
     }
 
-    (optionalAttrs profiles.gaming {
+    (optionalAttrs gaming.enable {
       inherit (pkgs)
         asdf-vm
         ;
     })
 
     # graphical
-    (optionalAttrs profiles.graphical {
+    (optionalAttrs graphical.enable {
       inherit (pkgs)
         # control
         brightnessctl

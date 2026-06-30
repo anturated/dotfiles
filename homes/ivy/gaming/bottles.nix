@@ -5,8 +5,12 @@
   ...
 }:
 
+let
+  inherit (lib) mkIf;
+  inherit (config.ceirios.profiles) gaming;
+in
 {
-  ceirios.packages = lib.mkIf config.ceirios.profiles.gaming {
+  ceirios.packages = mkIf gaming.enable {
     # using stable here because openldap won't pass tests
     inherit (pkgs) bottles;
   };

@@ -5,9 +5,13 @@
   ...
 }:
 
+let
+  inherit (lib) mkIf;
+  inherit (config.ceirios.profiles) graphical;
+in
 {
   # these don't deserve separate modules probably
-  ceirios.packages = lib.mkIf config.ceirios.profiles.graphical {
+  ceirios.packages = mkIf graphical.enable {
     inherit (pkgs)
       vivaldi
       telegram-desktop

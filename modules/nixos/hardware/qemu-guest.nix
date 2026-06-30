@@ -3,8 +3,12 @@
 
 { config, lib, ... }:
 
+let
+  inherit (lib.modules) mkIf;
+  inherit (config.ceirios.profiles) qemuGuest;
+in
 {
-  config = lib.mkIf config.ceirios.profiles.qemuGuest {
+  config = mkIf qemuGuest.enable {
     boot.initrd.availableKernelModules = [
       "virtio_net"
       "virtio_pci"

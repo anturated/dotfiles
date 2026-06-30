@@ -2,7 +2,8 @@
 
 {
   programs.cava = {
-    enable = config.ceirios.profiles.graphical;
+    inherit (config.ceirios.profiles.graphical) enable;
+
     settings = {
       color = {
         theme = "ivy";

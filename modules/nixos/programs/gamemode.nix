@@ -3,7 +3,7 @@
 {
   # gamemode just has to be system level for some reason
   programs.gamemode = {
-    enable = config.ceirios.profiles.gaming;
+    inherit (config.ceirios.profiles.gaming) enable;
     enableRenice = true;
   };
 }

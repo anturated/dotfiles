@@ -8,12 +8,11 @@
 let
   inherit (lib) concatStringsSep;
 
-  enable = config.ceirios.profiles.graphical;
   sessionData = config.services.displayManager.sessionData.desktops;
 in
 {
   config.services.greetd = {
-    inherit enable;
+    inherit (config.ceirios.profiles.graphical) enable;
     restart = true;
     useTextGreeter = true;
 

@@ -7,9 +7,10 @@
 
 let
   inherit (lib) mkIf mkForce;
+  inherit (config.ceirios.profiles) graphical;
 in
 {
-  config = mkIf config.ceirios.profiles.graphical {
+  config = mkIf graphical.enable {
     services = {
       udev.packages = [ pkgs.gnome-settings-daemon ];
 

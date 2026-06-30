@@ -7,10 +7,10 @@
 
   ceirios = {
     profiles = {
-      laptop = true;
-      workstation = true;
-      graphical = true;
-      gaming = true;
+      laptop.enable = true;
+      workstation.enable = true;
+      graphical.enable = true;
+      gaming.enable = true;
     };
 
     hardware = {

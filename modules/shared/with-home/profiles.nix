@@ -5,29 +5,29 @@ let
 in
 {
   options.ceirios.profiles = {
-    graphical = mkEnableOption ''
+    graphical.enable = mkEnableOption ''
       Enable graphical applications
       (hyprland, browser, terminal, etc.)'';
 
-    headless = mkEnableOption ''
+    headless.enable = mkEnableOption ''
       stuff for better operation of a headless machine
       (like a VPS or WSL instance)'';
 
-    workstation = mkEnableOption ''
+    workstation.enable = mkEnableOption ''
       coding stuff
       (ssh, docker, direnv, etc.)'';
 
-    gaming = mkEnableOption ''
+    gaming.enable = mkEnableOption ''
       gaming apps and optimizations
       (prism, steam, bottles, etc.)'';
 
-    laptop = mkEnableOption ''
+    laptop.enable = mkEnableOption ''
       laptop optimizations and services
       (tuned, acpid, etc.)'';
 
     # TODO: this does nothing currently (i think)
-    virtualization = mkEnableOption "stuff for VM hosting (iommu, kvm, etc.)";
+    virtualization.enable = mkEnableOption "stuff for VM hosting (iommu, kvm, etc.)";
 
-    qemuGuest = mkEnableOption "QEMU guest optimizations";
+    qemuGuest.enable = mkEnableOption "QEMU guest optimizations";
   };
 }

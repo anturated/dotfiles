@@ -6,11 +6,11 @@
 }:
 
 let
-  inherit (config.ceirios.profiles) graphical;
   inherit (lib) mkIf;
+  inherit (config.ceirios.profiles) graphical;
 in
 {
-  ceirios.packages = mkIf graphical {
+  ceirios.packages = mkIf graphical.enable {
     animelist = pkgs.writeShellScriptBin "animelist" ''
       #!/usr/bin/env bash
       set -euo pipefail

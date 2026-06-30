@@ -8,8 +8,10 @@ let
   inherit (lib) mkDefault;
 in
 {
+  # mkDefault is here because hyprland uhhh...
+  # disables it for whatever reason. # TODO: research
   xdg.portal = {
-    enable = mkDefault config.ceirios.profiles.graphical;
+    enable = mkDefault config.ceirios.profiles.graphical.enable;
 
     xdgOpenUsePortal = true;
 
@@ -22,7 +24,7 @@ in
     };
 
     wlr = {
-      enable = mkDefault config.ceirios.profiles.graphical;
+      enable = mkDefault config.ceirios.profiles.graphical.enable;
       settings = {
         screencast = {
           max_fps = 60;

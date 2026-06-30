@@ -11,7 +11,7 @@ let
   inherit (lib) mkIf;
 in
 {
-  ceirios.packages = mkIf graphical {
+  ceirios.packages = mkIf graphical.enable {
     ${explorer} = pkgs.${explorer};
   };
 }

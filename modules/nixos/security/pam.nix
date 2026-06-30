@@ -2,6 +2,7 @@
 
 let
   inherit (lib) genAttrs mkIf mkMerge;
+  inherit (config.ceirios.profiles) graphical;
 
   services = [
     "login"
@@ -26,7 +27,7 @@ in
       };
     }
 
-    (mkIf config.ceirios.profiles.graphical {
+    (mkIf graphical.enable {
       services = genAttrs services (_: mkService);
     })
   ];

@@ -14,7 +14,7 @@ let
   hasSecret = osConfig.ceirios.users.${user}.secrets.wakatime;
 in
 {
-  config = lib.mkIf (workstation && hasSecret) {
+  config = lib.mkIf (workstation.enable && hasSecret) {
     ceirios.packages = {
       inherit (pkgs) wakatime-cli;
     };

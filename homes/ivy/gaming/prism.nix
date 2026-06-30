@@ -5,8 +5,12 @@
   ...
 }:
 
+let
+  inherit (lib) mkIf;
+  inherit (config.ceirios.profiles) gaming;
+in
 {
-  config = lib.mkIf config.ceirios.profiles.gaming {
+  config = mkIf gaming.enable {
     ceirios.packages = {
       prismlauncher = pkgs.prismlauncher.override {
         # Add binary required by some mod

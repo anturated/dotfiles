@@ -6,10 +6,11 @@
 }:
 
 let
-  isLaptop = config.ceirios.profiles.laptop;
+  inherit (lib.modules) mkIf;
+  inherit (config.ceirios.profiles) laptop;
 in
 {
-  services = lib.mkIf isLaptop {
+  services = mkIf laptop.enable {
     tuned = {
       enable = true;
 

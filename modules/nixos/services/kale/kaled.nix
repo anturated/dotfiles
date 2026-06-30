@@ -6,6 +6,9 @@
 }:
 
 let
+  inherit (lib) mkIf;
+  inherit (config.ceirios.profiles) gaming;
+
   pythonEnv = pkgs.python3.withPackages (
     ps: with ps; [
       dbus-python
@@ -21,7 +24,7 @@ let
   };
 in
 {
-  config = lib.mkIf config.ceirios.profiles.gaming {
+  config = mkIf gaming.enable {
     services.dbus.packages = [
       (pkgs.writeTextFile {
         name = "kaled-dbus-conf";

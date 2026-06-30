@@ -5,8 +5,12 @@
   ...
 }:
 
+let
+  inherit (lib.modules) mkIf;
+  inherit (config.ceirios.profiles) graphical;
+in
 {
-  fonts = lib.mkIf config.ceirios.profiles.graphical {
+  fonts = mkIf graphical.enable {
     enableDefaultPackages = true;
 
     packages = with pkgs; [

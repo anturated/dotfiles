@@ -6,7 +6,7 @@
 
 {
   programs.gh = {
-    enable = config.ceirios.profiles.workstation;
+    inherit (config.ceirios.profiles.workstation) enable;
 
     extensions = lib.attrValues {
       # inherit (pkgs)

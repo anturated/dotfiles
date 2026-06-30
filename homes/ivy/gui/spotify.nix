@@ -7,12 +7,15 @@
 }:
 
 let
+  inherit (lib) mkIf;
+  inherit (config.ceirios.profiles) graphical;
+
   spicetifyPkgs = inputs'.spicetify.legacyPackages;
 in
 {
   imports = [ inputs.spicetify.homeManagerModules.spicetify ];
 
-  config = lib.mkIf config.ceirios.profiles.graphical {
+  config = mkIf graphical.enable {
 
     # this installs spotify too probably
     programs.spicetify = {

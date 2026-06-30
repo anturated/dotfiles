@@ -6,12 +6,13 @@
 }:
 
 let
+  inherit (lib) mkIf;
   inherit (config.ceirios.profiles) gaming;
   hasOffload = config.ceirios.hardware.prime == "offload";
   useOffload = if hasOffload then "1" else "0";
 in
 {
-  environment.systemPackages = lib.mkIf gaming [
+  environment.systemPackages = mkIf gaming.enable [
     (pkgs.writeShellScriptBin "kale" ''
       #!/usr/bin/env bash
 

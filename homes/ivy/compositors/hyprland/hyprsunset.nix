@@ -1,11 +1,9 @@
-{ lib, config, ... }:
+{ config, ... }:
 
 {
-  config = lib.mkIf config.ceirios.profiles.graphical {
-    services.hyprsunset = {
-      enable = true;
+  services.hyprsunset = {
+    inherit (config.ceirios.profiles.graphical) enable;
 
-      settings = { };
-    };
+    settings = { };
   };
 }

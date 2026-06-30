@@ -6,13 +6,12 @@
 }:
 
 let
-  inherit (lib.modules) mkIf;
   inherit (pkgs.stdenv.hostPlatform) isLinux;
 in
 {
-  config = mkIf config.ceirios.profiles.graphical {
+  config = {
     programs.mpv = {
-      enable = true;
+      inherit (config.ceirios.profiles.graphical) enable;
 
       scripts =
         (with pkgs.mpvScripts; [

@@ -1,8 +1,8 @@
 { lib, config, ... }:
 
 let
-  inherit (config.ceirios) profiles;
-  cond = profiles.workstation || profiles.headless;
+  inherit (config.ceirios.profiles) workstation headless;
+  cond = workstation.enable || headless.enable;
 in
 {
   config = lib.mkIf cond {

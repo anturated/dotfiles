@@ -3,9 +3,10 @@
 let
   inherit (lib.attrsets) mapAttrs;
   inherit (lib.modules) mkIf mkForce;
+  inherit (config.ceirios.profiles) headless;
 in
 {
-  config = mkIf config.ceirios.profiles.headless {
+  config = mkIf headless.enable {
     # print the URL instead
     environment.variables.BROWSER = "echo";
 

@@ -2,7 +2,7 @@
 
 {
   programs.vesktop = {
-    enable = config.ceirios.profiles.graphical;
+    inherit (config.ceirios.profiles.graphical) enable;
 
     settings = {
       # disable auto update because it breaks vencord sometimes i guess

@@ -5,7 +5,8 @@
 }:
 
 let
-  cfg = config.ceirios;
+  inherit (lib.strings) optionalString;
+  inherit (config.ceirios.profiles) gaming workstation graphical;
 in
 {
   programs.fish = {
@@ -23,7 +24,7 @@ in
           fish_add_path --append ~/Applications/depot_tools
       end
 
-      ${lib.optionalString cfg.profiles.gaming ''
+      ${optionalString gaming.enable ''
         # asdf shims
         if test -z "$ASDF_DATA_DIR"
             set _asdf_shims "$HOME/.asdf/shims"
@@ -59,7 +60,7 @@ in
       # tool integrations
       starship init fish | source
       zoxide init fish | source
-      ${lib.optionalString cfg.profiles.workstation "direnv hook fish | source"}
+      ${optionalString workstation.enable "direnv hook fish | source"}
     '';
 
     functions = {
@@ -83,7 +84,7 @@ in
 
       fish_greeting = {
         description = "exec on start";
-        body = lib.optionalString cfg.profiles.graphical "fastfetch";
+        body = optionalString graphical.enable "fastfetch";
       };
 
       # !! — repeat last command

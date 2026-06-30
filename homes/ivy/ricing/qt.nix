@@ -5,8 +5,12 @@
   ...
 }:
 
+let
+  inherit (lib) mkIf;
+  inherit (config.ceirios.profiles) graphical;
+in
 {
-  config = lib.mkIf config.ceirios.profiles.graphical {
+  config = mkIf graphical.enable {
     qt = {
       enable = true;
       platformTheme.name = "qtct";

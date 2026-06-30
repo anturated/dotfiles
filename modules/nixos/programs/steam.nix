@@ -2,7 +2,7 @@
 
 {
   programs.steam = {
-    enable = config.ceirios.profiles.gaming;
+    inherit (config.ceirios.profiles.gaming) enable;
 
     # Open ports in the firewall for Steam Remote Play
     remotePlay.openFirewall = true;

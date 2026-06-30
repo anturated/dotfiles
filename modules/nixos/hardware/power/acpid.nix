@@ -8,11 +8,10 @@
 
 let
   inherit (lib.modules) mkIf;
-
-  isLaptop = config.ceirios.profiles.laptop;
+  inherit (config.ceirios.profiles) laptop;
 in
 {
-  config = mkIf isLaptop {
+  config = mkIf laptop.enable {
     services.acpid.enable = true;
 
     ceirios.packages = { inherit (pkgs) acpi; };

@@ -7,7 +7,7 @@ let
 in
 {
   programs.gamescope = {
-    enable = config.ceirios.profiles.gaming;
+    inherit (config.ceirios.profiles.gaming) enable;
     args = lib.mkIf (monitors != { }) [
       # window size
       "-W"

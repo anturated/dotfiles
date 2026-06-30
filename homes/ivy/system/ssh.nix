@@ -10,7 +10,7 @@ let
 in
 {
   programs.ssh = {
-    enable = config.ceirios.profiles.workstation;
+    inherit (config.ceirios.profiles.workstation) enable;
     enableDefaultConfig = false;
 
     includes = [ ];

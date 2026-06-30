@@ -5,5 +5,5 @@ let
   inherit (config.ceirios.profiles) gaming;
 in
 {
-  boot.kernelModules = optionals gaming [ "ntsync" ];
+  boot.kernelModules = optionals gaming.enable [ "ntsync" ];
 }

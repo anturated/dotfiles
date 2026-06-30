@@ -1,9 +1,12 @@
 { config, ... }:
 
+let
+  inherit (config.ceirios.programs.defaults) terminal;
+  inherit (config.ceirios.profiles) graphical;
+in
 {
   programs.ghostty = {
-    enable =
-      config.ceirios.profiles.graphical && (config.ceirios.programs.defaults.terminal == "ghostty");
+    enable = graphical.enable && (terminal == "ghostty");
     settings = {
       theme = "matugen";
 

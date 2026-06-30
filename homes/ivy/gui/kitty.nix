@@ -6,7 +6,7 @@ let
 in
 {
   programs.kitty = {
-    enable = graphical && (terminal == "kitty");
+    enable = graphical.enable && (terminal == "kitty");
     settings = {
       include = "current-theme.conf";
 

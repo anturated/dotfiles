@@ -6,6 +6,7 @@
 }:
 
 let
+  inherit (config.ceirios.profiles) graphical;
   inherit (lib.modules) mkIf;
   inherit (lib.options) mkOption mkEnableOption;
   inherit (lib.types)
@@ -20,7 +21,7 @@ in
 {
   options.ceirios.style.fonts = {
     enable = mkEnableOption "fontconfig" // {
-      default = config.ceirios.profiles.graphical;
+      default = graphical.enable;
     };
 
     name = mkOption {

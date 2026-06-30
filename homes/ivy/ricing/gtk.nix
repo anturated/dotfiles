@@ -6,10 +6,12 @@
 }:
 
 let
+  inherit (lib) mkIf;
+  inherit (config.ceirios.profiles) graphical;
   schema = pkgs.gsettings-desktop-schemas;
 in
 {
-  config = lib.mkIf config.ceirios.profiles.graphical {
+  config = mkIf graphical.enable {
     # gsettings for hot reload, requires dbus and dconf.
     ceirios.packages = { inherit (pkgs) glib; };
 

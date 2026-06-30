@@ -2,9 +2,10 @@
 
 let
   inherit (lib) mkIf;
+  inherit (config.ceirios.profiles) graphical;
 in
 {
-  config = mkIf config.ceirios.profiles.graphical {
+  config = mkIf graphical.enable {
     programs = {
       # we need dconf to interact with gtk
       dconf.enable = true;

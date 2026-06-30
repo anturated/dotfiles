@@ -104,7 +104,7 @@ in
     "systemd.show_status=auto"
     "rd.systemd.show_status=auto"
   ]
-  ++ optionals virtualization [
+  ++ optionals virtualization.enable [
     # enable IOMMU for devices used in passthrough and provide better host performance
     "iommu=pt"
   ];

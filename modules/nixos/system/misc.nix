@@ -6,9 +6,10 @@
 }:
 let
   inherit (lib) mkIf;
+  inherit (config.ceirios.profiles) graphical;
 in
 {
-  config = mkIf config.ceirios.profiles.graphical {
+  config = mkIf graphical.enable {
     services = {
       # enable GVfs, a userspace virtual filesystem.
       gvfs.enable = true;

@@ -6,10 +6,14 @@
   ...
 }:
 
+let
+  inherit (lib) mkIf;
+  inherit (config.ceirios.profiles) graphical;
+in
 {
   imports = [ ./hyprsunset.nix ];
 
-  config = lib.mkIf config.ceirios.profiles.graphical {
+  config = mkIf graphical.enable {
     ceirios.packages = { inherit (pkgs) grim slurp; };
 
     # whoever tf thought it's a good idea to make me rewrite

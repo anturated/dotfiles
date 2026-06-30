@@ -7,8 +7,8 @@
 
   ceirios = {
     profiles = {
-      headless = true;
-      qemuGuest = true;
+      headless.enable = true;
+      qemuGuest.enable = true;
     };
 
     hardware.cpu = "amd";
