@@ -3,11 +3,13 @@
   self,
   inputs,
   config,
+  pkgs,
   ...
 }:
 
 let
-  inherit (lib.modules) mkIf;
+  inherit (lib.modules) mkIf mkForce mkMerge;
+  inherit (lib.options) mkEnableOption mkOption;
   inherit (self.lib) mkServiceOption mkSecret;
   inherit (config.sops) secrets;
 
@@ -17,7 +19,19 @@ in
 {
   imports = [ inputs.simple-nixos-mailserver.nixosModules.default ];
 
-  options.ceirios.services.mailserver = mkServiceOption "mailserver" { domain = "mail.${rdomain}"; };
+  options.ceirios.services = {
+    mailserver = mkServiceOption "mailserver" {
+      domain = "mail.${rdomain}";
+
+      webui = {
+        enable = mkEnableOption "webui";
+        domain = mkOption {
+          type = lib.types.str;
+          default = "rc.${rdomain}";
+        };
+      };
+    };
+  };
 
   config = mkIf cfg.enable {
     mailserver = {
@@ -137,29 +151,88 @@ in
       };
     };
 
-    services = {
-      postfix = {
-        dnsBlacklists = [
-          "all.s5h.net"
-          "b.barracudacentral.org"
-          "bl.spamcop.net"
-          "blacklist.woody.ch"
-        ];
+    services = mkMerge [
+      {
+        postfix = {
+          dnsBlacklists = [
+            "all.s5h.net"
+            "b.barracudacentral.org"
+            "bl.spamcop.net"
+            "blacklist.woody.ch"
+          ];
 
-        dnsBlacklistOverrides = ''
-          ${rdomain} OK
-          ${config.mailserver.fqdn} OK
-          127.0.0.0/8 OK
-          10.0.0.0/8 OK
-          192.168.0.0/16 OK
-        '';
+          dnsBlacklistOverrides = ''
+            ${rdomain} OK
+            ${config.mailserver.fqdn} OK
+            127.0.0.0/8 OK
+            10.0.0.0/8 OK
+            192.168.0.0/16 OK
+          '';
 
-        settings.main.smtp_helo_name = config.mailserver.fqdn;
-      };
+          settings.main.smtp_helo_name = config.mailserver.fqdn;
+        };
 
-      # ssl and acme are true by default
-      nginx.virtualHosts."${cfg.domain}" = { };
-    };
+        # ssl and acme are true by default
+        nginx.virtualHosts."${cfg.domain}" = { };
+      }
+
+      (mkIf cfg.webui.enable {
+        roundcube = {
+          enable = true;
+
+          package = pkgs.roundcube.withPlugins (
+            plugins: builtins.attrValues { inherit (plugins) persistent_login carddav; }
+          );
+
+          maxAttachmentSize = 50;
+
+          dicts = [ pkgs.aspellDicts.en ];
+
+          plugins = [
+            "carddav"
+            "persistent_login"
+          ];
+
+          hostName = "${cfg.webui.domain}";
+          extraConfig = ''
+            $config['imap_host'] = array(
+              'ssl://${config.mailserver.fqdn}' => 'anturated.dev mailserver',
+              'ssl://imap.gmail.com:993' => 'gmail.com mailserver',
+            );
+
+            $config['username_domain'] = array(
+              '${config.mailserver.fqdn}' => '${rdomain}',
+              'mail.gmail.com' => 'gmail.com',
+            );
+
+            $config['x_frame_options'] = false;
+
+            # starttls needed for authentication,
+            # so fqdn has to match the certificate
+            $config['smtp_host'] = "ssl://${config.mailserver.fqdn}";
+            $config['smtp_user'] = "%u";
+            $config['smtp_pass'] = "%p";
+          '';
+        };
+
+        phpfpm.pools.roundcube.settings = {
+          "listen.owner" = config.services.nginx.user;
+          "listen.group" = config.services.nginx.group;
+        };
+
+        postgresql = {
+          ensureDatabases = [ "roundcube" ];
+          ensureUsers = lib.singleton {
+            name = "roundcube";
+            ensureDBOwnership = true;
+          };
+        };
+
+        nginx.virtualHosts."${cfg.webui.domain}" = {
+          locations."/".extraConfig = mkForce "";
+        };
+      })
+    ];
 
     security.acme.certs.${cfg.domain} = {
       reloadServices = [

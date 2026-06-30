@@ -32,6 +32,7 @@
       # self-hosted #
       anturated-website.enable = true;
       mailserver.enable = true;
+      mailserver.webui.enable = true;
       forgejo.enable = true;
       woodpecker.enable = true;
       jellyfin.enable = true;
