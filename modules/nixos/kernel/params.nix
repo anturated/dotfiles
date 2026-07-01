@@ -4,7 +4,7 @@
 let
   inherit (lib.lists) optionals;
   inherit (lib.options) mkEnableOption;
-  inherit (config.ceirios.profiles) virtualization;
+  inherit (config.ceirios.profiles) virtualisation;
 
   cfg = config.ceirios.system;
 in
@@ -104,7 +104,7 @@ in
     "systemd.show_status=auto"
     "rd.systemd.show_status=auto"
   ]
-  ++ optionals virtualization.enable [
+  ++ optionals virtualisation.enable [
     # enable IOMMU for devices used in passthrough and provide better host performance
     "iommu=pt"
   ];

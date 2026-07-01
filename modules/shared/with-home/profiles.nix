@@ -25,8 +25,7 @@ in
       laptop optimizations and services
       (tuned, acpid, etc.)'';
 
-    # TODO: this does nothing currently (i think)
-    virtualization.enable = mkEnableOption "stuff for VM hosting (iommu, kvm, etc.)";
+    virtualisation.enable = mkEnableOption "stuff for VM hosting (iommu, kvm, etc.)";
 
     qemuGuest.enable = mkEnableOption "QEMU guest optimizations";
   };
