@@ -1,7 +1,7 @@
 { ... }:
 
 {
-  # imports = [ ./hardware.nix ];
+  imports = [ ./hardware.nix ];
 
   ceirios = {
     profiles = {
