@@ -12,7 +12,9 @@
     };
 
     hardware = {
-      cpu = "amd";
+      cpu = "intel";
+      gpu = "nvidia";
+      bluetooth.enable = true;
     };
 
     users.acngku = {
