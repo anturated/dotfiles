@@ -2,6 +2,7 @@
 
 let
   inherit (lib) mkIf optionals;
+  inherit (lib.strings) optionalString;
   inherit (config.ceirios) hardware;
   inherit (config.ceirios.profiles) virtualisation;
 in
@@ -10,6 +11,6 @@ in
     hardware.cpu.amd.updateMicrocode = true;
 
     boot.kernelModules = optionals virtualisation.enable [ "kvm-amd" ];
-    boot.extraModprobeConfig = optionals virtualisation.enable "options kvm_amd nested=1";
+    boot.extraModprobeConfig = optionalString virtualisation.enable "options kvm_amd nested=1";
   };
 }
