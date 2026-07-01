@@ -10,5 +10,6 @@ in
     hardware.cpu.amd.updateMicrocode = true;
 
     boot.kernelModules = optionals virtualisation.enable [ "kvm-amd" ];
+    boot.extraModprobeConfig = optionals virtualisation.enable "options kvm_amd nested=1";
   };
 }

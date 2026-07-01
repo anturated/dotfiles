@@ -17,6 +17,7 @@
     ./secrets.nix
     ./system
     ./users.nix
+    ./virtualisation.nix
 
     ./extras.nix
   ];

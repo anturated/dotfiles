@@ -11,6 +11,7 @@
       workstation.enable = true;
       graphical.enable = true;
       gaming.enable = true;
+      virtualisation.enable = true;
     };
 
     hardware = {

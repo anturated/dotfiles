@@ -62,6 +62,7 @@ in
           "podman"
           "git"
           "libvirtd"
+          "kvm"
           "cloudflared"
         ];
       })
