@@ -53,7 +53,7 @@ in
 
         -- aquamarine --
 
-        ${import ./aquamarine.nix { inherit osConfig; }}
+        ${import ./aquamarine.nix { inherit osConfig lib; }}
 
         -------------------------------------
         -- too small to have it's own file --
