@@ -64,7 +64,7 @@ evalHost {
         inputs' = mapAttrs (_: mapAttrs (_: v: v.${config.nixpkgs.hostPlatform.system} or v)) inputs;
       in
       {
-        key = "dotfiles#specialArgs";
+        key = "ceirios#specialArgs";
         _file = "${__curPos.file}";
 
         _module.args = {
