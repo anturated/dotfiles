@@ -44,7 +44,7 @@ in
     # ceirios options .md
     optionsDocs = pkgs.callPackage ./docs.nix {
       inherit lib pkgs;
-      machineOptions = self.nixosConfigurations.legion.options;
+      machine = self.nixosConfigurations.legion;
     };
   });
 
