@@ -9,10 +9,11 @@
 let
   inherit (lib.modules) mkIf mkForce;
   inherit (lib.lists) concatLists;
+  inherit (lib.attrsets) concatMapAttrs listToAttrs nameValuePair;
   inherit (pkgs.stdenv.hostPlatform) isLinux;
 
-  template = self.lib.template.xdg;
-  vars = template.user config.xdg;
+  inherit (self.lib) template;
+  vars = template.xdg.user config.xdg;
 
   appsToAssoc = {
     browser = {
@@ -69,8 +70,8 @@ let
     };
   };
 
-  associations' = lib.concatMapAttrs (
-    _: val: lib.listToAttrs (lib.map (mt: lib.nameValuePair mt "${val.app}.desktop") val.mimeTypes)
+  associations' = concatMapAttrs (
+    _: val: listToAttrs (map (mt: nameValuePair mt "${val.app}.desktop") val.mimeTypes)
   ) appsToAssoc;
 
   specifics = {
@@ -111,7 +112,7 @@ in
       defaultApplications = associations;
     };
     # disable in home, let nixos manage it
-    portal.enable = lib.mkForce false;
+    portal.enable = mkForce false;
   };
 
   home.sessionVariables = vars // {

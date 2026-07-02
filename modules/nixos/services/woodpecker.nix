@@ -18,6 +18,8 @@ let
   inherit (lib.modules) mkIf;
   inherit (lib.options) mkOption;
   inherit (lib.attrsets) mapAttrs';
+  inherit (lib.lists) singleton;
+  inherit (lib.types) int;
   inherit (self.lib) mkServiceOption mkSecret;
   inherit (config.sops) secrets;
   inherit (config.ceirios.services) forgejo;
@@ -28,13 +30,13 @@ in
     port = 8000; # webui
 
     portGRPC = mkOption {
-      type = lib.types.int;
+      type = int;
       default = 9000;
       description = "Agent comms port";
     };
 
     portHealthcheck = mkOption {
-      type = lib.types.int;
+      type = int;
       default = 3001;
       description = "Healthcheck port";
     };
@@ -74,7 +76,7 @@ in
 
       postgresql = {
         ensureDatabases = [ dbUser ];
-        ensureUsers = lib.singleton {
+        ensureUsers = singleton {
           name = dbUser;
           ensureDBOwnership = true;
         };

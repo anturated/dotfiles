@@ -1,11 +1,13 @@
 { lib, config, ... }:
 
 let
+  inherit (lib.options) mkOption;
+  inherit (lib.types) str;
   inherit (config.ceirios.system) flakeDir;
 in
 {
-  options.ceirios.system.flakeDir = lib.mkOption {
-    type = lib.types.str;
+  options.ceirios.system.flakeDir = mkOption {
+    type = str;
     default = "";
     description = "Path to your local config";
     example = "$HOME/dev/dotfiles";

@@ -8,12 +8,13 @@
 let
   inherit (lib.attrsets) genAttrs;
   inherit (lib.modules) mkIf;
+  inherit (lib.options) mkEnableOption;
 
   cfg = config.ceirios.system.security.binaries;
 in
 {
   options.ceirios.system.security = {
-    binaries.enable = lib.mkEnableOption ''
+    binaries.enable = mkEnableOption ''
       native binary runners (nix-ld and AppImage).
       Allows to run binaries not from nix store, like on normal linux distros.
       Usually you don't want this, you can install almost anything from nixpkgs'';

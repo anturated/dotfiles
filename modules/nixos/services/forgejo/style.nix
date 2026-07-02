@@ -6,11 +6,8 @@
 }:
 
 let
-  inherit (lib.attrsets)
-    attrValues
-    attrNames
-    mapAttrs
-    ;
+  inherit (lib.attrsets) attrValues attrNames mapAttrs;
+  inherit (lib.lists) flatten;
 
   logo = ./custom/icon.svg;
   favicon = ./custom/favicon_sm.svg;
@@ -39,16 +36,14 @@ in
   services.forgejo.settings.ui = {
     DEFAULT_THEME = "gefail";
 
-    THEMES = lib.concatStringsSep "," (
-      lib.flatten [
-        (attrNames themes)
-        [
-          "forgejo-auto"
-          "forgejo-light"
-          "forgejo-dark"
-        ]
+    THEMES = lib.concatStringsSep "," (flatten [
+      (attrNames themes)
+      [
+        "forgejo-auto"
+        "forgejo-light"
+        "forgejo-dark"
       ]
-    );
+    ]);
   };
 
   systemd.services.forgejo-themes = {

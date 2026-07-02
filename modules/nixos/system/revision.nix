@@ -7,12 +7,13 @@
 }:
 let
   inherit (lib.options) mkOption;
+  inherit (lib.types) str;
 
   cfg = config.ceirios.system;
 in
 {
   options.ceirios.system.stateVersion = mkOption {
-    type = lib.types.str;
+    type = str;
     default = "26.05";
     description = ''
       Whatever version of nixos was initially installed.

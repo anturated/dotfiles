@@ -11,6 +11,7 @@ let
   rdomain = config.networking.domain;
 
   inherit (lib.modules) mkIf mkForce;
+  inherit (lib.lists) singleton head;
   inherit (self.lib) mkServiceOption mkSecret;
 in
 {
@@ -73,7 +74,7 @@ in
             # LANDING_PAGE = "/explore/repos";
 
             SSH_CREATE_AUTHORIZED_KEYS_FILE = true;
-            SSH_PORT = lib.head config.services.openssh.ports;
+            SSH_PORT = head config.services.openssh.ports;
 
             # fix gravatar images
             OFFLINE_MODE = false;
@@ -185,7 +186,7 @@ in
 
       postgresql = {
         ensureDatabases = [ "forgejo" ];
-        ensureUsers = lib.singleton {
+        ensureUsers = singleton {
           name = "forgejo";
           ensureDBOwnership = true;
         };

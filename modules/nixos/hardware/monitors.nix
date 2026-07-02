@@ -2,7 +2,7 @@
 
 let
   inherit (lib.lists) sort head;
-  inherit (lib.options) mkOption;
+  inherit (lib.options) mkOption literalExpression;
   inherit (lib.attrsets) attrValues;
   inherit (lib.types)
     str
@@ -66,14 +66,14 @@ in
                 example = 144;
               };
 
-              orientation = lib.mkOption {
+              orientation = mkOption {
                 type = int;
                 default = 0;
                 description = "How many times the monitor is rotated 90 degrees clockwise.";
                 example = 3;
               };
 
-              x = lib.mkOption {
+              x = mkOption {
                 type = int;
                 default = 0;
                 description = ''
@@ -88,7 +88,7 @@ in
                 example = -1920;
               };
 
-              y = lib.mkOption {
+              y = mkOption {
                 type = int;
                 default = 0;
                 description = ''
@@ -118,7 +118,7 @@ in
         Monitors config. You usually want this set up. Get monitor names with `hyprctl monitors` or similar.
       '';
 
-      example = lib.literalExpression ''
+      example = literalExpression ''
         monitors = {
           HDMI-1 = { }; # defaults to 1080p @ 60hz
           DP-1 = {

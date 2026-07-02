@@ -10,6 +10,8 @@
 let
   inherit (lib.modules) mkIf mkForce mkMerge;
   inherit (lib.options) mkEnableOption mkOption;
+  inherit (lib.types) str;
+  inherit (lib.lists) singleton;
   inherit (self.lib) mkServiceOption mkSecret;
   inherit (config.sops) secrets;
 
@@ -26,7 +28,7 @@ in
       webui = {
         enable = mkEnableOption "webui";
         domain = mkOption {
-          type = lib.types.str;
+          type = str;
           default = "rc.${rdomain}";
         };
       };
@@ -222,7 +224,7 @@ in
 
         postgresql = {
           ensureDatabases = [ "roundcube" ];
-          ensureUsers = lib.singleton {
+          ensureUsers = singleton {
             name = "roundcube";
             ensureDBOwnership = true;
           };

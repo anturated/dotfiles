@@ -28,7 +28,7 @@ let
       };
 
       port = mkOption {
-        type = lib.types.port;
+        type = lib.types.port; # keep this as lib.types to avoid name clash
         default = port;
         description = "The port for ${name} service";
       };
