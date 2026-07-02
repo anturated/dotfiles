@@ -95,6 +95,7 @@ fi
 if $PRIMARY_INVOLVED; then
   # get image hash
   hash=$(sha1sum "$img" | cut -d' ' -f1)
+  mkdir -p "$HOME/.cache/matugen"
   cache="$HOME/.cache/matugen/$SCHEME-$hash.json"
   echo "hash is $hash for $img"
 
