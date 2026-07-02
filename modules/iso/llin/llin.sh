@@ -4,10 +4,30 @@ set -euo pipefail
 
 # WARN: probably should do all the checks (repo, boot, etc.) BEFORE we wipe the disk.
 
+############
+#   ARGS   #
+############
+
 VERBOSE=false
-if [[ "${1:-}" == "-v" ]]; then
-  VERBOSE=true
-fi
+NETWORK_ONLY=false
+PARTITIONS=false
+
+while getopts ":vqp" opt; do
+  case $opt in
+  # verbose
+  v) VERBOSE=true ;;
+  # quit after network setup
+  q) NETWORK_ONLY=true ;;
+  # partition select instead of wipe
+  p) PARTITIONS=true ;;
+  *) ;;
+  esac
+done
+shift $((OPTIND - 1))
+
+#############
+# FUNCTIONS #
+#############
 
 # wrapper
 run() {
@@ -151,19 +171,9 @@ if [ "$HAS_DNS" -eq 0 ]; then
 fi
 
 echo "  You have internet."
-
-gum confirm "Exit installer so you can SSH?" \
-  --affirmative "yes" \
-  --negative "no" \
-  --prompt.foreground 15 \
-  --selected.foreground 16 \
-  --selected.background 15 \
-  --unselected.foreground 15 \
-  --unselected.background 16 \
-  --padding "1 2" \
-  --no-show-help &&
-  exit 0 ||
-  true
+if "$NETWORK_ONLY"; then
+  exit 0
+fi
 
 # get some information from the user
 hostname=$(gum input \
@@ -175,145 +185,202 @@ hostname=$(gum input \
   --cursor.foreground 15)
 echo "  Hostname: $hostname"
 
-drive=$(lsblk -nlo PATH,TYPE |
-  awk '$2 == "disk" { print $1 }' | # choose only disks
-  gum choose \
-    --header "  Install to:" \
-    --header.foreground 15 \
-    --item.foreground 8 \
-    --cursor.foreground 2)
-echo "  Install to: $drive"
-echo "• ──────────────────────────────────────────────── •"
-echo "  Checking if we are BIOS or UEFI..."
+if "$PARTITIONS"; then
+  echo "  You've chosen to save the disk."
 
-IS_UEFI=1
-ls /sys/firmware/efi >/dev/null 2>&1 || IS_UEFI=0
+  IS_UEFI=1
+  ls /sys/firmware/efi >/dev/null 2>&1 || IS_UEFI=0
 
-if [ "$IS_UEFI" -eq 0 ]; then
-  echo "  BIOS."
-  echo "! MAKE SURE YOU HAVE GRUB AND GRUB DEVICE SET!"
-
-  # Determine partition prefix based on drive type
-  if [[ $drive == *"nvme"* ]]; then
-    # nvme dirves like /dev/nvme0n1p1
-    echo "  Looks like nvme. Using p1-p4"
-    bios_part="${drive}p1"
-    boot_part="${drive}p2"
-    root_part="${drive}p3"
-    swap_part="${drive}p4"
-  else
-    # handle /dev/sda1 style drives
-    echo "  Doesn't look like nvme. Using 1-4"
-    bios_part="${drive}1"
-    boot_part="${drive}2"
-    root_part="${drive}3"
-    swap_part="${drive}4"
+  if [ "$IS_UEFI" -eq 0 ]; then
+    echo "  You're on BIOS boot."
+    echo "  Hope you have a partition for that."
   fi
 
-  echo "  Will create these partitions:"
-  echo "  $bios_part 1MiB"
-  echo "  $boot_part 1024MiB"
-  echo "  $root_part Most of it"
-  echo "  $swap_part 8GiB"
-else
-  echo "  UEFI."
-  # Determine partition prefix based on drive type
-  if [[ $drive == *"nvme"* ]]; then
-    # nvme dirves like /dev/nvme0n1p1
-    echo "  Looks like nvme. Using p1-p3"
-    boot_part="${drive}p1"
-    root_part="${drive}p2"
-    swap_part="${drive}p3"
-  else
-    # handle /dev/sda1 style drives
-    echo "  Doesn't look like nvme. Using 1-3"
-    boot_part="${drive}1"
-    root_part="${drive}2"
-    swap_part="${drive}3"
+  echo "  Running mandatory unmount."
+  umount -R /mnt 2>/dev/null || true
+  swapoff -a 2>/dev/null || true
+
+  # check for swap
+  swap_part=$(lsblk -nlo PATH,FSTYPE | awk '$2 == "swap" { print $1; exit }')
+  if [ -n "$swap_part" ]; then
+    echo "  Swap partition detected at $swap_part and will be used."
+    run swapon "$swap_part"
   fi
 
-  echo "  Will create these partitions:"
-  echo "  $boot_part 1024MiB"
-  echo "  $root_part Most of it"
-  echo "  $swap_part 8GiB"
-fi
+  boot_part=$(lsblk -nlo PATH,SIZE,TYPE,FSTYPE,LABEL |
+    awk '$3 == "part" { printf "%-18s %-8s %-8s %s\n", $1, $2, ($4==""?"-":$4), $5 }' |
+    gum choose \
+      --header "  Select /boot partition (usually vfat):" \
+      --header.foreground 15 \
+      --item.foreground 8 \
+      --cursor.foreground 2 |
+    awk '{ print $1 }')
 
-# last warning
-gum confirm "Wipe $drive and set up flake?" \
-  --affirmative "yes" \
-  --negative "no" \
-  --default=false \
-  --prompt.foreground 1 \
-  --selected.foreground 16 \
-  --selected.background 15 \
-  --unselected.foreground 15 \
-  --unselected.background 16 \
-  --padding "0 2" &&
-  echo "  Wiping $drive..." ||
-  exit 1
+  root_part=$(lsblk -nlo PATH,SIZE,TYPE,FSTYPE,LABEL |
+    awk '$3 == "part" { printf "%-18s %-8s %-8s %s\n", $1, $2, ($4==""?"-":$4), $5 }' |
+    gum choose \
+      --header "  Select / root partition:" \
+      --header.foreground 15 \
+      --item.foreground 8 \
+      --cursor.foreground 2 |
+    awk '{ print $1 }')
 
-##############
-#   MOUNTS   #
-##############
+  echo "• ──────────────────────────────────────────────── •"
+  echo "  BOOT: $boot_part"
+  echo "  ROOT: $root_part"
+  if [ -n "$swap_part" ]; then
+    echo "  SWAP: $swap_part"
+  fi
 
-# remove old install attempts (if there are any)
-umount -R /mnt 2>/dev/null || true
-swapoff -a 2>/dev/null || true
-
-# cleanup
-run wipefs -af "$drive"       # fs signature
-run sgdisk --zap-all "$drive" # headers
-
-# refresh info
-run partprobe "$drive"
-run udevadm settle
-
-# create some partitions
-run parted -s "$drive" -- mklabel gpt
-
-# partitions should start some space from 0 because alignment
-
-# boot & root
-if [ "$IS_UEFI" -eq 0 ]; then
-  run parted -s "$drive" -- mkpart bios-boot 1MiB 2MiB # raw
-  run parted -s "$drive" -- mkpart boot fat32 2MiB 1025MiB
-  run parted -s "$drive" -- mkpart root btrfs 1025MiB -8GiB
-  run parted -s "$drive" -- set 1 bios_grub on
-  run parted -s "$drive" -- set 2 esp on # this needs to be on boot partition
+  echo "  Mounting all that..."
+  run mkdir -p /mnt
+  run mount "$root_part" /mnt
+  run mkdir -p /mnt/boot
+  run mount "$boot_part" /mnt/boot
 else
-  run parted -s "$drive" -- mkpart boot fat32 1MiB 1024MiB
-  run parted -s "$drive" -- mkpart root btrfs 1024MiB -8GiB
-  run parted -s "$drive" -- set 1 esp on
+  drive=$(lsblk -nlo PATH,TYPE |
+    awk '$2 == "disk" { print $1 }' | # choose only disks
+    gum choose \
+      --header "  Install to:" \
+      --header.foreground 15 \
+      --item.foreground 8 \
+      --cursor.foreground 2)
+  echo "  Install to: $drive"
+  echo "• ──────────────────────────────────────────────── •"
+  echo "  Checking if we are BIOS or UEFI..."
+
+  IS_UEFI=1
+  ls /sys/firmware/efi >/dev/null 2>&1 || IS_UEFI=0
+
+  if [ "$IS_UEFI" -eq 0 ]; then
+    echo "  BIOS."
+    echo "! MAKE SURE YOU HAVE GRUB AND GRUB DEVICE SET!"
+
+    # Determine partition prefix based on drive type
+    if [[ $drive == *"nvme"* ]]; then
+      # nvme dirves like /dev/nvme0n1p1
+      echo "  Looks like nvme. Using p1-p4"
+      bios_part="${drive}p1"
+      boot_part="${drive}p2"
+      root_part="${drive}p3"
+      swap_part="${drive}p4"
+    else
+      # handle /dev/sda1 style drives
+      echo "  Doesn't look like nvme. Using 1-4"
+      bios_part="${drive}1"
+      boot_part="${drive}2"
+      root_part="${drive}3"
+      swap_part="${drive}4"
+    fi
+
+    echo "  Will create these partitions:"
+    echo "  $bios_part 1MiB"
+    echo "  $boot_part 1024MiB"
+    echo "  $root_part Most of it"
+    echo "  $swap_part 8GiB"
+  else
+    echo "  UEFI."
+    # Determine partition prefix based on drive type
+    if [[ $drive == *"nvme"* ]]; then
+      # nvme dirves like /dev/nvme0n1p1
+      echo "  Looks like nvme. Using p1-p3"
+      boot_part="${drive}p1"
+      root_part="${drive}p2"
+      swap_part="${drive}p3"
+    else
+      # handle /dev/sda1 style drives
+      echo "  Doesn't look like nvme. Using 1-3"
+      boot_part="${drive}1"
+      root_part="${drive}2"
+      swap_part="${drive}3"
+    fi
+
+    echo "  Will create these partitions:"
+    echo "  $boot_part 1024MiB"
+    echo "  $root_part Most of it"
+    echo "  $swap_part 8GiB"
+  fi
+
+  # last warning
+  gum confirm "Wipe $drive and set up flake?" \
+    --affirmative "yes" \
+    --negative "no" \
+    --default=false \
+    --prompt.foreground 1 \
+    --selected.foreground 16 \
+    --selected.background 15 \
+    --unselected.foreground 15 \
+    --unselected.background 16 \
+    --padding "0 2" &&
+    echo "  Wiping $drive..." ||
+    exit 1
+
+  ##############
+  #   MOUNTS   #
+  ##############
+
+  # remove old install attempts (if there are any)
+  umount -R /mnt 2>/dev/null || true
+  swapoff -a 2>/dev/null || true
+
+  # cleanup
+  run wipefs -af "$drive"       # fs signature
+  run sgdisk --zap-all "$drive" # headers
+
+  # refresh info
+  run partprobe "$drive"
+  run udevadm settle
+
+  # create some partitions
+  run parted -s "$drive" -- mklabel gpt
+
+  # partitions should start some space from 0 because alignment
+
+  # boot & root
+  if [ "$IS_UEFI" -eq 0 ]; then
+    run parted -s "$drive" -- mkpart bios-boot 1MiB 2MiB # raw
+    run parted -s "$drive" -- mkpart boot fat32 2MiB 1025MiB
+    run parted -s "$drive" -- mkpart root btrfs 1025MiB -8GiB
+    run parted -s "$drive" -- set 1 bios_grub on
+    run parted -s "$drive" -- set 2 esp on # this needs to be on boot partition
+  else
+    run parted -s "$drive" -- mkpart boot fat32 1MiB 1024MiB
+    run parted -s "$drive" -- mkpart root btrfs 1024MiB -8GiB
+    run parted -s "$drive" -- set 1 esp on
+  fi
+
+  # swap
+  run parted -s "$drive" -- mkpart swap linux-swap -8GiB 100%
+
+  # refresh info
+  run partprobe "$drive"
+  run udevadm settle
+
+  # format the partitions
+  echo "  Formatting..."
+  # boot-bios doesn't need formatting
+  run mkfs.fat -F32 -n boot "$boot_part"
+  run mkfs.btrfs -f -L root "$root_part" # force
+  run mkswap -L swap "$swap_part"
+  run swapon "$swap_part"
+
+  # mount the partitions whilst ensuring the directories exist
+  echo "  Mounting..."
+  run mkdir -p /mnt
+  run mount "$root_part" /mnt
+  run mkdir -p /mnt/boot
+  run mount "$boot_part" /mnt/boot
 fi
-
-# swap
-run parted -s "$drive" -- mkpart swap linux-swap -8GiB 100%
-
-# refresh info
-run partprobe "$drive"
-run udevadm settle
-
-# format the partitions
-echo "  Formatting..."
-# boot-bios doesn't need formatting
-run mkfs.fat -F32 -n boot "$boot_part"
-run mkfs.btrfs -f -L root "$root_part" # force
-run mkswap -L swap "$swap_part"
-run swapon "$swap_part"
-
-# mount the partitions whilst ensuring the directories exist
-echo "  Mounting..."
-run mkdir -p /mnt
-run mount "$root_part" /mnt
-run mkdir -p /mnt/boot
-run mount "$boot_part" /mnt/boot
 
 ###################
 #   GIT / FLAKE   #
 ###################
 
 echo "  Setting up flake..."
-run mkdir -p /mnt/etc/nixos/machines/"$hostname" # extend it all the way so we can write hw
+# just in case, remove old attempt
+run rm -r /mnt/etc/nixos || true
+# extend it all the way so we can write hw
+run mkdir -p /mnt/etc/nixos/machines/"$hostname"
 
 # need to check a whole lot of git stuff because i might get funky
 FLAKE_REPO="https://git.anturated.dev/anturated/dotfiles"
