@@ -2,6 +2,7 @@
   lib,
   config,
   pkgs,
+  self,
   ...
 }:
 
@@ -10,13 +11,7 @@ let
   inherit (lib) mkIf;
 
   hasBusId = busIds.discrete != null;
-  pciAddr =
-    let
-      parts = lib.splitString ":" busIds.discrete;
-    in
-    "0000:${lib.fixedWidthString 2 "0" (builtins.elemAt parts 0)}"
-    + ":${lib.fixedWidthString 2 "0" (builtins.elemAt parts 1)}"
-    + ".${builtins.elemAt parts 2}";
+  pciAddr = self.lib.pciAddr busIds.discrete;
 in
 {
   config = mkIf (gpu == "nvidia" || gpu == "nv-hybrid") {

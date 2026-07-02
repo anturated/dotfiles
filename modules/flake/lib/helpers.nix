@@ -25,7 +25,16 @@ let
   };
 
   mkPubs = host: keys: lib.foldl' (acc: key: acc // mkPub host key) { } keys;
+
+  pciAddr =
+    busId:
+    let
+      parts = lib.splitString ":" busId;
+    in
+    "0000:${lib.fixedWidthString 2 "0" (builtins.elemAt parts 0)}"
+    + ":${lib.fixedWidthString 2 "0" (builtins.elemAt parts 1)}"
+    + ".${builtins.elemAt parts 2}";
 in
 {
-  inherit mkPubs anyHome;
+  inherit mkPubs anyHome pciAddr;
 }

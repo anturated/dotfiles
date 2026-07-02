@@ -2,6 +2,7 @@
   lib,
   pkgs,
   config,
+  self,
   ...
 }:
 
@@ -11,13 +12,7 @@ let
 
   useAmd = gpu == "amd" || gpu == "nv-hybrid" && cpu == "amd";
   hasBusId = useAmd && busIds.primary != null;
-  pciAddr = # assuming this is only used in laptops
-    let
-      parts = lib.splitString ":" busIds.primary;
-    in
-    "0000:${lib.fixedWidthString 2 "0" (builtins.elemAt parts 0)}"
-    + ":${lib.fixedWidthString 2 "0" (builtins.elemAt parts 1)}"
-    + ".${builtins.elemAt parts 2}";
+  pciAddr = self.lib.pciAddr busIds.primary;
 in
 {
   config = mkIf useAmd {
