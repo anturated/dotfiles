@@ -8,7 +8,8 @@
 }:
 
 let
-  inherit (lib) mkIf attrValues;
+  inherit (lib.modules) mkIf;
+  inherit (lib.attrsets) attrValues;
   inherit (config.ceirios.hardware) cpu gpu busIds;
 
   useIntel = gpu == "intel" || gpu == "nv-hybrid" && cpu == "intel";

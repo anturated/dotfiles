@@ -10,7 +10,7 @@
 }:
 
 let
-  inherit (lib) genAttrs;
+  inherit (lib.attrsets) genAttrs;
   inherit (config.ceirios) users;
   usernames = builtins.attrNames users;
 in

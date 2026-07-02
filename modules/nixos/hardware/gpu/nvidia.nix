@@ -7,8 +7,8 @@
 }:
 
 let
+  inherit (lib.modules) mkIf;
   inherit (config.ceirios.hardware) gpu busIds;
-  inherit (lib) mkIf;
 
   hasBusId = busIds.discrete != null;
   pciAddr = self.lib.pciAddr busIds.discrete;

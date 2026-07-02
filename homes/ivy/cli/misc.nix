@@ -6,7 +6,7 @@
 }:
 
 let
-  inherit (lib) mergeAttrsList optionalAttrs;
+  inherit (lib.attrsets) mergeAttrsList optionalAttrs;
   inherit (config.ceirios.profiles) gaming graphical;
 in
 {

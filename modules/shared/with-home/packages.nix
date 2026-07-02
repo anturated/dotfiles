@@ -6,7 +6,8 @@
 }:
 
 let
-  inherit (lib) mergeAttrsList optionalAttrs mkOption;
+  inherit (lib.attrsets) mergeAttrsList optionalAttrs;
+  inherit (lib.options) mkOption;
   inherit (lib.types) lazyAttrsOf package;
 in
 {

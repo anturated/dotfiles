@@ -1,7 +1,7 @@
 { lib, config, ... }:
 
 let
-  inherit (lib) optionals;
+  inherit (lib.lists) optionals;
   inherit (config.ceirios.profiles) gaming;
 in
 {

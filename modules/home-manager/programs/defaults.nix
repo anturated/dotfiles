@@ -5,7 +5,8 @@
 }:
 
 let
-  inherit (lib) mapAttrs mkOption;
+  inherit (lib.attrsets) mapAttrs;
+  inherit (lib.options) mkOption;
   inherit (lib.types) enum str;
 
   mkDefault = name: args: mkOption ({ description = "default ${name} for the system"; } // args);

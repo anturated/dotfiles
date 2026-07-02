@@ -7,7 +7,7 @@ let
     prime
     busIds
     ;
-  inherit (lib) mkMerge mkIf mkDefault;
+  inherit (lib.modules) mkMerge mkIf mkDefault;
 
   hasBusIds = busIds.primary != null && busIds.discrete != null;
   isHybrid = gpu == "nv-hybrid";

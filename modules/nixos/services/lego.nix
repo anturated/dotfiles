@@ -6,16 +6,17 @@
 }:
 
 let
-  inherit (lib)
-    mkIf
-    mkOption
-    types
-    listToAttrs
-    mapAttrsToList
-    nameValuePair
-    concatLists
+  inherit (lib.modules) mkIf;
+  inherit (lib.options) mkOption;
+  inherit (lib.attrsets) listToAttrs mapAttrsToList nameValuePair;
+  inherit (lib.lists) concatLists;
+  inherit (lib.types)
+    str
+    nullOr
+    attrsOf
+    submodule
+    anything
     ;
-  inherit (types) str nullOr;
 
   inherit (self.lib) mkSecret;
   inherit (config.sops) secrets;
@@ -53,11 +54,11 @@ let
 in
 {
   options.security.acme.certs = mkOption {
-    type = types.attrsOf (
-      types.submodule (
+    type = attrsOf (
+      submodule (
         { config, ... }:
         {
-          freeformType = types.attrsOf types.anything;
+          freeformType = attrsOf anything;
 
           options.autoProvider = mkOption {
             type = nullOr str;

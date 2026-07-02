@@ -6,8 +6,9 @@
 }:
 
 let
-  inherit (lib) mkOption mkOverride types;
-  inherit (types) raw;
+  inherit (lib.modules) mkOverride;
+  inherit (lib.options) mkOption;
+  inherit (lib.types) raw;
 
   cfg = config.ceirios.system.kernel;
 in

@@ -6,15 +6,16 @@
 }:
 
 let
-  inherit (lib)
+  inherit (lib.attrsets)
     mergeAttrsList
     optionalAttrs
     genAttrs
-    mkDefault
+    attrNames
     ;
+  inherit (lib.modules) mkDefault;
 in
 {
-  users.users = genAttrs (builtins.attrNames config.ceirios.users) (
+  users.users = genAttrs (attrNames config.ceirios.users) (
     name:
     let
       inherit (config.home-manager.users.${name}.ceirios.programs.defaults) shell;

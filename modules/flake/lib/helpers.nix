@@ -1,7 +1,8 @@
 { lib }:
 
 let
-  inherit (lib) getAttrFromPath any;
+  inherit (lib.attrsets) getAttrFromPath attrNames;
+  inherit (lib.lists) any elemAt;
 
   anyHome =
     conf: cond:
@@ -13,7 +14,7 @@ let
           "users"
           user
         ] conf
-      ) (builtins.attrNames conf.ceirios.users);
+      ) (attrNames conf.ceirios.users);
     in
     any cond list;
 
@@ -31,9 +32,9 @@ let
     let
       parts = lib.splitString ":" busId;
     in
-    "0000:${lib.fixedWidthString 2 "0" (builtins.elemAt parts 0)}"
-    + ":${lib.fixedWidthString 2 "0" (builtins.elemAt parts 1)}"
-    + ".${builtins.elemAt parts 2}";
+    "0000:${lib.fixedWidthString 2 "0" (elemAt parts 0)}"
+    + ":${lib.fixedWidthString 2 "0" (elemAt parts 1)}"
+    + ".${elemAt parts 2}";
 in
 {
   inherit mkPubs anyHome pciAddr;

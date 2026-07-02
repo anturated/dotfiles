@@ -6,7 +6,8 @@
 }:
 
 let
-  inherit (lib) mkIf mkForce concatStringsSep;
+  inherit (lib.modules) mkIf mkForce;
+  inherit (lib.strings) concatStringsSep;
   inherit (config.ceirios.profiles) graphical;
 
   avoid = concatStringsSep "|" [

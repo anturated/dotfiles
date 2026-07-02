@@ -6,7 +6,7 @@
 }:
 
 let
-  inherit (lib) mkIf mkForce;
+  inherit (lib.modules) mkIf mkForce;
   inherit (config.ceirios.profiles) graphical;
 in
 {

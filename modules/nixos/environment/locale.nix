@@ -1,8 +1,8 @@
 { config, lib, ... }:
 
 let
-  inherit (lib) mkOption types;
-  inherit (types) str;
+  inherit (lib.options) mkOption;
+  inherit (lib.types) str;
 in
 {
   options.ceirios.system = {

@@ -1,8 +1,10 @@
 { lib, config, ... }:
 
 let
-  inherit (lib) mkOption types;
-  inherit (types)
+  inherit (lib.lists) sort head;
+  inherit (lib.options) mkOption;
+  inherit (lib.attrsets) attrValues;
+  inherit (lib.types)
     str
     attrsOf
     submodule
@@ -13,9 +15,9 @@ let
   getClosestTo00 =
     let
       # use values because names MAY be overridden
-      mons = builtins.attrValues config.ceirios.hardware.monitors;
-      sorted = builtins.sort (a: b: (a.x + a.y) < (b.x + b.y)) mons;
-      closestTo00 = builtins.head sorted;
+      mons = attrValues config.ceirios.hardware.monitors;
+      sorted = sort (a: b: (a.x + a.y) < (b.x + b.y)) mons;
+      closestTo00 = head sorted;
     in
     closestTo00;
 in

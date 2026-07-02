@@ -5,7 +5,7 @@
   ...
 }:
 let
-  inherit (lib) mkDefault;
+  inherit (lib.modules) mkDefault;
 in
 {
   # mkDefault is here because hyprland uhhh...

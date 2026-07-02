@@ -7,7 +7,7 @@
 }:
 
 let
-  inherit (lib) mkIf;
+  inherit (lib.modules) mkIf;
   inherit (config.ceirios.hardware) cpu gpu busIds;
 
   useAmd = gpu == "amd" || gpu == "nv-hybrid" && cpu == "amd";

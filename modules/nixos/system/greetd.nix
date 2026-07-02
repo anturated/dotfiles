@@ -6,7 +6,7 @@
 }:
 
 let
-  inherit (lib) concatStringsSep;
+  inherit (lib.strings) concatStringsSep;
 
   sessionData = config.services.displayManager.sessionData.desktops;
 in

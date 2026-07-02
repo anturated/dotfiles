@@ -10,10 +10,10 @@ let
 
   inherit (inputs) nixpkgs self;
   inherit (nixpkgs) lib;
-  inherit (lib)
+  inherit (lib.filesystem) readDir;
+  inherit (lib.attrsets)
     genAttrs
     filterAttrs
-    readDir
     attrNames
     mapAttrs
     ;

@@ -1,8 +1,8 @@
 { config, lib, ... }:
 
 let
-  inherit (lib) mkOption types;
-  inherit (types) int;
+  inherit (lib.options) mkOption;
+  inherit (lib.types) int;
 
   cfg = config.ceirios.boot;
 in

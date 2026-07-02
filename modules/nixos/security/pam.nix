@@ -1,7 +1,8 @@
 { lib, config, ... }:
 
 let
-  inherit (lib) genAttrs mkIf mkMerge;
+  inherit (lib.modules) mkIf mkMerge;
+  inherit (lib.attrsets) genAttrs;
   inherit (config.ceirios.profiles) graphical;
 
   services = [

@@ -1,7 +1,8 @@
 { lib, config, ... }:
 
 let
-  inherit (lib) mkIf optionals;
+  inherit (lib.modules) mkIf;
+  inherit (lib.lists) optionals;
   inherit (lib.strings) optionalString;
   inherit (config.ceirios) hardware;
   inherit (config.ceirios.profiles) virtualisation;

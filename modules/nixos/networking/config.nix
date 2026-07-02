@@ -3,12 +3,9 @@
 { config, lib, ... }:
 
 let
-  inherit (lib)
-    mkIf
-    mkOption
-    mkForce
-    optionals
-    ;
+  inherit (lib.modules) mkIf mkForce;
+  inherit (lib.options) mkOption;
+  inherit (lib.lists) optionals;
   inherit (lib.types)
     nullOr
     str

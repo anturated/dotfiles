@@ -7,7 +7,7 @@
 }:
 
 let
-  inherit (lib) mkIf;
+  inherit (lib.modules) mkIf;
   inherit (config.ceirios.profiles) graphical;
 
   spicetifyPkgs = inputs'.spicetify.legacyPackages;

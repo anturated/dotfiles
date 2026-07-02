@@ -1,7 +1,7 @@
 { lib, config, ... }:
 
 let
-  inherit (lib) mkIf;
+  inherit (lib.modules) mkIf;
   inherit (config.ceirios.profiles) graphical;
 in
 {

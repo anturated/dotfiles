@@ -5,13 +5,9 @@
 }:
 
 let
-  inherit (lib)
-    mkOption
-    mkEnableOption
-    attrNames
-    length
-    elemAt
-    ;
+  inherit (lib.options) mkOption mkEnableOption;
+  inherit (lib.attrsets) attrNames;
+  inherit (lib.lists) length elemAt;
   inherit (lib.types)
     submodule
     enum

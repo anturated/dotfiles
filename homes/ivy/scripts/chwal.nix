@@ -9,7 +9,8 @@
 let
   inherit (config.ceirios.profiles) graphical;
   inherit (osConfig.ceirios) hardware;
-  inherit (lib) attrNames length;
+  inherit (lib.attrsets) attrNames;
+  inherit (lib.lists) length;
 
   # fallbacks just in case it's not configured
   hasMonitors = length (attrNames hardware.monitors) > 0;

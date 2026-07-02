@@ -6,12 +6,8 @@
 }:
 
 let
-  inherit (lib)
-    concatStringsSep
-    genList
-    length
-    elemAt
-    ;
+  inherit (lib.strings) concatStringsSep;
+  inherit (lib.lists) genList length elemAt;
   inherit (osConfig.ceirios) hardware;
   # use the name from values because it may be overridden
   monitors =

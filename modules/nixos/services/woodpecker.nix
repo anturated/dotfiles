@@ -15,7 +15,9 @@ let
   serverAddr = "${cfg.host}:${toString cfg.portGRPC}";
   healthAddr = "${cfg.host}:${toString cfg.portHealthcheck}";
 
-  inherit (lib) mkIf mkOption mapAttrs';
+  inherit (lib.modules) mkIf;
+  inherit (lib.options) mkOption;
+  inherit (lib.attrsets) mapAttrs';
   inherit (self.lib) mkServiceOption mkSecret;
   inherit (config.sops) secrets;
   inherit (config.ceirios.services) forgejo;

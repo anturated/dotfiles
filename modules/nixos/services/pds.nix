@@ -7,7 +7,7 @@
 
 let
   inherit (self.lib) mkServiceOption mkSecret;
-  inherit (lib) mkIf mkForce;
+  inherit (lib.modules) mkIf mkForce;
 
   inherit (config.sops) secrets;
 

@@ -2,13 +2,8 @@
 let
   inherit (inputs) self;
 
-  inherit (lib)
-    recursiveUpdate
-    concatLists
-    singleton
-    optionals
-    mapAttrs
-    ;
+  inherit (lib.attrsets) recursiveUpdate mapAttrs;
+  inherit (lib.lists) concatLists singleton optionals;
 in
 
 name:

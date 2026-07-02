@@ -6,7 +6,7 @@
 }:
 
 let
-  inherit (lib) optionalAttrs;
+  inherit (lib.attrsets) optionalAttrs;
   inherit (osConfig.ceirios.hardware) gpu bluetooth;
 in
 {

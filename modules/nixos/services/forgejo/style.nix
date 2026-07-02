@@ -6,7 +6,7 @@
 }:
 
 let
-  inherit (lib)
+  inherit (lib.attrsets)
     attrValues
     attrNames
     mapAttrs

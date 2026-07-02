@@ -1,7 +1,8 @@
 { osConfig, lib, ... }:
 
 let
-  inherit (lib) concatStringsSep mapAttrsToList;
+  inherit (lib.strings) concatStringsSep;
+  inherit (lib.attrsets) mapAttrsToList;
   inherit (osConfig.ceirios.hardware) monitors;
   hasMonitor = monitors != { };
 

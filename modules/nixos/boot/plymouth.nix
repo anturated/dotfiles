@@ -6,8 +6,8 @@
 }:
 
 let
-  inherit (lib) mkOption mkEnableOption types;
-  inherit (types) str listOf;
+  inherit (lib.options) mkOption mkEnableOption;
+  inherit (lib.types) str listOf;
 
   cfg = config.ceirios.boot.plymouth;
 in

@@ -1,8 +1,8 @@
 { lib, ... }:
 
 let
-  inherit (lib) mkOption mkEnableOption types;
-  inherit (types) nullOr enum;
+  inherit (lib.options) mkOption mkEnableOption;
+  inherit (lib.types) nullOr enum;
 in
 {
   imports = [

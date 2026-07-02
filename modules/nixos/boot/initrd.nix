@@ -2,11 +2,8 @@
 
 let
   inherit (config.ceirios.profiles) workstation;
-  inherit (lib)
-    mkIf
-    mkMerge
-    mkEnableOption
-    ;
+  inherit (lib.modules) mkIf mkMerge;
+  inherit (lib.options) mkEnableOption;
 
   cfg = config.ceirios.boot.initrd;
 in

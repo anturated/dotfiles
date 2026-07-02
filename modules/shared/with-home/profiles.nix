@@ -1,7 +1,7 @@
 { lib, _class, ... }:
 
 let
-  inherit (lib) mkEnableOption;
+  inherit (lib.options) mkEnableOption;
 in
 {
   options.ceirios.profiles = {

@@ -9,7 +9,7 @@ let
   inherit (self.lib) mkServiceOption;
   inherit (lib.modules) mkIf mkDefault mkMerge;
   inherit (lib.options) mkOption;
-  inherit (lib) types;
+  inherit (lib.types) attrsOf submodule anything;
 
   cfg = config.ceirios.services.nginx;
 in
@@ -22,9 +22,9 @@ in
     # getchoo is cool for this
     # https://github.com/getchoo/borealis/blob/6e5ad4fb14a0de172c64e0d6a9d6f63ed7df88e6/modules/nixos/mixins/nginx.nix#L5
     services.nginx.virtualHosts = mkOption {
-      type = types.attrsOf (
-        types.submodule (_: {
-          freeformType = types.attrsOf types.anything;
+      type = attrsOf (
+        submodule (_: {
+          freeformType = attrsOf anything;
 
           config = {
             quic = mkDefault true;
