@@ -1,26 +1,10 @@
-{ lib, inputs, ... }:
+{ lib, ... }:
 
-let
-  inherit (lib)
-    filterAttrs
-    mapAttrs
-    isType
-    mkForce
-    ;
-
-  flakeInputs = filterAttrs (name: value: (isType "flake" value) && (name != "self")) inputs;
-in
 {
   # prevent using ~/.config/nixpkgs/config.nix
   environment.variables.NIXPKGS_CONFIG = lib.mkForce "";
 
   nix = {
-    # make nix run, nix shell, etc. use the nixpkgs present on system
-    # instead of downloading whatever's pinned in the flake we're running
-    registry = (mapAttrs (_: flake: { inherit flake; }) flakeInputs) // {
-      # https://github.com/NixOS/nixpkgs/pull/388090
-      nixpkgs = mkForce { flake = inputs.nixpkgs; };
-    };
 
     # disable usage of nix channels
     channel.enable = false;
