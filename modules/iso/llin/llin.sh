@@ -497,8 +497,8 @@ run git -C /mnt/etc/nixos add machines/"$hostname"/hardware.nix
 # create ssh keys with no passphrases
 echo "  Creating ssh host keys (for the new install)..."
 run mkdir -p /mnt/etc/ssh
-run ssh-keygen -t ed25519 -f /mnt/etc/ssh/ssh_host_ed25519_key -N ""
-run ssh-keygen -t rsa -b 4096 -f /mnt/etc/ssh/ssh_host_rsa_key -N ""
+[ -f /mnt/etc/ssh/ssh_host_ed25519_key ] || ssh-keygen -t ed25519 -f /mnt/etc/ssh/ssh_host_ed25519_key -N ""
+[ -f /mnt/etc/ssh/ssh_host_rsa_key ] || ssh-keygen -t rsa -b 4096 -f /mnt/etc/ssh/ssh_host_rsa_key -N ""
 
 ###############
 #   INSTALL   #
