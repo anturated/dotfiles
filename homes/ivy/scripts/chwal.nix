@@ -27,6 +27,7 @@ in
         jq
         rofi
         awww
+        matugen
         hyprland
         findutils
         coreutils
