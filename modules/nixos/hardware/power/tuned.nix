@@ -23,7 +23,7 @@ in
           };
         };
 
-        # NOTE: looks like laptop-battery-powersave just includes powersave.
+        # looks like laptop-battery-powersave just includes powersave.
         ceirios-powersave-bat = {
           main = {
             summary = "We squeeze that battery";
@@ -80,10 +80,10 @@ in
           # these require acpid
 
           # watch ac plug/unplug
-          battery_detection = false; # INFO: broken, see ppdSettings.battery below
+          battery_detection = false; # broken, see ppdSettings.battery below
 
           # watch acpi stuff like hardware key profile switch (Fn+Q, Fn+L, etc.)
-          # sysfs_acpi_monitor = true; # WARN: looks like it's not supported here yet :\
+          # sysfs_acpi_monitor = true; # looks like it's not supported here yet :\
         };
 
         # ppd -> tuned profile bridge
@@ -95,7 +95,7 @@ in
         };
 
         # on battery:
-        # WARN: looks correct in the config but has no effect :\
+        # looks correct in the config but has no effect :\
         # defaults to balanced-power which shouldn't be too bad
         battery = {
           power-saver = "ceirios-powersave-bat";
@@ -106,7 +106,7 @@ in
       };
     };
 
-    # HACK: this should be handled by tuned.ppdSettings.main.sysfs_acpi_monitor
+    # FIXME: this should be handled by tuned.ppdSettings.main.sysfs_acpi_monitor
     udev.extraRules = ''
       ACTION=="change", SUBSYSTEM=="platform", \
         ATTR{/sys/firmware/acpi/platform_profile}=="low-power", \

@@ -9,7 +9,6 @@ hl.window_rule({
   match = {
     class = "^(steam_app_.*)$" -- proton xwayland
       -- linux native steam games
-      -- TODO: check if they have contentType = "game" or 3 and maybe remove
       .. "|^(cs2)$|^(Celeste.bin.x86_64)$|^(Celeste)$|^(valheim.x86_64)$"
       -- Minecraft modpacks (they just have to have a different title all of them)
       .. "|^(Minecraft.*)$|^(DREAD.*)$"
