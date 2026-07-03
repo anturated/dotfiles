@@ -10,5 +10,6 @@
     ./gamescope.nix
     ./steam.nix
     ./hyprland.nix
+    ./virtualisation.nix
   ];
 }
