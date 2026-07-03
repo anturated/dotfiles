@@ -28,5 +28,7 @@ in
     virtualisation.enable = mkEnableOption "stuff for VM hosting (iommu, kvm, etc.)";
 
     qemuGuest.enable = mkEnableOption "QEMU guest optimizations";
+
+    server.enable = mkEnableOption "server stuff (optimize Grub and whatnot)";
   };
 }

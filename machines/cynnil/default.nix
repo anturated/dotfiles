@@ -8,6 +8,7 @@
   ceirios = {
     profiles = {
       headless.enable = true;
+      server.enable = true;
       qemuGuest.enable = true;
     };
 

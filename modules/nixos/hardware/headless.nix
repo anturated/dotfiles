@@ -48,13 +48,5 @@ in
         AllowHybridSleep = false;
       };
     };
-
-    # TODO: move this out of here, this isn't really "headless" stuff
-    boot = {
-      loader.grub = {
-        useOSProber = mkForce false;
-        efiSupport = mkForce false;
-      };
-    };
   };
 }

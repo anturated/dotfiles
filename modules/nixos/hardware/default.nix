@@ -10,5 +10,6 @@
     ./headless.nix
     ./monitors.nix
     ./qemu-guest.nix
+    ./server.nix
   ];
 }
