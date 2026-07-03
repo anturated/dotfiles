@@ -43,7 +43,6 @@ in
   packages = forAllSystems (pkgs: {
     # ceirios options .md
     optionsDocs = pkgs.callPackage ./docs.nix {
-      inherit lib pkgs;
       machine = self.nixosConfigurations.legion;
     };
   });
