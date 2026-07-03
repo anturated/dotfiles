@@ -50,7 +50,6 @@ in
 
         # clipboard
         wl-clipboard-rs
-        xclip # TODO: test if proton needs this nowadays
 
         imagemagick # nice to have for images
         ;
