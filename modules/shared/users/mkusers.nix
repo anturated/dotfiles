@@ -2,6 +2,7 @@
   lib,
   _class,
   config,
+  pkgs,
   ...
 }:
 
@@ -20,10 +21,17 @@ in
     let
       inherit (config.home-manager.users.${name}.ceirios.programs.defaults) shell;
       inherit (config.ceirios.allUsers.${name}) ssh hashedPassword;
+
+      shellPkg =
+        {
+          fish = pkgs.fish;
+          zsh = pkgs.zsh;
+        }
+        .${shell} or pkgs.bashInteractive;
     in
     mergeAttrsList [
       # set shell
-      { shell = "/run/current-system/sw/bin/${shell}"; }
+      { shell = shellPkg; }
 
       # darwin manages users differently so we just point at home
       (optionalAttrs (_class == "darwin") { home = "/Users/${name}"; })
