@@ -89,6 +89,7 @@ fi
 # assemble #
 CMD=("$@")
 ENV_VARS=()
+ORIG_LD_PRELOAD="${LD_PRELOAD:-}"
 
 # proton / steam env
 [ "$USE_PROTON_WAYLAND" -eq 1 ] && ENV_VARS+=("PROTON_ENABLE_WAYLAND=1")
@@ -99,10 +100,9 @@ ENV_VARS=()
 if [ "$USE_GAMESCOPE" -eq 1 ]; then
   if [ "$USE_MANGOHUD" -eq 1 ]; then
     ENV_VARS+=("MANGOHUD=1")
-    # export PATH="${pkgs.mangohud}/bin:$PATH"
   fi
-  # this should kill the lag at ~24 minutes
-  ENV_VARS+=("LD_PRELOAD=\"\"")
+  # https://wiki.archlinux.org/title/Gamescope#Launching_gamescope_from_Steam,_stuttering_after_~24_minutes_(Gamescope_Lag_Bomb)
+  ENV_VARS+=("LD_PRELOAD=${ORIG_LD_PRELOAD}")
 fi
 
 # nvidia offload
@@ -123,7 +123,7 @@ fi
 # wrappers (order matters!)
 if [ "$USE_GAMESCOPE" -eq 1 ]; then
   # use default gamescope to apply args from config
-  CMD=(gamescope -- "${CMD[@]}")
+  CMD=(env -u LD_PRELOAD gamescope -- "${CMD[@]}")
 else
   if [ "$USE_MANGOHUD" -eq 1 ]; then
     CMD=(mangohud "${CMD[@]}")
