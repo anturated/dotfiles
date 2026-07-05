@@ -22,10 +22,7 @@ in
       ];
 
       text = ''
-        #!/usr/bin/env bash
-
         # defaults
-
         USE_HYPR=1
         USE_POWER=1
         USE_NTSYNC=1
