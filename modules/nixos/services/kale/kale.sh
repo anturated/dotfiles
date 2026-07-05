@@ -144,7 +144,7 @@ if [ "$USE_GAMEMODE_BYPASS" -eq 1 ]; then
   declare -A seen
   while kill -0 $LAUNCHER_PID 2>/dev/null; do
     while IFS= read -r pid; do
-      if [ -n "$pid" ] && [ -z "${seen[$pid]}" ] && [ "$pid" != "$$" ]; then
+      if [ -n "$pid" ] && [[ ! -v seen[$pid] ]] && [ "$pid" != "$$" ]; then
         PROC_NAME=$(ps -p "$pid" -o comm= 2>/dev/null | xargs)
 
         # Only register if it's an .exe and NOT in the blacklist
