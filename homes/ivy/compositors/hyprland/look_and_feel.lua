@@ -54,6 +54,11 @@ hl.config({
     force_default_wallpaper = 1,
     disable_hyprland_logo = true,
   },
+
+  -- this feels better, i can't really describe it
+  cursor = {
+    no_hardware_cursors = 1,
+  },
 })
 
 -- workspace and window cosmetic tweaks --
