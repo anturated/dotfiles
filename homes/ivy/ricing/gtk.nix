@@ -24,17 +24,9 @@ in
       };
     };
 
-    home = {
-      pointerCursor = {
-        gtk.enable = true;
-        x11.enable = true;
-        name = "volantes_cursors";
-        package = pkgs.volantes-cursors;
-        size = 24;
-      };
-
+    home.sessionVariables = {
       # gtk applications should use xdg specified settings
-      sessionVariables.GTK_USE_PORTAL = "1";
+      GTK_USE_PORTAL = "1";
     };
 
     gtk = {
