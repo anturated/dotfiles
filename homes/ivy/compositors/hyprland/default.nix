@@ -55,14 +55,6 @@ in
 
         ${import ./aquamarine.nix { inherit osConfig lib; }}
 
-        -------------------------------------
-        -- too small to have it's own file --
-        -------------------------------------
-
-        -- cursor env
-        hl.env("XCURSOR_SIZE", "24")
-        hl.env("XCURSOR_THEME", "Volantes Cursors")
-
         --------------
         -- the rest --
         --------------

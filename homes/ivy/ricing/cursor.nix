@@ -9,5 +9,6 @@
     name = "volantes_cursors";
     package = pkgs.volantes-cursors;
     size = 24;
+    dotIcons.enable = false; # removes ~/.icons
   };
 }
