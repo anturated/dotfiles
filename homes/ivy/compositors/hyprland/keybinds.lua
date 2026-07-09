@@ -131,8 +131,8 @@ local br_dn = br_cmd .. " 5%-"
 hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd(br_up), { repeating = true })
 hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd(br_dn), { repeating = true })
 
-hl.bind(mod .. " + bracketright", hl.dsp.exec_cmd(br_up), { repeating = true })
-hl.bind(mod .. " + bracketleft", hl.dsp.exec_cmd(br_dn), { repeating = true })
+hl.bind(mod .. " + a", hl.dsp.exec_cmd(br_dn), { repeating = true })
+hl.bind(mod .. " + s", hl.dsp.exec_cmd(br_up), { repeating = true })
 
 -- mute
 hl.bind("XF86AudioMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"))
