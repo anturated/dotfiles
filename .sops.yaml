@@ -1,11 +1,9 @@
 keys:
   # users (for scripts and such)
   - &desant ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMOJoauZQLAdUyxVmB+oxNQK+LSQ1Y3/L///GjC+oQlG
-  - &anturated ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII//DoqpZQ6913qjdN3HDia0Cn2TOCgax7FbBB8FHp4c
 
   # machines (for fywion services)
   - &legion ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIExmw+GajJLhh9tjCp7tRdNEOAnjpl0MyiAY7R/XMtT5
-  - &pinwydd ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOkmb1L2+K8pN9f4zgIQCG8AyqSxTr52eHzuQtcNAjqN
   - &cynnil ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINNsMAoi3+7N7B9uqG8sU/mGvnLBHXMhC1jzpgBO0n02
 
 # INFO: add at your user to key groups so you can edit secrets
@@ -22,7 +20,5 @@ creation_rules:
     key_groups:
       - age:
           - *desant
-          - *anturated
           - *legion
-          - *pinwydd
           - *cynnil

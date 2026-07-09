@@ -14,6 +14,6 @@
       cpu = "amd";
     };
 
-    users.acngku.home = "ivy";
+    users.anturated = { };
   };
 }
