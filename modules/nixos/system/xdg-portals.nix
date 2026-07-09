@@ -8,8 +8,8 @@ let
   inherit (lib.modules) mkDefault;
 in
 {
-  # mkDefault is here because hyprland uhhh...
-  # disables it for whatever reason. # TODO: research
+  # mkDefault is here because hyprland has its own portal
+  # and you'd rather use that over whatever 3rd party
   xdg.portal = {
     enable = mkDefault config.ceirios.profiles.graphical.enable;
 
