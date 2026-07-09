@@ -8,8 +8,7 @@
 let
   inherit (lib.modules) mkIf;
   inherit (lib.options) mkOption;
-  inherit (lib.attrsets) listToAttrs mapAttrsToList nameValuePair;
-  inherit (lib.lists) concatLists;
+  inherit (lib.attrsets) concatMapAttrs;
   inherit (lib.types)
     str
     nullOr
@@ -30,27 +29,18 @@ let
   };
 
   # i love automating things i could've defined once
-  # also this feels like it was written by a 5th grader
-  # TODO: is there a way to skip listToAttrs (concatLists (mapAttrsToList()))?
-  mkLegoSecrets =
-    let
-      mkEntry =
-        provider: type:
-        nameValuePair "lego-${provider}-${type}" (mkSecret {
-          file = "lego";
-          key = "${provider}-${type}";
-          owner = "acme";
-          group = "acme";
-        });
-    in
-    listToAttrs (
-      concatLists (
-        mapAttrsToList (provider: _: [
-          (mkEntry provider "key")
-          (mkEntry provider "secret")
-        ]) providerCreds
-      )
-    );
+  mkEntry = provider: type: {
+    "lego-${provider}-${type}" = mkSecret {
+      file = "lego";
+      key = "${provider}-${type}";
+      owner = "acme";
+      group = "acme";
+    };
+  };
+
+  mkLegoSecrets = concatMapAttrs (
+    provider: _: (mkEntry provider "key") // (mkEntry provider "secret")
+  ) providerCreds;
 in
 {
   options.security.acme.certs = mkOption {
