@@ -6,10 +6,6 @@ let
 in
 {
   services.journald = {
-    # persist logs
-    # TODO: remove after debugging
-    storage = "persistent";
-
     # lower logs size on non-server machines
     extraConfig = mkIf (!server.enable) ''
       SystemMaxUse=100M
