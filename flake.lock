@@ -58,27 +58,6 @@
         "type": "github"
       }
     },
-    "gift-wrap": {
-      "inputs": {
-        "nixpkgs": [
-          "newydd",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1773403464,
-        "narHash": "sha256-fckT48WShz/HqRgHgBKbVZCreC+Apfu3UqPZxFuL7Us=",
-        "owner": "tgirlcloud",
-        "repo": "gift-wrap",
-        "rev": "9499bc6e450d9959e2019f7122efd3b9077f333a",
-        "type": "github"
-      },
-      "original": {
-        "owner": "tgirlcloud",
-        "repo": "gift-wrap",
-        "type": "github"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -86,11 +65,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1783525612,
-        "narHash": "sha256-OEFYdbtG6Qy04KGteknnrx15Uo2XXkYVuUvBvFNEn+Q=",
+        "lastModified": 1783618078,
+        "narHash": "sha256-F43DGcBoIO8xOZFAfodg3jy0VghB9NGdb6xbTYAIx1A=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "1aac8895fea6fcabc6a0184c63a80fb2f99fd208",
+        "rev": "144f4e36d0186195037da9fce80a727108978070",
         "type": "github"
       },
       "original": {
@@ -101,18 +80,17 @@
     },
     "newydd": {
       "inputs": {
-        "gift-wrap": "gift-wrap",
         "nixpkgs": [
           "nixpkgs"
         ],
         "ts-nix-numtide": "ts-nix-numtide"
       },
       "locked": {
-        "lastModified": 1783616207,
-        "narHash": "sha256-1HIVg3IeFBIlE0xr99xS2cFOU9N8ao7HGVQqpwTn6FQ=",
+        "lastModified": 1783616945,
+        "narHash": "sha256-GtKBFUM3CdG0lc4+V1iyRI+E6SD9iqmnahCdYzejY84=",
         "ref": "refs/heads/master",
-        "rev": "a2f074a340ebc7366352674abc85a685ac330eeb",
-        "revCount": 103,
+        "rev": "987efbac661d217be295576f30fcbc3e8883b85b",
+        "revCount": 104,
         "type": "git",
         "url": "https://git.anturated.dev/anturated/newydd"
       },
@@ -180,11 +158,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1783272034,
-        "narHash": "sha256-PFVI20RpmBCAjstjfzidH0UciHxZOWc1X6KW6NYAzwM=",
+        "lastModified": 1783626363,
+        "narHash": "sha256-QRuF6YabMrlQc4UXrq07uKO6y+Pnjlhy6ul5aKUu89M=",
         "owner": "simple-nixos-mailserver",
         "repo": "nixos-mailserver",
-        "rev": "c8babc10612312e344ddf16472a16a1906f0125c",
+        "rev": "d80b23bd88fc52cc107d455e7149a0112f289672",
         "type": "gitlab"
       },
       "original": {
