@@ -66,7 +66,8 @@ in
         }
         {
           type = "gpu";
-          format = "{name}";
+          # truncate this because its just big sometimes
+          format = "{name:${toString (spacerWidth - 4)}}";
           key = "   ";
           keyColor = "green";
         }
