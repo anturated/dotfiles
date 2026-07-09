@@ -32,6 +32,8 @@
           y = 700;
         };
       };
+
+      keyboard.layouts = "us,ru,pl,ua";
     };
 
     users.desant = {

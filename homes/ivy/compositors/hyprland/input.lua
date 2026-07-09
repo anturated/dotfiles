@@ -1,13 +1,13 @@
--- TODO: generalize this in ceirios.hardware?
 hl.config({
   input = {
-    kb_layout = "us,ru,pl,ua",
-    kb_options = "grp:alt_shift_toggle",
+    kb_layout = layouts,
+    kb_options = layout_kbo,
 
     follow_mouse = 1,
 
     -- set flat globally because my mouse just won't
-    accel_profile = "flat",
+    accel_profile = accel,
+    sensitivity = sensitivity,
 
     touchpad = {
       natural_scroll = true,
