@@ -37,6 +37,9 @@
       forgejo.enable = true;
       woodpecker.enable = true;
       jellyfin.enable = true;
+      matrix.enable = true;
+      # matrixrtc.enable = true;
+      # coturn.enable = true;
 
       # web services #
       nginx.enable = true;

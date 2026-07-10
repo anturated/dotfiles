@@ -18,6 +18,7 @@ in
       anytype
       libreoffice
       signal-desktop
+      element-desktop
       ;
   };
 }

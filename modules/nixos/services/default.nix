@@ -15,5 +15,6 @@
     ./redis.nix
     ./website.nix
     ./woodpecker.nix
+    ./matrix
   ];
 }
