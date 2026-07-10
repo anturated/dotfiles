@@ -16,11 +16,9 @@ let
   healthAddr = "${cfg.host}:${toString cfg.portHealthcheck}";
 
   inherit (lib.modules) mkIf;
-  inherit (lib.options) mkOption;
   inherit (lib.attrsets) mapAttrs';
   inherit (lib.lists) singleton;
-  inherit (lib.types) int;
-  inherit (self.lib) mkServiceOption mkSecret;
+  inherit (self.lib) mkServiceOption mkSecret mkPortOption;
   inherit (config.sops) secrets;
   inherit (config.ceirios.services) forgejo;
 in
@@ -29,17 +27,8 @@ in
     domain = "ci.${rdomain}";
     port = 8000; # webui
 
-    portGRPC = mkOption {
-      type = int;
-      default = 9000;
-      description = "Agent comms port";
-    };
-
-    portHealthcheck = mkOption {
-      type = int;
-      default = 3001;
-      description = "Healthcheck port";
-    };
+    portGRPC = mkPortOption 9000; # agent comms
+    portHealthcheck = mkPortOption 3001;
   };
 
   config = mkIf cfg.enable {
