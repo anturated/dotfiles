@@ -3,6 +3,8 @@
 let
   inherit (lib.attrsets) getAttrFromPath attrNames;
   inherit (lib.lists) any elemAt;
+  inherit (lib.types) port;
+  inherit (lib.options) mkOption;
 
   anyHome =
     conf: cond:
@@ -35,7 +37,19 @@ let
     "0000:${lib.fixedWidthString 2 "0" (elemAt parts 0)}"
     + ":${lib.fixedWidthString 2 "0" (elemAt parts 1)}"
     + ".${elemAt parts 2}";
+
+  mkPortOption =
+    defaultPort:
+    mkOption {
+      type = port;
+      default = defaultPort;
+    };
 in
 {
-  inherit mkPubs anyHome pciAddr;
+  inherit
+    mkPubs
+    anyHome
+    pciAddr
+    mkPortOption
+    ;
 }

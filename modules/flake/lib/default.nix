@@ -8,6 +8,11 @@ lib.fixedPoints.makeExtensible (final: {
   template = import ./template; # templates, selections of code that are repeated
 
   inherit (final.services) mkServiceOption;
-  inherit (final.helpers) mkPubs anyHome pciAddr;
+  inherit (final.helpers)
+    mkPubs
+    anyHome
+    pciAddr
+    mkPortOption
+    ;
   inherit (final.secrets) mkSecret;
 })
