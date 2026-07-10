@@ -15,12 +15,21 @@ let
   rdomain = config.networking.domain;
 
   cfg = config.ceirios.services.matrix;
+  rtcCfg = config.ceirios.services.matrixrtc;
   coturnCfg = config.ceirios.services.coturn;
 
   bindAddress = "::1";
   serverConfig."m.server" = "${config.services.matrix-synapse.settings.server_name}:443";
   clientConfig = {
     "m.homeserver".base_url = "https://${cfg.domain}";
+
+    # tell clients which MatrixRTC backend to use for group calls/screenshare
+    "org.matrix.msc4143.rtc_foci" = [
+      {
+        type = "livekit";
+        livekit_service_url = "https://${rtcCfg.domain}/livekit/jwt";
+      }
+    ];
   };
 
   mkWellKnown = data: ''
