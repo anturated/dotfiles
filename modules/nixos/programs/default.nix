@@ -11,5 +11,6 @@
     ./steam.nix
     ./hyprland.nix
     ./virtualisation.nix
+    ./gpu-screen-recorder.nix
   ];
 }
