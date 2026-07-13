@@ -6,7 +6,7 @@ hl.config({
     gaps_in = 5,
     gaps_out = 5,
 
-    border_size = 1,
+    border_size = 2,
 
     -- col is completely offloaded to matugen
 
@@ -25,7 +25,7 @@ hl.config({
   decoration = {
     -- i bet you i came up with these numbers at 5am
     rounding = 13,
-    rounding_power = 2,
+    rounding_power = 3, -- bigger numbers feel better
 
     active_opacity = 1.0,
     inactive_opacity = 0.92,
@@ -39,8 +39,8 @@ hl.config({
 
     blur = {
       enabled = true,
-      size = 1,
-      passes = 2,
+      size = 4,
+      passes = 4,
       vibrancy = 0.1696,
     },
   },
