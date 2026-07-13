@@ -12,6 +12,6 @@ in
 {
   ceirios.packages = mkIf gaming.enable {
     # using stable here because openldap won't pass tests
-    inherit (pkgs) bottles;
+    # inherit (pkgs) bottles;
   };
 }
