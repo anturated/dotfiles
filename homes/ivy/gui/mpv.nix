@@ -16,8 +16,8 @@ in
       scripts =
         (with pkgs.mpvScripts; [
           # modern ui
-          modernz
-          thumbfast
+          # modernz
+          # thumbfast
 
           # mpv as our image viewer
           mpv-image-viewer.image-positioning
@@ -58,8 +58,8 @@ in
 
       config = {
         # osc settings
-        osc = "no";
-        border = "no";
+        osc = "yes";
+        border = "yes";
         msg-color = "yes";
         msg-module = "yes";
 
