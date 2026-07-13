@@ -3,6 +3,7 @@
 {
   imports = [
     ./hardware.nix
+    ./users.nix
   ];
 
   ceirios = {
