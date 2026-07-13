@@ -23,7 +23,9 @@
       netmask = "255.255.255.255";
     };
 
-    users.anturated = { };
+    users.anturated = {
+      home = "desant";
+    };
 
     system.stateVersion = "25.11";
 

@@ -14,6 +14,8 @@
       cpu = "amd";
     };
 
-    users.anturated = { };
+    users.anturated = {
+      home = "desant";
+    };
   };
 }

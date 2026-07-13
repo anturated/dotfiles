@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ../../homes
+    ../../home
     ./nix
     ./with-home
     ./users

@@ -47,38 +47,42 @@ in
       example = lib.literalExpression ''
         # machines/legion/default.nix
         ceirios = {
-          users.desant = {
-            home = "ivy";
+          users.john = {
+            home = "desant";
           };
         };'';
 
       default = { };
 
-      type = attrsOf (submodule ({
-        options = {
-          home = mkOption {
-            type = str;
-            default = "ivy";
-            description = "Which home config to use from homes/";
-            example = "ivy";
-          };
-
-          # here because ssh keys don't appear out of thin air
-          secrets = {
-            wakatime =
-              mkEnableOption ''
-                wakatime config file.
-                You must have a wakatime config file in your secrets for this to work''
-              // {
-                example = lib.literalExpression ''
-                  # in secrets/<you>.yaml
-                  # wakatime: |
-                  #   [settings]
-                  #   api_key = waka_your-wakatime-api-key-xyz'';
+      type = attrsOf (
+        submodule (
+          { name, ... }: {
+            options = {
+              home = mkOption {
+                type = str;
+                default = name;
+                description = "Which home config to use from home/";
+                example = "desant";
               };
-          };
-        };
-      }));
+
+              # here because ssh keys don't appear out of thin air
+              secrets = {
+                wakatime =
+                  mkEnableOption ''
+                    wakatime config file.
+                    You must have a wakatime config file in your secrets for this to work''
+                  // {
+                    example = lib.literalExpression ''
+                      # in secrets/<you>.yaml
+                      # wakatime: |
+                      #   [settings]
+                      #   api_key = waka_your-wakatime-api-key-xyz'';
+                  };
+              };
+            };
+          }
+        )
+      );
     };
 
     allUsers = mkOption {
