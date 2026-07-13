@@ -11,7 +11,7 @@ in
       "fakenews"
       "gambling"
       "porn"
-      "social"
+      # "social"
     ];
   };
 }
