@@ -5,7 +5,8 @@
     inherit (config.ceirios.profiles.graphical) enable;
 
     gtk.enable = true;
-    x11.enable = true;
+    # i don't plan on using X and disabling this saves space so
+    x11.enable = false;
     name = "volantes_cursors";
     package = pkgs.volantes-cursors;
     size = 24;
