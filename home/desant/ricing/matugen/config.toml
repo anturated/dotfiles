@@ -63,11 +63,11 @@ output_path = '~/.local/share/PrismLauncher/themes/Matugen/theme.json'
 
 [templates.qt5ct]
 input_path = '~/.config/matugen/templates/qtxct.conf'
-output_path = '~/.config/qt5ct/colors/matugen-theme.conf'
+output_path = '~/.config/qt5ct/colors/ivy.conf'
 
 [templates.qt6ct]
 input_path = '~/.config/matugen/templates/qtxct.conf'
-output_path = '~/.config/qt6ct/colors/matugen-theme.conf'
+output_path = '~/.config/qt6ct/colors/ivy.conf'
 
 [templates.rofi]
 input_path = '~/.config/matugen/templates/rofi.rasi'
