@@ -22,12 +22,12 @@
     ### extra stuff ###
 
     # spotify themes & plugins
-    spicetify = {
-      type = "github";
-      owner = "Gerg-L";
-      repo = "spicetify-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # spicetify = {
+    #   type = "github";
+    #   owner = "Gerg-L";
+    #   repo = "spicetify-nix";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     # need this for comma to work
     nix-index-database = {
