@@ -6,7 +6,9 @@
 
 let
   inherit (lib.strings) optionalString;
+  inherit (lib.modules) mkIf;
   inherit (config.ceirios.profiles) gaming workstation graphical;
+  inherit (config.ceirios.programs.defaults) terminal;
 in
 {
   programs.fish = {
@@ -135,6 +137,9 @@ in
 
       # Networking
       refreshwifi = "nmcli device wifi rescan";
+
+      # kitty ssh
+      ssh = mkIf (terminal == "kitty") "kitten ssh";
 
       # grep / color wrappers
       grep = "grep --color=auto";
