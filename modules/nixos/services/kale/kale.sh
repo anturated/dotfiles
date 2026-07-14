@@ -59,6 +59,7 @@ GM_PID=""
 
 # shellcheck disable=SC2329
 cleanup() {
+  # echo "trap triggered @ $(date)" >>~/kale.log
   if [ -n "$GM_PID" ]; then
     kill "$GM_PID" 2>/dev/null || true
   fi
@@ -97,13 +98,6 @@ ORIG_LD_PRELOAD="${LD_PRELOAD:-}"
 [ "$USE_STEAMDECK" -eq 1 ] && ENV_VARS+=("SteamDeck=1")
 [ "$USE_NTSYNC" -eq 1 ] && ENV_VARS+=("PROTON_ENABLE_NTSYNC=1")
 [ "$USE_FSR4" -eq 1 ] && ENV_VARS+=("PROTON_FSR4_UPGRADE=1")
-if [ "$USE_GAMESCOPE" -eq 1 ]; then
-  if [ "$USE_MANGOHUD" -eq 1 ]; then
-    ENV_VARS+=("MANGOHUD=1")
-  fi
-  # https://wiki.archlinux.org/title/Gamescope#Launching_gamescope_from_Steam,_stuttering_after_~24_minutes_(Gamescope_Lag_Bomb)
-  ENV_VARS+=("LD_PRELOAD=${ORIG_LD_PRELOAD}")
-fi
 
 # nvidia offload
 if [ "$USE_OFFLOAD" -eq 1 ]; then
@@ -115,15 +109,14 @@ if [ "$USE_OFFLOAD" -eq 1 ]; then
   )
 fi
 
-# apply env in one go
-if [ ${#ENV_VARS[@]} -gt 0 ]; then
-  CMD=(env "${ENV_VARS[@]}" "${CMD[@]}")
-fi
-
 # wrappers (order matters!)
 if [ "$USE_GAMESCOPE" -eq 1 ]; then
-  # use default gamescope to apply args from config
-  CMD=(env -u LD_PRELOAD gamescope -- "${CMD[@]}")
+  gsArgs=()
+  [ "$USE_MANGOHUD" -eq 1 ] && gsArgs+=(--mangoapp)
+  # https://wiki.archlinux.org/title/Gamescope#Launching_gamescope_from_Steam,_stuttering_after_~24_minutes_(Gamescope_Lag_Bomb)
+  gsArgs+=(--)
+  gsArgs+=(env LD_PRELOAD="$ORIG_LD_PRELOAD")
+  CMD=(env -u LD_PRELOAD gamescope "${gsArgs[@]}" "${CMD[@]}")
 else
   if [ "$USE_MANGOHUD" -eq 1 ]; then
     CMD=(mangohud "${CMD[@]}")
@@ -132,6 +125,11 @@ fi
 
 if [ "$USE_GAMEMODE" -eq 1 ]; then
   CMD=(gamemoderun "${CMD[@]}")
+fi
+
+# apply env in one go
+if [ ${#ENV_VARS[@]} -gt 0 ]; then
+  CMD=(env "${ENV_VARS[@]}" "${CMD[@]}")
 fi
 
 # run #
@@ -160,6 +158,8 @@ if [ "$USE_GAMEMODE_BYPASS" -eq 1 ]; then
   wait $LAUNCHER_PID
   exit $?
 else
+  # echo "${CMD[@]}" >~/kale.log
+  # echo "@ $(date)" >>~/kale.log
   "${CMD[@]}"
   exit $?
 fi
