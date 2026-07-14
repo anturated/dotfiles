@@ -8,6 +8,7 @@
 
 let
   inherit (lib.modules) mkIf;
+  inherit (lib.options) mkEnableOption;
   inherit (self.lib) mkServiceOption mkSecret;
   inherit (config.sops) secrets;
 
@@ -35,6 +36,14 @@ in
   options.ceirios.services.matrix = mkServiceOption "matrix" {
     port = 3012;
     domain = "matrix.${rdomain}";
+
+    webui = mkEnableOption "element web" // {
+      default = true;
+    };
+
+    admin = mkEnableOption "ketesa" // {
+      default = true;
+    };
   };
 
   config = mkIf cfg.enable {
@@ -185,14 +194,37 @@ in
         };
       };
 
-      nginx.virtualHosts.${rdomain} = {
-        locations = {
-          "= /.well-known/matrix/server".extraConfig = mkWellKnown serverConfig;
-          "= /.well-known/matrix/client".extraConfig = mkWellKnown clientConfig;
-          "/_matrix".proxyPass = "http://[${bindAddress}]:${toString cfg.port}";
-          "/_synapse/client".proxyPass = "http://[${bindAddress}]:${toString cfg.port}";
+      nginx.virtualHosts = {
+        # protocol bs
+        "${rdomain}" = {
+          locations = {
+            "= /.well-known/matrix/server".extraConfig = mkWellKnown serverConfig;
+            "= /.well-known/matrix/client".extraConfig = mkWellKnown clientConfig;
+            "/_synapse/admin".proxyPass = "http://[${bindAddress}]:${toString cfg.port}";
+            "/_matrix".proxyPass = "http://[${bindAddress}]:${toString cfg.port}";
+            "/_synapse/client".proxyPass = "http://[${bindAddress}]:${toString cfg.port}";
+          };
+          serverAliases = [ "${cfg.domain}" ];
         };
-        serverAliases = [ "${cfg.domain}" ];
+
+        # webui
+        "chat.${rdomain}".root = pkgs.element-web.override {
+          conf = {
+            default_theme = "dark";
+
+            default_server_config."m.homeserver" = {
+              base_url = "https://${rdomain}";
+              server_name = rdomain;
+            };
+          };
+        };
+
+        # admin webui
+        "ketesa.${rdomain}".root = pkgs.ketesa.withConfig {
+          restrictBaseUrl = [
+            "https://${rdomain}"
+          ];
+        };
       };
     };
   };
