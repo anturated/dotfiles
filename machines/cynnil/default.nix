@@ -42,6 +42,7 @@
       matrix.enable = true;
       matrixrtc.enable = true;
       coturn.enable = true;
+      pds.enable = true;
 
       # web services #
       nginx.enable = true;
