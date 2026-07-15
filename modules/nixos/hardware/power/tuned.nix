@@ -36,21 +36,12 @@ in
             summary = "We chill";
             include = "balanced";
           };
-
-          # hope this helps my electricity bill
-          cpu = {
-            boost = 0;
-          };
         };
 
         ceirios-balanced-bat = {
           main = {
             summary = "We need more power";
             include = "balanced-battery";
-          };
-
-          cpu = {
-            boost = 0;
           };
         };
 
