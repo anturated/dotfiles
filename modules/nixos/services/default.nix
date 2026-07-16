@@ -3,6 +3,7 @@
 {
   imports = [
     ./kale
+    ./gatus
     ./adguard.nix
     ./lego.nix
     ./nginx.nix

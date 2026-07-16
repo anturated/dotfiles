@@ -44,6 +44,7 @@
       coturn.enable = true;
       pds.enable = true;
       adguard.enable = true;
+      gatus.enable = true;
 
       # web services #
       nginx.enable = true;
