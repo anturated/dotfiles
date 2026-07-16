@@ -9,6 +9,7 @@ let
   inherit (lib.lists) map;
   inherit (self.lib.services) mkServiceOption;
   inherit (self.lib.secrets) mkSecret;
+  inherit (config.sops) secrets;
 
   rdomain = config.networking.domain;
   cfg = config.ceirios.services.gatus;
@@ -22,7 +23,10 @@ let
     {
       interval = "5m";
       conditions = if defaultConditions then ([ "[STATUS] == 200" ] ++ conditions) else conditions;
-      alerts = [ ]; # don't care for alerts rn
+      alerts = [
+        # { type = "matrix"; }
+        { type = "telegram"; }
+      ];
     }
     // (removeAttrs endpoint [
       "defaultConditions"
@@ -41,6 +45,8 @@ in
     services = {
       gatus = {
         enable = true;
+
+        environmentFile = secrets.gatus-env.path;
 
         settings = {
           web = {
@@ -114,6 +120,19 @@ in
                 display: none !important;
               }
             '';
+          };
+
+          alerting = {
+            # idk whats wrong with this one, use telegram for now
+            # matrix = {
+            #   webhook-url = "https://matrix.anturated.dev";
+            #   access-token = "$GATUS_ACCESS_TOKEN";
+            #   internal-room-id = "$GATUS_ROOM_ID";
+            # };
+            telegram = {
+              token = "$GATUS_TG_TOKEN";
+              id = "$GATUS_TG_ID";
+            };
           };
 
           storage = {
