@@ -24,8 +24,8 @@ let
       interval = "5m";
       conditions = if defaultConditions then ([ "[STATUS] == 200" ] ++ conditions) else conditions;
       alerts = [
-        # { type = "matrix"; }
-        { type = "telegram"; }
+        { type = "matrix"; }
+        # { type = "telegram"; }
       ];
     }
     // (removeAttrs endpoint [
@@ -123,16 +123,15 @@ in
           };
 
           alerting = {
-            # idk whats wrong with this one, use telegram for now
-            # matrix = {
-            #   webhook-url = "https://matrix.anturated.dev";
-            #   access-token = "$GATUS_ACCESS_TOKEN";
-            #   internal-room-id = "$GATUS_ROOM_ID";
-            # };
-            telegram = {
-              token = "$GATUS_TG_TOKEN";
-              id = "$GATUS_TG_ID";
+            matrix = {
+              server-url = "https://matrix.anturated.dev";
+              access-token = "$GATUS_ACCESS_TOKEN";
+              internal-room-id = "!DJBZlyVJcnxyrdovrt:anturated.dev"; # it just won't parse
             };
+            # telegram = {
+            #   token = "$GATUS_TG_TOKEN";
+            #   id = "$GATUS_TG_ID";
+            # };
           };
 
           storage = {
