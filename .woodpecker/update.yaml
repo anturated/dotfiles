@@ -18,8 +18,9 @@ steps:
         from_secret: PILL_TOKEN
     commands:
       # configure git
-      - git config --global user.name "Caterpillar"
-      - git config --global user.email "pill@anturated.dev"
+      # use --local so it persists between steps
+      - git config --local user.name "Caterpillar"
+      - git config --local user.email "pill@anturated.dev"
       - git remote set-url origin "https://caterpillar:$${FORGEJO_TOKEN}@git.anturated.dev/${CI_REPO}.git"
       - BEFORE=$(git rev-parse HEAD)
       # checkout
@@ -36,7 +37,57 @@ steps:
         --commit-lock-file \
         --commit-lockfile-summary "flake: bump (auto)"
       # check diff push
-      - git diff --quiet $BEFORE HEAD && exit 0
+      - git diff --quiet $BEFORE HEAD && touch .ci-no-changes || true
+      - test -f .ci-no-changes && exit 0 || true
+      - git push -f -u origin pill-flake-update
+
+  - name: check
+    image: nixos/nix
+    commands:
+      # skip check if no changes
+      - test -f .ci-no-changes && exit 0 || true
+      # basic flake check
+      - |
+        export NIX_CONFIG="
+          extra-experimental-features = nix-command flakes
+          http-connections = 128
+          max-substitution-jobs = 128
+        "
+      - nix flake check --show-trace
+
+  - name: merge
+    image: nixos/nix
+    when:
+      status: [success]
+    commands:
+      # skip if no changes
+      - test -f .ci-no-changes && exit 0 || true
+      # merge
       - git checkout ${CI_REPO_DEFAULT_BRANCH}
       - git merge --ff pill-flake-update
       - git push -u origin ${CI_REPO_DEFAULT_BRANCH}
+      - git push origin --delete pill-flake-update || true
+
+  - name: pr
+    image: alpine/curl
+    environment:
+      FORGEJO_TOKEN:
+        from_secret: PILL_TOKEN
+    when:
+      status: [failure]
+    commands:
+      - |
+        cat > /tmp/pr.json <<EOF
+        {
+          "head": "pill-flake-update",
+          "base": "${CI_REPO_DEFAULT_BRANCH}",
+          "title": "flake: bump (auto)",
+          "body": "[CHECKS FAILED](${CI_PIPELINE_URL})"
+        }
+        EOF
+      - |
+        curl -sS -o /dev/stderr -w "%{http_code}\n" -X POST \
+          -H "Authorization: token $${FORGEJO_TOKEN}" \
+          -H "Content-Type: application/json" \
+          "https://git.anturated.dev/api/v1/repos/${CI_REPO}/pulls" \
+          -d @/tmp/pr.json
