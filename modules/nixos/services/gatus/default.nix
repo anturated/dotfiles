@@ -6,7 +6,8 @@
 }:
 let
   inherit (lib.modules) mkIf;
-  inherit (lib.lists) map;
+  inherit (lib.lists) optional concatLists;
+  inherit (lib.attrsets) mapAttrsToList;
   inherit (self.lib.services) mkServiceOption;
   inherit (self.lib.secrets) mkSecret;
   inherit (config.sops) secrets;
@@ -14,25 +15,26 @@ let
   rdomain = config.networking.domain;
   cfg = config.ceirios.services.gatus;
 
-  mkEndpoints = map (
+  mkEndpoint =
+    group: name:
     endpoint@{
       defaultConditions ? true,
       conditions ? [ ],
       ...
     }:
     {
+      inherit name group;
       interval = "5m";
-      conditions = if defaultConditions then ([ "[STATUS] == 200" ] ++ conditions) else conditions;
-      alerts = [
-        { type = "matrix"; }
-        # { type = "telegram"; }
-      ];
+      conditions = optional defaultConditions "[STATUS] == 200" ++ conditions;
+      alerts = [ { type = "matrix"; } ];
     }
-    // (removeAttrs endpoint [
+    // removeAttrs endpoint [
       "defaultConditions"
       "conditions"
-    ])
-  );
+    ];
+
+  mkEndpoints =
+    endpoints: concatLists (mapAttrsToList (group: mapAttrsToList (mkEndpoint group)) endpoints);
 in
 {
 
