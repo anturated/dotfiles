@@ -198,8 +198,8 @@ in
           hostName = "${cfg.webui.domain}";
           extraConfig = ''
             $config['imap_host'] = array(
-              'ssl://${config.mailserver.fqdn}' => 'anturated.dev mailserver',
-              'ssl://imap.gmail.com:993' => 'gmail.com mailserver',
+              'ssl://${config.mailserver.fqdn}' => '@anturated.dev',
+              'ssl://imap.gmail.com:993' => '@gmail.com',
             );
 
             $config['username_domain'] = array(
