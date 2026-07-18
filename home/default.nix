@@ -10,9 +10,8 @@
 }:
 
 let
-  inherit (lib.attrsets) genAttrs;
+  inherit (lib.attrsets) mapAttrs;
   inherit (config.ceirios) users;
-  usernames = builtins.attrNames users;
 in
 {
   home-manager = {
@@ -22,13 +21,13 @@ in
     backupFileExtension = "bak";
 
     # generate config per user on our machine
-    users = genAttrs usernames (name: {
+    users = mapAttrs (name: user: {
       # with their chosen home
-      imports = [ ./${users.${name}.home} ];
+      imports = [ ./${user.home} ];
 
       # also give it the username, because.
       _module.args.user = name;
-    });
+    }) users;
 
     extraSpecialArgs = {
       inherit
