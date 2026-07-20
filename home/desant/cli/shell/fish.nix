@@ -84,6 +84,18 @@ in
         '';
       };
 
+      ",," = {
+        description = "comma and disown";
+        body = ''
+          if test (count $argv) -eq 0
+            echo "Usage: ,, <command>"
+            return 1
+          end
+
+          , $argv[1] & disown
+        '';
+      };
+
       fish_greeting = {
         description = "exec on start";
         body = optionalString graphical.enable "fastfetch";
