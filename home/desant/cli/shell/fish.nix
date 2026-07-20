@@ -125,11 +125,11 @@ in
       "......" = "cd ../../../../..";
 
       # file listing — eza
-      ls = "eza     --color=always --group-directories-first --icons";
-      ll = "eza -l  --color=always --group-directories-first --icons";
-      la = "eza -la --color=always --group-directories-first --icons";
-      lt = "eza -T  --color=always --group-directories-first --icons";
-      lT = "eza -aT --color=always --group-directories-first --icons";
+      ls = "eza     --color=always --group-directories-first --icons=always";
+      ll = "eza -l  --color=always --group-directories-first --icons=always";
+      la = "eza -la --color=always --group-directories-first --icons=always";
+      lt = "eza -T  --color=always --group-directories-first --icons=always";
+      lT = "eza -aT --color=always --group-directories-first --icons=always";
       "l." = ''eza -a | grep -e "^\."'';
 
       # System
