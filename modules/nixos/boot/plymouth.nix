@@ -6,8 +6,9 @@
 }:
 
 let
+  inherit (lib.modules) mkIf;
   inherit (lib.options) mkOption mkEnableOption;
-  inherit (lib.types) str listOf;
+  inherit (lib.types) str;
 
   cfg = config.ceirios.boot.plymouth;
 in
@@ -21,25 +22,17 @@ in
       default = "circle_hud";
       description = "Plymouth theme.";
     };
-
-    themes = mkOption {
-      type = listOf str;
-      default = [ "circle_hud" ];
-      description = "Extra themes to get.";
-    };
   };
 
-  config.boot = {
-    # optional plymouth
-    plymouth = lib.mkIf cfg.enable {
-      enable = true;
-      inherit (cfg) theme;
-      themePackages = with pkgs; [
-        # By default we would install all themes
-        (adi1090x-plymouth-themes.override {
-          selected_themes = cfg.themes;
-        })
-      ];
-    };
+  config.boot.plymouth = mkIf cfg.enable {
+    enable = true;
+    inherit (cfg) theme;
+
+    themePackages = [
+      # only install the themes we need
+      (pkgs.adi1090x-plymouth-themes.override {
+        selected_themes = [ cfg.theme ];
+      })
+    ];
   };
 }
