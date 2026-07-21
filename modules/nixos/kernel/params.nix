@@ -7,16 +7,19 @@ let
   inherit (config.ceirios.profiles) virtualisation;
 
   cfg = config.ceirios.system;
+  bootCfg = config.ceirios.boot;
 in
 {
-  options.ceirios.system = {
+  options.ceirios = {
     boot.silent = mkEnableOption ''
       silent boot
       (hides kernel logs, you get a clean screen during boot)'';
 
-    kernel.tweaks.enable = mkEnableOption "security and performance related kernel parameters" // {
-      default = true;
-    };
+    system.kernel.tweaks.enable =
+      mkEnableOption "security and performance related kernel parameters"
+      // {
+        default = true;
+      };
   };
 
   config.boot.kernelParams = [
@@ -86,7 +89,7 @@ in
     # disable the cursor in vt to get a black screen during intermissions
     "vt.global_cursor_default=0"
   ]
-  ++ optionals cfg.boot.silent [
+  ++ optionals bootCfg.silent [
     # tell the kernel to not be verbose, the voices are too loud
     "quiet"
 
