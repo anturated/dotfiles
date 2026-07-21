@@ -71,7 +71,7 @@ in
     # disable usb autosuspend
     "usbcore.autosuspend=-1"
 
-    # isables resume and restores original swap space
+    # disables resume and restores original swap space
     "noresume"
 
     # allow systemd to set and save the backlight state
