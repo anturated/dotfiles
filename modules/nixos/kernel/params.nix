@@ -59,9 +59,6 @@ in
 
     # linux security modules
     "lsm=landlock,lockdown,yama,integrity,apparmor,bpf,tomoyo,selinux"
-
-    # prevent the kernel from blanking plymouth out of the fb
-    "fbcon=nodefer"
   ]
   ++ optionals cfg.kernel.tweaks.enable [
     # https://en.wikipedia.org/wiki/Kernel_page-table_isolation
