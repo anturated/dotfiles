@@ -82,12 +82,7 @@ in
         "desant@${rdomain}" = {
           hashedPasswordFile = config.sops.secrets.mailserver-desant.path;
           aliases = [
-            "anturated@${rdomain}"
-            "me@${rdomain}"
-            "wlodek@${rdomain}"
-            "volodymyr@${rdomain}"
-            "volodymyrdesiatniuk@${rdomain}"
-            "desiatniuk@${rdomain}"
+            "vd@${rdomain}"
             "contact@${rdomain}"
             "admin@${rdomain}"
             "root@${rdomain}"
