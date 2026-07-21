@@ -22,6 +22,8 @@
       defaultConditions = false;
       conditions = [ "[CONNECTED] == true" ];
     };
+
+    vaultwarden.url = "https://vw.anturated.dev/alive";
   };
 
   mailserver = {

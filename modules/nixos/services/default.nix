@@ -18,5 +18,6 @@
     ./website.nix
     ./woodpecker.nix
     ./matrix
+    ./vaultwarden.nix
   ];
 }

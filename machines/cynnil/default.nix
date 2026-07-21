@@ -45,6 +45,7 @@
       pds.enable = true;
       adguard.enable = true;
       gatus.enable = true;
+      vaultwarden.enable = true;
 
       # web services #
       nginx.enable = true;
