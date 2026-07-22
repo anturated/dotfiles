@@ -146,6 +146,7 @@ in
 
       # System
       jctl = "journalctl -p 3 -xb";
+      jctu = "journalctl --no-pager -l -u";
 
       # Networking
       refreshwifi = "nmcli device wifi rescan";
