@@ -4,6 +4,7 @@
   gitMinimal,
   sops,
   nix-output-monitor,
+  ffmpeg,
 }:
 mkShellNoCC {
   name = "ceirios";
@@ -13,6 +14,7 @@ mkShellNoCC {
     gitMinimal
     sops
     nix-output-monitor
+    ffmpeg
   ];
 
   env.DIRENV_LOG_FORMAT = "";
