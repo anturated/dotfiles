@@ -58,7 +58,7 @@ in
       enablePop3Ssl = false;
 
       # sending
-      enableSubmission = false; # 587 STARTTLS
+      enableSubmission = true; # 587 STARTTLS
       enableSubmissionSsl = true; # 465 TLS
 
       # Enable ManageSieve so that we don't need to change the config to update sieves
