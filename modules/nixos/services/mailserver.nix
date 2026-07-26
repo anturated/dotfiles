@@ -108,6 +108,10 @@ in
           hashedPasswordFile = secrets.mailserver-spam.path;
         };
 
+        "test123@${rdomain}" = {
+          hashedPasswordFile = secrets.mailserver-test.path;
+        };
+
         "caterpillar@${rdomain}" = {
           aliases = [
             "pill@${rdomain}"
@@ -261,6 +265,10 @@ in
       };
       mailserver-caterpillar = mkSecret {
         key = "bot";
+        file = "mailserver";
+      };
+      mailserver-test = mkSecret {
+        key = "test";
         file = "mailserver";
       };
     };
