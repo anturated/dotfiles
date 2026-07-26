@@ -49,16 +49,17 @@ in
         path = "/srv/storage/mail/vmail";
       };
 
-      # Enable STARTTLS
-      enableImap = true;
-      enableImapSsl = true;
+      # recieving
+      enableImap = true; # 143 STARTTLS
+      enableImapSsl = true; # 993 TLS
 
-      # eww
+      # receiving, but lame
       enablePop3 = false;
       enablePop3Ssl = false;
 
-      enableSubmission = false;
-      enableSubmissionSsl = true;
+      # sending
+      enableSubmission = false; # 587 STARTTLS
+      enableSubmissionSsl = true; # 465 TLS
 
       # Enable ManageSieve so that we don't need to change the config to update sieves
       enableManageSieve = true;
