@@ -16,6 +16,7 @@
     ./secrets.nix
     ./system
     ./users.nix
+    ./performance.nix
 
     ./extras.nix
   ];
