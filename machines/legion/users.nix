@@ -4,7 +4,7 @@
   home-manager.users.desant = {
     ceirios.packages = {
       inherit (pkgs)
-        # bottles
+        bottles
         gpu-screen-recorder-gtk
         olympus
         ;
