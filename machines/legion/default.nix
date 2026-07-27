@@ -26,7 +26,7 @@
       };
 
       monitors = {
-        eDP-2.refresh-rate = 120;
+        eDP-1.refresh-rate = 120;
 
         DP-1 = {
           x = 1920;

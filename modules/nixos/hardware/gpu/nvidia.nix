@@ -31,12 +31,14 @@ in
       blacklistedKernelModules = [ "snd_hda_codec_hdmi" ];
 
       # early load modules
-      initrd.kernelModules = [
-        "nvidia"
-        "nvidia_modeset"
-        "nvidia_uvm"
-        "nvidia_drm"
-      ];
+      # note: don't do this, per nixpkgs nvidia_uvm shouldn't be loaded this early.
+      # besides we don't ever need nvidia THIS early
+      # initrd.kernelModules = [
+      #   "nvidia"
+      #   "nvidia_modeset"
+      #   "nvidia_uvm"
+      #   "nvidia_drm"
+      # ];
     };
 
     ceirios.packages = {
