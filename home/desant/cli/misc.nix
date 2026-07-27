@@ -32,6 +32,8 @@ in
 
         # secrets
         sops
+
+        nix-output-monitor # i wanna get rid of direnv autoload
         ;
     }
 
