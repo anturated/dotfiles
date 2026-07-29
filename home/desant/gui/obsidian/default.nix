@@ -1,10 +1,9 @@
-{ ... }:
+{ config, ... }:
 
 {
-  # i don't think i'm gonna be using obsidian any time soon.
-  # that's too much stuff to set up for what i want from a notes app.
-  # AnyType is gonna have to do for the foreseeable future.
   programs.obsidian = {
-    # inherit (config.ceirios.profiles.graphical) enable;
+    inherit (config.ceirios.profiles.graphical) enable;
+    # don't think i'm gonna customize it here
+    # because it gets overridden by vault's settings anyways so
   };
 }

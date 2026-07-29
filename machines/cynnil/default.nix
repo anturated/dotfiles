@@ -46,6 +46,7 @@
       adguard.enable = true;
       gatus.enable = true;
       vaultwarden.enable = true;
+      obsidian-livesync.enable = true;
 
       # web services #
       nginx.enable = true;
