@@ -15,11 +15,11 @@ in
     # https://github.com/garuda-linux/garuda-nix-subsystem/blob/main/internal/modules/base/performance.nix
 
     # automatically tune nice levels, cachyos thing
-    services.ananicy = {
-      enable = true;
-      package = pkgs.ananicy-cpp;
-      rulesProvider = pkgs.ananicy-rules-cachyos;
-    };
+    # services.ananicy = {
+    #   enable = true;
+    #   package = pkgs.ananicy-cpp;
+    #   rulesProvider = pkgs.ananicy-rules-cachyos;
+    # };
 
     # allow compressing whatever % of RAM before using swap
     # could choke the CPU a little, but should be fine
