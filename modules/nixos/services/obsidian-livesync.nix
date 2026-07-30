@@ -9,11 +9,12 @@ let
   inherit (lib.modules) mkIf;
   inherit (self.lib) mkSecret mkServiceOption;
 
+  rdomain = config.networking.domain;
   cfg = config.ceirios.services.obsidian-livesync;
 in
 {
   options.ceirios.services.obsidian-livesync = mkServiceOption "CouchDB + nginx" {
-    inherit (config.networking) domain;
+    domain = "obsidian.${rdomain}";
     port = 5984;
   };
 
@@ -46,7 +47,7 @@ in
         };
       };
 
-      nginx.virtualHosts."obsidian.${cfg.domain}" = {
+      nginx.virtualHosts.${cfg.domain} = {
         locations."/" = {
           proxyPass = "http://${cfg.host}:${toString cfg.port}";
           extraConfig = "proxy_buffering off;";
