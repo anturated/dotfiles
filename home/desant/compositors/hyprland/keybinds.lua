@@ -42,7 +42,7 @@ hl.bind(mod .. " + ALT + D", hl.dsp.exec_cmd("vesktop"))
 hl.bind(mod .. " + ALT + S", hl.dsp.exec_cmd("steam -steamos"))
 hl.bind(mod .. " + ALT + M", hl.dsp.exec_cmd("spotify"))
 
-hl.bind(mod .. " + ALT + A", hl.dsp.exec_cmd("anytype"))
+hl.bind(mod .. " + ALT + A", hl.dsp.exec_cmd("obsidian"))
 hl.bind(mod .. " + ALT + T", hl.dsp.exec_cmd("Telegram"))
 
 -------------
