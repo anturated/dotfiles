@@ -47,6 +47,7 @@
       gatus.enable = true;
       vaultwarden.enable = true;
       obsidian-livesync.enable = true;
+      wakapi.enable = true;
 
       # web services #
       nginx.enable = true;

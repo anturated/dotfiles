@@ -19,5 +19,6 @@
     ./woodpecker.nix
     ./matrix
     ./vaultwarden.nix
+    ./wakapi.nix
   ];
 }

@@ -24,6 +24,8 @@
     };
 
     vaultwarden.url = "https://vw.anturated.dev/alive";
+
+    wakapi.url = "https://wt.anturated.dev";
   };
 
   mailserver = {
