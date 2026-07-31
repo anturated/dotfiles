@@ -151,3 +151,17 @@ hl.window_rule({
 
   no_blur = true,
 })
+
+hl.window_rule({
+  name = "showmethekey-overlay",
+  match = {
+    class = "one.alynx.showmethekey",
+    title = "Floating Window - Show Me The Key",
+  },
+
+  -- pin center
+  float = true,
+  pin = true,
+  size = "1500 150",
+  move = "210 880",
+})
