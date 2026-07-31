@@ -165,3 +165,5 @@ hl.window_rule({
   size = "1500 150",
   move = "210 880",
 })
+
+hl.window_rule({ match = { title = "(?i)bitwarden.*" }, float = true, size = "500 600" })
