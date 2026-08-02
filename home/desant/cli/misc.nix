@@ -7,7 +7,7 @@
 
 let
   inherit (lib.attrsets) mergeAttrsList optionalAttrs;
-  inherit (config.ceirios.profiles) gaming graphical;
+  inherit (config.ceirios.profiles) graphical;
 in
 {
   ceirios.packages = mergeAttrsList [
@@ -36,12 +36,6 @@ in
         nix-output-monitor # i wanna get rid of direnv autoload
         ;
     }
-
-    (optionalAttrs gaming.enable {
-      inherit (pkgs)
-        asdf-vm
-        ;
-    })
 
     # graphical
     (optionalAttrs graphical.enable {

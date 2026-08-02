@@ -15,30 +15,6 @@ in
     enable = true;
 
     shellInit = ''
-      # source .fish_profile if present
-      if test -f ~/.fish_profile
-          source ~/.fish_profile
-      end
-
-      # ~/.local/bin first, depot_tools last
-      fish_add_path --prepend ~/.local/bin
-      if test -d ~/Applications/depot_tools
-          fish_add_path --append ~/Applications/depot_tools
-      end
-
-      ${optionalString gaming.enable ''
-        # asdf shims
-        if test -z "$ASDF_DATA_DIR"
-            set _asdf_shims "$HOME/.asdf/shims"
-        else
-            set _asdf_shims "$ASDF_DATA_DIR/shims"
-        end
-        if not contains $_asdf_shims $PATH
-            set -gx --prepend PATH $_asdf_shims
-        end
-        set --erase _asdf_shims
-      ''}
-
       # matugen theme
       if test -f ~/.config/fish/theme.fish
           source ~/.config/fish/theme.fish
@@ -46,10 +22,6 @@ in
     '';
 
     interactiveShellInit = ''
-      # man pages via bat
-      set -x MANROFFOPT "-c"
-      set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
-
       # bang-bang shortcuts: !! repeats last command, !$ repeats last argument
       if [ "$fish_key_bindings" = fish_vi_key_bindings ]
           bind -Minsert ! __history_previous_command
@@ -59,10 +31,8 @@ in
           bind '$' __history_previous_command_arguments
       end
 
-      # tool integrations
-      starship init fish | source
+      # TODO: zoxide doesn't work without this but maybe there's a way
       zoxide init fish | source
-      ${optionalString workstation.enable "direnv hook fish | source"}
     '';
 
     functions = {
