@@ -7,7 +7,7 @@
 let
   inherit (lib.strings) optionalString;
   inherit (lib.modules) mkIf;
-  inherit (config.ceirios.profiles) gaming workstation graphical;
+  inherit (config.ceirios.profiles) graphical;
   inherit (config.ceirios.programs.defaults) terminal;
 in
 {
@@ -114,15 +114,8 @@ in
       lT = "eza -aT --color=always --group-directories-first --icons=always";
       "l." = ''eza -a | grep -e "^\."'';
 
-      # System
-      jctl = "journalctl -p 3 -xb";
-      jctu = "journalctl --no-pager -l -u";
-
       # Networking
       refreshwifi = "nmcli device wifi rescan";
-
-      # kitty ssh
-      ssh = mkIf (terminal == "kitty") "kitten ssh";
 
       # grep / color wrappers
       grep = "grep --color=auto";
@@ -130,9 +123,19 @@ in
       egrep = "egrep --color=auto";
       dir = "dir --color=auto";
       vdir = "vdir --color=auto";
+    };
+
+    shellAbbrs = {
+      # kitty ssh
+      ssh = mkIf (terminal == "kitty") "kitten ssh";
 
       # Misc
       ff = "fastfetch";
+
+      # System
+      jctl = "journalctl -p 3 -xb";
+      jctu = "journalctl --no-pager -l -u";
+
     };
   };
 }
