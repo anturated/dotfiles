@@ -20,5 +20,6 @@
     ./matrix
     ./vaultwarden.nix
     ./wakapi.nix
+    ./tailscale.nix
   ];
 }
