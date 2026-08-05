@@ -1,40 +1,45 @@
 { lib, config, ... }:
 
 let
+  inherit (lib.modules) mkIf;
+
   inherit (config.ceirios.hardware) monitors mainMonitor;
+  inherit (config.ceirios.profiles) gaming;
 
   mon = monitors.${mainMonitor};
 in
 {
-  programs.gamescope = {
-    inherit (config.ceirios.profiles.gaming) enable;
-    args = lib.mkIf (monitors != { }) [
-      # window size
-      "-W"
-      "${toString mon.width}"
-      "-H"
-      "${toString mon.height}"
+  config = mkIf gaming.enable {
+    programs.gamescope = {
+      enable = true;
+      args = lib.mkIf (monitors != { }) [
+        # window size
+        "-W"
+        "${toString mon.width}"
+        "-H"
+        "${toString mon.height}"
 
-      # game resolution (only used in upscaling)
-      # "-w"
-      # "${toString mainMonitor.width}"
-      # "-h"
-      # "${toString mainMonitor.height}"
+        # game resolution (only used in upscaling)
+        # "-w"
+        # "${toString mainMonitor.width}"
+        # "-h"
+        # "${toString mainMonitor.height}"
 
-      # frame cap
-      "-r"
-      "${toString mon.refresh-rate}"
+        # frame cap
+        "-r"
+        "${toString mon.refresh-rate}"
 
-      # wayland stuff
-      "--backend"
-      "wayland"
-      "--expose-wayland" # PROTON_ENABLE_WAYLAND analogue?
+        # wayland stuff
+        "--backend"
+        "wayland"
+        "--expose-wayland" # PROTON_ENABLE_WAYLAND analogue?
 
-      "--mangoapp"
+        "--mangoapp"
 
-      # steam deck vibrancy
-      "--sdr-gamut-wideness"
-      "1"
-    ];
+        # steam deck vibrancy
+        "--sdr-gamut-wideness"
+        "1"
+      ];
+    };
   };
 }
