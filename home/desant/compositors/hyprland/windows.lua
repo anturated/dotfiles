@@ -101,6 +101,15 @@ hl.window_rule({
   workspace = "5 silent",
 })
 
+hl.window_rule({
+  match = {
+    title = "Steam Big Picture Mode",
+    class = "steam",
+  },
+
+  workspace = "2", -- not silent, nobody's switching workspaces with this one
+})
+
 -- fixes --
 
 hl.window_rule({
