@@ -10,6 +10,9 @@ let
 in
 {
   config = mkIf gaming.enable {
+    # i'm leaving it here because it has gamescope in the name
+    programs.steam.gamescopeSession.enable = true;
+
     programs.gamescope = {
       enable = true;
       args = lib.mkIf (monitors != { }) [
