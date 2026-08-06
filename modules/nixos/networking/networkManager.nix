@@ -9,7 +9,8 @@ in
 
     wifi = {
       # iwd is newer, can be wpa_supplicant too
-      backend = "iwd";
+      # note: iwd breaks for me for whatever reason
+      # backend = "iwd";
 
       # battery
       powersave = laptop.enable;
