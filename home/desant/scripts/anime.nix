@@ -23,7 +23,7 @@ in
         while read -r dir; do
           echo $(basename "$dir")
         done |
-        rofi -dmenu
+        walker --dmenu
       )"
 
       mpv "''${anime}"

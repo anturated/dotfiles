@@ -13,14 +13,8 @@ hl.bind(mod .. " + E", hl.dsp.exec_cmd(terminal .. " yazi"))
 hl.bind(mod .. " + SHIFT + E", hl.dsp.exec_cmd(explorer))
 
 -- dmenu
-hl.bind(mod .. " + D", hl.dsp.exec_cmd(menu))
-hl.bind(mod .. " + SHIFT + D", hl.dsp.exec_cmd("rofi -show run"))
-
--- wallpaper picker
-hl.bind(mod .. " + SHIFT + I", hl.dsp.exec_cmd("chwal"))
-
--- rofi videos
-hl.bind(mod .. " + ALT + W", hl.dsp.exec_cmd("animelist"))
+hl.bind(mod .. " + D", hl.dsp.exec_cmd("walker"))
+-- TODO: how do i do commands with walker
 
 -- screenshot
 hl.bind(
@@ -44,6 +38,13 @@ hl.bind(mod .. " + ALT + M", hl.dsp.exec_cmd("spotify"))
 
 hl.bind(mod .. " + ALT + A", hl.dsp.exec_cmd("obsidian"))
 hl.bind(mod .. " + ALT + T", hl.dsp.exec_cmd("Telegram"))
+
+-- some walker menus
+hl.bind(mod .. " + SHIFT + B", hl.dsp.exec_cmd("walker --provider bluetooth"))
+hl.bind(mod .. " + SHIFT + A", hl.dsp.exec_cmd("walker --provider wireplumber"))
+hl.bind(mod .. " + V", hl.dsp.exec_cmd("walker --provider clipboard"))
+hl.bind(mod .. " + SHIFT + I", hl.dsp.exec_cmd("chwal"))
+hl.bind(mod .. " + ALT + W", hl.dsp.exec_cmd("animelist"))
 
 -------------
 -- windows --

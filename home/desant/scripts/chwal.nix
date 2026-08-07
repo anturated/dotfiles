@@ -26,7 +26,7 @@ in
 
       runtimeInputs = with pkgs; [
         jq
-        rofi
+        walker
         awww
         matugen
         hyprland

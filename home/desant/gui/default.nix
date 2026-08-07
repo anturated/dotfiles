@@ -6,7 +6,6 @@
     ./daily.nix
     ./explorer.nix
     ./ghostty.nix
-    ./rofi
     ./kitty.nix
     ./misc.nix
     ./mpv.nix
@@ -14,5 +13,6 @@
     ./spotify.nix
     ./quickshell.nix
     ./vesktop.nix
+    ./walker
   ];
 }

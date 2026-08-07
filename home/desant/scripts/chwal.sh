@@ -54,8 +54,7 @@ else
           printf "%s\0icon\x1f%s\n" "$base" "$thumb"
         fi
       done |
-      rofi -dmenu \
-        -theme wallpaper
+      walker --dmenu
   )"
 fi
 
