@@ -67,6 +67,7 @@ in
 
         #  audio settings
         volume-max = 200;
+        volume = 30;
 
         # video settings
         # use hardware decoding when available, prefer vulkan
