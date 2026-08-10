@@ -15,7 +15,6 @@ in
     inherit (pkgs)
       vivaldi
       telegram-desktop
-      anytype
       libreoffice
       signal-desktop
       element-desktop
