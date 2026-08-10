@@ -45,7 +45,7 @@ in
         playerctl
 
         # clipboard
-        wl-clipboard-rs
+        wl-clipboard
 
         imagemagick # nice to have for images
         ;
