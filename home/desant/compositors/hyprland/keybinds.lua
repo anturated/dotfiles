@@ -17,18 +17,7 @@ hl.bind(mod .. " + D", hl.dsp.exec_cmd("walker"))
 -- TODO: how do i do commands with walker
 
 -- screenshot
-hl.bind(
-  mod .. " + SHIFT + S",
-  hl.dsp.exec_cmd(
-    "mkdir -p "
-      .. screenshotDir -- generate screenshots dir
-      .. ' && grim -g "$(slurp)" -' -- take screenshot
-      .. " | tee "
-      .. screenshotDir
-      .. "/$(date +%Y-%m-%d_%H-%M-%S).png" -- save
-      .. " | wl-copy" -- copy
-  )
-)
+hl.bind(mod .. " + SHIFT + S", hl.dsp.exec_cmd("screenshot"))
 
 -- why does it spell bdsm :cry:
 hl.bind(mod .. " + ALT + B", hl.dsp.exec_cmd(browser))

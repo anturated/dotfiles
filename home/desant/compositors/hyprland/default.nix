@@ -14,8 +14,6 @@ in
   imports = [ ./hyprsunset.nix ];
 
   config = mkIf graphical.enable {
-    ceirios.packages = { inherit (pkgs) grim slurp; };
-
     # whoever tf thought it's a good idea to make me rewrite
     # my hyprland config for the second time this year
     # (and it's only may) should reconsider their life choices
