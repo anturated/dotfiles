@@ -47,12 +47,12 @@ in
         ip = mkOption {
           type = nullOr str;
           default = null;
-          description = "Your ipv4 address";
+          description = "Your ipv4 address (bare, no /prefix)";
         };
         ip6 = mkOption {
           type = nullOr str;
           default = null;
-          description = "Your ipv6 address";
+          description = "Your ipv6 address (bare, no /prefix)";
         };
 
         gateway = mkOption {
@@ -76,16 +76,12 @@ in
           default = maskToPrefix cfg.netmask;
           description = "Your prefix. Auto-generated if netmask is set.";
         };
-
-        netmask6 = mkOption {
-          type = nullOr str;
-          default = null;
-          description = "Your netmask v6";
-        };
         prefix6 = mkOption {
           type = nullOr int;
           default = null;
-          description = "Your prefix v6";
+          description = ''
+            Your prefix v6
+            Required if you have ip6 set.'';
         };
 
         interface = mkOption {
@@ -99,36 +95,49 @@ in
     };
   };
 
-  config.networking = mkIf (cfg.interface != null) {
-    defaultGateway = mkIf (cfg.gateway != null) {
-      address = cfg.gateway;
-      inherit (cfg) interface;
-    };
+  config = mkIf (cfg.interface != null) {
+    assertions = [
+      {
+        assertion = cfg.ip == null || cfg.prefix != null;
+        message = "ceirios.networking.prefix or .netmask needs to be set.";
+      }
+      {
+        assertion = cfg.ip6 == null || cfg.prefix6 != null;
+        message = "ceirios.networking.prefix6 needs to be set.";
+      }
+    ];
 
-    defaultGateway6 = mkIf (cfg.gateway6 != null) {
-      address = cfg.gateway6;
-      inherit (cfg) interface;
-    };
+    networking = {
+      defaultGateway = mkIf (cfg.gateway != null) {
+        address = cfg.gateway;
+        inherit (cfg) interface;
+      };
 
-    dhcpcd.enable = mkForce false;
+      defaultGateway6 = mkIf (cfg.gateway6 != null) {
+        address = cfg.gateway6;
+        inherit (cfg) interface;
+      };
 
-    interfaces = {
-      ${cfg.interface} = {
-        ipv4 = mkIf (cfg.prefix != null) {
-          addresses = optionals (cfg.ip != null) [
-            {
-              address = cfg.ip;
-              prefixLength = cfg.prefix;
-            }
-          ];
-        };
-        ipv6 = mkIf (cfg.prefix6 != null) {
-          addresses = optionals (cfg.ip6 != null) [
-            {
-              address = cfg.ip6;
-              prefixLength = cfg.prefix6;
-            }
-          ];
+      dhcpcd.enable = mkForce false;
+
+      interfaces = {
+        ${cfg.interface} = {
+          ipv4 = mkIf (cfg.prefix != null) {
+            addresses = optionals (cfg.ip != null) [
+              {
+                address = cfg.ip;
+                prefixLength = cfg.prefix;
+              }
+            ];
+          };
+          ipv6 = mkIf (cfg.prefix6 != null) {
+            addresses = optionals (cfg.ip6 != null) [
+              {
+                address = cfg.ip6;
+                prefixLength = cfg.prefix6;
+              }
+            ];
+          };
         };
       };
     };
