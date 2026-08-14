@@ -29,5 +29,10 @@ in
 
       };
     };
+
+    # elephant menus
+    xdg.configFile = {
+      "elephant/menus".source = ./menus;
+    };
   };
 }

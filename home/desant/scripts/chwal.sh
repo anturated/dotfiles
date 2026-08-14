@@ -1,7 +1,5 @@
 SCHEME="scheme-tonal-spot"
 DURATION="0.6"
-# do this because it won't resolve pictures dir from hyprland keybind
-WALLPAPER_DIR="$HOME/media/pictures/wallpapers/"
 
 ALL_MONITORS=false
 IMG_ARG=""
@@ -15,7 +13,7 @@ while [[ $# -gt 0 ]]; do
     shift
     ;;
   -*)
-    echo "Unknown option: $1"
+    echo "unknown option: $1"
     exit 1
     ;;
   *)
@@ -25,41 +23,19 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-# set up thumbnails dir #
-
-thumb_dir="$HOME/.cache/wallthumbs"
-mkdir -p "$thumb_dir"
-
 # check/process args #
 
-if [ -n "$IMG_ARG" ]; then
-  img="$IMG_ARG"
-elif $ALL_MONITORS; then
-  echo "chwal: -a requires an image path" >&2
+if [ -z "$IMG_ARG" ]; then
+  echo "image path required" >&2
   exit 1
-else
-  # try get an image from user
-  img="$WALLPAPER_DIR$(
-    # scan wallpapers dir
-    find "$WALLPAPER_DIR" -type f \( -iname "*.jpg" -o -iname "*.png" -o -iname "*.webp" -o -iname "*.jpeg" -o -iname "*.gif" \) |
-      # extract name
-      while read -r file; do
-        base=$(basename "$file")
-        thumb="$thumb_dir/$base"
-        # generate thumbnail if not present
-        if [ ! -f "$thumb" ]; then
-          printf "%s\0icon\x1fthumbnail://%s\n" "$base" "$file"
-          magick "$file"[0] -thumbnail 200x200 "$thumb" &
-        else
-          printf "%s\0icon\x1f%s\n" "$base" "$thumb"
-        fi
-      done |
-      walker --dmenu
-  )"
 fi
 
-# if we didn't get an image we do nothing
-[ -z "$img" ] && exit 0
+img="$IMG_ARG"
+
+if [ ! -f "$img" ]; then
+  echo "no such file: $img" >&2
+  exit 1
+fi
 
 # set wallpaper #
 
