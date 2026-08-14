@@ -43,12 +43,6 @@ hl.window_rule({
 -- floating stuff --
 
 hl.window_rule({
-  match = { class = "floating-" .. terminal },
-
-  float = true,
-})
-
-hl.window_rule({
   name = "picture-in-picture",
   match = { title = "^(Picture in picture)$" },
 

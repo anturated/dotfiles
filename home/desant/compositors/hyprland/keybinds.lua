@@ -6,7 +6,7 @@ local mod = "SUPER"
 
 -- terminal
 hl.bind(mod .. " + R", hl.dsp.exec_cmd(terminal))
-hl.bind(mod .. " + SHIFT + R", hl.dsp.exec_cmd(terminal .. " --class=floating-" .. terminal))
+hl.bind(mod .. " + SHIFT + R", hl.dsp.exec_cmd(terminal, { float = true }))
 
 -- files
 hl.bind(mod .. " + E", hl.dsp.exec_cmd(terminal .. " yazi"))
