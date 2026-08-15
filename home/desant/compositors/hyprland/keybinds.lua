@@ -32,6 +32,7 @@ hl.bind(mod .. " + ALT + T", hl.dsp.exec_cmd("Telegram"))
 hl.bind(mod .. " + SHIFT + B", hl.dsp.exec_cmd("walker --provider bluetooth"))
 hl.bind(mod .. " + SHIFT + A", hl.dsp.exec_cmd("walker --provider wireplumber"))
 hl.bind(mod .. " + SHIFT + I", hl.dsp.exec_cmd("walker --provider menus:wallpapers -N"))
+hl.bind(mod .. " + SHIFT + M", hl.dsp.exec_cmd("walker --provider menus:music -N"))
 hl.bind(mod .. " + V", hl.dsp.exec_cmd("walker --provider clipboard"))
 hl.bind(mod .. " + ALT + W", hl.dsp.exec_cmd("animelist"))
 
