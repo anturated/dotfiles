@@ -80,6 +80,8 @@ function GetEntries()
 
   local home = os.getenv("HOME")
   local music_dir = home .. "/media/music/"
+  local thumb_dir = home .. "/.cache/ceirios/musicthumbs/"
+  os.execute("mkdir -p " .. shell_escape(thumb_dir))
 
   local handle =
     io.popen("find " .. shell_escape(music_dir) .. " -mindepth 1 -maxdepth 1 -type d ! -name '.*' 2>/dev/null | sort")
@@ -102,7 +104,23 @@ function GetEntries()
 
         local cover = find_cover(line)
         if cover then
-          entry.Icon = cover
+          local rel = line:sub(#music_dir + 1)
+          local cache_key = rel:gsub("/", "_")
+          local thumb = thumb_dir .. cache_key .. ".png"
+
+          if not file_exists(thumb) then
+            local cmd = "magick "
+              .. shell_escape(cover)
+              .. " -thumbnail 100x100 "
+              .. shell_escape(thumb)
+              .. " >/dev/null 2>&1 &"
+            local ph = io.popen(cmd)
+            if ph then
+              ph:close()
+            end
+          end
+
+          entry.Icon = thumb
         end
 
         table.insert(entries, entry)
