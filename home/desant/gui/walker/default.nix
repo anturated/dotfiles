@@ -39,6 +39,10 @@ in
 
       settings = {
         theme = "ivy";
+
+        providers.max_results_provider = {
+          "menus:wallpapers" = 999; # i wanna see all of em
+        };
       };
     };
 
