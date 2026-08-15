@@ -48,7 +48,7 @@ function GetEntries()
   -- note: doesn't work with XDG_XXX for whatever reason
   local home = os.getenv("HOME")
   local wallpaper_dir = home .. "/media/pictures/wallpapers/"
-  local thumb_dir = home .. "/.cache/wallthumbs/"
+  local thumb_dir = home .. "/.cache/ceirios/wallthumbs/"
 
   os.execute("mkdir -p " .. shell_escape(thumb_dir))
 

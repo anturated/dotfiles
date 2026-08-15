@@ -70,8 +70,8 @@ fi
 if $PRIMARY_INVOLVED; then
   # get image hash
   hash=$(sha1sum "$img" | cut -d' ' -f1)
-  mkdir -p "$HOME/.cache/matugen"
-  cache="$HOME/.cache/matugen/$SCHEME-$hash.json"
+  mkdir -p "$HOME/.cache/ceirios/matugen"
+  cache="$HOME/.cache/ceirios/matugen/$SCHEME-$hash.json"
   echo "hash is $hash for $img"
 
   # check if cache for the image exists
