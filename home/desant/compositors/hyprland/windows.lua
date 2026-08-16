@@ -31,6 +31,15 @@ hl.window_rule({
   workspace = "2 silent",
 })
 
+hl.window_rule({
+  name = "games-proton",
+  match = { xdg_tag = "proton-game" },
+
+  immediate = true,
+  fullscreen = true,
+  workspace = "2 silent",
+})
+
 -- gamescope is just gamescope
 hl.window_rule({
   name = "gamescope",
