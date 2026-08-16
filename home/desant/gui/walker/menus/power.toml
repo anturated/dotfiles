@@ -1,0 +1,26 @@
+name = "power"
+name_pretty = "Power"
+icon = "system-shutdown"
+
+[[entries]]
+text = "Power Off"
+actions = { "off" = "systemctl poweroff" }
+icon = "system-shutdown"
+
+
+[[entries]]
+text = "Log Out"
+actions = { "log" = "hyprctl dispatch 'hl.dsp.exit()'" }
+icon = "system-log-out"
+
+
+[[entries]]
+text = "Reboot"
+actions = { "reboot" = "systemctl reboot" }
+icon = "system-reboot"
+
+
+[[entries]]
+text = "Suspend"
+actions = { "sleep" = "systemctl suspend" }
+icon = "weather-clear-night"                # idk
