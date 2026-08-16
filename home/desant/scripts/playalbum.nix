@@ -25,7 +25,11 @@ in
         | sort
       )
 
-      exec mpv "''${tracks[@]}"
+      systemd-run --user \
+        --unit="elephant-mpv-$(date +%s%N)" \
+        --collect \
+        --description="playalbum: $1" \
+        -- mpv --no-terminal -- "''${tracks[@]}"
     '';
   };
 }
