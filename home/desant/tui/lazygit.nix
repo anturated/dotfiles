@@ -12,8 +12,8 @@
         overrideGpg = true;
 
         # use delta pager
-        pagers = [
-          { pager = "delta --paging=never"; }
+        diffRenderers = [
+          { command = "delta --paging=never"; }
         ];
       };
     };
