@@ -88,7 +88,6 @@ class KaleDaemon(dbus.service.Object):
             "        blur = { enabled = false },"
             "    },"
             "    animations = { enabled = false },"
-            "    render = { direct_scanout = 1 },"
             "})"
         )], sig, xdg)
 
