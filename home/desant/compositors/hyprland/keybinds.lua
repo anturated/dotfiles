@@ -129,3 +129,6 @@ hl.bind(mod .. " + s", hl.dsp.exec_cmd(br_up), { repeating = true })
 -- mute
 hl.bind("XF86AudioMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"))
 hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"))
+
+-- mute active
+hl.bind(mod .. " + CTRL + M", hl.dsp.exec_cmd("mute-active"))
