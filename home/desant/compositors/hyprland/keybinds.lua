@@ -18,6 +18,7 @@ hl.bind(mod .. " + D", hl.dsp.exec_cmd("walker"))
 
 -- screenshot
 hl.bind(mod .. " + SHIFT + S", hl.dsp.exec_cmd("screenshot"))
+hl.bind("Print", hl.dsp.exec_cmd("screenshot -f"))
 
 -- why does it spell bdsm :cry:
 hl.bind(mod .. " + ALT + B", hl.dsp.exec_cmd(browser))

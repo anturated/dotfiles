@@ -22,9 +22,20 @@ in
         slurp
         killall
         wl-clipboard
+        jq
       ];
 
       text = ''
+        full=false
+
+        # parse args
+        while getopts ":f" opt; do
+          case "$opt" in
+            f) full=true ;;
+            *) ;;
+          esac
+        done
+
         # cleanup
         killall -9 hyprpicker grim slurp || true
 
@@ -32,20 +43,26 @@ in
         screenshotDir="${config.xdg.userDirs.pictures}/screenshots"
         mkdir -p "$screenshotDir"
 
-        # freeze
-        hyprpicker -z -r &
-        sleep 0.1
-
         # capture date
         screenshotDate="$(date +%Y-%m-%d_%H-%M-%S)"
 
         screenshotPath="$screenshotDir/$screenshotDate.png"
 
-        # grab
-        grim -g "$(slurp)" "$screenshotPath" || true # safeguard just in case idk
+        if $full; then
+          # grab monitor
+          monitor="$(hyprctl monitors -j | jq -r '.[] | select(.focused) | .name')"
+          grim -o "$monitor" "$screenshotPath" || true
+        else
+          # freeze
+          hyprpicker -z -r &
+          sleep 0.1
 
-        # unfreeze
-        killall -9 hyprpicker || true
+          # grab
+          grim -g "$(slurp)" "$screenshotPath" || true # safeguard just in case idk
+
+          # unfreeze
+          killall -9 hyprpicker || true
+        fi
 
         # copy, this should be the proper way to spawn wl-copy
         wl-copy -t image/png < "$screenshotPath" 2>>/tmp/wlcopy-errors.log
