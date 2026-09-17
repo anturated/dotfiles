@@ -17,7 +17,7 @@
 
     hardware = {
       cpu = "amd";
-      gpu = "nv-hybrid";
+      gpu = "nvidia";
       bluetooth.enable = true;
 
       busIds = {
