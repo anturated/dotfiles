@@ -19,6 +19,10 @@ text = "Reboot"
 actions = { "reboot" = "systemctl reboot" }
 icon = "system-reboot"
 
+[[entries]]
+text = "Reboot to UEFI"
+actions = { "reboot" = "systemctl reboot --firmware-setup" }
+icon = "system-reboot"
 
 [[entries]]
 text = "Suspend"
