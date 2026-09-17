@@ -46,6 +46,10 @@
     system = {
       lix.enable = true;
       flakeDir = "$HOME/dev/dotfiles";
+
+      security = {
+        binaries.enable = true;
+      };
     };
   };
 }
