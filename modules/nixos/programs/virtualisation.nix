@@ -22,5 +22,8 @@ in
     };
 
     programs.virt-manager.enable = true;
+
+    # socket exists for this, give me my boot time back
+    systemd.services.libvirtd.wantedBy = lib.mkForce [ ];
   };
 }
