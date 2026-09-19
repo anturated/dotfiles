@@ -86,11 +86,11 @@
         "ts-nix-numtide": "ts-nix-numtide"
       },
       "locked": {
-        "lastModified": 1789768906,
-        "narHash": "sha256-FDn/YYsflwoPxP5LL3VsbRNIhzW80OtLcBrVY8h50JQ=",
+        "lastModified": 1789831652,
+        "narHash": "sha256-0cakix4wXkn1gBvuRV8mRHZIUSXzsROGt4dq+dKAaSw=",
         "ref": "refs/heads/master",
-        "rev": "9ccb6a2f8dec7333fe6ce981267041ceef2e469e",
-        "revCount": 156,
+        "rev": "1117d129a9a152069350f2ac4db22228e766b126",
+        "revCount": 157,
         "type": "git",
         "url": "https://git.anturated.dev/anturated/newydd"
       },
