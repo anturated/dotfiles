@@ -1,60 +1,81 @@
 MY_PID=$$
 
-# check flags
-while getopts ":mgGbncHOMPlsxS" opt; do
-  case $opt in
+# -- DEFAULTS -- #
+
+USE_HYPR="$CEIRIOS_HAS_HYPR"
+USE_POWER="$CEIRIOS_HAS_POWER"
+USE_NTSYNC="$CEIRIOS_HAS_NTSYNC"
+
+USE_OFFLOAD="$CEIRIOS_HAS_OFFLOAD"
+
+USE_GAMEMODE=1
+USE_GAMEMODE_DAEMON=0
+USE_GAMEMODE_BYPASS=0
+
+USE_MANGOHUD=1
+
+USE_FSR4=1 # why not
+USE_PROTON_WAYLAND=1
+USE_PROTON_LOG=0
+USE_STEAMDECK=0
+USE_GAMESCOPE=0
+
+# -- PARSER -- #
+
+declare -A FLAG=(
+  [g]=USE_GAMEMODE
+  [d]=USE_GAMEMODE_DAEMON
+  [b]=USE_GAMEMODE_BYPASS
+  [w]=USE_PROTON_WAYLAND
+  [l]=USE_PROTON_LOG
+  [s]=USE_STEAMDECK
+  [h]=USE_HYPR
+  [o]=USE_OFFLOAD
+  [m]=USE_MANGOHUD
+  [p]=USE_POWER
+)
+
+apply() {
+  local c=$1 v=$2
+  case $c in
   m) # minimal
     USE_HYPR=0
     USE_MANGOHUD=0
     USE_POWER=0
     USE_PROTON_WAYLAND=0
-    USE_FSR4=1
-    ;;
-  # env vars
-  x) USE_PROTON_WAYLAND=0 ;;
-  l) USE_PROTON_LOG=1 ;;
-  s) USE_STEAMDECK=1 ;;
-  g) # gamemode daemon
-    USE_GAMEMODE=0
-    USE_GAMEMODE_DAEMON=1
-    ;;
-  G) # gamemode both
-    USE_GAMEMODE=1
-    USE_GAMEMODE_DAEMON=1
-    ;;
-  b) # bypass: daemon + direct pid registration, no gamemoderun
-    USE_GAMEMODE=0
-    USE_GAMEMODE_DAEMON=0
-    USE_GAMEMODE_BYPASS=1
-    ;;
-  n) # no gamemode
-    USE_GAMEMODE=0
-    USE_GAMEMODE_DAEMON=0
-    USE_GAMEMODE_BYPASS=0
-    ;;
-  S)                     # gamescope
-    USE_PROTON_WAYLAND=0 # breaks i think
-    USE_GAMESCOPE=1
     ;;
   c) # customize
-    USE_HYPR=0
-    USE_OFFLOAD=0
-    USE_GAMEMODE=0
-    USE_GAMEMODE_DAEMON=0
-    USE_GAMEMODE_BYPASS=0
-    USE_MANGOHUD=0
-    USE_POWER=0
+    USE_HYPR=0 USE_POWER=0 USE_NTSYNC=0 USE_OFFLOAD=0
+    USE_GAMEMODE=0 USE_GAMEMODE_DAEMON=0 USE_GAMEMODE_BYPASS=0
+    USE_MANGOHUD=0 USE_FSR4=0 USE_PROTON_WAYLAND=0
+    USE_PROTON_LOG=0 USE_STEAMDECK=0 USE_GAMESCOPE=0
     ;;
-  H) USE_HYPR=1 ;;
-  O) USE_OFFLOAD=1 ;;
-  M) USE_MANGOHUD=1 ;;
-  P) USE_POWER=1 ;;
-  *) ;;
+  S) # gamescope
+    USE_GAMESCOPE=$v
+    if ((v)); then USE_PROTON_WAYLAND=0; fi
+    ;;
+  *)
+    [[ -n ${FLAG[$c]:-} ]] || return 0
+    printf -v "${FLAG[$c]}" %s "$v"
+    ;;
   esac
-done
-shift $((OPTIND - 1))
+}
 
-# cleanup trap
+while [[ ${1:-} == -?* ]]; do
+  [[ $1 == -- ]] && {
+    shift
+    break
+  }
+  s=${1#-}
+  shift
+  while [[ $s =~ ^([A-Za-z])([0-9]*)(.*)$ ]]; do
+    c=${BASH_REMATCH[1]} v=${BASH_REMATCH[2]:-1} s=${BASH_REMATCH[3]}
+    apply "$c" "$v"
+  done
+done
+
+# -- CLEANUP TRAP -- #
+
 GM_PID=""
 
 # shellcheck disable=SC2329
@@ -72,7 +93,8 @@ cleanup() {
 
 trap cleanup EXIT INT TERM HUP
 
-# register in daemon for tweaks
+# -- CALL DAEMON -- #
+
 dbus-send --system --print-reply \
   --dest=com.anturated.kaled \
   /com/anturated/kaled com.anturated.kaled.RegisterClient \
@@ -81,13 +103,15 @@ dbus-send --system --print-reply \
   boolean:"$([ "$USE_HYPR" -eq 1 ] && echo true || echo false)" \
   boolean:"$([ "$USE_POWER" -eq 1 ] && echo true || echo false)"
 
-# pop a gamemode daemon (nightreign stare)
+# -- GAMEMODE DAEMON -- #
+
 if [ "$USE_GAMEMODE_DAEMON" -eq 1 ]; then
   gamemoded -r &
   GM_PID=$!
 fi
 
-# assemble #
+# -- ENVIRONMENT -- #
+
 CMD=("$@")
 ENV_VARS=()
 ORIG_LD_PRELOAD="${LD_PRELOAD:-}"
@@ -109,7 +133,9 @@ if [ "$USE_OFFLOAD" -eq 1 ]; then
   )
 fi
 
-# wrappers (order matters!)
+# -- WRAPPERS -- #
+
+# (order matters!)
 if [ "$USE_GAMESCOPE" -eq 1 ]; then
   gsArgs=()
   [ "$USE_MANGOHUD" -eq 1 ] && gsArgs+=(--mangoapp)
@@ -132,7 +158,8 @@ if [ ${#ENV_VARS[@]} -gt 0 ]; then
   CMD=(env "${ENV_VARS[@]}" "${CMD[@]}")
 fi
 
-# run #
+# -- LAUNCH -- #
+
 if [ "$USE_GAMEMODE_BYPASS" -eq 1 ]; then
   "${CMD[@]}" &
   LAUNCHER_PID=$!

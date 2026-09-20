@@ -7,9 +7,14 @@
 
 let
   inherit (lib.modules) mkIf;
-  inherit (config.ceirios.profiles) gaming;
-  hasOffload = config.ceirios.hardware.prime == "offload";
-  useOffload = if hasOffload then "1" else "0";
+  inherit (lib.lists) elem;
+  inherit (config.ceirios.profiles) gaming laptop;
+
+  bts = cond: if cond then "1" else "0";
+
+  hasOffload = bts (config.ceirios.hardware.prime == "offload");
+  hasPower = bts laptop.enable;
+  hasNtsync = bts (elem "ntsync" config.boot.kernelModules);
 in
 {
   ceirios.packages = mkIf gaming.enable {
@@ -23,23 +28,10 @@ in
 
       text = ''
         # defaults
-        USE_HYPR=1
-        USE_POWER=1
-        USE_NTSYNC=1
-
-        USE_OFFLOAD=${useOffload}
-
-        USE_GAMEMODE=1
-        USE_GAMEMODE_DAEMON=0
-        USE_GAMEMODE_BYPASS=0
-
-        USE_MANGOHUD=1
-
-        USE_FSR4=1 # why not
-        USE_PROTON_WAYLAND=1
-        USE_PROTON_LOG=0
-        USE_STEAMDECK=0
-        USE_GAMESCOPE=0
+        CEIRIOS_HAS_HYPR=1 # TODO: do this properly
+        CEIRIOS_HAS_POWER=${hasPower}
+        CEIRIOS_HAS_OFFLOAD=${hasOffload}
+        CEIRIOS_HAS_NTSYNC=${hasNtsync}
       ''
       + builtins.readFile ./kale.sh;
     };
