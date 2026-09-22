@@ -38,6 +38,9 @@ hl.bind(mod .. " + Escape", hl.dsp.exec_cmd("walker --provider menus:power -N"))
 hl.bind(mod .. " + V", hl.dsp.exec_cmd("walker --provider clipboard"))
 hl.bind(mod .. " + ALT + W", hl.dsp.exec_cmd("animelist"))
 
+-- """task manager"""
+hl.bind("CTRL + SHIFT + Escape", hl.dsp.exec_cmd(terminal .. " btop"))
+
 -------------
 -- windows --
 -------------
