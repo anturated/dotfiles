@@ -1,9 +1,4 @@
-{
-  pkgs,
-  lib,
-  config,
-  ...
-}:
+{ lib, config, ... }:
 
 let
   inherit (lib.modules) mkIf;
@@ -11,21 +6,8 @@ let
 in
 {
   config = mkIf graphical.enable {
-    ceirios.packages = {
-      inherit (pkgs) awww;
-    };
-
-    systemd.user.services.awww-daemon = {
-      Unit = {
-        Description = "awww daemon";
-        After = [ "graphical-session.target" ];
-        PartOf = [ "graphical-session.target" ];
-      };
-      Service = {
-        ExecStart = "${pkgs.awww}/bin/awww-daemon";
-        Restart = "on-failure";
-      };
-      Install.WantedBy = [ "graphical-session.target" ];
+    services.awww = {
+      enable = true;
     };
   };
 }
