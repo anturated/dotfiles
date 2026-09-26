@@ -3,42 +3,35 @@
 
 -- games can be native, wayland, and gamescope, thus this many rules
 
--- steam / xwayland
-hl.window_rule({
-  name = "games",
-  match = {
-    class = "^(steam_app_.*)$" -- proton xwayland
-      -- linux native steam games
-      .. "|^(cs2)$|^(Celeste.bin.x86_64)$|^(Celeste)$|^(valheim.x86_64)$"
-      -- Minecraft modpacks (they just have to have a different title all of them)
-      .. "|^(Minecraft.*)$|^(DREAD.*)$"
-      -- no idea what this is, might be steam's remote play
-      .. "|^(Streaming Client)$",
+local game_rules = {
+  immediate = true,
+  fullscreen = true,
+  workspace = "2 silent",
+}
+
+local game_matches = {
+  { name = "games-wayland", match = { content = "game" } },
+  { name = "games-proton", match = { xdg_tag = "proton-game" } },
+  {
+    name = "games",
+    match = {
+      class = "^(steam_app_.*)$" -- proton xwayland
+        -- linux native steam games
+        .. "|^(cs2)$|^(Celeste.bin.x86_64)$|^(Celeste)$|^(valheim.x86_64)$|helldivers2.exe"
+        -- Minecraft modpacks (they just have to have a different title all of them)
+        .. "|^(Minecraft.*)$|^(DREAD.*)$"
+        -- no idea what this is, might be steam's remote play
+        .. "|^(Streaming Client)$",
+    },
   },
+}
 
-  immediate = true,
-  fullscreen = true,
-  workspace = "2 silent",
-})
-
--- games on wayland seem to set contentType = "game" pretty consistently
-hl.window_rule({
-  name = "games-wayland",
-  match = { content = "game" },
-
-  immediate = true,
-  fullscreen = true,
-  workspace = "2 silent",
-})
-
-hl.window_rule({
-  name = "games-proton",
-  match = { xdg_tag = "proton-game" },
-
-  immediate = true,
-  fullscreen = true,
-  workspace = "2 silent",
-})
+for _, rule in ipairs(game_rules) do
+  for k, v in pairs(game_matches) do
+    rule[k] = v
+  end
+  hl.window_rule(rule)
+end
 
 -- gamescope is just gamescope
 hl.window_rule({
