@@ -17,7 +17,7 @@ local game_matches = {
     match = {
       class = "^(steam_app_.*)$" -- proton xwayland
         -- linux native steam games
-        .. "|^(cs2)$|^(Celeste.bin.x86_64)$|^(Celeste)$|^(valheim.x86_64)$|helldivers2.exe"
+        .. "|^(cs2)$|^(Celeste.bin.x86_64)$|^(Celeste)$|^(valheim.x86_64)$|HELLDIVERS™ 2"
         -- Minecraft modpacks (they just have to have a different title all of them)
         .. "|^(Minecraft.*)$|^(DREAD.*)$"
         -- no idea what this is, might be steam's remote play

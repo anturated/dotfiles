@@ -15,7 +15,7 @@ USE_GAMEMODE_BYPASS=0
 USE_MANGOHUD=1
 
 USE_FSR4=1 # why not
-USE_PROTON_WAYLAND=1
+USE_PROTON_WAYLAND=0
 USE_PROTON_LOG=0
 USE_STEAMDECK=0
 USE_GAMESCOPE=0
@@ -164,7 +164,7 @@ if [ "$USE_GAMEMODE_BYPASS" -eq 1 ]; then
   "${CMD[@]}" &
   LAUNCHER_PID=$!
 
-  BLACKLIST="^(steam|steamwebhelper|services|winedevice|svchost|plugplay|explorer|rpcss|tabtip|conhost|wineboot|rundll32|winemenubuilder|upc)\.exe$"
+  BLACKLIST="^(steam|steamwebhelper|services|winedevice|svchost|plugplay|explorer|rpcss|tabtip|conhost|wineboot|rundll32|winemenubuilder|upc|crs-handler)\.exe$"
 
   declare -A seen
   while kill -0 $LAUNCHER_PID 2>/dev/null; do
