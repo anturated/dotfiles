@@ -28,6 +28,16 @@ in
       package = null;
       portalPackage = null;
 
+      # this fixes user services rushing and not getting needed env vars
+      systemd = {
+        enable = true;
+        variables = [ "--all" ];
+        extraCommands = [
+          "systemctl --user stop graphical-session.target"
+          "systemctl --user start hyprland-session.target"
+        ];
+      };
+
       # we ball. merge raw lua into one file since that's gonna happen anyways
       extraConfig = ''
         -- import colors from matugen
