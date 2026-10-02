@@ -88,7 +88,10 @@ in
             APP_DISPLAY_NAME_FORMAT = "{APP_NAME}";
           };
 
-          attachment.ALLOWED_TYPES = "*/*";
+          attachment = {
+            ALLOWED_TYPES = "*/*";
+            MAX_SIZE = 4096; # MiB
+          };
 
           # disable the "ambiguous characters detected" warning, it's mostly just annoying
           ui.AMBIGUOUS_UNICODE_DETECTION = false;
@@ -202,6 +205,10 @@ in
       };
 
       nginx.virtualHosts.${cfg.domain} = {
+        # hopefully this lets me upload ISOs
+        extraConfig = ''
+          client_max_body_size 4G;
+        '';
         locations."/" = {
           recommendedProxySettings = true;
           proxyPass =

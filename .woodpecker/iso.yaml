@@ -26,66 +26,8 @@ steps:
       # nix store gets nuked
       - cp ./result/iso/*.iso ./
 
-  - name: cleanup
-    depends_on: [build]
-    image: alpine
-    environment:
-      CDN_PASS:
-        from_secret: CDN_PASS
-    commands:
-      - apk add curl jq
-      - |
-        CDN_TOKEN=$(curl -X PUT -s "https://burger.anturated.dev/~/api/auth" \
-          -F "login=builder" \
-          -F "password=$${CDN_PASS}" | jq -r '.data.token')
-      # this is horrid but i'm sleep deprived enough at this point
-      # delete all but 2 last ISOs
-      - |
-        curl -s -X GET "https://burger.anturated.dev/~/api/directory?path=/ceirios-builds" \
-          --header "Authorization: Bearer $${CDN_TOKEN}" \
-          | jq -r '[.data[] | select(.isDirectory == false)] | sort_by(.birthtime) | reverse | .[2:] | .[].path' \
-          | while read path; do
-              echo "deleting $path"
-              curl -s -X DELETE "https://burger.anturated.dev/~/api/file?path=$(echo $path | sed 's|/|%2F|g')" \
-                --header "Authorization: Bearer $${CDN_TOKEN}"
-            done
-
-  - name: upload
-    depends_on: [cleanup]
-    image: alpine
-    environment:
-      CDN_PASS:
-        from_secret: CDN_PASS
-      FORGEJO_TOKEN:
-        from_secret: PILL_TOKEN
-    commands:
-      # set up
-      - apk add curl jq
-      # get iso data
-      - ISO=$(ls *.iso | head -1)
-      - UPLOAD_PATH="/ceirios-builds/$${ISO}"
-      # get cdn token
-      - |
-        CDN_TOKEN=$(curl -X PUT -s "https://burger.anturated.dev/~/api/auth" \
-        -F "login=builder" \
-        -F "password=$${CDN_PASS}" | jq -r '.data.token')
-      # upload
-      - |
-        curl -X PUT "https://burger.anturated.dev/~/api/file" \
-        --header "Authorization: Bearer $${CDN_TOKEN}" \
-        --data-binary "@$${ISO}" \
-        --url-query "path=$${UPLOAD_PATH}"
-      # get permalink
-      - |
-        LINK_RESPONSE=$(curl -X GET -s "https://burger.anturated.dev/~/api/link" \
-        --header "Authorization: Bearer $${CDN_TOKEN}" \
-        --url-query "path=$${UPLOAD_PATH}")
-      - URL=$(echo "$${LINK_RESPONSE}" | jq -r '.data.url')
-      # persist
-      - echo $URL > ./url
-
   - name: release
-    depends_on: [upload]
+    depends_on: [build]
     image: alpine
     environment:
       FORGEJO_TOKEN:
@@ -93,12 +35,11 @@ steps:
     commands:
       # setup
       - apk add curl jq
-      - URL=$(cat ./url)
       - ISO=$(ls *.iso | head -1)
       - SHORT_SHA=$(echo ${CI_COMMIT_SHA} | cut -c1-7)
       # release
       - |
-        RELEASE=$(curl -s -X POST https://git.anturated.dev/api/v1/repos/${CI_REPO}/releases \
+        RELEASE=$(curl -sf -X POST https://git.anturated.dev/api/v1/repos/${CI_REPO}/releases \
           -H "Authorization: token $${FORGEJO_TOKEN}" \
           -H "Content-Type: application/json" \
           -d "{
@@ -107,16 +48,33 @@ steps:
             \"target_commitish\": \"${CI_COMMIT_SHA}\"
           }")
       # grab id
-      - RELEASE_ID=$(echo $RELEASE | jq -r '.id')
+      - RELEASE_ID=$(echo "$${RELEASE}" | jq -r '.id')
       # add iso
       - |
-        curl -s -X POST "https://git.anturated.dev/api/v1/repos/${CI_REPO}/releases/$${RELEASE_ID}/assets?name=$${ISO}" \
+        curl -sS --fail-with-body -X POST "https://git.anturated.dev/api/v1/repos/${CI_REPO}/releases/$${RELEASE_ID}/assets?name=$${ISO}" \
           -H "Authorization: token $${FORGEJO_TOKEN}" \
-          -H "Content-Type: multipart/form-data" \
-          -F "external_url=$${URL}"
+          -F "attachment=@$${ISO}"
       # add pipeline
       - |
-        curl -s -X POST "https://git.anturated.dev/api/v1/repos/${CI_REPO}/releases/$${RELEASE_ID}/assets?name=pipeline" \
+        curl -sf -X POST "https://git.anturated.dev/api/v1/repos/${CI_REPO}/releases/$${RELEASE_ID}/assets?name=pipeline" \
           -H "Authorization: token $${FORGEJO_TOKEN}" \
-          -H "Content-Type: multipart/form-data" \
           -F "external_url=${CI_PIPELINE_URL}"
+
+  - name: cleanup
+    depends_on: [release]
+    image: alpine
+    environment:
+      FORGEJO_TOKEN:
+        from_secret: PILL_TOKEN
+    commands:
+      - apk add curl jq
+      # keep latest 3 ceirios-* releases, delete the rest
+      - |
+        curl -sf "https://git.anturated.dev/api/v1/repos/${CI_REPO}/releases?limit=50" \
+          -H "Authorization: token $${FORGEJO_TOKEN}" \
+          | jq -r '[.[] | select(.tag_name | startswith("ceirios-"))] | sort_by(.created_at) | reverse | .[3:] | .[] | "\(.id) \(.tag_name)"' \
+          | while read id tag; do
+              echo "deleting release $id ($tag)"
+              curl -sf -X DELETE "https://git.anturated.dev/api/v1/repos/${CI_REPO}/releases/$id" \
+                -H "Authorization: token $${FORGEJO_TOKEN}"
+            done
