@@ -29,8 +29,9 @@ local game_matches = {
   },
 }
 
-for _, rule in ipairs(game_rules) do
-  for k, v in pairs(game_matches) do
+for _, m in ipairs(game_matches) do
+  local rule = { name = m.name, match = m.match }
+  for k, v in pairs(game_rules) do
     rule[k] = v
   end
   hl.window_rule(rule)
