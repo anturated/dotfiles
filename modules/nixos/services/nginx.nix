@@ -9,7 +9,7 @@ let
   inherit (self.lib) mkServiceOption;
   inherit (lib.modules) mkIf mkDefault mkMerge;
   inherit (lib.options) mkOption;
-  inherit (lib.types) attrsOf submodule anything;
+  inherit (lib.types) attrsOf submodule;
 
   cfg = config.ceirios.services.nginx;
 in
@@ -24,8 +24,6 @@ in
     services.nginx.virtualHosts = mkOption {
       type = attrsOf (
         submodule (_: {
-          freeformType = attrsOf anything;
-
           config = {
             quic = mkDefault true;
             forceSSL = mkDefault true;
