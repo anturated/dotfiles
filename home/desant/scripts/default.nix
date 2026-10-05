@@ -8,5 +8,6 @@
     ./screenshot.nix
     ./playalbum.nix
     ./mute-active.nix
+    ./upd.nix
   ];
 }
