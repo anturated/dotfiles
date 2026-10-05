@@ -6,5 +6,6 @@
     ./lazygit.nix
     ./nvim.nix
     ./misc.nix
+    ./yazi.nix
   ];
 }

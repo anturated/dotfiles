@@ -13,7 +13,6 @@ in
   ceirios.packages = {
     inherit (pkgs)
       # these are just nice to have
-      yazi
       btop
       gdu
       ;
