@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1791151316,
-        "narHash": "sha256-17ad7xouu/fgoLUwYqJ0QcWQ6DwF8+wLEJHSmTIDQdE=",
+        "lastModified": 1791237723,
+        "narHash": "sha256-Njq5ye0kHOBhFzqBp/XCII0MCiOHKkVRDVzGzbKi84s=",
         "ref": "refs/heads/master",
-        "rev": "290431220815a6c3495515879fea63ab8231d7c4",
-        "revCount": 120,
+        "rev": "7bd39a0fc58601e95c5f07b9cc73be7fe590257d",
+        "revCount": 121,
         "type": "git",
         "url": "https://git.anturated.dev/anturated/website"
       },
@@ -27,11 +27,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1791151316,
-        "narHash": "sha256-CxbAdnElhPDtzf9F+QvDux3rkSmY0nxj2lIFAOP0eEU=",
+        "lastModified": 1791237723,
+        "narHash": "sha256-ffKhCRxV4xVMxg4gr1ZM/cd6h1YIksaOps9ula1PRHg=",
         "ref": "refs/heads/master",
-        "rev": "01c144339acb73972ef88bc16b2f35e9cb4c6d93",
-        "revCount": 187,
+        "rev": "b5cdd1055ba2fe51cd71349b379973554607bd95",
+        "revCount": 188,
         "type": "git",
         "url": "https://git.anturated.dev/anturated/eiddew"
       },
@@ -65,11 +65,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1791123389,
-        "narHash": "sha256-4ln1QbTLlSC6Wo0Jus/YZuueOBBNhTSa9KMSnco+j8M=",
+        "lastModified": 1791227480,
+        "narHash": "sha256-+lrD+sxc2RKUWXRBAcggn7uBCFeJgnV75jD/cz7gJRA=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "8cfa9c9514e86f3b88856958b4692e7312b96598",
+        "rev": "aa23f720d022187228bc264f759aef6b80233bcf",
         "type": "github"
       },
       "original": {
@@ -86,11 +86,11 @@
         "ts-nix-numtide": "ts-nix-numtide"
       },
       "locked": {
-        "lastModified": 1791151317,
-        "narHash": "sha256-x9667bdjZg7qEhXRfYBWvcPUDjpU9BBVKzJNAlNAHL8=",
+        "lastModified": 1791237725,
+        "narHash": "sha256-BJQn47PiOrogZbv90EArmSJm6BFvFyhmUWEUduFrEac=",
         "ref": "refs/heads/master",
-        "rev": "9ff6a122c0de929b4bbe7d4b9ba92f6c64f53c1e",
-        "revCount": 169,
+        "rev": "58bccefe551ff75129efbba86333e854b05d01a4",
+        "revCount": 170,
         "type": "git",
         "url": "https://git.anturated.dev/anturated/newydd"
       },
@@ -121,11 +121,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1791011291,
-        "narHash": "sha256-V6OBJccNKBo/ktknxlJXZChPoI0NE2lembArBO3CE9k=",
+        "lastModified": 1791191277,
+        "narHash": "sha256-i8KuaINOYLvB2oQikGvtRmdZRxATRxsI9Yad2pp7dEA=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "73e728ddb6b7a12d18808f510813a13ee1fe4cce",
+        "rev": "aa48d347080940b8a2b8d2f48228674e280a3514",
         "type": "github"
       },
       "original": {
@@ -157,11 +157,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1790256478,
-        "narHash": "sha256-jnU8wDRoMIUxuT0AgGYxqPucIf3cOAwWrmB23xarCXI=",
+        "lastModified": 1791231530,
+        "narHash": "sha256-sj7RiYmHW+d7NjH2TWKozEaYp8nhdGas6/zMKjTCO5k=",
         "owner": "simple-nixos-mailserver",
         "repo": "nixos-mailserver",
-        "rev": "2c3a8c4e36ab8190010f9f104e48d042cc65b05f",
+        "rev": "4a06abf89ea5e38a3e0f9bf12f3036095d4a24a2",
         "type": "gitlab"
       },
       "original": {
