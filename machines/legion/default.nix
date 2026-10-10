@@ -25,7 +25,10 @@
       };
 
       monitors = {
-        eDP-1.refresh-rate = 120;
+        eDP-2 = {
+          description = "AU Optronics 0xD1ED";
+          refresh-rate = 120;
+        };
 
         DP-1 = {
           x = 1920;

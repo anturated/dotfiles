@@ -10,6 +10,7 @@ let
     submodule
     int
     float
+    nullOr
     ;
 
   getClosestTo00 =
@@ -35,7 +36,7 @@ in
     monitors = mkOption {
       type = attrsOf (
         submodule (
-          { name, ... }:
+          { config, name, ... }:
           {
             options = {
               name = mkOption {
@@ -43,6 +44,22 @@ in
                 default = name;
                 description = "Monitor name";
                 example = "DP-1";
+              };
+
+              description = mkOption {
+                type = nullOr str;
+                default = null;
+                description = ''
+                  Monitor descriptions as per `hyprctl monitors`.
+                  Use this if matching by name is flaky.
+                '';
+              };
+
+              selector = mkOption {
+                type = str;
+                readOnly = true;
+                internal = true;
+                default = if config.description != null then "desc:${config.description}" else config.name;
               };
 
               width = mkOption {

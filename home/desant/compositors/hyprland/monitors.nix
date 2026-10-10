@@ -33,7 +33,7 @@ let
   configMonitors = concatLines (
     mapAttrsToList (name: mon: ''
       hl.monitor({
-        output = "${name}",
+        output = "${mon.selector}",
         mode = "${toString mon.width}x${toString mon.height}@${toString mon.refresh-rate}",
         position = "${toString mon.x}x${toString mon.y}",
         transform = ${toString mon.orientation},

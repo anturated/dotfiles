@@ -29,7 +29,7 @@ let
   isPersistent = index: if index < wsPerMon then "true" else "false";
 
   # get monitor name for the workspace
-  idxToMon = index: (elemAt monitors (index / wsPerMon)).name;
+  idxToMon = index: (elemAt monitors (index / wsPerMon)).selector;
 
   # rule generator
   mkRule = index: ''
