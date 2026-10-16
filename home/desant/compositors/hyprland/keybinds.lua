@@ -23,7 +23,7 @@ hl.bind("Print", hl.dsp.exec_cmd("screenshot -f"))
 -- why does it spell bdsm :cry:
 hl.bind(mod .. " + ALT + B", hl.dsp.exec_cmd(browser))
 hl.bind(mod .. " + ALT + D", hl.dsp.exec_cmd("vesktop"))
-hl.bind(mod .. " + ALT + S", hl.dsp.exec_cmd("steam -steamos"))
+hl.bind(mod .. " + ALT + S", hl.dsp.exec_cmd("steam")) -- note: -steamos was apparently a beta and is gone now
 hl.bind(mod .. " + ALT + M", hl.dsp.exec_cmd("spotify"))
 
 hl.bind(mod .. " + ALT + A", hl.dsp.exec_cmd("obsidian"))
