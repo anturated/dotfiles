@@ -17,6 +17,7 @@
     ./system
     ./users.nix
     ./performance.nix
+    ./phone.nix
 
     ./extras.nix
   ];
