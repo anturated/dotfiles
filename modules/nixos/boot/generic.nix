@@ -29,6 +29,5 @@ in
 
     # something related to boot logs (probably)
     consoleLogLevel = 3;
-    initrd.verbose = false;
   };
 }
