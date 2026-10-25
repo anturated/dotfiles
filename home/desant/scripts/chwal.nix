@@ -38,7 +38,7 @@ in
       text = ''
         CHWAL_GRAPHICAL=${if graphical.enable && hasMonitors then "1" else "0"}
         CHWAL_REFRESH=${toString refresh}
-        CHWAL_MAIN_MONITOR="${mainMonitor}"
+        CHWAL_MAIN_MONITOR="${hardware.monitors.${mainMonitor}.selector or mainMonitor}"
       ''
       + builtins.readFile ./chwal.sh;
     };

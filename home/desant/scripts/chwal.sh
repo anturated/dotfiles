@@ -52,6 +52,8 @@ else
   # get focused monitor info
   monitor_json=$(hyprctl monitors -j | jq -r '.[] | select(.focused == true)')
   monitor=$(echo "$monitor_json" | jq -r '.name')
+  # remove trailing monitor name if present
+  monitor_desc=$(echo "$monitor_json" | jq -r '.description' | sed 's/ ([^)]*)$//')
 
   # set wallpaper only on that monitor
   if [ "$CHWAL_GRAPHICAL" -eq 1 ]; then
@@ -63,7 +65,10 @@ else
   fi
 
   PRIMARY_INVOLVED=false
-  [ "$monitor" == "$CHWAL_MAIN_MONITOR" ] && PRIMARY_INVOLVED=true
+  case "$CHWAL_MAIN_MONITOR" in
+  desc:*) [ "$monitor_desc" == "${CHWAL_MAIN_MONITOR#desc:}" ] && PRIMARY_INVOLVED=true ;;
+  *) [ "$monitor" == "$CHWAL_MAIN_MONITOR" ] && PRIMARY_INVOLVED=true ;;
+  esac
 fi
 
 # if run on primary monitor run matugen
