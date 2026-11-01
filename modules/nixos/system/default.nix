@@ -12,5 +12,6 @@
     ./runners.nix
     ./size.nix
     ./xdg-portals.nix
+    ./systemd.nix
   ];
 }
