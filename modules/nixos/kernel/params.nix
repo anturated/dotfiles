@@ -39,11 +39,15 @@ in
     # that is recoverable. This will make it unrecoverable, and therefore safe to those attacks
     "oops=panic"
 
+    # FIXME: the two options below don't let me boot because of some systemd signatures issue
+    # that i don't have the time to dive into. so i commented them, but it sould be nice
+    # to have it some day
+
     # only allow signed modules
-    "module.sig_enforce=1"
+    # "module.sig_enforce=1"
 
     # blocks access to all kernel memory, even preventing administrators from being able to inspect and probe the kernel
-    "lockdown=confidentiality"
+    # "lockdown=confidentiality"
 
     # enable buddy allocator free poisoning
     "page_poison=on"
