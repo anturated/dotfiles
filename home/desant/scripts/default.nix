@@ -9,5 +9,6 @@
     ./playalbum.nix
     ./mute-active.nix
     ./upd.nix
+    ./save-replay.nix
   ];
 }

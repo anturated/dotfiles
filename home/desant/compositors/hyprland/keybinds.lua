@@ -20,6 +20,10 @@ hl.bind(mod .. " + D", hl.dsp.exec_cmd("walker"))
 hl.bind(mod .. " + SHIFT + S", hl.dsp.exec_cmd("screenshot"))
 hl.bind("Print", hl.dsp.exec_cmd("screenshot -f"))
 
+-- replay
+hl.bind("ALT + F10", hl.dsp.exec_cmd("save-replay"))
+hl.bind("MOD5 + F10", hl.dsp.exec_cmd("save-replay")) -- right alt
+
 -- why does it spell bdsm :cry:
 hl.bind(mod .. " + ALT + B", hl.dsp.exec_cmd(browser))
 hl.bind(mod .. " + ALT + D", hl.dsp.exec_cmd("vesktop"))
