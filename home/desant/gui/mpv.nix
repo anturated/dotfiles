@@ -144,6 +144,9 @@ in
           info_button = "no";
           fullscreen_button = "no";
 
+          # don't show ui on pause (or when scrolling frame by frame)
+          showonpause = false;
+
           hover_effect = "color";
           hover_effect_color = "#a4d396"; # button hover
           seek_handle_color = "#e1e4da";
