@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1793660480,
-        "narHash": "sha256-/fi3Vx5DqQ+fsVxjSm1Z42mqGUb2s3QEYS74Fg4Qd6s=",
+        "lastModified": 1793746880,
+        "narHash": "sha256-aYVtrVW4A/p7PcIMr1Xa5ofvRAWS8k86YW47GPXOjqo=",
         "ref": "refs/heads/master",
-        "rev": "7e0e0e60f445a86c4973dc4c3a5fd69b9a4fc330",
-        "revCount": 137,
+        "rev": "dab6d1c1d5640944c826bc765f043baa51d590a6",
+        "revCount": 138,
         "type": "git",
         "url": "https://git.anturated.dev/anturated/website"
       },
@@ -27,11 +27,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1793660480,
-        "narHash": "sha256-1PzJAl15TsRLafGuLbUW+KiasC6SlglgqR+5sDIiZtE=",
+        "lastModified": 1793746880,
+        "narHash": "sha256-WTvupPtUoAIMyz0eazPoD/c0BFUIUZY2yBHijje3jco=",
         "ref": "refs/heads/master",
-        "rev": "cb6f3379f154dfb00fec650ed1cf3201cb05768d",
-        "revCount": 204,
+        "rev": "9c27c25f9aa4a6a94e9b0a3f8843d025371ca4a2",
+        "revCount": 205,
         "type": "git",
         "url": "https://git.anturated.dev/anturated/eiddew"
       },
@@ -86,11 +86,11 @@
         "ts-nix-numtide": "ts-nix-numtide"
       },
       "locked": {
-        "lastModified": 1793660481,
-        "narHash": "sha256-vuTewFsLcLAiiDe8af3GJxeMq/y2l1AyeB+k1JD2oNw=",
+        "lastModified": 1793746881,
+        "narHash": "sha256-2+bYgkiWSx3qY3vjqf3LxAhnni8NsksqT4E6DioCi7Y=",
         "ref": "refs/heads/master",
-        "rev": "3fdbf444b54a35f9658e4aa6586cc01e236de4a2",
-        "revCount": 186,
+        "rev": "b2b8e4bc7446eddedf867e5c5c26e02a7690680b",
+        "revCount": 187,
         "type": "git",
         "url": "https://git.anturated.dev/anturated/newydd"
       },
@@ -121,11 +121,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1793616200,
-        "narHash": "sha256-3t7xlnGR8DYoMIISMPqE4CwjRzw3J/3ympUKMu8pC4o=",
+        "lastModified": 1793706278,
+        "narHash": "sha256-CE1GD35mj//AKYuLNbQJZDelQYWzef5GBpQno9uyNP0=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "df1e6651c16c38563a164037647a5f00704b3e41",
+        "rev": "ea9e3ef341e11c193537f674f821a99f9f436729",
         "type": "github"
       },
       "original": {
