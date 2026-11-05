@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1793833278,
-        "narHash": "sha256-IsZU5thqEDZAaEv/Be0ZtsVAWIUAHJ/No3A3cfdPZ/E=",
+        "lastModified": 1793919674,
+        "narHash": "sha256-oMPpv2jVZbjqURp1sSg+foUrEJRxW/SE94o+XJsa1Wo=",
         "ref": "refs/heads/master",
-        "rev": "7eb258988c9efbce73b8883c215eb363c580bd0f",
-        "revCount": 139,
+        "rev": "2629a28780227ac59c59b8c5f596adfaf71a07d5",
+        "revCount": 140,
         "type": "git",
         "url": "https://git.anturated.dev/anturated/website"
       },
@@ -27,11 +27,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1793833277,
-        "narHash": "sha256-c4bH5SGTb0384u3JZJALs45gnP/jmofPXadMvJNbrRo=",
+        "lastModified": 1793919675,
+        "narHash": "sha256-SnlNW4drEBDqEdEbtYkgIESV8GO3FDUUiSTtW7HTP4c=",
         "ref": "refs/heads/master",
-        "rev": "346a5e2f855e83403292d95038a035d920b46725",
-        "revCount": 206,
+        "rev": "21e2207ae4afd597675113b093e493dbcfb6b206",
+        "revCount": 207,
         "type": "git",
         "url": "https://git.anturated.dev/anturated/eiddew"
       },
@@ -86,11 +86,11 @@
         "ts-nix-numtide": "ts-nix-numtide"
       },
       "locked": {
-        "lastModified": 1793833279,
-        "narHash": "sha256-VW/Qoj02A6v71BQty4jytBVxDSBSHHHL/g4wz1XaVb4=",
+        "lastModified": 1793919675,
+        "narHash": "sha256-AsHtnJPY5GEH6Z3Q+5RC8enEoZUwiYYODPQEh81kxrI=",
         "ref": "refs/heads/master",
-        "rev": "3a5e8ac25bf2e88961661a4ad7afad0bdfaeffb4",
-        "revCount": 188,
+        "rev": "a81c3111791ef1e5aaf5196a6e4871de742f45dc",
+        "revCount": 189,
         "type": "git",
         "url": "https://git.anturated.dev/anturated/newydd"
       },
@@ -121,11 +121,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1793735720,
-        "narHash": "sha256-smoxPKrzAhdGuFd2LLnG4m8P6IrZuW95DVyzjnlab7w=",
+        "lastModified": 1793826729,
+        "narHash": "sha256-D5H7H+qMoTGI/jJtxKP4u7BdjkFnUyhOovTrf3pTOr0=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "9d3b8db48266c17be0b5f9c6360c3ecfbac3d1f5",
+        "rev": "6dadaf4375be35033e1c84395adbd53ff5fded96",
         "type": "github"
       },
       "original": {
