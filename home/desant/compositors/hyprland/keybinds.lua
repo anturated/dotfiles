@@ -93,6 +93,8 @@ hl.bind(mod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 hl.bind(mod .. " + grave", hl.dsp.workspace.toggle_special())
 hl.bind(mod .. " + SHIFT + grave", hl.dsp.window.move({ workspace = "special" }))
 
+hl.bind(mod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
+hl.bind(mod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
 for i = 1, 10 do
   local key = i % 10 -- 10 -> 0
   hl.bind(mod .. " + " .. key, hl.dsp.focus({ workspace = i }))
