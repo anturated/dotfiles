@@ -28,6 +28,11 @@
         hostname = "185.233.36.209";
       };
 
+      "ffortwin" = {
+        user = "wizard";
+        hostname = "173.242.60.122";
+      };
+
       "forge" = {
         user = "forgejo";
         hostname = "anturated.dev";
