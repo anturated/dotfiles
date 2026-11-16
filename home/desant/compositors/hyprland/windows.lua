@@ -18,7 +18,7 @@ local game_matches = {
       class = "^(steam_app_.*)$" -- proton xwayland
         -- linux native steam games
         .. "|^(cs2)$"
-        .. "|^(Celeste.bin.x86_64)$|^(Celeste)$"
+        .. "|^(Celeste.bin.x86_64)$|^(Celeste)$|^(EverestSplash-linux)$"
         .. "|^(valheim.x86_64)$"
         .. "|^(helldivers2.exe)$"
         -- Minecraft modpacks (they just have to have a different title all of them)
