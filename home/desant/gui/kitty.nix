@@ -28,8 +28,12 @@ in
       tab_title_template = "{title}{' :{}:'.format(num_windows) if num_windows > 1 else ''}";
 
       # misc
-      background_opacity = 0.9;
+      background_opacity = 1;
+      # lets nvim flip opacity at runtime via `kitty @ set-background-opacity`
+      dynamic_background_opacity = true;
       allow_remote_control = "yes";
+      # exposes $KITTY_LISTEN_ON so nvim's child processes (no tty) can reach kitty
+      listen_on = "unix:@kitty-{kitty_pid}";
 
       # this spawns literally 500k watchers for some reason
       # and fills inotify limits

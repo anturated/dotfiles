@@ -29,11 +29,11 @@ hl.config({
 
   decoration = {
     -- i bet you i came up with these numbers at 5am
-    rounding = 13,
+    rounding = 0,
     rounding_power = 3, -- bigger numbers feel better
 
     active_opacity = 1.0,
-    inactive_opacity = 0.92,
+    inactive_opacity = 1.0,
 
     shadow = {
       enabled = true,
