@@ -45,6 +45,9 @@ hl.bind(mod .. " + ALT + W", hl.dsp.exec_cmd("animelist"))
 -- """task manager"""
 hl.bind("CTRL + SHIFT + Escape", hl.dsp.exec_cmd(terminal .. " btop"))
 
+-- ifori stuff
+hl.bind(mod .. " + ALT + L", hl.dsp.exec_cmd("ifori ipc call lock lock"))
+
 -------------
 -- windows --
 -------------
