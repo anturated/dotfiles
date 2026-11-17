@@ -65,11 +65,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1794937615,
-        "narHash": "sha256-YiOaUT1dN3unE48svnXGhZA1pmQ0ROjTjkGU9tXiUnc=",
+        "lastModified": 1794938143,
+        "narHash": "sha256-q0IyRF7aabetmvpVSv9uynp7AjWcT0IPQyYwqYPo6HE=",
         "ref": "refs/heads/master",
-        "rev": "c82bcdac626dcf9596b2c5bff82b72273ea905bc",
-        "revCount": 19,
+        "rev": "a8f85c06018f0459581ea426088fe74a0e787d7c",
+        "revCount": 21,
         "type": "git",
         "url": "https://git.anturated.dev/anturated/ifori"
       },
