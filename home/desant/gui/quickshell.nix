@@ -1,9 +1,9 @@
 { config, inputs, ... }:
 
 {
-  imports = [ inputs.eiddew.homeModules.default ];
+  imports = [ inputs.ifori.homeModules.default ];
 
-  programs.eiddew = {
+  programs.ifori = {
     inherit (config.ceirios.profiles.graphical) enable;
   };
 }

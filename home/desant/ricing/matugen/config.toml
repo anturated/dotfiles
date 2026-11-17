@@ -48,9 +48,9 @@ post_hook = 'gsettings set org.gnome.desktop.interface color-scheme prefer-light
 input_path = '~/.config/matugen/templates/hyprland-colors.lua'
 output_path = '~/.config/hypr/colors.lua'
 
-[templates.ivy]
+[templates.quickshell]
 input_path = '~/.config/matugen/templates/ivy-colors.json'
-output_path = '~/.config/eiddew/colors.json'
+output_path = '~/.config/ifori/colors.json'
 
 [templates.kitty]
 input_path = '~/.config/matugen/templates/kitty-theme.conf'

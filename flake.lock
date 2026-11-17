@@ -20,26 +20,6 @@
         "url": "https://git.anturated.dev/anturated/website"
       }
     },
-    "eiddew": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1794783693,
-        "narHash": "sha256-6eSk/GFapQi6IzL+u3ul9ABDdNRhhltecg21XEFmQ4E=",
-        "ref": "refs/heads/master",
-        "rev": "40bee30ef3bdd14f7de96c4b80eebc3b212076b0",
-        "revCount": 210,
-        "type": "git",
-        "url": "https://git.anturated.dev/anturated/eiddew"
-      },
-      "original": {
-        "type": "git",
-        "url": "https://git.anturated.dev/anturated/eiddew"
-      }
-    },
     "flake-utils": {
       "inputs": {
         "systems": "systems"
@@ -76,6 +56,26 @@
         "owner": "nix-community",
         "repo": "home-manager",
         "type": "github"
+      }
+    },
+    "ifori": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1794933982,
+        "narHash": "sha256-phQFTSnkK1Ze4pLSJredscSb7sRnMOUAsNSPtND8iOM=",
+        "ref": "refs/heads/master",
+        "rev": "f5b4d12dc4074db29503a39bfe2631c07aa2b50b",
+        "revCount": 13,
+        "type": "git",
+        "url": "https://git.anturated.dev/anturated/ifori"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://git.anturated.dev/anturated/ifori"
       }
     },
     "newydd": {
@@ -138,8 +138,8 @@
     "root": {
       "inputs": {
         "anturated-website": "anturated-website",
-        "eiddew": "eiddew",
         "home-manager": "home-manager",
+        "ifori": "ifori",
         "newydd": "newydd",
         "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs",

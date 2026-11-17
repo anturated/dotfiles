@@ -76,9 +76,9 @@
     };
 
     # my quickshell config
-    eiddew = {
+    ifori = {
       type = "git";
-      url = "https://git.anturated.dev/anturated/eiddew";
+      url = "https://git.anturated.dev/anturated/ifori";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
