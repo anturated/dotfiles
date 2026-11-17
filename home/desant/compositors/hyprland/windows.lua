@@ -126,6 +126,13 @@ hl.window_rule({
   suppress_event = "maximize",
 })
 
+-- ifori no animations
+hl.layer_rule({
+  name = "ifori-no-anim",
+  match = { namespace = "^ifori-" },
+  no_anim = true,
+})
+
 -- Fix some dragging issues with XWayland
 hl.window_rule({
   name = "fix-xwayland-drag",
