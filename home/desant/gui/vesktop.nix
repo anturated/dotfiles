@@ -41,4 +41,13 @@
       };
     };
   };
+
+  # force override it idc what vesktop thinks.
+  # note: this is because hm can't overwrite it if a backup exists which stops rebuilds.
+  # the vesktop module defines these via home.file with absolute paths,
+  # not xdg.configFile
+  home.file = {
+    "${config.xdg.configHome}/vesktop/settings.json".force = true;
+    "${config.xdg.configHome}/vesktop/settings/settings.json".force = true;
+  };
 }
