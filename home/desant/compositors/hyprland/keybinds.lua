@@ -12,10 +12,6 @@ hl.bind(mod .. " + SHIFT + R", hl.dsp.exec_cmd(terminal, { float = true }))
 hl.bind(mod .. " + E", hl.dsp.exec_cmd(terminal .. " yazi"))
 hl.bind(mod .. " + SHIFT + E", hl.dsp.exec_cmd(explorer))
 
--- dmenu
-hl.bind(mod .. " + D", hl.dsp.exec_cmd("walker"))
--- TODO: how do i do commands with walker
-
 -- screenshot
 hl.bind(mod .. " + SHIFT + S", hl.dsp.exec_cmd("screenshot"))
 hl.bind("Print", hl.dsp.exec_cmd("screenshot -f"))
@@ -33,20 +29,14 @@ hl.bind(mod .. " + ALT + M", hl.dsp.exec_cmd("spotify"))
 hl.bind(mod .. " + ALT + A", hl.dsp.exec_cmd("obsidian"))
 hl.bind(mod .. " + ALT + T", hl.dsp.exec_cmd("Telegram"))
 
--- some walker menus
-hl.bind(mod .. " + SHIFT + B", hl.dsp.exec_cmd("walker --provider bluetooth"))
-hl.bind(mod .. " + SHIFT + A", hl.dsp.exec_cmd("walker --provider wireplumber"))
-hl.bind(mod .. " + SHIFT + I", hl.dsp.exec_cmd("walker --provider menus:wallpapers -N"))
-hl.bind(mod .. " + SHIFT + M", hl.dsp.exec_cmd("walker --provider menus:music -N"))
-hl.bind(mod .. " + Escape", hl.dsp.exec_cmd("walker --provider menus:power -N"))
-hl.bind(mod .. " + V", hl.dsp.exec_cmd("walker --provider clipboard"))
-hl.bind(mod .. " + ALT + W", hl.dsp.exec_cmd("animelist"))
-
 -- """task manager"""
 hl.bind("CTRL + SHIFT + Escape", hl.dsp.exec_cmd(terminal .. " btop"))
 
 -- ifori stuff
 hl.bind(mod .. " + ALT + L", hl.dsp.exec_cmd("ifori ipc call lock lock"))
+hl.bind(mod .. " + SHIFT + I", hl.dsp.exec_cmd("ifori ipc call menus wallpapers"))
+hl.bind(mod .. " + Escape", hl.dsp.exec_cmd("ifori ipc call menus power"))
+hl.bind(mod .. " + D", hl.dsp.exec_cmd("ifori ipc call menus apps"))
 
 -------------
 -- windows --

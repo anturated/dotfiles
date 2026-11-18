@@ -13,7 +13,6 @@
     ./spotify.nix
     ./quickshell.nix
     ./vesktop.nix
-    ./walker
     ./thumbnails.nix
   ];
 }
