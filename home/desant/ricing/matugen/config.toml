@@ -55,7 +55,15 @@ output_path = '~/.config/ifori/colors.json'
 [templates.kitty]
 input_path = '~/.config/matugen/templates/kitty-theme.conf'
 output_path = '~/.config/kitty/current-theme.conf'
-post_hook = "killall -SIGUSR1 .kitty-wrapped &"
+# swap colors only
+# SIGUSR1 reloads the whole config which resets background_opacity
+# runs as its own systemd unit so it survives whatever launched matugen getting killed
+# (e.g. the walker restart below);
+post_hook = '''systemd-run --user --collect --quiet sh -c 'mkdir -p "$HOME/.cache/ceirios"; exec >>"$HOME/.cache/ceirios/matugen-kitty.log" 2>&1; echo "== $(date -Is)"; for pid in $(pgrep -x .kitty-wrapped); do echo "kitty $pid"; kitty @ --to "unix:@kitty-$pid" set-colors --all --configured "$HOME/.config/kitty/current-theme.conf"; done' '''
+
+[templates.nvim]
+input_path = '~/.config/matugen/templates/newydd_accent'
+output_path = '~/.local/share/newydd/newydd_accent'
 
 [templates.prismlauncher]
 input_path = '~/.config/matugen/templates/prismlauncher.json'
