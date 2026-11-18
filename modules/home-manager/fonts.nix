@@ -27,37 +27,37 @@ in
     name = mkOption {
       type = str;
       description = "The name of the font";
-      default = "Maple Mono";
+      default = "PxPlus IBM VGA 8x16";
     };
 
     italic = mkOption {
       type = str;
       description = "The name of the italic font";
-      default = "Maple Mono Italic";
+      default = "PxPlus IBM VGA 8x16";
     };
 
     bold = mkOption {
       type = str;
       description = "The name of the bold font";
-      default = "Maple Mono Bold";
+      default = "PxPlus IBM VGA 8x16";
     };
 
     bold-italic = mkOption {
       type = str;
       description = "The name of the bold italic font";
-      default = "Maple Mono Bold Italic";
+      default = "PxPlus IBM VGA 8x16";
     };
 
     package = mkOption {
       type = nullOr package;
       description = "The package that provides the font";
-      default = pkgs.maple-mono.truetype;
+      default = pkgs.ultimate-oldschool-pc-font-pack;
     };
 
     size = mkOption {
       type = int;
       description = "The size of the font";
-      default = 11;
+      default = 12;
     };
   };
 
