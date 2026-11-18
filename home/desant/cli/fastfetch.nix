@@ -23,19 +23,15 @@ in
     enable = true;
     settings = {
       logo = {
-        type = "small";
+        # kitty graphics protocol; 14x7 cells is square at an 8x16 cell size
+        type = "kitty-direct";
+        source = "${./fastfetch-logo.png}";
+        width = 14;
+        height = 7;
         padding = {
           top = 2;
           left = 3;
           right = 1;
-        };
-        color = {
-          "1" = "white";
-          "2" = "blue";
-          "3" = "white";
-          "4" = "blue";
-          "5" = "white";
-          "6" = "blue";
         };
       };
       modules = [
