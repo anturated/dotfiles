@@ -16,10 +16,6 @@ hl.bind(mod .. " + SHIFT + E", hl.dsp.exec_cmd(explorer))
 hl.bind(mod .. " + SHIFT + S", hl.dsp.exec_cmd("screenshot"))
 hl.bind("Print", hl.dsp.exec_cmd("screenshot -f"))
 
--- replay
-hl.bind("ALT + F10", hl.dsp.exec_cmd("save-replay"))
-hl.bind("MOD5 + F10", hl.dsp.exec_cmd("save-replay")) -- right alt
-
 -- why does it spell bdsm :cry:
 hl.bind(mod .. " + ALT + B", hl.dsp.exec_cmd(browser))
 hl.bind(mod .. " + ALT + D", hl.dsp.exec_cmd("vesktop"))
@@ -32,11 +28,42 @@ hl.bind(mod .. " + ALT + T", hl.dsp.exec_cmd("Telegram"))
 -- """task manager"""
 hl.bind("CTRL + SHIFT + Escape", hl.dsp.exec_cmd(terminal .. " btop"))
 
--- ifori stuff
-hl.bind(mod .. " + ALT + L", hl.dsp.exec_cmd("ifori ipc call lock lock"))
-hl.bind(mod .. " + SHIFT + I", hl.dsp.exec_cmd("ifori ipc call menus wallpapers"))
-hl.bind(mod .. " + Escape", hl.dsp.exec_cmd("ifori ipc call menus power"))
-hl.bind(mod .. " + D", hl.dsp.exec_cmd("ifori ipc call menus apps"))
+-----------------
+-- ifori stuff --
+-----------------
+
+-- note: mod5 is right alt
+
+local iforiIpc = "ifori ipc call "
+
+-- lock
+hl.bind(mod .. " + ALT + L", hl.dsp.exec_cmd(iforiIpc .. "lock lock"))
+
+-- menus
+local menuIpc = iforiIpc .. "menus "
+
+hl.bind(mod .. " + D", hl.dsp.exec_cmd(menuIpc .. "apps"))
+hl.bind(mod .. " + Escape", hl.dsp.exec_cmd(menuIpc .. "power"))
+hl.bind(mod .. " + SHIFT + I", hl.dsp.exec_cmd(menuIpc .. "wallpapers"))
+
+--- recording ---
+local recIpc = iforiIpc .. "recorder "
+
+-- toggle record
+hl.bind("ALT + F9", hl.dsp.exec_cmd(recIpc .. "record"))
+hl.bind("MOD5 + F9", hl.dsp.exec_cmd(recIpc .. "record"))
+
+-- toggle replay
+hl.bind("ALT + SHIFT + F10", hl.dsp.exec_cmd(recIpc .. "replay"))
+hl.bind("MOD5 + SHIFT + F10", hl.dsp.exec_cmd(recIpc .. "replay"))
+
+-- save
+hl.bind("ALT + F10", hl.dsp.exec_cmd(recIpc .. "save"))
+hl.bind("MOD5 + F10", hl.dsp.exec_cmd(recIpc .. "save"))
+
+-- stop
+hl.bind("ALT + SHIFT + F9", hl.dsp.exec_cmd(recIpc .. "stop"))
+hl.bind("MOD5 + SHIFT + F9", hl.dsp.exec_cmd(recIpc .. "stop"))
 
 -------------
 -- windows --
