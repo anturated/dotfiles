@@ -66,15 +66,16 @@ in
 
       # make tuned impersonate ppd so we have nice integrations across shells
       ppdSettings = {
-        # auto switching on laptops
         main = {
-          # these require acpid
+          # note: these require acpid and upower.
+          # ppd bridge enables upower but acpid is on me
+          # (it's tied to laptop profile so we should be fine)
+          # and sysfs_acpi_monitor is on by default now
+          # (the nixos module stil doesn't allow tweaking it smh)
 
-          # watch ac plug/unplug
-          battery_detection = false; # broken, see ppdSettings.battery below
-
-          # watch acpi stuff like hardware key profile switch (Fn+Q, Fn+L, etc.)
-          # sysfs_acpi_monitor = true; # looks like it's not supported here yet :\
+          # use -bat profiles from below when on battery.
+          # doesn't swap automatically so we have to summon daemons below
+          battery_detection = true;
         };
 
         # ppd -> tuned profile bridge
@@ -86,38 +87,98 @@ in
         };
 
         # on battery:
-        # looks correct in the config but has no effect :\
-        # defaults to balanced-power which shouldn't be too bad
         battery = {
           power-saver = "ceirios-powersave-bat";
-
-          # might change to powersave if the laptop doesn't handle this too well
           balanced = "ceirios-balanced-bat";
         };
       };
     };
+  };
 
-    # FIXME: this should be handled by tuned.ppdSettings.main.sysfs_acpi_monitor
-    udev.extraRules = ''
-      ACTION=="change", SUBSYSTEM=="platform", \
-        ATTR{/sys/firmware/acpi/platform_profile}=="low-power", \
-        RUN+="${pkgs.tuned}/bin/tuned-adm profile ceirios-powersave-bat"
+  # HACK: restart tuned-ppd on config change.
+  # tuned-ppd doesn't restart on config change from a rebuild.
+  # am i mad? yes. am i gonna report any of this? hell no.
+  # remove this block if they ever fix it
+  systemd.services.tuned-ppd = mkIf laptop.enable {
+    restartTriggers = [ config.environment.etc."tuned/ppd.conf".source ];
+  };
 
-      ACTION=="change", SUBSYSTEM=="platform", \
-        ATTR{/sys/firmware/acpi/platform_profile}=="balanced", \
-        RUN+="${pkgs.tuned}/bin/tuned-adm profile ceirios-balanced"
+  # note: hardware switches to quiet mode silently for whatever reason,
+  # so tuned has no idea it has to switch to power save,
+  # so i have to do all that below.
+  # i have no idea if this is a lenovo firmware bug or a global issue.
+  # hope someone will discover and fix this without my input :)
 
-      ACTION=="change", SUBSYSTEM=="platform", \
-        ATTR{/sys/firmware/acpi/platform_profile}=="performance", \
-        RUN+="${pkgs.tuned}/bin/tuned-adm profile ceirios-performance"
+  # check if platform profile and tuned profile mismatches every now and then and switch.
+  # also handle ac plug/unplug and change profile because tuned couldn't care less
+  systemd.services.ceirios-platform-profile-sync = mkIf laptop.enable {
+    description = "fixes quiet profile switch; switches profile on ac plug/unplug. i'm sane and not crying.";
 
-      ACTION=="change", SUBSYSTEM=="power_supply", \
-        ATTR{type}=="Mains", ATTR{online}=="0", \
-        RUN+="${pkgs.tuned}/bin/tuned-adm profile ceirios-powersave-bat"
+    wantedBy = [ "multi-user.target" ];
+    wants = [ "tuned-ppd.service" ];
+    after = [ "tuned-ppd.service" ];
 
-      ACTION=="change", SUBSYSTEM=="power_supply", \
-        ATTR{type}=="Mains", ATTR{online}=="1", \
-        RUN+="${pkgs.tuned}/bin/tuned-adm profile ceirios-balanced"
+    path = [
+      pkgs.coreutils
+      pkgs.systemd
+    ];
+
+    serviceConfig = {
+      Restart = "always";
+      RestartSec = 2;
+    };
+
+    script = ''
+      fw=/sys/firmware/acpi/platform_profile
+      ac=
+      for s in /sys/class/power_supply/*; do
+        if [ "$(cat "$s/type")" = Mains ]; then ac=$s/online; fi
+      done
+      ppd=(net.hadess.PowerProfiles /net/hadess/PowerProfiles net.hadess.PowerProfiles ActiveProfile)
+
+      get_ppd() {
+        busctl --system get-property "''${ppd[@]}" | cut -d'"' -f2;
+      }
+
+      set_ppd() {
+        echo "setting $1 ($2)"
+        busctl --system set-property "''${ppd[@]}" s "$1" || true
+      }
+
+      last_fw=$(cat $fw)
+      last_ac=1
+      if [ -n "$ac" ]; then last_ac=$(cat "$ac"); fi
+
+      while sleep 1; do
+        if [ -n "$ac" ]; then
+          now_ac=$(cat "$ac")
+          if [ "$now_ac" != "$last_ac" ]; then
+            last_ac=$now_ac
+            if [ "$now_ac" = 0 ]; then
+              set_ppd power-saver unplugged
+            elif [ "$(get_ppd)" != performance ]; then
+              set_ppd balanced "plugged in"
+            fi
+            continue
+          fi
+        fi
+
+        now_fw=$(cat $fw)
+        if [ "$now_fw" = "$last_fw" ]; then continue; fi
+
+        # tuned writes balanced while switching profiles for whatever mythical reason.
+        # wait for it to write the actual thing
+        sleep 0.5
+        if [ "$(cat $fw)" != "$now_fw" ]; then continue; fi
+        last_fw=$now_fw
+
+        case $now_fw in
+          low-power) want=power-saver ;;
+          balanced | performance) want=$now_fw ;;
+          *) continue ;;
+        esac
+        if [ "$(get_ppd)" != "$want" ]; then set_ppd "$want" "firmware is $now_fw"; fi
+      done
     '';
   };
 }
