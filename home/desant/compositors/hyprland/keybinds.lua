@@ -43,6 +43,7 @@ hl.bind(mod .. " + ALT + L", hl.dsp.exec_cmd(iforiIpc .. "lock lock"))
 local menuIpc = iforiIpc .. "menus "
 
 hl.bind(mod .. " + D", hl.dsp.exec_cmd(menuIpc .. "apps"))
+hl.bind(mod .. " + V", hl.dsp.exec_cmd(menuIpc .. "clipboard"))
 hl.bind(mod .. " + Escape", hl.dsp.exec_cmd(menuIpc .. "power"))
 hl.bind(mod .. " + SHIFT + I", hl.dsp.exec_cmd(menuIpc .. "wallpapers"))
 
