@@ -33,6 +33,15 @@ in
 
       # TODO: zoxide doesn't work without this but maybe there's a way
       zoxide init fish | source
+
+      # theme hot reload
+      # matugen bumps variable, fish notice, fish update theme
+      # also do it here and not in functions below because those don't register handlers until called
+      function __ceirios_reload_theme --on-variable __ceirios_theme_reload
+          test -f ~/.config/fish/theme.fish; or return
+          source ~/.config/fish/theme.fish
+          commandline -f repaint
+      end
     '';
 
     functions = {

@@ -21,7 +21,7 @@ output_path = '~/.config/vesktop/themes/matugen.css'
 [templates.fish]
 input_path = '~/.config/matugen/templates/fish-theme.fish'
 output_path = '~/.config/fish/theme.fish'
-post_hook = "fish -c 'emit reload-theme' &"
+post_hook = "fish -c 'set -U __ceirios_theme_reload (date +%s%N)' &" # this is so ass
 
 [templates.ghostty]
 input_path = '~/.config/matugen/templates/ghostty-theme.conf'
