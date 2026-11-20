@@ -6,13 +6,7 @@
 Check the [wiki](https://git.anturated.dev/anturated/dotfiles/wiki/Home)
 
 ## TODO
-- [ ] wifi menu
-- [ ] bluetooth menu
-- [ ] power menu
-- [ ] brightness/volume sliders
-- [x] notifs
 - [ ] better defaults customization
-- [x] kale seems to not exit properly
 
 ## Thank/Credits
 - [isabelroses/dotfiles](https://github.com/isabelroses/dotfiles) - HEAVILY based upon, will happily steal more
