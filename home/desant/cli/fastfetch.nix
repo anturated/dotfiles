@@ -89,7 +89,7 @@ in
         }
         {
           type = "custom";
-          format = "${repeat " " colorsPadding}{#red}  {#green}  {#yellow}  {#blue}  {#magenta}  {#cyan}  {#white}  {#black}  ";
+          format = "${repeat " " colorsPadding}{#red}†  {#green}†  {#yellow}†  {#blue}†  {#magenta}†  {#cyan}†  {#white}†  {#black}†  ";
         }
         {
           type = "custom";
