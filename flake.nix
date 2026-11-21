@@ -68,6 +68,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # warframe price helper (wf.anturated.dev)
+    wfniche = {
+      type = "git";
+      url = "https://git.anturated.dev/anturated/wfniche";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # my nvim config
     newydd = {
       type = "git";

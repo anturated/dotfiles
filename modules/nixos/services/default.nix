@@ -16,6 +16,7 @@
     ./postgres.nix
     ./redis.nix
     ./website.nix
+    ./wfniche.nix
     ./woodpecker.nix
     ./matrix
     ./vaultwarden.nix

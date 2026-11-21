@@ -37,6 +37,7 @@
     services = {
       # self-hosted #
       anturated-website.enable = true;
+      wfniche.enable = true;
       mailserver.enable = true;
       mailserver.webui.enable = true;
       forgejo.enable = true;
