@@ -144,7 +144,8 @@
         "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs",
         "simple-nixos-mailserver": "simple-nixos-mailserver",
-        "sops": "sops"
+        "sops": "sops",
+        "wfniche": "wfniche"
       }
     },
     "simple-nixos-mailserver": {
@@ -225,6 +226,26 @@
         "owner": "numtide",
         "repo": "tree-sitter-nix",
         "type": "github"
+      }
+    },
+    "wfniche": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1795219363,
+        "narHash": "sha256-kGjdHwizUs88m898Wg4B5NCd0WDiuJJsP4LR+IFctik=",
+        "ref": "refs/heads/master",
+        "rev": "3906fb13012323b3403b0d25d520a5b1da15726f",
+        "revCount": 2,
+        "type": "git",
+        "url": "https://git.anturated.dev/anturated/wfniche"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://git.anturated.dev/anturated/wfniche"
       }
     }
   },
