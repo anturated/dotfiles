@@ -71,7 +71,8 @@ in
       };
 
       hierarchySeparator = "/";
-      localDnsResolver = false;
+      # HACK: i should probably adress this
+      assertions.dnsResolver = false;
       fqdn = cfg.domain;
       x509.useACMEHost = cfg.domain;
       domains = [ rdomain ];
