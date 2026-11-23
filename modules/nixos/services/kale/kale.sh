@@ -133,6 +133,11 @@ if [ "$USE_OFFLOAD" -eq 1 ]; then
   )
 fi
 
+# don't limit cache size
+# NOTE: the old cache does not get culled, so that needs to be taken care of
+# manually. technically this might solve my shader stutters, remove if it doesn't
+ENV_VARS+=("__GL_SHADER_DISK_CACHE_SKIP_CLEANUP=1")
+
 # -- WRAPPERS -- #
 
 # (order matters!)
