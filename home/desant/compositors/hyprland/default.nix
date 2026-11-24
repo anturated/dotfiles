@@ -63,6 +63,13 @@ in
 
         ${import ./aquamarine.nix { inherit osConfig lib; }}
 
+        -- NOTE: this belongs in a different file
+        -- further hint apps that we're using wayland
+        -- this fixes pixelated scaling on some extra stubborn apps
+        -- (spotify i'm looking at you)
+        hl.env("ELECTRON_OZONE_PLATFORM_HINT", "wayland")
+        hl.env("NIXOS_OZONE_WL", "1")
+
         --------------
         -- the rest --
         --------------
