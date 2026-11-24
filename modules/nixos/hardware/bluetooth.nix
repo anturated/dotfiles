@@ -12,7 +12,6 @@ in
   config = mkIf config.ceirios.hardware.bluetooth.enable {
     hardware.bluetooth = {
       enable = true;
-      powerOnBoot = true;
 
       # might fix autostart
       disabledPlugins = [ "sap" ];
@@ -32,9 +31,6 @@ in
           # should disable absolute volume
           VolumeWithoutTarget = false;
         };
-
-        # Enable all controllers when they are found.
-        Policy.AutoEnable = true;
       };
     };
   };
