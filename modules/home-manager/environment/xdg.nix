@@ -17,7 +17,7 @@ let
 
   appsToAssoc = {
     browser = {
-      app = "chromium-browser";
+      app = "vivaldi-stable";
       mimeTypes = [
         "text/html"
         "application/pdf"
